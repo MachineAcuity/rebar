@@ -19,7 +19,7 @@ export default new GraphQLObjectType( {
   fields: {
     id: globalIdField('Viewer'),
 
-    User_IsAnonymous:  { type: GraphQLBoolean, resolve: (obj) => obj.id.equals( Uuid_0 ) },
+    User_IsAnonymous:  { type: GraphQLBoolean, resolve: (obj) => obj.id == Uuid_0 },
     User_DisplayName:  { type: GraphQLString,  resolve: (obj) => obj.User_DisplayName },
     User_ProfilePhoto: { type: GraphQLString,  resolve: (obj) => obj.User_ProfilePhoto },
     User_Email:        { type: GraphQLString,  resolve: (obj) => obj.User_Email },
