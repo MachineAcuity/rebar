@@ -31,13 +31,13 @@
   },
   "betterScripts": {
     "start-dev": {
-      "command": "nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js",
+      "command": "nodemon --exec babel-node -- ./server/server.js",
       "env": {
         "NODE_ENV": "development"
       }
     },
     "start-webpack": {
-      "command": "./node_modules/.bin/webpack-dev-server --hot --inline --no-info --colors"
+      "command": "webpack-dev-server --hot --inline --no-info --colors"
     }
   },
   "metadata": {

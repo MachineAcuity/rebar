@@ -6,7 +6,7 @@ import Relay from 'react-relay'
 
 import {darkWhite, lightWhite, grey900} from 'material-ui/styles/colors';
 
-import FullWidthSection from '../../../webapp/components/FullWidthSection.jsx'
+import FullWidthSection from '../../../webapp/components/FullWidthSection.js'
 
 
 const styles = {
