@@ -156,6 +156,18 @@
               "deprecationReason": null
             },
             {
+              "name": "User_AccountName",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "User_DisplayName",
               "description": null,
               "args": [],
@@ -192,6 +204,18 @@
               "deprecationReason": null
             },
             {
+              "name": "User_PhoneNumberMobile",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "User_Locale",
               "description": null,
               "args": [],
@@ -204,7 +228,7 @@
               "deprecationReason": null
             },
             {
-              "name": "User_AuthToken",
+              "name": "User_Token2",
               "description": null,
               "args": [],
               "type": {
@@ -1778,6 +1802,20 @@
             },
             {
               "name": "User_Email",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "User_PhoneNumberMobile",
               "description": null,
               "type": {
                 "kind": "NON_NULL",

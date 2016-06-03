@@ -7,12 +7,10 @@ import ReactDOM from 'react-dom';
 import { browserHistory, match, Router } from 'react-router';
 import Relay from 'react-relay';
 
-import isomorphicVars from '../configuration/webapp/scripts/isomorphicVars';
+import publicURL from '../configuration/scripts/publicURL'
 import routes from '../configuration/webapp/routes';
 
 import './styles/main.css';
-
-var isoVars = isomorphicVars( );
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -27,33 +25,34 @@ const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent 
 
 // Retrieve the auth token. We know it will be on viewer, but we do not know which fragment.
 // Go through them all.
-// It is important that User_AuthToken is requested in Chrome.jsx
-let User_AuthToken = "";
+// It is important that User_Token2 is requested in Chrome.jsx
+let User_Token2 = "";
 for( let fragment of data )
 {
-  const authTokenInThisFragment = fragment.response.Viewer.User_AuthToken;
+  const authTokenInThisFragment = fragment.response.Viewer.User_Token2;
   if( authTokenInThisFragment != null )
   {
-    User_AuthToken = authTokenInThisFragment;
+    User_Token2 = authTokenInThisFragment;
     break;
   }
 }
 
-if( User_AuthToken.length == 0 )
+if( User_Token2.length == 0 )
   alert( 'Authentication token retrieval failed' );
 
 
-// Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
-let GraphQL_URL = ( isoVars.PUBLIC_URL == null ) ? '/graphql' : isoVars.PUBLIC_URL + '/graphql';
+// Where is the GraphQL server?
+const graphQLServerURL = publicURL + '/graphql';
 
 // Create Relay environment
+// Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
 const environment = new Relay.Environment( );
 environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
-  GraphQL_URL,
+  graphQLServerURL,
   {
     credentials: 'same-origin',
     headers: {
-      user_auth_token: User_AuthToken,
+      user_token_2: User_Token2,
     },
   }
 ) );

@@ -1,7 +1,7 @@
 /* @flow weak */
 
 import winston from 'winston';
-import winstonCassandra from 'winston-cassandra';
+import winstonCassandra from './winstonCassandra'
 
 // Read environment
 require( 'dotenv' ).load( );
@@ -13,11 +13,7 @@ const transports = [ ];
 
 // Use Cassandra for logging if Cassandra is configured
 if( process.env.OBJECT_PERSISTENCE == 'cassandra' )
-{
-  // Refuses to create schema - internally receives [ResponseError: unconfigured table schema_keyspaces] when tries to create schema
   transports.push( new winstonCassandra( options ) );
-  transports.push( new (winston.transports.Console)( ) ); // Just copy to console for troubleshooting purposes
-}
 else
   transports.push( new (winston.transports.Console)( ) );
 

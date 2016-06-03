@@ -9,7 +9,6 @@ export default function( )
       // Modify the code below to set the variables >>>
       npm_package_version: process.env.npm_package_version,
       OBJECT_PERSISTENCE: process.env.OBJECT_PERSISTENCE,
-      PUBLIC_URL: process.env.PUBLIC_URL,
       // <<< Modify the code above to set the variables
     }
   }

@@ -27,29 +27,20 @@ function ObjectPersister_getList( entityName: string, ObjectType: any, fieldName
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/
 function ObjectPersister_add( entityName: string, fields: any, ObjectType: any )
 {
-  const id = Uuid.random( );
-
-  let cqlTextFieldNames = 'id';
-  let cqlTextFieldValues = '?';
-  let cqlParams = [
-    id,
-  ];
+  let cqlTextFieldNames = '';
+  let cqlTextFieldValues = '';
+  let cqlParams = [ ];
 
   for( let fieldName in fields )
-    if( fieldName != 'id' ) // Ignore the ID if it has been passed since we are generating it
-    {
-      cqlTextFieldNames += ', "' + fieldName + '"';
-      cqlTextFieldValues += ', ?';
-      cqlParams.push( fields[ fieldName ] );
-    }
+  {
+    cqlTextFieldNames += (cqlParams.length > 0 ? ', ' : '') + '"' + fieldName + '"';
+    cqlTextFieldValues += (cqlParams.length > 0 ? ', ' : '') + '?';
+    cqlParams.push( fields[ fieldName ] );
+  }
 
   let cqlText = 'INSERT INTO "' + entityName + '" (' + cqlTextFieldNames + ') VALUES (' + cqlTextFieldValues + ');';
 
-  return runQueryNoResult( cqlText, cqlParams )
-  .then( ( ) => {
-    return id;
-  } )
-  ;
+  return runQueryNoResult( cqlText, cqlParams );
 }
 
 function ObjectPersister_update( entityName: string, fields: any )

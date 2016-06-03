@@ -53,13 +53,11 @@ function ObjectPersister_getList( entityName: string, ObjectType: any, fieldName
 function ObjectPersister_add( entityName: string, fields: any, ObjectType: any )
 {
   const store = getStore( entityName );
-
-  fields.id = Uuid.random( );
   const newObject = new ObjectType( fields );
 
   store.push( newObject );
 
-  return Promise.resolve( fields.id );
+  return Promise.resolve( );
 }
 
 function ObjectPersister_update( entityName: string, fields: any )

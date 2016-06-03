@@ -1,14 +1,14 @@
 /* @flow */
 
-import Compendium_ViewerFields from '../../units/starter-kit-example-compendium/graphql/type/_ViewerFields'
-import Ensayo_ViewerFields from '../../units/starter-kit-example-ensayo/graphql/type/_ViewerFields'
-import ToDo_ViewerFields from '../../units/starter-kit-example-todo/graphql/type/_ViewerFields'
-import Translaticiarum_ViewerFields from '../../units/starter-kit-example-translaticiarum/graphql/type/_ViewerFields'
+import urb_example_compendium_ViewerFields from '../../units/urb-example-compendium/graphql/type/_ViewerFields'
+import urb_example_ensayo_ViewerFields from '../../units/urb-example-ensayo/graphql/type/_ViewerFields'
+import urb_example_todo_ViewerFields from '../../units/urb-example-todo/graphql/type/_ViewerFields'
+import urb_example_translaticiarum_ViewerFields from '../../units/urb-example-translaticiarum/graphql/type/_ViewerFields'
 
 
 export default {
-  ...Compendium_ViewerFields,
-  ...Ensayo_ViewerFields,
-  ...ToDo_ViewerFields,
-  ...Translaticiarum_ViewerFields,
+  ...urb_example_compendium_ViewerFields,
+  ...urb_example_ensayo_ViewerFields,
+  ...urb_example_todo_ViewerFields,
+  ...urb_example_translaticiarum_ViewerFields,
 }

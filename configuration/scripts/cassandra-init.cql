@@ -30,8 +30,9 @@ CREATE TABLE "User"(
   "User_DisplayName" varchar,
   "User_ProfilePhoto" varchar,
   "User_Email" varchar,
+  "User_PhoneNumberMobile" varchar,
   "User_Locale" varchar,
-  "User_AuthToken" varchar
+  "User_Token2" varchar
 );
 
 CREATE INDEX "User_User_AccountName_ix"

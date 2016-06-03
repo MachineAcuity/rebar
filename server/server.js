@@ -8,8 +8,12 @@ import path from 'path';
 import process from 'process';
 
 import auth from './auth'; // Authentication server
-import webapp from '../webapp/server'; // Isomorphic React server
+import getLocalIP from '../scripts/getLocalIP'
 import graphql from '../graphql/server'; // GraphQL server
+import publicURL from '../configuration/scripts/publicURL'
+import serverExtensions from '../configuration/server/serverExtensions'
+import webapp from '../webapp/server'; // Isomorphic React server
+
 
 // Read environment
 require( 'dotenv' ).load( );
@@ -37,10 +41,11 @@ log.log( 'info', 'Starting application', {
   NODE_ENV: process.env.NODE_ENV,
   HOST: process.env.HOST,
   PORT: process.env.PORT,
-  PUBLIC_URL: process.env.PUBLIC_URL,
+  publicURL: publicURL,
   process_title: process.title,
   process_pid: process.pid,
   objectPersistence: objectPersistence,
+  IP: getLocalIP( ),
   ...persistenceInformation
 } );
 
@@ -62,6 +67,9 @@ router.use( '/auth', auth );
 // Static assets server
 let oneYear = 365*86400000;
 router.use( express.static( path.resolve( __dirname + '/../public/' ), { maxAge: oneYear } ) );
+
+// Add extensions - custom configurations
+serverExtensions( router )
 
 // Application with routes
 router.use( '/*', webapp );
