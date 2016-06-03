@@ -1,17 +1,18 @@
 /* @flow */
 
-import UserManagement_mutations from '../../units/sys-account-management/graphql/mutation/_mutations'
+import urb_account_management_mutations from '../../units/urb-account-management/graphql/mutation/_mutations'
 
-import Compendium_mutations from '../../units/starter-kit-example-compendium/graphql/mutation/_mutations'
-import Ensayo_mutations from '../../units/starter-kit-example-ensayo/graphql/mutation/_mutations'
-import ToDo_mutations from '../../units/starter-kit-example-todo/graphql/mutation/_mutations'
-import Translaticiarum_mutations from '../../units/starter-kit-example-translaticiarum/graphql/mutation/_mutations'
+import urb_example_compendium_mutations from '../../units/urb-example-compendium/graphql/mutation/_mutations'
+import urb_example_ensayo_mutations from '../../units/urb-example-ensayo/graphql/mutation/_mutations'
+import urb_example_todo_mutations from '../../units/urb-example-todo/graphql/mutation/_mutations'
+import urb_example_translaticiarum_mutations from '../../units/urb-example-translaticiarum/graphql/mutation/_mutations'
 
 
 export default {
-  ...UserManagement_mutations,
-  ...Compendium_mutations,
-  ...Ensayo_mutations,
-  ...ToDo_mutations,
-  ...Translaticiarum_mutations,
+  ...urb_account_management_mutations,
+
+  ...urb_example_compendium_mutations,
+  ...urb_example_ensayo_mutations,
+  ...urb_example_todo_mutations,
+  ...urb_example_translaticiarum_mutations,
 }

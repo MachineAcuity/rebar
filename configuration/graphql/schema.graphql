@@ -275,11 +275,13 @@ type TranslaticiarumsEdge {
 type Viewer implements Node {
   id: ID!
   User_IsAnonymous: Boolean
+  User_AccountName: String
   User_DisplayName: String
   User_ProfilePhoto: String
   User_Email: String
+  User_PhoneNumberMobile: String
   User_Locale: String
-  User_AuthToken: String
+  User_Token2: String
   compendiums(after: String, first: Int, before: String, last: Int): CompendiumsConnection
   Ensayos(after: String, first: Int, before: String, last: Int): EnsayosConnection
   Ensayo(id: ID): Ensayo
@@ -294,6 +296,7 @@ input Viewer_updateInput {
   User_DisplayName: String!
   User_ProfilePhoto: String!
   User_Email: String!
+  User_PhoneNumberMobile: String!
   User_Locale: String!
   clientMutationId: String!
 }

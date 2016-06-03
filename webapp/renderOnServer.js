@@ -11,7 +11,7 @@ import { match } from 'react-router';
 
 import { getUserByCookie, serveAuthenticationFailed } from '../server/credentials_check.js';
 import isomorphicVars from '../configuration/webapp/scripts/isomorphicVars';
-import ObjectManager from '../configuration/graphql/ObjectManager';
+import ObjectManager from '../graphql/ObjectManager';
 import routes from '../configuration/webapp/routes';
 import schema from '../graphql/schema'; // Schema for GraphQL server
 
@@ -21,12 +21,16 @@ require( 'dotenv' ).load( );
 // Load up isomorphic vars here, for server rendering
 const isoVars = JSON.stringify( isomorphicVars( ) );
 
+const httpError500FileName = path.resolve( __dirname, '../configuration/server/httpError/500.html' )
+
 export function serveFailure( type, res, message, err )
 {
   log.log( type, 'Server error: ' + message, err );
 
-  res.status( 500 ).send( 'Server error' );
+  res.status( 500 ).sendFile( httpError500FileName );
 }
+
+const httpError404FileName = path.resolve( __dirname, '../configuration/server/httpError/404.html' )
 
 export default ( req, res, next, assetsPath ) =>
 {
@@ -38,7 +42,7 @@ export default ( req, res, next, assetsPath ) =>
     else if( renderProps )
       reunderOnServerCorrectRequest( req, res, next, assetsPath, renderProps );
     else
-        res.status( 404 ).send( 'Not Found' );
+        res.status( 404 ).sendFile( httpError404FileName );
   } );
 };
 
@@ -64,7 +68,7 @@ function reunderOnServerCorrectRequest( req, res, next, assetsPath, renderProps 
         {
           // Setting up static, global navigator object to pass user agent to material-ui. Since the function is synchronous,
           // it is OK to do so.
-          GLOBAL.navigator = { userAgent: req.headers[ 'user-agent' ] }
+          global.navigator = { userAgent: req.headers[ 'user-agent' ] }
 
           // Also, set width to emulate phone, tablet or desktop
           const md = new MobileDetect( req.headers[ 'user-agent' ] )
@@ -77,10 +81,10 @@ function reunderOnServerCorrectRequest( req, res, next, assetsPath, renderProps 
           else
             innerWidth = 1100 // Will qualify as LARGE
 
-          GLOBAL.window = { innerWidth: innerWidth }
+          global.window = { innerWidth: innerWidth }
 
           // Also set global location for the leftNav
-          GLOBAL.location = { pathname: req.originalUrl };
+          global.location = { pathname: req.originalUrl };
 
           // Get the react output HTML
           const reactOutput = ReactDOMServer.renderToString( IsomorphicRouter.render(props) );

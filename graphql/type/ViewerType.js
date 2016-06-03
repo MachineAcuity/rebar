@@ -19,12 +19,14 @@ export default new GraphQLObjectType( {
   fields: {
     id: globalIdField('Viewer'),
 
-    User_IsAnonymous:  { type: GraphQLBoolean, resolve: (obj) => obj.id.equals( Uuid_0 ) },
-    User_DisplayName:  { type: GraphQLString,  resolve: (obj) => obj.User_DisplayName },
-    User_ProfilePhoto: { type: GraphQLString,  resolve: (obj) => obj.User_ProfilePhoto },
-    User_Email:        { type: GraphQLString,  resolve: (obj) => obj.User_Email },
-    User_Locale:       { type: GraphQLString,  resolve: (obj) => obj.User_Locale },
-    User_AuthToken:    { type: GraphQLString,  resolve: (obj) => obj.User_AuthToken },
+    User_IsAnonymous:        { type: GraphQLBoolean, resolve: (obj) => obj.id.equals( Uuid_0 ) },
+    User_AccountName:        { type: GraphQLString,  resolve: (obj) => obj.User_AccountName },
+    User_DisplayName:        { type: GraphQLString,  resolve: (obj) => obj.User_DisplayName },
+    User_ProfilePhoto:       { type: GraphQLString,  resolve: (obj) => obj.User_ProfilePhoto },
+    User_Email:              { type: GraphQLString,  resolve: (obj) => obj.User_Email },
+    User_PhoneNumberMobile:  { type: GraphQLString,  resolve: (obj) => obj.User_PhoneNumberMobile },
+    User_Locale:             { type: GraphQLString,  resolve: (obj) => obj.User_Locale },
+    User_Token2:             { type: GraphQLString,  resolve: (obj) => obj.User_Token2 },
 
     ..._ViewerFields,
 
