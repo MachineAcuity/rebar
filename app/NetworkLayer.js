@@ -1,43 +1,82 @@
+import Keychain from 'react-native-keychain'
 import Relay, {
   DefaultNetworkLayer,
-  RelayContext
 } from 'react-relay';
 
 import AnonymousUserToken2 from '../configuration/server/AnonymousUserToken2'
-import publicURL from '../configuration/scripts/publicURL'
+import publicURL from '../configuration/app/publicURL'
 
 
-let user_token_1 = null
-let user_token_2 = AnonymousUserToken2
+let UserToken1 = null
+let UserToken2 = null
+let currentEnvironment = null
+let listeningComponent = null
 
 export default class NetworkLayer
 {
-  static setUserTokens( _user_token_1, _user_token_2 )
+  static loadPersistedCredentials( )
   {
-    user_token_1 = _user_token_1
-    user_token_2 = _user_token_2
+    Keychain
+      .getGenericPassword( )
+      .then( (credentials) => {
+        const credentialsJSON = JSON.parse( credentials.password, true )
+        NetworkLayer.setUserTokens( credentialsJSON.UserToken1, credentialsJSON.UserToken2 )
+      } )
+      .catch( ( error ) => {
+        NetworkLayer.setUserTokens( null, AnonymousUserToken2, true )
+      } )
   }
 
-  static injectNetworkLayer( )
+  static setUserTokens( _UserToken1, _UserToken2, doNotPersist )
+  {
+    UserToken1 = _UserToken1
+    UserToken2 = _UserToken2
+    currentEnvironment = null // In order to force the creation of new environment
+
+    if( listeningComponent )
+    {
+      listeningComponent.updateEnvironment( )
+    }
+
+    if( ! doNotPersist )
+    {
+      const tokensAsJSON = JSON.stringify( { UserToken1, UserToken2 } )
+      Keychain.setGenericPassword( 'user', tokensAsJSON )
+    }
+  }
+
+  static createNetworkLayer( )
   {
     const graphQLServerURL = publicURL + '/graphql';
 
     let headers = { }
 
-    if( user_token_1 != null )
-      headers.Cookie = 'user_token_1=' + user_token_1
+    if( UserToken1 != null )
+      headers.Cookie = 'UserToken1=' + UserToken1
 
-    if( user_token_2 != null )
-      headers.user_token_2 = user_token_2
+    if( UserToken2 != null )
+      headers.UserToken2 = UserToken2
 
-    // TODO: equivalent of RelayContext.reset( )
-
-    // Uncomment for connection to server in the cloud. Smarter way to do this will be needed.
-    // graphQLServerURL = 'http://universal-relay-boilerplate.herokuapp.com/graphql';
-    Relay.injectNetworkLayer( new DefaultNetworkLayer(
+    return new DefaultNetworkLayer(
       graphQLServerURL,
       { headers: headers }
-    ) );
+    )
+  }
 
+  static getCurrentEnvironment( )
+  {
+    // UserToken2 will be null before persistent credentials are retrieved, or anonymous credentials are set
+    if( currentEnvironment == null && UserToken2 != null )
+    {
+      currentEnvironment = new Relay.Environment( )
+      currentEnvironment.injectNetworkLayer( NetworkLayer.createNetworkLayer( ) )
+    }
+
+    return currentEnvironment
+  }
+
+  static RegisterListeningComponent( component )
+  {
+    listeningComponent = component
   }
 }

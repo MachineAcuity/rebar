@@ -1,11 +1,12 @@
+import { Actions } from 'react-native-router-flux'
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Button from 'react-native-button'
-import { Actions } from 'react-native-router-flux'
 
 import FloatingLabelTextInput from '../../../../app/components/FloatingLabelTextInput'
 import NetworkLayer from '../../../../app/NetworkLayer'
-import publicURL from '../../../../configuration/scripts/publicURL'
+import publicURL from '../../../../configuration/app/publicURL'
+import { SuccessfulLoginRouteName, SuccessfulLoginRouteOptions } from '../../../../configuration/units/urb-account-management/app/SuccessfulLoginRoute'
 
 const styles = StyleSheet.create( {
   container: {
@@ -44,7 +45,7 @@ export default class Login extends React.Component
 
     const currentLoginAttempt = ++(this.loginAttempt)
 
-    let user_token_1
+    let UserToken1
 
     fetch( publicURL + '/auth/login', {
       method: "POST",
@@ -52,7 +53,7 @@ export default class Login extends React.Component
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': '',
-        // TODO ZZZ do I need the host? I hope I can live without that Host': 'localhost'
+        // TODO x5000 Test if the following is needed when posting to /auth/login: Host: 'localhost'?
       },
       body: JSON.stringify( {
         User_AccountName: this.state.User_AccountName,
@@ -62,11 +63,11 @@ export default class Login extends React.Component
     .then( ( response ) => {
       if( 'set-cookie' in response.headers.map )
         for( let cookie of response.headers.map[ 'set-cookie' ] )
-          if( cookie.startsWith( 'user_token_1=' ) )
+          if( cookie.startsWith( 'UserToken1=' ) )
           {
             console.log( 'cookie=' + cookie )
-            user_token_1 = cookie.substring( 13, cookie.indexOf( ';' ) )
-            console.log( 'user_token_1=' + user_token_1 )
+            UserToken1 = cookie.substring( 11, cookie.indexOf( ';' ) )
+            console.log( 'UserToken1=' + UserToken1 )
           }
       return response.json( )
     } )
@@ -75,11 +76,12 @@ export default class Login extends React.Component
       {
         if( responseData.success )
         {
-          console.log( 'user_token_1=' + user_token_1 )
-          console.log( 'user_token_2=' + responseData.User_Token2 )
+          console.log( 'XXX UserToken1=' + UserToken1 )
+          console.log( 'XXX UserToken2=' + responseData.UserToken2 )
 
-          NetworkLayer.setUserTokens( user_token_1, responseData.User_Token2 )
-          NetworkLayer.injectNetworkLayer( )
+          NetworkLayer.setUserTokens( UserToken1, responseData.UserToken2 )
+
+          Actions[ SuccessfulLoginRouteName ]( SuccessfulLoginRouteOptions )
         }
         else
         {
@@ -96,9 +98,9 @@ export default class Login extends React.Component
         }
       }
       else
-        console.log( "Expired login event" )
+        console.log( "XXX Expired login event" )
     } )
-    // TODO: Error handling here
+    // TODO x5000 Error handling for failed login
     .done()
   }
 

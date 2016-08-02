@@ -281,7 +281,7 @@ type Viewer implements Node {
   User_Email: String
   User_PhoneNumberMobile: String
   User_Locale: String
-  User_Token2: String
+  UserToken2: String
   compendiums(after: String, first: Int, before: String, last: Int): CompendiumsConnection
   Ensayos(after: String, first: Int, before: String, last: Int): EnsayosConnection
   Ensayo(id: ID): Ensayo

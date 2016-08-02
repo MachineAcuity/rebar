@@ -2,13 +2,14 @@
 
 import express from 'express';
 
+import {version} from '../configuration/package'
 import renderOnServer from './renderOnServer'
 
 let assetsPath;
 if( process.env.NODE_ENV == 'production' )
-  assetsPath = `/assets/${process.env.npm_package_version}`;
+  assetsPath = `/assets/${version}`;
 else
-  assetsPath = `http://localhost:8080/${process.env.npm_package_version}`;
+  assetsPath = `http://localhost:8080/${version}`;
 
 let app = express();
 

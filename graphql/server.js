@@ -4,8 +4,16 @@ import express from 'express';
 import graphQLHTTP from 'express-graphql';
 import ObjectManager from '../graphql/ObjectManager';
 
+import { connectAndLoadSchemas } from './ExpressCassandra'
+import _schemas_system from './model/_schemas'
+import _schemas from '../configuration/graphql/_schemas'
+
 import { getUserByCookie, verifyUserAuthToken, serveAuthenticationFailed } from '../server/credentials_check.js';
 import schema from './schema'; // Schema for GraphQL server
+
+
+// Prepare express-cassandra
+connectAndLoadSchemas( )
 
 let router = express( );
 

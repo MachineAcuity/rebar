@@ -5,7 +5,7 @@ import cassandraDriver from 'cassandra-driver';
 // Read environment
 require( 'dotenv' ).load( );
 
-let options =
+const CassandraOptions =
 {
   contactPoints: process.env.CASSANDRA_CONNECTION_POINTS != null ?
     process.env.CASSANDRA_CONNECTION_POINTS.split(',')
@@ -17,11 +17,11 @@ let options =
 
 if( process.env.CASSANDRA_USER )
 {
-  options.authProvider =
+  CassandraOptions.authProvider =
     new cassandraDriver.auth.PlainTextAuthProvider(
       process.env.CASSANDRA_USER,
       process.env.CASSANDRA_PASSWORD
     );
 }
 
-export default options;
+export default CassandraOptions;

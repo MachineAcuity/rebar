@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
+import Relay from 'react-relay';
 import Drawer from 'react-native-drawer';
 import { DefaultRenderer } from 'react-native-router-flux';
 
-import DrawerView from './DrawerView';
+import DrawerView from '../../configuration/app/components/DrawerView';
 
 class NavigationDrawer extends React.Component
 {
@@ -13,16 +14,19 @@ class NavigationDrawer extends React.Component
       <Drawer
         ref="navigation"
         type="displace"
-        content={<DrawerView />}
+        content={ <DrawerView Viewer={this.props.Viewer} /> }
         tapToClose
-        openDrawerOffset={0.2}
-        panCloseMask={0.2}
+        openDrawerOffset={ 0.2 }
+        panCloseMask={ 0.2 }
         negotiatePan
-        tweenHandler={(ratio) => ({
-          main: { opacity: Math.max(0.54, 1 - ratio) },
-        })}
+        tweenHandler={ ( ratio ) => ( {
+          main: { opacity: Math.max( 0.54, 1 - ratio ) },
+        } ) }
       >
-        <DefaultRenderer navigationState={children[0]} onNavigate={this.props.onNavigate} />
+        <DefaultRenderer
+          navigationState={ children[ 0 ] }
+          onNavigate={ this.props.onNavigate }
+        />
       </Drawer>
     );
   }
@@ -30,6 +34,16 @@ class NavigationDrawer extends React.Component
 
 NavigationDrawer.propTypes = {
   navigationState: PropTypes.object,
+  onNavigate: PropTypes.func
 }
 
-export default NavigationDrawer
+export default Relay.createContainer( NavigationDrawer,
+{
+  fragments: {
+    Viewer: ( ) => Relay.QL`
+      fragment on Viewer {
+        ${ DrawerView.getFragment( 'Viewer' ) }
+      }
+    `,
+  },
+} )

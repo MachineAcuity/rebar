@@ -1,16 +1,8 @@
 {
-  "env": {
-    "development": {
-      "presets": ["es2015", "stage-0", "react"],
-      "plugins": ["babel-relay-plugin-loader"]
-    },
-    "production": {
-      "presets": ["es2015", "stage-0", "react"],
-      "plugins": ["babel-relay-plugin-loader"]
-    },
-    "native": {
-      "presets": ["es2015", "stage-0", "react", "react-native"],
-      "plugins": ["babel-relay-plugin-loader"]
-    },
-  }
+  "presets": [
+    "react-native-stage-0"
+  ],
+  "plugins": [
+    "babel-relay-plugin-loader"
+  ]
 }

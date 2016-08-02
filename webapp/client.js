@@ -7,10 +7,11 @@ import ReactDOM from 'react-dom';
 import { browserHistory, match, Router } from 'react-router';
 import Relay from 'react-relay';
 
-import publicURL from '../configuration/scripts/publicURL'
+import isomorphicVars from '../configuration/webapp/scripts/isomorphicVars';
 import routes from '../configuration/webapp/routes';
 
 import './styles/main.css';
+
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -19,30 +20,31 @@ import './styles/main.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin( );
 
+const isoVars = isomorphicVars( );
 
 // Retrieve prepared data
 const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent );
 
 // Retrieve the auth token. We know it will be on viewer, but we do not know which fragment.
 // Go through them all.
-// It is important that User_Token2 is requested in Chrome.jsx
-let User_Token2 = "";
+// It is important that UserToken2 is requested in Chrome.jsx
+let UserToken2 = "";
 for( let fragment of data )
 {
-  const authTokenInThisFragment = fragment.response.Viewer.User_Token2;
+  const authTokenInThisFragment = fragment.response.Viewer.UserToken2;
   if( authTokenInThisFragment != null )
   {
-    User_Token2 = authTokenInThisFragment;
+    UserToken2 = authTokenInThisFragment;
     break;
   }
 }
 
-if( User_Token2.length == 0 )
+if( UserToken2.length == 0 )
   alert( 'Authentication token retrieval failed' );
 
 
 // Where is the GraphQL server?
-const graphQLServerURL = publicURL + '/graphql';
+const graphQLServerURL = isoVars.PUBLIC_URL + '/graphql';
 
 // Create Relay environment
 // Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
@@ -52,7 +54,7 @@ environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
   {
     credentials: 'same-origin',
     headers: {
-      user_token_2: User_Token2,
+      UserToken2: UserToken2,
     },
   }
 ) );

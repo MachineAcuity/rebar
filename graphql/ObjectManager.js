@@ -23,7 +23,7 @@ const User_0 = new User( {
   User_Email: '',
   User_PhoneNumberMobile: '',
   User_Locale: '',
-  User_Token2: AnonymousUserToken2
+  UserToken2: AnonymousUserToken2
 } )
 
 // Set persistence

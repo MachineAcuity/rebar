@@ -2,7 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-var version = require('./package.json').version;
+var version = require('./configuration/package.js').version;
 
 let config = {
   entry: {

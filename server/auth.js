@@ -42,10 +42,10 @@ auth.post( '/login', ( req, res ) =>
           // User has authenticated correctly thus we create a JWT token
           var token = jwt.encode( { user_id: a_User.id }, process.env.JWT_SECRET );
 
-          res.cookie( 'user_token_1', token, { httpOnly: true } );
+          res.cookie( 'UserToken1', token, { httpOnly: true } );
           res.json( {
             success: true,
-            User_Token2: a_User.User_Token2
+            UserToken2: a_User.UserToken2
           } );
         }
         else
@@ -89,7 +89,7 @@ auth.post( '/createuser', ( req, res ) =>
           User_Email: User_Email,
           User_PhoneNumberMobile: '',
           User_Locale: '',
-          User_Token2: Math.random( ).toString( 36 ).substring( 2 ) + Math.random( ).toString( 36 ).substring( 2 )
+          UserToken2: Math.random( ).toString( 36 ).substring( 2 ) + Math.random( ).toString( 36 ).substring( 2 )
         } )
       } )
   } )
@@ -100,7 +100,7 @@ auth.post( '/createuser', ( req, res ) =>
     // User has been created thus we create a JWT token
     var token = jwt.encode( { user_id: a_User.id }, process.env.JWT_SECRET );
 
-    res.cookie( 'user_token_1', token, { httpOnly: true } );
+    res.cookie( 'UserToken1', token, { httpOnly: true } );
     res.json( { success : true } );
   } )
   .catch( ( reason ) =>
@@ -113,7 +113,7 @@ auth.post( '/createuser', ( req, res ) =>
 
 auth.post( '/logout', ( req, res ) =>
 {
-  res.cookie( 'user_token_1', '', { httpOnly: true, expires: new Date( 1 ) } );
+  res.cookie( 'UserToken1', '', { httpOnly: true, expires: new Date( 1 ) } );
   res.json( { success : true } );
 } )
 

@@ -41,8 +41,7 @@ export default Relay.createContainer(ToDoListFooter, {
   },
   prepareVariables(prevVars) {
     return {
-      ...prevVars,
-      limit: 2147483647,  // GraphQLInt
+      ...prevVars
     };
   },
   fragments: {

@@ -15,10 +15,10 @@ export function getUserByCookie( objectManager, req)
 
   try
   {
-    if( req.cookies.user_token_1 )
-      if( req.cookies.user_token_1.length > 10 )
+    if( req.cookies.UserToken1 )
+      if( req.cookies.UserToken1.length > 10 )
       {
-        var decoded = jwt.decode( req.cookies.user_token_1, process.env.JWT_SECRET )
+        var decoded = jwt.decode( req.cookies.UserToken1, process.env.JWT_SECRET )
         user_id = decoded.user_id
       }
   }
@@ -46,12 +46,12 @@ export function verifyUserAuthToken( a_User, req )
     return Promise.reject( "User not found" )
   else
   {
-    const request_User_Token2 = req.get( 'user_token_2' )
-    if( request_User_Token2 == a_User.User_Token2 || process.env.USER_TOKEN_2_BYPASS_IP == req.ip )
+    const request_UserToken2 = req.get( 'UserToken2' )
+    if( request_UserToken2 == a_User.UserToken2 || process.env.USER_TOKEN_2_BYPASS_IP == req.ip )
       return Promise.resolve( a_User.id )
     else
     {
-      return Promise.reject( "Authentication token expected: " + a_User.User_Token2 + ", provided:" + request_User_Token2 )
+      return Promise.reject( "Authentication token expected: " + a_User.UserToken2 + ", provided:" + request_UserToken2 )
     }
   }
 }
@@ -62,6 +62,6 @@ export function serveAuthenticationFailed( res, message )
 {
   log.log( 'warn', 'Checking credentials failed: ' + message )
 
-  res.cookie( 'user_token_1', '', { httpOnly: true, expires: new Date( 1 ) } ) // Expire cookie. Only way to 'delete'
+  res.cookie( 'UserToken1', '', { httpOnly: true, expires: new Date( 1 ) } ) // Expire cookie. Only way to 'delete'
   res.status( 403 ).sendFile( httpError403FileName )
 }

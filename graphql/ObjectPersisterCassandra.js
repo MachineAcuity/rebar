@@ -1,6 +1,6 @@
 /* @flow weak */
 
-import { runQuery, runQueryOneResult, runQueryNoResult, Uuid } from './CassandraClient.js';
+import { runQuery, runQueryOneResult, runQueryNoResult } from './CassandraClient.js';
 
 function ObjectPersister_get( entityName: string, ObjectType: any, fieldName: string, values: Array<any> )
 {

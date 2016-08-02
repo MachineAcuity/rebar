@@ -1,8 +1,6 @@
 /* @flow weak */
 'use strict';
 
-import Button from 'react-native-button';
-import { Actions } from 'react-native-router-flux';
 import Relay from 'react-relay';
 import StatusButton from './StatusButton';
 import ToDoList from './ToDoList';
@@ -11,7 +9,6 @@ import React from 'react';
 import {
   Platform,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 
@@ -92,7 +89,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5F5F5',
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? undefined : 20,
+    //paddingTop: Platform.OS === 'android' ? undefined : 20,
+    paddingTop: 84 // TODO x3000 Read nav bar height from context
   },
   footer: {
     height: 10,

@@ -11,14 +11,14 @@ function resolveNodeField( source, args, context, { rootValue: objectManager } )
   // the node field will receive a globally
   // unique id, and here we convert that back
   // to the local type and id
-  const {local_id, type} = fromGlobalId(args.id);
+  const { id, type } = fromGlobalId(args.id);
 
   // map the local type and id into the
   // actual data for the record
   if( type === 'Viewer' )
-    return objectManager.getOneById( 'User', local_id );
+    return objectManager.getOneById( 'User', id );
   else
-    return objectManager.getOneById( type, local_id );
+    return objectManager.getOneById( type, id );
 }
 
 export default new GraphQLObjectType({

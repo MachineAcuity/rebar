@@ -24,6 +24,7 @@ project.xcworkspace
 
 # Android/IJ
 #
+*.iml
 .idea
 .gradle
 local.properties
@@ -42,5 +43,7 @@ android/keystores/debug.keystore
 # Server
 #
 .env
-configuration/scripts/publicURL.js
+configuration/app/publicURL.js
+ios/main.jsbundle
 public/assets
+build

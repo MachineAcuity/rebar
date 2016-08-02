@@ -1,9 +1,15 @@
 import React from 'react'
+import Relay from 'react-relay';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
-import { Scene, Reducer, Router, Modal } from 'react-native-router-flux'
+import { Reducer, Router, Scene } from 'react-native-router-flux'
 
 import NavigationDrawer from './NavigationDrawer'
+import NetworkLayer from '../NetworkLayer'
+import RelayRenderer from './RelayComponentRenderer'
+import ViewerQuery from '../ViewerQuery'
+
 import routes from '../../configuration/app/routes'
+
 
 const styles = StyleSheet.create( {
   container: {
@@ -18,12 +24,12 @@ const reducerCreate = params=>
   return ( state, action ) => defaultReducer( state, action )
 }
 
-function getSceneStyle ( props )
+function getSceneStyle ( )
 {
   return {
     flex: 1,
     marginTop: 0,
-    backgroundColor: '#0000ff',
+    backgroundColor: '#ffffff',
     shadowColor: null,
     shadowOffset: null,
     shadowOpacity: null,
@@ -32,7 +38,7 @@ function getSceneStyle ( props )
 }
 
 class MenuButton extends React.Component {
-  render = ( props ) => {
+  render = ( ) => {
     const drawer = this.context.drawer
 		return (
 			<TouchableOpacity
@@ -51,19 +57,54 @@ MenuButton.contextTypes = {
   drawer: React.PropTypes.object,
 }
 
+// Will start the process of loading credentials. Notice that the function returns before the loading is complete
+NetworkLayer.loadPersistedCredentials( )
 
-export default class ApplicationMain extends React.Component
+class ApplicationMain extends React.Component
 {
+  constructor(props)
+  {
+    super( props )
+    this.state = {
+      environment: NetworkLayer.getCurrentEnvironment( )
+    }
+    NetworkLayer.RegisterListeningComponent( this )
+  }
+
+  updateEnvironment( )
+  {
+    this.setState( {
+      environment: NetworkLayer.getCurrentEnvironment( )
+    } )
+  }
+
+  getChildContext ()
+  {
+    return {
+      environment: this.state.environment
+    }
+  }
+
   render( )
   {
-    return <View style={styles.container}>
-      <Router createReducer={reducerCreate} getSceneStyle={getSceneStyle}>
-        <Scene key="modal" component={Modal} >
-            <Scene key="tabbar" component={NavigationDrawer} initial={true}>
-              { routes( MenuButton ) }
-            </Scene>
-        </Scene>
-      </Router>
-    </View>
+    // If the persisted credentials have not been loaded yet
+    if( this.state.environment == null )
+      // Return an empty view. Once the credentials are loaded, updateEnvironment will be called and it will cause re-render
+      return <View />
+    else
+      // Credentials are available, proceed to render UI
+      return <View style={styles.container}>
+        <Router createReducer={ reducerCreate } getSceneStyle={ getSceneStyle } wrapBy={ RelayRenderer( ) }>
+          <Scene key="tabbar" component={ NavigationDrawer }  queries={ ViewerQuery } initial={ true }>
+            { routes( MenuButton ) }
+          </Scene>
+        </Router>
+      </View>
   }
 }
+
+ApplicationMain.childContextTypes = {
+  environment: Relay.PropTypes.Environment
+}
+
+export default ApplicationMain

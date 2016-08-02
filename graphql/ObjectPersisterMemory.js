@@ -1,7 +1,5 @@
 /* @flow weak */
 
-import { Uuid } from './CassandraClient.js';
-
 
 var stores = { };
 function getStore( entityName: string )

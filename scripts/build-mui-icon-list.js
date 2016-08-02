@@ -76,4 +76,4 @@ let sourceCode = [
   `});`,
 ];
 
-fs.writeFileSync('./units/urb-example-mui/webapp/components/MUI_Icons.jsx', sourceCode.join('\n'));
+fs.writeFileSync('./units/urb-example-mui/webapp/components/MUI_Icons', sourceCode.join('\n'));

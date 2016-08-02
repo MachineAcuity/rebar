@@ -8,4 +8,4 @@ import ApplicationMain from './app/components/ApplicationMain';
 import AppRegistryName from './configuration/app/AppRegistryName';
 
 
-AppRegistry.registerComponent( AppRegistryName, () => ApplicationMain );
+AppRegistry.registerComponent( AppRegistryName, ( ) => ApplicationMain );

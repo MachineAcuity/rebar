@@ -6,8 +6,8 @@ export default function( )
   {
     // Running on server.
     return {
+      PUBLIC_URL: process.env.PUBLIC_URL,
       // Modify the code below to set the variables >>>
-      npm_package_version: process.env.npm_package_version,
       OBJECT_PERSISTENCE: process.env.OBJECT_PERSISTENCE,
       // <<< Modify the code above to set the variables
     }

@@ -26,7 +26,7 @@ export default new GraphQLObjectType( {
     User_Email:              { type: GraphQLString,  resolve: (obj) => obj.User_Email },
     User_PhoneNumberMobile:  { type: GraphQLString,  resolve: (obj) => obj.User_PhoneNumberMobile },
     User_Locale:             { type: GraphQLString,  resolve: (obj) => obj.User_Locale },
-    User_Token2:             { type: GraphQLString,  resolve: (obj) => obj.User_Token2 },
+    UserToken2:             { type: GraphQLString,  resolve: (obj) => obj.UserToken2 },
 
     ..._ViewerFields,
 
