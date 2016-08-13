@@ -1,26 +1,27 @@
-import React, { PropTypes } from 'react';
-import Relay from 'react-relay';
-import Drawer from 'react-native-drawer';
-import { DefaultRenderer } from 'react-native-router-flux';
+import React, { PropTypes } from 'react'
+import Relay from 'react-relay'
+import Drawer from 'react-native-drawer'
+import { DefaultRenderer } from 'react-native-router-flux'
 
-import DrawerView from '../../configuration/app/components/DrawerView';
+import DrawerView from '../../configuration/app/components/DrawerView'
+import { openDrawerOffset, panCloseMask, opacityBase } from '../../configuration/app/components/NavigationDrawerSettings'
 
 class NavigationDrawer extends React.Component
 {
   render( )
   {
-    const children = this.props.navigationState.children;
+    const children = this.props.navigationState.children
     return (
       <Drawer
         ref="navigation"
         type="displace"
         content={ <DrawerView Viewer={this.props.Viewer} /> }
         tapToClose
-        openDrawerOffset={ 0.2 }
-        panCloseMask={ 0.2 }
+        openDrawerOffset={ openDrawerOffset }
+        panCloseMask={ panCloseMask}
         negotiatePan
         tweenHandler={ ( ratio ) => ( {
-          main: { opacity: Math.max( 0.54, 1 - ratio ) },
+          main: { opacity: Math.max( opacityBase, 1 - ratio ) },
         } ) }
       >
         <DefaultRenderer
@@ -28,7 +29,7 @@ class NavigationDrawer extends React.Component
           onNavigate={ this.props.onNavigate }
         />
       </Drawer>
-    );
+    )
   }
 }
 

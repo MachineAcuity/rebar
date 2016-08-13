@@ -76,10 +76,7 @@ export default class Login extends React.Component
       {
         if( responseData.success )
         {
-          console.log( 'XXX UserToken1=' + UserToken1 )
-          console.log( 'XXX UserToken2=' + responseData.UserToken2 )
-
-          NetworkLayer.setUserTokens( UserToken1, responseData.UserToken2 )
+          NetworkLayer.setUserTokens( UserToken1, responseData.UserToken2, true )
 
           Actions[ SuccessfulLoginRouteName ]( SuccessfulLoginRouteOptions )
         }
@@ -128,13 +125,11 @@ export default class Login extends React.Component
       return (
         <View style={styles.container}>
           <FloatingLabelTextInput
-            zstyle={ { height: 44, borderColor: '#c0c0c0', borderWidth: 1, margin: 6, padding: 4 } }
             placeholder={"Account Name"}
             value={this.state.User_AccountName}
             onChangeTextValue={(text) => this.setState({User_AccountName: text})}
           />
           <FloatingLabelTextInput
-            zstyle={ { height: 44, borderColor: '#c0c0c0', borderWidth: 1, margin: 6, padding: 4 } }
             placeholder={"Password"}
             secureTextEntry
             value={this.state.User_AccountPassword}

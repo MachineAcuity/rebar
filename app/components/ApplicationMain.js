@@ -6,15 +6,13 @@ import { Reducer, Router, Scene } from 'react-native-router-flux'
 import NavigationDrawer from './NavigationDrawer'
 import NetworkLayer from '../NetworkLayer'
 import RelayRenderer from './RelayComponentRenderer'
-import ViewerQuery from '../ViewerQuery'
 
 import routes from '../../configuration/app/routes'
 
 
 const styles = StyleSheet.create( {
   container: {
-    flex:1,
-    backgroundColor:"red",
+    flex: 1,
   },
 } )
 
@@ -29,7 +27,6 @@ function getSceneStyle ( )
   return {
     flex: 1,
     marginTop: 0,
-    backgroundColor: '#ffffff',
     shadowColor: null,
     shadowOffset: null,
     shadowOpacity: null,
@@ -57,46 +54,54 @@ MenuButton.contextTypes = {
   drawer: React.PropTypes.object,
 }
 
-// Will start the process of loading credentials. Notice that the function returns before the loading is complete
-NetworkLayer.loadPersistedCredentials( )
-
 class ApplicationMain extends React.Component
 {
-  constructor(props)
+  constructor( props )
   {
     super( props )
     this.state = {
-      environment: NetworkLayer.getCurrentEnvironment( )
+      user: 1
     }
     NetworkLayer.RegisterListeningComponent( this )
   }
 
-  updateEnvironment( )
+  updateEnvironment( isAnonymous )
   {
     this.setState( {
-      environment: NetworkLayer.getCurrentEnvironment( )
+      user: this.state.user + 1,
+      isAnonymous
     } )
   }
 
-  getChildContext ()
+  getChildContext( )
   {
     return {
-      environment: this.state.environment
+      environment: NetworkLayer.getCurrentEnvironment( )
     }
+  }
+
+  componentDidMount( )
+  {
+    // Will start the process of loading credentials. Notice that the function returns before the loading is complete
+    NetworkLayer.loadPersistedCredentials( )
   }
 
   render( )
   {
+    // Every time create a new viewer query. This way, when the relay environment changes and this method is called, the components
+    // dependent on the viewer query will be re-rendered
+    const viewerQuery = { Viewer: ( ) => Relay.QL`query { Viewer }` }
+
     // If the persisted credentials have not been loaded yet
-    if( this.state.environment == null )
+    if( NetworkLayer.getCurrentEnvironment( ) == null )
       // Return an empty view. Once the credentials are loaded, updateEnvironment will be called and it will cause re-render
       return <View />
     else
       // Credentials are available, proceed to render UI
       return <View style={styles.container}>
         <Router createReducer={ reducerCreate } getSceneStyle={ getSceneStyle } wrapBy={ RelayRenderer( ) }>
-          <Scene key="tabbar" component={ NavigationDrawer }  queries={ ViewerQuery } initial={ true }>
-            { routes( MenuButton ) }
+          <Scene key="tabbar" component={ NavigationDrawer }  queries={ viewerQuery } initial={ true }>
+            { routes( MenuButton, viewerQuery, this.state.isAnonymous ) }
           </Scene>
         </Router>
       </View>

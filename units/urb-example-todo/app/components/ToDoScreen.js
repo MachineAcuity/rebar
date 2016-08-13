@@ -24,7 +24,6 @@ class ToDoScreen extends React.Component
 
   _handleStatusChange = ( status ) =>
   {
-    console.log( 'status=' + status )
     this.props.relay.setVariables( { status } )
   };
 

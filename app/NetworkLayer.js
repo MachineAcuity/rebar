@@ -7,8 +7,6 @@ import AnonymousUserToken2 from '../configuration/server/AnonymousUserToken2'
 import publicURL from '../configuration/app/publicURL'
 
 
-let UserToken1 = null
-let UserToken2 = null
 let currentEnvironment = null
 let listeningComponent = null
 
@@ -20,35 +18,26 @@ export default class NetworkLayer
       .getGenericPassword( )
       .then( (credentials) => {
         const credentialsJSON = JSON.parse( credentials.password, true )
-        NetworkLayer.setUserTokens( credentialsJSON.UserToken1, credentialsJSON.UserToken2 )
+        NetworkLayer.setUserTokens( credentialsJSON.UserToken1, credentialsJSON.UserToken2, false )
       } )
       .catch( ( error ) => {
-        NetworkLayer.setUserTokens( null, AnonymousUserToken2, true )
+        NetworkLayer.setUserTokens( null, AnonymousUserToken2, false )
       } )
   }
 
-  static setUserTokens( _UserToken1, _UserToken2, doNotPersist )
+  static logout( cb )
   {
-    UserToken1 = _UserToken1
-    UserToken2 = _UserToken2
-    currentEnvironment = null // In order to force the creation of new environment
-
-    if( listeningComponent )
-    {
-      listeningComponent.updateEnvironment( )
-    }
-
-    if( ! doNotPersist )
-    {
-      const tokensAsJSON = JSON.stringify( { UserToken1, UserToken2 } )
-      Keychain.setGenericPassword( 'user', tokensAsJSON )
-    }
+    Keychain.resetGenericPassword( )
+    .then( ( ) => NetworkLayer.setUserTokens( null, AnonymousUserToken2, false ) )
+    .then( ( ) => cb( ) )
   }
 
-  static createNetworkLayer( )
+  static setUserTokens( UserToken1, UserToken2, persist )
   {
-    const graphQLServerURL = publicURL + '/graphql';
+    // New tokens mean new environment
+    currentEnvironment = new Relay.Environment( )
 
+    // Set up options for network layer
     let headers = { }
 
     if( UserToken1 != null )
@@ -57,21 +46,26 @@ export default class NetworkLayer
     if( UserToken2 != null )
       headers.UserToken2 = UserToken2
 
-    return new DefaultNetworkLayer(
+    const graphQLServerURL = publicURL + '/graphql';
+
+    // Create network layer with options and inject
+    currentEnvironment.injectNetworkLayer( new DefaultNetworkLayer(
       graphQLServerURL,
       { headers: headers }
-    )
+    ) )
+
+    if( listeningComponent )
+      listeningComponent.updateEnvironment( UserToken1 == null )
+
+    if( persist )
+    {
+      const tokensAsJSON = JSON.stringify( { UserToken1, UserToken2 } )
+      Keychain.setGenericPassword( 'user', tokensAsJSON )
+    }
   }
 
   static getCurrentEnvironment( )
   {
-    // UserToken2 will be null before persistent credentials are retrieved, or anonymous credentials are set
-    if( currentEnvironment == null && UserToken2 != null )
-    {
-      currentEnvironment = new Relay.Environment( )
-      currentEnvironment.injectNetworkLayer( NetworkLayer.createNetworkLayer( ) )
-    }
-
     return currentEnvironment
   }
 
