@@ -1,68 +1,82 @@
 /* @flow weak */
-'use strict';
+'use strict'
 
-import React, {
-  PropTypes,
-} from 'react';
-import {
-  TextInput,
-} from 'react-native';
+import React from 'react'
+import { TextInput } from 'react-native'
 
-export default class TodoTextInput extends React.Component {
+export default class TodoTextInput extends React.Component
+{
   static defaultProps = {
     commitOnBlur: false,
-  };
-  static propTypes = {
+  }
+  
+  static propTypes =
+  {
     autoFocus: TextInput.propTypes.autoFocus,
     clearButtonMode: TextInput.propTypes.clearButtonMode,
-    commitOnBlur: PropTypes.bool.isRequired,
-    onCancel: PropTypes.func,
-    onDelete: PropTypes.func,
-    onSave: PropTypes.func.isRequired,
+    initialValue: React.PropTypes.string.isRequred,
+    commitOnBlur: React.PropTypes.bool.isRequired,
+    onCancel: React.PropTypes.func,
+    onDelete: React.PropTypes.func,
+    onSave: React.PropTypes.func.isRequired,
     placeholder: TextInput.propTypes.placeholder,
     style: TextInput.propTypes.style,
     value: TextInput.propTypes.value,
-  };
+  }
+
   state = {
     ToDo_Text: this.props.initialValue || '',
-  };
-  constructor(props, context) {
-    super(props, context);
-    this._commitChanges = this._commitChanges.bind(this);
-    this._handleBlur = this._handleBlur.bind(this);
-    this._handleChangeText = this._handleChangeText.bind(this);
-    this._handleSubmitEditing = this._handleSubmitEditing.bind(this);
   }
-  _commitChanges() {
-    var newText = this.state.ToDo_Text.trim();
+
+  constructor(props, context)
+  {
+    super(props, context)
+    this._commitChanges = this._commitChanges.bind(this)
+    this._handleBlur = this._handleBlur.bind(this)
+    this._handleChangeText = this._handleChangeText.bind(this)
+    this._handleSubmitEditing = this._handleSubmitEditing.bind(this)
+  }
+
+  _commitChanges( )
+  {
+    var newText = this.state.ToDo_Text.trim()
     if (this.props.onDelete && newText === '') {
-      this.props.onDelete();
+      this.props.onDelete()
     } else if (this.props.onCancel && newText === this.props.initialValue) {
-      this.props.onCancel();
+      this.props.onCancel()
     } else if (newText !== '') {
-      this.props.onSave(newText);
+      this.props.onSave(newText)
       if (this._mounted !== false) {
-        this.setState({ToDo_Text: ''});
+        this.setState({ToDo_Text: ''})
       }
     }
   }
-  _handleBlur() {
+
+  _handleBlur()
+  {
     if (this.props.commitOnBlur) {
-      this._commitChanges();
+      this._commitChanges()
     }
   }
-  _handleChangeText(ToDo_Text) {
+
+  _handleChangeText( ToDo_Text )
+  {
     if (this._mounted !== false) {
-      this.setState({ToDo_Text: ToDo_Text});
+      this.setState({ToDo_Text: ToDo_Text})
     }
   }
-  _handleSubmitEditing() {
-    this._commitChanges();
+
+  _handleSubmitEditing( )
+  {
+    this._commitChanges()
   }
-  componentWillUnmount() {
-    this._mounted = false;
+  componentWillUnmount( )
+  {
+    this._mounted = false
   }
-  render() {
+
+  render()
+  {
     return (
       <TextInput
         autoFocus={this.props.autoFocus}
@@ -75,6 +89,6 @@ export default class TodoTextInput extends React.Component {
         underlineColorAndroid="transparent"
         value={this.state.ToDo_Text}
       />
-    );
+    )
   }
 }

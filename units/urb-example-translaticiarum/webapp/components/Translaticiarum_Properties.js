@@ -1,75 +1,82 @@
 /* @flow weak */
 
-import React from 'react';
+import React from 'react'
 
-import DatePicker from 'material-ui/DatePicker/DatePicker';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
-import TimePicker from 'material-ui/TimePicker/TimePicker';
+import DatePicker from 'material-ui/DatePicker/DatePicker'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
+import TextField from 'material-ui/TextField'
+import TimePicker from 'material-ui/TimePicker/TimePicker'
 
 import { dateFromUTCString, dateUTCToLocal, dateLocalToUTC } from '../../../../webapp/scripts/DateTimeHelpers'
 
 export default class Translaticiarum_Properties extends React.Component
 {
+  static propTypes = {
+    Translaticiarum_Date: React.PropTypes.string.isRequired,
+    Translaticiarum_Time: React.PropTypes.string.isRequired,
+    updateHandler: React.PropTypes.func.isRequired,
+    Translaticiarum_Type: React.PropTypes.number.isRequired,
+  }
+
   constructor( props : any )
   {
-    super( props );
+    super( props )
 
     this.state = {
       Dialog_IsOpen: false,
       Translaticiarum_Date: dateUTCToLocal( dateFromUTCString( props.Translaticiarum_Date ) ),
       Translaticiarum_Time: dateUTCToLocal( dateFromUTCString( props.Translaticiarum_Time ) ),
-    };
+    }
   }
 
   _handle_Open( )
   {
     this.setState( {
       Dialog_IsOpen: true
-    } );
+    } )
   }
 
   _handle_onChange_Translaticiarum_Date = ( event, value ) =>
   {
     this.setState( {
       Translaticiarum_Date: value
-    } );
-  };
+    } )
+  }
 
   _handle_onChange_Translaticiarum_Time = ( event, value ) =>
   {
     this.setState( {
       Translaticiarum_Time: value
-    } );
-  };
+    } )
+  }
 
   _handle_onTouchTap_Close = ( ) =>
   {
     this.setState( {
       Dialog_IsOpen: false
-    } );
-  };
+    } )
+  }
 
   _handle_onTouchTap_OK = ( ) =>
   {
-    let theTime = this.state.Translaticiarum_Time;
-    theTime.setYear( 1970 );
-    theTime.setMonth( 0 );
-    theTime.setDate( 1 );
-    theTime.setSeconds( 0 );
-    theTime.setMilliseconds( 0 );
+    let theTime = this.state.Translaticiarum_Time
+    theTime.setYear( 1970 )
+    theTime.setMonth( 0 )
+    theTime.setDate( 1 )
+    theTime.setSeconds( 0 )
+    theTime.setMilliseconds( 0 )
 
     this.props.updateHandler( {
       Translaticiarum_Type: this.refs.Translaticiarum_Type.getValue( ),
       Translaticiarum_Date: dateLocalToUTC( this.state.Translaticiarum_Date ).toJSON( ),
       Translaticiarum_Time: dateLocalToUTC( theTime ).toJSON( ),
-    } );
+    } )
 
     this.setState( {
       Dialog_IsOpen: false
-    } );
-  };
+    } )
+  }
 
   render( )
   {
@@ -101,6 +108,6 @@ export default class Translaticiarum_Properties extends React.Component
           />
         </Dialog>
       </div>
-    );
+    )
   }
 }

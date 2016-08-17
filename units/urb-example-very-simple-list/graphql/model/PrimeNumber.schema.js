@@ -1,9 +1,9 @@
 /* @flow */
 
-import { addTableSchema } from '../../../../graphql/ExpressCassandra'
+import defaultPersister from '../../../../configuration/graphql/defaultPersister'
 
 
-addTableSchema( 'PrimeNumber', {
+defaultPersister.addTableSchema( 'PrimeNumber', {
   fields: {
       id: 'uuid',
       PrimeNumber_NumericValue: 'int',

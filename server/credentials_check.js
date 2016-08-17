@@ -3,7 +3,7 @@
 import jwt from 'jwt-simple'
 import path from 'path';
 
-import log from './log.js'
+import log from './log'
 
 
 // Read environment

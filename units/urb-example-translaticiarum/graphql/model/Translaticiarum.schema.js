@@ -1,8 +1,8 @@
 /* @flow */
 
-import { addTableSchema } from '../../../../graphql/ExpressCassandra'
+import defaultPersister from '../../../../configuration/graphql/defaultPersister'
 
-addTableSchema( 'Translaticiarum', {
+defaultPersister.addTableSchema( 'Translaticiarum', {
   fields: {
       id: 'uuid',
       Translaticiarum_User_id: 'uuid',

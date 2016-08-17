@@ -1,26 +1,26 @@
 /* @flow weak */
 
-import express from 'express';
-import graphQLHTTP from 'express-graphql';
-import ObjectManager from '../graphql/ObjectManager';
+import express from 'express'
+import graphQLHTTP from 'express-graphql'
+import ObjectManager from '../graphql/ObjectManager'
 
-import { connectAndLoadSchemas } from './ExpressCassandra'
+import { connectAndLoadSchemas } from '../units/urb-persister-cassandra/graphql/ExpressCassandra'
 import _schemas_system from './model/_schemas'
 import _schemas from '../configuration/graphql/_schemas'
 
-import { getUserByCookie, verifyUserAuthToken, serveAuthenticationFailed } from '../server/credentials_check.js';
-import schema from './schema'; // Schema for GraphQL server
+import { getUserByCookie, verifyUserAuthToken, serveAuthenticationFailed } from '../server/credentials_check.js'
+import schema from './schema' // Schema for GraphQL server
 
 
 // Prepare express-cassandra
 connectAndLoadSchemas( )
 
-let router = express( );
+let router = express( )
 
 router.use( '/', ( req, res, next ) =>
 {
   // create individual object manager for each request
-  const objectManager = new ObjectManager( );
+  const objectManager = new ObjectManager( )
 
   getUserByCookie( objectManager, req, res )
   .then( ( a_User ) => verifyUserAuthToken( a_User, req, res ) )
@@ -32,10 +32,9 @@ router.use( '/', ( req, res, next ) =>
         pretty: true,
         graphiql: true,
       } )
-    } )( req, res, next );
+    } )( req, res, next )
   } )
   .catch( ( error ) => serveAuthenticationFailed( res, error ) )
-  ; // then
-} ); // router.use
+} ) // router.use
 
-export default router;
+export default router

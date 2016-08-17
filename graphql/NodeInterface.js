@@ -1,6 +1,7 @@
 /* @flow weak */
 
-import {GraphQLID, GraphQLNonNull, GraphQLInterfaceType} from "graphql";
+import {GraphQLID, GraphQLNonNull, GraphQLInterfaceType} from "graphql"
+
 
 export default new GraphQLInterfaceType( {
   name: "Node",
@@ -11,4 +12,4 @@ export default new GraphQLInterfaceType( {
        description: "The globally unique id of the object.",
     }
   } )
-} );
+} )

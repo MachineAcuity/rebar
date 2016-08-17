@@ -21,7 +21,7 @@ class MUI_Home extends React.Component
           <pre>
             if( key > 50 ) return;
           </pre>
-          in scripts/build-mui-icon-list.js and run
+          in units/urb-example-mui/scripts/build-mui-icon-list.js and run
           <pre>
             npm run build-mui-icon-list
           </pre>

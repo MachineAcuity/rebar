@@ -1,3 +1,5 @@
+/* @flow weak */
+
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/
 export default function serverExtensions( router )
 {

@@ -5,8 +5,6 @@ import { GraphQLInt, GraphQLNonNull } from "graphql";
 
 import GraphQLDateTime from "../../../../graphql/type/GraphQLDateTime";
 
-import { cursorForObjectInConnectionWithUuidComparison } from '../../../../graphql/mutation_helper';
-
 import TranslaticiarumsConnection from '../type/TranslaticiarumsConnection';
 import ViewerType from '../../../../graphql/type/ViewerType';
 
@@ -29,7 +27,7 @@ export default mutationWithClientMutationId( {
         } )
         .then( ( ) => objectManager.getListBy( 'Translaticiarum', 'Translaticiarum_User_id', objectManager.getViewerUserId( ) ) )
         .then( ( arr ) => ( {
-          cursor: cursorForObjectInConnectionWithUuidComparison( arr, an_Object ),
+          cursor: objectManager.cursorForObjectInConnection( 'Translaticiarum', arr, an_Object ),
           node: an_Object,
         } ) )
         ;

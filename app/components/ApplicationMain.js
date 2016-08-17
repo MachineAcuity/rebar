@@ -1,3 +1,5 @@
+/* @flow weak */
+
 import React from 'react'
 import Relay from 'react-relay';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
@@ -7,6 +9,7 @@ import NavigationDrawer from './NavigationDrawer'
 import NetworkLayer from '../NetworkLayer'
 import RelayRenderer from './RelayComponentRenderer'
 
+import { componentDidMountAdditionalInitialization } from '../../configuration/app/components/ApplicationMainSettings'
 import routes from '../../configuration/app/routes'
 
 
@@ -84,6 +87,9 @@ class ApplicationMain extends React.Component
   {
     // Will start the process of loading credentials. Notice that the function returns before the loading is complete
     NetworkLayer.loadPersistedCredentials( )
+
+    // Configurable hook so that additional actions can be performed when the application has been loaded
+    componentDidMountAdditionalInitialization( )
   }
 
   render( )

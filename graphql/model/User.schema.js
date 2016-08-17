@@ -1,8 +1,8 @@
 /* @flow */
 
-import { addTableSchema } from '../ExpressCassandra'
+import defaultPersister from '../../configuration/graphql/defaultPersister'
 
-addTableSchema( 'User', {
+defaultPersister.addTableSchema( 'User', {
   fields: {
       id: 'uuid',
       User_AccountName: 'text',

@@ -3,13 +3,13 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
-import log from './log.js';
 import path from 'path';
 import process from 'process';
 
 import auth from './auth'; // Authentication server
 import getLocalIP from '../scripts/getLocalIP'
 import graphql from '../graphql/server'; // GraphQL server
+import log from './log';
 import {name,version} from '../configuration/package'
 import serverExtensions from '../configuration/server/serverExtensions'
 import webapp from '../webapp/server'; // Isomorphic React server
@@ -17,22 +17,6 @@ import webapp from '../webapp/server'; // Isomorphic React server
 
 // Read environment
 require( 'dotenv' ).load( );
-
-// Validate Persistence
-const objectPersistence = process.env.OBJECT_PERSISTENCE;
-if( objectPersistence != 'memory' && objectPersistence != 'cassandra' )
-{
-  log.log( 'info', 'Invalid process.env.OBJECT_PERSISTENCE: ' + objectPersistence );
-  process.exit( );
-}
-
-// Log starting application - first gather connection information
-let persistenceInformation = { };
-if( objectPersistence == 'cassandra' )
-{
-  persistenceInformation.CASSANDRA_KEYSPACE = process.env.CASSANDRA_KEYSPACE;
-  persistenceInformation.CASSANDRA_CONNECTION_POINTS = process.env.CASSANDRA_CONNECTION_POINTS;
-}
 
 const startupInformation =
 {
@@ -47,9 +31,6 @@ const startupInformation =
   process_title:        process.title,
   process_pid:          process.pid,
   local_ip:             getLocalIP( ),
-
-  objectPersistence:    objectPersistence,
-  ...persistenceInformation
 }
 
 // Log starting application, also print to console

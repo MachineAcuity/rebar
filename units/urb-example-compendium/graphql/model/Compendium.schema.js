@@ -1,8 +1,8 @@
 /* @flow */
 
-import { addTableSchema } from '../../../../graphql/ExpressCassandra'
+import defaultPersister from '../../../../configuration/graphql/defaultPersister'
 
-addTableSchema( 'Compendium', {
+defaultPersister.addTableSchema( 'Compendium', {
   fields: {
       id: 'uuid',
       Compendium_User_id: 'uuid',

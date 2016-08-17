@@ -2,7 +2,6 @@
 
 import Helmet from 'react-helmet';
 import IsomorphicRouter from 'isomorphic-relay-router';
-import log from '../server/log.js';
 import MobileDetect from 'mobile-detect'
 import path from 'path';
 import ReactDOMServer from 'react-dom/server';
@@ -11,6 +10,7 @@ import { match } from 'react-router';
 
 import { getUserByCookie, serveAuthenticationFailed } from '../server/credentials_check.js';
 import isomorphicVars from '../configuration/webapp/scripts/isomorphicVars';
+import log from '../server/log';
 import ObjectManager from '../graphql/ObjectManager';
 import routes from '../configuration/webapp/routes';
 import schema from '../graphql/schema'; // Schema for GraphQL server

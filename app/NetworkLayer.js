@@ -1,3 +1,5 @@
+/* @flow weak */
+
 import Keychain from 'react-native-keychain'
 import Relay, {
   DefaultNetworkLayer,

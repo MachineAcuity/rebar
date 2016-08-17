@@ -1,8 +1,9 @@
 /* @flow */
 
-import { addTableSchema } from '../ExpressCassandra'
+import defaultPersister from '../../configuration/graphql/defaultPersister'
 
-addTableSchema( 'logs', {
+
+defaultPersister.addTableSchema( 'logs', {
   fields: {
       key: 'text',
       date: 'timestamp',

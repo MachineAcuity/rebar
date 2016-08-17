@@ -1,9 +1,9 @@
 /* @flow weak */
 
-import cassandraDriver from 'cassandra-driver';
+import cassandraDriver from 'cassandra-driver'
 
 // Read environment
-require( 'dotenv' ).load( );
+require( 'dotenv' ).load( )
 
 const CassandraOptions =
 {
@@ -13,7 +13,7 @@ const CassandraOptions =
   ,
   keyspace: process.env.CASSANDRA_KEYSPACE,
   authProvider: null
-};
+}
 
 if( process.env.CASSANDRA_USER )
 {
@@ -21,7 +21,7 @@ if( process.env.CASSANDRA_USER )
     new cassandraDriver.auth.PlainTextAuthProvider(
       process.env.CASSANDRA_USER,
       process.env.CASSANDRA_PASSWORD
-    );
+    )
 }
 
-export default CassandraOptions;
+export default CassandraOptions

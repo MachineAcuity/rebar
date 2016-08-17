@@ -1,11 +1,11 @@
-'use strict';
+/* @flow weak */
 
-import React, {
-  AppRegistry,
-} from 'react-native';
+'use strict'
 
-import ApplicationMain from './app/components/ApplicationMain';
-import AppRegistryName from './configuration/app/AppRegistryName';
+import React, { AppRegistry } from 'react-native'
+
+import ApplicationMain from './app/components/ApplicationMain'
+import AppRegistryName from './configuration/app/AppRegistryName'
 
 
-AppRegistry.registerComponent( AppRegistryName, ( ) => ApplicationMain );
+AppRegistry.registerComponent( AppRegistryName, ( ) => ApplicationMain )

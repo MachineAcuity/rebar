@@ -13,7 +13,7 @@ const ExpressCassandraClient = ExpressCassandra.createClient( {
       class: 'SimpleStrategy',
       replication_factor: 1
     },
-    dropTableOnSchemaChange: false,
+    migration: 'safe',
     createKeyspace: true
   }
 } )
@@ -81,12 +81,10 @@ export function connectAndLoadSchemas( runAsPartOfSetupCassandra: boolean ): voi
       // TODO x7000 the code below replaces the Array.from function, which does not seem to be working
       //loadATableSchema( Array.from( tableSchemas ), runAsPartOfSetupCassandra )
 
-
       const tableSchemasAsArray = [ ]
       for( let tableName in tableSchemas )
         tableSchemasAsArray.push( [ tableName, tableSchemas[ tableName ] ] )
       loadATableSchema( tableSchemasAsArray, runAsPartOfSetupCassandra )
-
 
       tableSchemas = null // Free up the memory that is not needed any more
     }

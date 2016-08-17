@@ -1,9 +1,9 @@
 /* @flow */
 
-import { addTableSchema } from '../../../../graphql/ExpressCassandra'
+import defaultPersister from '../../../../configuration/graphql/defaultPersister'
 
 
-addTableSchema( 'ToDo', {
+defaultPersister.addTableSchema( 'ToDo', {
   fields: {
       id: 'uuid',
       ToDo_User_id: 'uuid',

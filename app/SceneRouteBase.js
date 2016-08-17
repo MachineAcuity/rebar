@@ -1,3 +1,5 @@
+/* @flow weak */
+
 import Relay from 'react-relay'
 
 export default class SceneRouteBase extends Relay.Route

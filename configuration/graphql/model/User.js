@@ -1,3 +1,5 @@
+/* @flow weak */
+
 // Class used by GraphQL Server
 export default class User
 {

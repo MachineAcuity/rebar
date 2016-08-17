@@ -1,47 +1,53 @@
 /* @flow weak */
 
-import React from 'react';
+import React from 'react'
 
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
+import TextField from 'material-ui/TextField'
 
 
 export default class ToDo_Properties extends React.Component
 {
+  static propTypes =
+  {
+    ToDo_Text: React.PropTypes.string.isRequired,
+    updateHandler: React.PropTypes.func.isRequired,
+  }
+
   constructor( props : any )
   {
-    super( props );
+    super( props )
 
     this.state = {
       Dialog_IsOpen: false,
-    };
+    }
   }
 
   _handle_Open( )
   {
     this.setState( {
       Dialog_IsOpen: true
-    } );
+    } )
   }
 
   _handle_onTouchTap_Close = ( ) =>
   {
     this.setState( {
       Dialog_IsOpen: false
-    } );
-  };
+    } )
+  }
 
   _handle_onTouchTap_OK = ( ) =>
   {
     this.props.updateHandler( {
       ToDo_Text: this.refs.ToDo_Text.getValue( ),
-    } );
+    } )
 
     this.setState( {
       Dialog_IsOpen: false
-    } );
-  };
+    } )
+  }
 
   render( )
   {
@@ -63,6 +69,6 @@ export default class ToDo_Properties extends React.Component
           />
         </Dialog>
       </div>
-    );
+    )
   }
 }

@@ -32,20 +32,6 @@ class HomeScreen extends React.Component
           <br/>
         </CardText>
       </Card>
-      { isoVars.OBJECT_PERSISTENCE == 'memory' &&
-        <div>
-          <br/>
-          <Card>
-            <CardHeader
-              title="Using in-memory persistence"
-              subtitle="Data loss warning"
-            />
-            <CardText>
-              The application is currently running with in-memory persistence. All data entered into the application, including any user accounts created, will be lost once the application is shut down or restarted.
-            </CardText>
-          </Card>
-        </div>
-      }
       <br/>
       <Card>
         <CardHeader
@@ -53,7 +39,7 @@ class HomeScreen extends React.Component
           subtitle="Available both for client and server rendering"
         />
         <CardText>
-          <p>OBJECT_PERSISTENCE: { isoVars.OBJECT_PERSISTENCE }</p>
+          <p>PUBLIC_URL: { isoVars.PUBLIC_URL }</p>
         </CardText>
       </Card>
       <br/>

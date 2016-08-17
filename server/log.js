@@ -1,23 +1,11 @@
 /* @flow weak */
 
-import winston from 'winston';
-import winstonCassandra from './winstonCassandra'
+import winston from 'winston'
 
-// Read environment
-require( 'dotenv' ).load( );
-
-import options from '../graphql/CassandraOptions.js';
-
-// Transports for Winston
-const transports = [ ];
-
-// Use Cassandra for logging if Cassandra is configured
-if( process.env.OBJECT_PERSISTENCE == 'cassandra' )
-  transports.push( new winstonCassandra( options ) );
-else
-  transports.push( new (winston.transports.Console)( ) );
+import defaultPersister from '../configuration/graphql/defaultPersister'
 
 
-var log = new (winston.Logger)( { transports: transports } );
+// The log is always handled by the default persister
+const log = new (winston.Logger)( { transports: [ defaultPersister.createLogger( ) ] } )
 
-export default log;
+export default log

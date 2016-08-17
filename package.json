@@ -5,34 +5,45 @@
   },
   "scripts": {
     "setup-local": "cp ./configuration/default.env ./.env && cp ./configuration/app/default.publicURL.js ./configuration/app/publicURL.js",
-    "setup-cassandra": "babel-node ./scripts/setup-cassandra.js",
-    "update-da-memory": "replace OBJECT_PERSISTENCE=cassandra OBJECT_PERSISTENCE=memory ./.env",
-    "update-da-cassandra": "replace OBJECT_PERSISTENCE=memory OBJECT_PERSISTENCE=cassandra ./.env",
-    "update-ip": "babel-node ./scripts/update-ip.js",
-    "build-babel": "export NODE_ENV=production && rm -rf build && mkdir build && cp -r configuration ./build/configuration && cp -r webapp ./build/webapp && babel -d ./build/server/ ./server -s --retain-lines  && babel -d ./build/configuration/ ./configuration -s --retain-lines && babel -d ./build/graphql/ ./graphql -s --retain-lines && babel -d ./build/scripts/ ./scripts -s --retain-lines && babel -d ./build/server/ ./server -s --retain-lines && babel -d ./build/units/ ./units -s --retain-lines && babel -d ./build/webapp/ ./webapp -s --retain-lines && babel -d ./build/server/ ./server -s --retain-lines && cp -r public ./build/public && cp ./package.json ./build",
-    "build-bump-version": "babel-node ./scripts/build-bump-version.js",
+    "setup-local-w": "copy .\\configuration\\default.env .\\.env. && copy .\\configuration\\app\\default.publicURL.js configuration\\app\\publicURL.js",
+    "setup-cassandra": "./node_modules/.bin/babel-node ./scripts/setup-cassandra.js",
+    "update-ip": "./node_modules/.bin/babel-node ./scripts/update-ip.js",
+    "build-babel": "export NODE_ENV=production && rm -rf build && mkdir build && cp -r configuration ./build/configuration && cp -r webapp ./build/webapp && ./node_modules/.bin/babel -d ./build/server/ ./server -s --retain-lines  && ./node_modules/.bin/babel -d ./build/configuration/ ./configuration -s --retain-lines && ./node_modules/.bin/babel -d ./build/graphql/ ./graphql -s --retain-lines && ./node_modules/.bin/babel -d ./build/scripts/ ./scripts -s --retain-lines && ./node_modules/.bin/babel -d ./build/server/ ./server -s --retain-lines && ./node_modules/.bin/babel -d ./build/units/ ./units -s --retain-lines && ./node_modules/.bin/babel -d ./build/webapp/ ./webapp -s --retain-lines && ./node_modules/.bin/babel -d ./build/server/ ./server -s --retain-lines && cp -r public ./build/public && cp ./package.json ./build",
+    "build-bump-version": "./node_modules/.bin/babel-node ./scripts/build-bump-version.js",
     "build-bundle-ios": "curl -o ./ios/main.jsbundle http://localhost:8081/index.ios.bundle?platform=ios&dev=false",
     "build-bundle-ios-dev": "curl -o ./ios/main.jsbundle http://localhost:8081/index.ios.bundle?platform=ios&dev=true",
     "build-lint": "eslint app configuration data graphql scripts server units webapp",
-    "build-schema": "babel-node ./scripts/build-schema.js",
+    "build-schema": "./node_modules/.bin/babel-node ./scripts/build-schema.js",
     "build-server": "rm -rf build && npm run build-bump-version && npm run build-schema && npm run build-webpack && npm run build-babel",
-    "build-webpack": "export NODE_ENV=production && rm -rf public/assets && mkdir public/assets &&  webpack -p --output-filename client.js",
+    "build-webpack": "export NODE_ENV=production && rm -rf public/assets && mkdir public/assets &&  ./node_modules/.bin/webpack -p --output-filename client.js",
     "dev-reset": "sudo chmod -R a+w * && watchman watch-del-all && rm -rf ~/Library/Developer/Xcode/DerivedData/* && rm -rf $TMPDIR/react-* && rm -rf ~/.node-gyp",
-    "dev-prod": "export NODE_ENV=production && babel-node ./server/server.js",
+    "dev-prod": "export NODE_ENV=production && ./node_modules/.bin/babel-node ./server/server.js",
     "dev-server": "better-npm-run dev-server",
+    "dev-server-w": "better-npm-run dev-server-w",
     "dev-webpack": "rm -rf build && better-npm-run dev-webpack",
+    "dev-webpack-w": "rmdir /s /q build & better-npm-run dev-webpack-w",
     "dev": "rm -rf build && concurrently --kill-others \"npm run dev-webpack\" \"npm run dev-server\" \"npm run start\" ",
+    "dev-w": "rmdir /s /q build & concurrently --kill-others \"npm run dev-webpack-w\" \"npm run dev-server-w\" \"npm run start\" ",
     "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache"
   },
   "betterScripts": {
     "dev-server": {
-      "command": "nodemon --exec babel-node -- ./server/server.js",
+      "command": "nodemon --exec ./node_modules/.bin/babel-node -- ./server/server.js",
       "env": {
         "NODE_ENV": "development"
       }
     },
     "dev-webpack": {
-      "command": "webpack-dev-server --hot --inline --no-info --colors"
+      "command": "./node_modules/.bin/webpack-dev-server --hot --inline --no-info --colors"
+    },
+    "dev-server-w": {
+      "command": "nodemon --exec node_modules\\.bin.\\babel-node -- server\\server.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "dev-webpack-w": {
+      "command": "node_modules\\.bin.\\webpack-dev-server --hot --inline --no-info --colors"
     }
   },
   "metadata": {
@@ -51,22 +62,22 @@
     "dotenv": "2.0.0",
     "ejs": "2.5.1",
     "express": "4.14.0",
-    "express-cassandra": "1.1.2",
+    "express-cassandra": "1.2.1",
     "express-graphql": "0.5.3",
     "graphql": "0.6.2",
     "graphql-relay": "0.4.2",
     "isomorphic-relay": "0.7.1",
     "isomorphic-relay-router": "0.8.1",
     "jwt-simple": "0.5.0",
-    "material-ui": "0.15.3",
+    "material-ui": "0.15.4",
     "material-ui-country-flags": "3.0.1",
     "material-ui-credit-card-icons": "3.0.1",
     "mobile-detect": "1.3.3",
     "node-fetch": "1.6.0",
     "nodemon": "1.10.0",
-    "react": "15.3.0",
+    "react": "15.2.1",
     "react-dimensions": "1.3.0",
-    "react-dom": "15.3.0",
+    "react-dom": "15.2.1",
     "react-event-listener": "0.2.1",
     "react-helmet": "3.1.0",
     "react-native": "0.31.0",
@@ -94,16 +105,16 @@
     "better-npm-run": "0.0.10",
     "concurrently": "2.2.0",
     "css-loader": "0.23.1",
-    "eslint": "3.2.2",
+    "eslint": "3.3.0",
     "eslint-loader": "1.5.0",
-    "eslint-plugin-react": "6.0.0",
+    "eslint-plugin-react": "6.1.0",
     "extract-text-webpack-plugin": "1.0.1",
     "react-hot-loader": "1.3.0",
     "react-native-button": "1.6.0",
     "react-native-drawer": "2.2.6",
     "react-native-listitem": "1.0.5",
-    "react-native-modalbox": "1.3.4",
-    "react-native-router-flux": "3.33.2",
+    "react-native-modalbox": "1.3.5",
+    "react-native-router-flux": "3.34.0",
     "react-tween-state": "0.1.5",
     "recursive-readdir-sync": "1.0.6",
     "replace": "0.3.0",

@@ -1,3 +1,5 @@
+/* @flow weak */
+
 // Originally from
 // https://github.com/eyaleizenberg/react-native-floating-label-text-input/blob/master/index.js
 // It has been copied and modified because at the time of writing it would not work with React 15

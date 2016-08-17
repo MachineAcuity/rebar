@@ -1,21 +1,17 @@
 /* @flow weak */
 
 import DataLoader from 'dataloader'
+import { cursorForObjectInConnection } from "graphql-relay"
 
 import AnonymousUserToken2 from '../configuration/server/AnonymousUserToken2'
-import ObjectPersisterCassandra from './ObjectPersisterCassandra.js'
-import ObjectPersisterMemory from './ObjectPersisterMemory.js'
+import defaultPersister from '../configuration/graphql/defaultPersister'
+import log from '../server/log'
 import User from '../configuration/graphql/model/User'
-import { Uuid } from './CassandraClient.js'
-
-
-// Read environment
-require( 'dotenv' ).load( )
 
 
 // Anonymous user
 const User_0 = new User( {
-  id: Uuid.fromString( '00000000-0000-0000-0000-000000000000' ),
+  id: defaultPersister.uuidFromString( '00000000-0000-0000-0000-000000000000' ),
   User_AccountName: '',
   User_AccountPassword: '',
   User_DisplayName: 'Anonymous',
@@ -25,9 +21,6 @@ const User_0 = new User( {
   User_Locale: '',
   UserToken2: AnonymousUserToken2
 } )
-
-// Set persistence
-const ObjectPersister = (process.env.OBJECT_PERSISTENCE == 'memory') ? ObjectPersisterMemory : ObjectPersisterCassandra
 
 // Static set of entity definitions
 const entityDefinitions = { }
@@ -43,7 +36,7 @@ export default class ObjectManager
     this.Viewer_User_id = null
   }
 
-  static registerEntity( entityName: string, EntityType : any )
+  static registerEntity( entityName: string, EntityType : any, persister: any ): void
   {
     if( entityName in entityDefinitions )
       throw new Error( "Entity already registered: " + entityName )
@@ -51,9 +44,14 @@ export default class ObjectManager
     // In order to be able to access the name as a static property of the type
     EntityType.entityName = entityName
 
+    // Determine persister - default, or otherwise
+    if( persister == null )
+      persister = defaultPersister
+
     entityDefinitions[ entityName ] = {
       EntityName: entityName,
       EntityType: EntityType,
+      Persister: persister,
       TriggersForAdd: [ ],
       TriggersForUpdate: [ ],
       TriggersForRemove: [ ]
@@ -122,16 +120,17 @@ export default class ObjectManager
     if( ! ( entityName in entityDefinitions ) )
       throw new Error( "Can not find entity type named " + entityName )
 
-    const EntityType = entityDefinitions[ entityName ].EntityType
+    const entityDefinition = entityDefinitions[ entityName ]
+    const entityType = entityDefinition.EntityType
 
     let loadersList = multipleResults ? this.getLoadersMultiple( entityName ) : this.getLoadersSingle( entityName )
     let loader = loadersList[ fieldName ]
     if( loader == null )
     {
       if( multipleResults )
-        loader = new DataLoader( values => ObjectPersister.ObjectPersister_getList( entityName, EntityType, fieldName, values ) )
+        loader = new DataLoader( values => entityDefinition.Persister.getList( entityName, entityType, fieldName, values ) )
       else
-        loader = new DataLoader( values => ObjectPersister.ObjectPersister_get( entityName, EntityType, fieldName, values ) )
+        loader = new DataLoader( values => entityDefinition.Persister.get( entityName, entityType, fieldName, values ) )
 
       loadersList[ fieldName ] = loader
     }
@@ -139,7 +138,7 @@ export default class ObjectManager
     return loader
   }
 
-  getOneById( entityName: string, id: Uuid )
+  getOneById( entityName: string, id: any )
   {
     // Special hack for anonymous users
     if( entityName == 'User' && id == '00000000-0000-0000-0000-000000000000' )
@@ -147,10 +146,11 @@ export default class ObjectManager
     // For all non-user, non 0 ids, load from data loader
     else
     {
+      const entityDefinition = entityDefinitions[ entityName ]
+
       const loader = this.getLoader( entityName, 'id', false )
 
-      if( id instanceof Uuid )
-        id = id.toString( )
+      id = entityDefinition.Persister.uuidToString( id )
 
       return loader.load( id )
     }
@@ -196,14 +196,14 @@ export default class ObjectManager
     if( entityDefinition == null ) console.log( 'Cound not find entity'+ entityName )
 
     // Generate primary key
-    fields.id = Uuid.random( )
+    fields.id = entityDefinition.Persister.uuidRandom( )
 
     // If this is a user ID
     if( entityName == 'User' )
       this.setViewerUserId( fields.id.toString( ) )
 
     return this.executeTriggers( entityDefinition.TriggersForAdd, fields )
-    .then( ( ) => ObjectPersister.ObjectPersister_add( entityName, fields, entityDefinition.EntityType ) )
+    .then( ( ) => entityDefinition.Persister.add( entityName, fields, entityDefinition.EntityType ) )
     .then( ( ) => {
       this.invalidateLoaderCache( entityName, fields )
       return fields.id
@@ -217,7 +217,7 @@ export default class ObjectManager
     if( entityDefinition == null ) console.log( 'Cound not find entity'+ entityName )
 
     return this.executeTriggers( entityDefinition.TriggersForUpdate, fields )
-    .then( ObjectPersister.ObjectPersister_update( entityName, fields ) )
+    .then( entityDefinition.Persister.update( entityName, fields ) )
     .then( ( ) => {
       this.invalidateLoaderCache( entityName, fields )
     } )
@@ -229,11 +229,47 @@ export default class ObjectManager
     const entityDefinition = entityDefinitions[ entityName ]
 
     return this.executeTriggers( entityDefinition.TriggersForRemove, fields )
-    .then( ObjectPersister.ObjectPersister_remove( entityName, fields ) )
+    .then( entityDefinition.Persister.remove( entityName, fields ) )
     .then( ( ) => {
       this.invalidateLoaderCache( entityName, fields )
     } )
 
+  }
+
+  cursorForObjectInConnection( entityName: string, arr, obj )
+  {
+    const entityDefinition = entityDefinitions[ entityName ]
+
+    // IDs can be both strings and Uuid. Check that first, and convert to String
+    const obj_id = entityDefinition.Persister.uuidToString( obj.id )
+
+    // Make sure that the object and its instance can be compared with ===
+    // assumed that the object has id field which is unique
+    for( let ix = 0 ; ix < arr.length ; ix++ )
+    {
+      const arr_element_id = entityDefinition.Persister.uuidToString( arr[ ix ].id )
+
+      if( arr_element_id == obj_id )
+      {
+        arr[ ix ] = obj
+        break
+      }
+    }
+
+    let cursor = cursorForObjectInConnection( arr, obj )
+    if( cursor == null )
+    {
+      log.log(
+        'error',
+        'Could not create cursor for object in connection for ' + entityName,
+        {
+          obj,
+          arr
+        }
+      )
+    }
+
+    return cursor
   }
 }
 
