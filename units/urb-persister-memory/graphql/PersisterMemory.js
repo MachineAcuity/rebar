@@ -19,41 +19,59 @@ export default class PersisterMemory
       return ( this.stores[ entityName ] = [ ] )
   }
 
-  findIndexes( entityName: string, fieldName: string, value: any )
+  findIndexes( entityName: string, filter: object )
   {
     const store = this.getStore( entityName )
     const arr_Indexes = [ ]
 
-    store.map( ( objectInStore, index ) => {
-      if( objectInStore[ fieldName ] == value )
+    store.map( ( objectInStore, index ) =>
+    {
+      let filterMatched = true
+      for( let filterField in filter )
+        if( objectInStore[ filterField ] != filter[ filterField ] )
+        {
+          filterMatched = false
+          break
+        }
+
+      if( filterMatched )
         arr_Indexes.push( index )
     } )
 
     return arr_Indexes
   }
 
-  findObjects( entityName: string, fieldName: string, value: any )
+  findObjects( entityName: string, filter: object )
   {
     const store = this.getStore( entityName )
     const arr_Objects = [ ]
 
-    store.map( ( objectInStore ) => {
-      if( objectInStore[ fieldName ] == value )
+    store.map( ( objectInStore ) =>
+    {
+      let filterMatched = true
+      for( let filterField in filter )
+        if( objectInStore[ filterField ] != filter[ filterField ] )
+        {
+          filterMatched = false
+          break
+        }
+
+      if( filterMatched )
         arr_Objects.push( objectInStore )
     } )
 
     return arr_Objects
   }
 
-  get( entityName: string, ObjectType: any, fieldName: string, values : Array<any> )
+  getOneObject( entityName: string, ObjectType: any, filters: Array<any> ): Promise
   {
-    const arr_Objects = values.map( value => this.findObjects( entityName, fieldName, value )[ 0 ] )
+    const arr_Objects = filters.map( filter => this.findObjects( entityName, filter )[ 0 ] )
     return Promise.resolve( arr_Objects )
   }
 
-  getList( entityName: string, ObjectType: any, fieldName: string, values : Array<any> )
+  getObjectList( entityName: string, ObjectType: any, filters: Array<any> ): Promise
   {
-    const arr_arr_Objects = values.map( value => this.findObjects( entityName, fieldName, value ) )
+    const arr_arr_Objects = filters.map( filter => this.findObjects( entityName, filter ) )
     return Promise.resolve( arr_arr_Objects )
   }
 
@@ -67,9 +85,13 @@ export default class PersisterMemory
     return Promise.resolve( )
   }
 
-  update( entityName: string, fields: any )
+  update( entityName: string, fields: any ): Promise
   {
-    const an_Object = this.findObjects( entityName, 'id', fields.id )[ 0 ]
+    // Only use the ID to find the record to delete
+    const newFields = { }
+    newFields.id = fields.id
+
+    const an_Object = this.findObjects( entityName, newFields )[ 0 ]
 
     for( let fieldName in fields )
       an_Object[ fieldName ] = fields[ fieldName ]
@@ -77,11 +99,11 @@ export default class PersisterMemory
     return Promise.resolve( )
   }
 
-  remove( entityName: string, fields: any )
+  remove( entityName: string, fields: any ): Promise
   {
     const store = this.getStore( entityName )
 
-    const indexToDelete = this.findIndexes( entityName, 'id', fields.id )
+    const indexToDelete = this.findIndexes( entityName, fields )[ 0 ]
     store.splice( indexToDelete, 1 )
 
     return Promise.resolve( )

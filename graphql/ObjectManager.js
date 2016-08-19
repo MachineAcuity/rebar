@@ -128,9 +128,9 @@ export default class ObjectManager
     if( loader == null )
     {
       if( multipleResults )
-        loader = new DataLoader( values => entityDefinition.Persister.getList( entityName, entityType, fieldName, values ) )
+        loader = new DataLoader( filter => entityDefinition.Persister.getObjectList( entityName, entityType, filter ) )
       else
-        loader = new DataLoader( values => entityDefinition.Persister.get( entityName, entityType, fieldName, values ) )
+        loader = new DataLoader( filter => entityDefinition.Persister.getOneObject( entityName, entityType, filter ) )
 
       loadersList[ fieldName ] = loader
     }
@@ -138,29 +138,42 @@ export default class ObjectManager
     return loader
   }
 
-  getOneById( entityName: string, id: any )
+  getOneObject( entityName: string, filter: object )
   {
+    // TODO x2000 Provide try catch with logging here!
     // Special hack for anonymous users
-    if( entityName == 'User' && id == '00000000-0000-0000-0000-000000000000' )
-      return Promise.resolve( User_0 )
-    // For all non-user, non 0 ids, load from data loader
-    else
-    {
-      const entityDefinition = entityDefinitions[ entityName ]
+    if( entityName == 'User' )
+      if( filter.id == '00000000-0000-0000-0000-000000000000' )
+        return Promise.resolve( User_0 )
 
-      const loader = this.getLoader( entityName, 'id', false )
+    // For all non-user, non 0 ids, load from data loader per protocol
+    const loaderIdentifier = Object.keys( filter ).sort( ).join( ',' )
+    const loader = this.getLoader( entityName, loaderIdentifier, false )
 
-      id = entityDefinition.Persister.uuidToString( id )
-
-      return loader.load( id )
-    }
+    return loader.load( filter )
   }
 
+  // TODO x1000 this should be replaced with getOneObject calls
+  getOneById( entityName: string, id: any )
+  {
+    return this.getOneObject( entityName, { id: id } )
+  }
+
+  // TODO x1000 this should be replaced with getObjectList calls
   getListBy( entityName: string, fieldName: string, value: string )
   {
-    const loader = this.getLoader( entityName, fieldName, true )
+    const filter = { }
+    filter[ fieldName ] = value
+    return this.getObjectList( entityName, filter )
+  }
 
-    return loader.load( value )
+  getObjectList( entityName: string, filter: object )
+  {
+    // TODO x2000 Provide try catch with logging here!
+    const loaderIdentifier = Object.keys( filter ).sort( ).join( ',' )
+    const loader = this.getLoader( entityName, loaderIdentifier, true )
+
+    return loader.load( filter )
   }
 
   invalidateLoaderCache( entityName: string, fields: any )
@@ -221,7 +234,6 @@ export default class ObjectManager
     .then( ( ) => {
       this.invalidateLoaderCache( entityName, fields )
     } )
-
   }
 
   remove( entityName: string, fields: any )
@@ -233,7 +245,6 @@ export default class ObjectManager
     .then( ( ) => {
       this.invalidateLoaderCache( entityName, fields )
     } )
-
   }
 
   cursorForObjectInConnection( entityName: string, arr, obj )

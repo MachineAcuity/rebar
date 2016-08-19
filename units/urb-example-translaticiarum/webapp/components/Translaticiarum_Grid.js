@@ -162,9 +162,7 @@ class Translaticiarum_Grid extends React.Component
         <div style={ {float: 'right', marginTop: -58, marginRight: 20 } }>
           <FloatingActionButton
             secondary={true}
-            linkButton={true}
             mini={true}
-            actAsExpander={true}
             onTouchTap={ this._handle_onTouchTap_Add }
           >
             <ContentAdd />
