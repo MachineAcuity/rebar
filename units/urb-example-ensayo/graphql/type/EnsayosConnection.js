@@ -1,6 +1,6 @@
 /* @flow weak */
 
-import {connectionDefinitions} from "graphql-relay";
+import {connectionDefinitions} from 'graphql-relay';
 
 import EnsayoType from "./EnsayoType";
 

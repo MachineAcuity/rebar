@@ -1,6 +1,6 @@
 /* @flow weak */
 
-import { fromGlobalId, mutationWithClientMutationId } from "graphql-relay";
+import { fromGlobalId, mutationWithClientMutationId } from 'graphql-relay';
 import { GraphQLString, GraphQLID, GraphQLNonNull } from "graphql";
 
 import ToDoType from '../type/ToDoType';

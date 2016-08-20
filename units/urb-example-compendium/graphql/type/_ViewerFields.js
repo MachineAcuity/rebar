@@ -1,6 +1,6 @@
 /* @flow weak */
 
-import { connectionArgs, connectionFromArray } from "graphql-relay";
+import { connectionArgs, connectionFromArray } from 'graphql-relay';
 
 import CompendiumsConnection from "./CompendiumsConnection";
 import Compendium_getListOrCreate from "../helper/Compendium_getListOrCreate";

@@ -141,6 +141,11 @@ export default class PersisterMemory
 
   addTableSchema( tableName: string, tableSchema: object ): void
   {
-    // Nothing to do
+    // Nothing to do, it's all in memory
+  }
+
+  initialize( runAsPartOfSetupDatabase: boolean ): void
+  {
+    // Nothing to do, it's all in memory
   }
 }

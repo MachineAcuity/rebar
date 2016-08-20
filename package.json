@@ -6,7 +6,7 @@
   "scripts": {
     "setup-local": "cp ./configuration/default.env ./.env && cp ./configuration/app/default.publicURL.js ./configuration/app/publicURL.js",
     "setup-local-w": "copy .\\configuration\\default.env .\\.env. && copy .\\configuration\\app\\default.publicURL.js configuration\\app\\publicURL.js",
-    "setup-cassandra": "./node_modules/.bin/babel-node ./scripts/setup-cassandra.js",
+    "setup-database": "./node_modules/.bin/babel-node ./scripts/setup-database.js",
     "update-ip": "./node_modules/.bin/babel-node ./scripts/update-ip.js",
     "build-babel": "export NODE_ENV=production && rm -rf build && mkdir build && cp -r configuration ./build/configuration && cp -r webapp ./build/webapp && ./node_modules/.bin/babel -d ./build/server/ ./server -s --retain-lines  && ./node_modules/.bin/babel -d ./build/configuration/ ./configuration -s --retain-lines && ./node_modules/.bin/babel -d ./build/graphql/ ./graphql -s --retain-lines && ./node_modules/.bin/babel -d ./build/scripts/ ./scripts -s --retain-lines && ./node_modules/.bin/babel -d ./build/server/ ./server -s --retain-lines && ./node_modules/.bin/babel -d ./build/units/ ./units -s --retain-lines && ./node_modules/.bin/babel -d ./build/webapp/ ./webapp -s --retain-lines && ./node_modules/.bin/babel -d ./build/server/ ./server -s --retain-lines && cp -r public ./build/public && cp ./package.json ./build",
     "build-bump-version": "./node_modules/.bin/babel-node ./scripts/build-bump-version.js",
@@ -33,14 +33,14 @@
         "NODE_ENV": "development"
       }
     },
-    "dev-webpack": {
-      "command": "./node_modules/.bin/webpack-dev-server --hot --inline --no-info --colors"
-    },
     "dev-server-w": {
-      "command": "nodemon --exec node_modules\\.bin.\\babel-node -- server\\server.js",
+      "command": "nodemon --exec node_modules\\.bin.\\babel-node -- --presets stage-3 server\\server.js",
       "env": {
         "NODE_ENV": "development"
       }
+    },
+    "dev-webpack": {
+      "command": "./node_modules/.bin/webpack-dev-server --hot --inline --no-info --colors"
     },
     "dev-webpack-w": {
       "command": "node_modules\\.bin.\\webpack-dev-server --hot --inline --no-info --colors"
@@ -130,7 +130,7 @@
     "type": "git",
     "url": "git+https://github.com/codefoundries/UniversalRelayBoilerplate.git"
   },
-  "version": "8.0.0",
+  "version": "9.0.1",
   "private": false,
   "license": "MIT"
 }

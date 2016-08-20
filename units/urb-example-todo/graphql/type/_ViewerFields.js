@@ -1,7 +1,7 @@
 /* @flow weak */
 
 import { GraphQLInt, GraphQLString } from "graphql";
-import { connectionArgs, connectionFromArray } from "graphql-relay";
+import { connectionArgs, connectionFromArray } from 'graphql-relay';
 
 import ToDosConnection from "./ToDosConnection";
 

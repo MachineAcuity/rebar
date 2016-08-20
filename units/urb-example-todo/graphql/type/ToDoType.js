@@ -1,6 +1,6 @@
 /* @flow weak */
 
-import { globalIdField } from "graphql-relay";
+import { globalIdField } from 'graphql-relay';
 import { GraphQLBoolean, GraphQLString, GraphQLObjectType } from "graphql";
 
 import NodeInterface from "../../../../graphql/NodeInterface";

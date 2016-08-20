@@ -2,21 +2,17 @@
 
 import express from 'express'
 import graphQLHTTP from 'express-graphql'
-import ObjectManager from '../graphql/ObjectManager'
-
-import { connectAndLoadSchemas } from '../units/urb-persister-cassandra/graphql/ExpressCassandra'
-import _schemas_system from './model/_schemas'
-import _schemas from '../configuration/graphql/_schemas'
 
 import { getUserByCookie, verifyUserAuthToken, serveAuthenticationFailed } from '../server/credentials_check.js'
+import ObjectManager from '../graphql/ObjectManager'
 import schema from './schema' // Schema for GraphQL server
 
 
-// Prepare express-cassandra
-connectAndLoadSchemas( )
+// Set up all persisters
+ObjectManager.initializePersisters( false )
 
-let router = express( )
 
+const router = express( )
 router.use( '/', ( req, res, next ) =>
 {
   // create individual object manager for each request

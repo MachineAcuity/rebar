@@ -4,7 +4,7 @@
 
 
 # Universal Relay Boilerplate (URB)
-Boilerplate + examples for React Native (iOS, Android), React (isomorphic, Material-UI), Relay, GraphQL, JWT, Node.js, Apache Cassandra.
+Boilerplate + examples for React Native (iOS, Android), React (isomorphic, Material-UI), Relay, GraphQL, JWT, Node.js, Apache Cassandra, other databases.
 
 
 [Project Overview](http://codefoundries.com/products/UniversalRelayBoilerplate.html).
@@ -42,13 +42,13 @@ For the most up to date list of technologies used please go to [CodeFoundries.co
 
 | **Technology** | **Description**|
 |----------------|----------------|
-| [Node.js](https://nodejs.org/en/)                                  | Event-driven, non-blocking I/O runtime based on JavaScript that is lightweight and efficient. |
-| [GraphQL](http://graphql.org/docs/getting-started/)                                 | A query language created by Facebook in 2012 for describing the capabilities and requirements of data models for client‐server applications. |
+| [Node.js](https://nodejs.org/en/)                               | Event-driven, non-blocking I/O runtime based on JavaScript that is lightweight and efficient. |
+| [GraphQL](http://graphql.org/docs/getting-started/)             | A query language created by Facebook in 2012 for describing the capabilities and requirements of data models for client‐server applications. |
 | [GraphiQL](https://github.com/graphql/graphiql)                 | An graphical interactive in-browser GraphQL IDE. It allows to test the entire schema provided by GraphQL and can be an excellent tool for exploring the boilerplate, as well as a part of applications built on top of it. |
 | [Express GraphQL](https://github.com/graphql/express-graphql)   | A Node.js express library that allows the creation of GraphQL servers. |
 | [Isomorphic Relay](https://github.com/denvned/isomorphic-relay) | Adds server side rendering support to React Relay. The boilerplate fully utilizes this library. |
 | [Data Loader](https://github.com/facebook/dataloader)           | Generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching. |
-| [Apache Cassandra](http://cassandra.apache.org/)                       | The right choice when you need scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data. Cassandra's support for replicating across multiple datacenters is best-in-class, providing lower latency for your users and the peace of mind of knowing that you can survive regional outages. |
+| [Apache Cassandra](http://cassandra.apache.org/)                | The right choice when you need scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data. Cassandra's support for replicating across multiple datacenters is best-in-class, providing lower latency for your users and the peace of mind of knowing that you can survive regional outages. |
 | [JWT](https://jwt.io/)                                          | JSON Web Tokens is an industry standard [RFC 7519](https://tools.ietf.org/html/rfc7519) method for representing claims securely between two parties. |
 | [React Helmet](https://github.com/nfl/react-helmet)             | Reusable React component will manage all of your changes to the document head with support for document title, meta, link, script, and base tags. |
 
@@ -74,7 +74,6 @@ The setup is for OS X only. Prerequisites:
 
 * **Install [Node.js](https://nodejs.org)**.  
 * **Install [Git](https://git-scm.com/downloads)**.
-* **Install [Apache Cassandra](/developer/cassandra/cassandra-installation-mac.html)**.
 * **Make sure** that Node.js is at least version 5.0 and NPM is at least version 3.
 * **In order to speed up NPM** run `npm set progress=false`. This [speeds up NPM significantly](https://twitter.com/gavinjoyce/status/691773956144119808).
 
@@ -86,8 +85,6 @@ In order to set up the project locally, perform the following steps:
 * **Install node packages.** `npm install`. You will see errors like `Error: ENOENT: no such file or directory, open '.env'.`. They can be ignored.
 * **Perform initial setup.** `npm run setup-local`.
 * **Specify JWT_SECRET** by modifying the `.env` file. This step can be skipped if you do not care about the actual security and simply want to get the project running.
-* **Start the server.** `npm run prod` or `npm run dev`.
-* **The application is available at:** `http://localhost:4444`.
 
 ## Running in development mode
 
@@ -102,10 +99,19 @@ To open the app:
 ## Configuring to use Cassandra
 
 * Install and configure Cassandra following the steps in [Cassandra Installation on Mac](http://codefoundries.com/developer/cassandra/cassandra-installation-mac.html).
-* Verify that the name of the database in `\.env` is the name of the database you want.
-* Create the database with `npm run setup-cassandra-init`.
-* Configure to use Cassandra with `npm run update-da-cassandra`.
+* Verify that the name of the database in `/.env` is the name of the database you want.
+* Modify [defaultPersister.js](https://github.com/codefoundries/UniversalRelayBoilerplate/blob/master/configuration/graphql/defaultPersister.js) to use Cassandra persister in the following way:
 
+```JavaScript
+import PersisterCassandra from '../../units/urb-persister-cassandra/graphql/PersisterCassandra'
+const defaultPersister = new PersisterCassandra( )
+
+export default defaultPersister
+```
+
+* Create the database with `npm run setup-database`.
+
+Instructions for other databases will be added as support for those is added.
 
 
 # Further Details

@@ -1,6 +1,6 @@
 /* @flow weak */
 
-import { connectionArgs, connectionFromArray } from "graphql-relay";
+import { connectionArgs, connectionFromArray } from 'graphql-relay';
 
 import TranslaticiarumsConnection from "./TranslaticiarumsConnection";
 

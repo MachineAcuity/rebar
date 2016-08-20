@@ -1,16 +1,35 @@
 /* @flow weak */
 
-import cassandraDriver from 'cassandra-driver'
+import CassandraDriver from 'cassandra-driver'
+import ExpressCassandra from 'express-cassandra'
 
 import CassandraOptions from './CassandraOptions'
-import ExpressCassandraClient, { addTableSchema } from './ExpressCassandra'
 import WinstonCassandra from './WinstonCassandra'
 
 
-const Uuid = cassandraDriver.types.Uuid
+const Uuid = CassandraDriver.types.Uuid
+
+const ExpressCassandraClient = ExpressCassandra.createClient( {
+  clientOptions: CassandraOptions, // Options are pre-set in a separate part of the application, they are correct
+  ormOptions: {
+    defaultReplicationStrategy : {
+      class: 'SimpleStrategy',
+      replication_factor: 1
+    },
+    migration: 'safe',
+    createKeyspace: true
+  }
+} )
 
 export default class PersisterCassandra
 {
+  constructor( )
+  {
+    this.tableSchemas = new Map( )
+    this.canAddMoreTableSchemas = true
+
+  }
+
   getOneObject( entityName: string, ObjectType: any, filters: Array<any> ): Promise
   {
     const resultPromises = [ ]
@@ -147,6 +166,73 @@ export default class PersisterCassandra
 
   addTableSchema( tableName: string, tableSchema: object ): void
   {
-    addTableSchema( tableName, tableSchema )
+    if( ! this.canAddMoreTableSchemas )
+    {
+      console.error( "Attempting to add table schemas after express-cassandra client connect." )
+      process.exit( 1 )
+    }
+    this.tableSchemas[ tableName ] = tableSchema
+  }
+
+  initialize( runAsPartOfSetupDatabase: boolean ): void
+  {
+    console.log( 'Initializing Cassandra persister' )
+
+    // All table schemas should have been added by now.
+    this.canAddMoreTableSchemas = false
+
+    ExpressCassandraClient.connect( ( err ) =>
+    {
+      if( err )
+        console.log( err.message )
+      else
+      {
+        // TODO x7000 the code below replaces the Array.from function, which does not seem to be working
+        //loadATableSchema( Array.from( this.tableSchemas ), runAsPartOfSetupDatabase )
+
+        const tableSchemasAsArray = [ ]
+        for( let tableName in this.tableSchemas )
+          tableSchemasAsArray.push( [ tableName, this.tableSchemas[ tableName ] ] )
+        this.loadATableSchema( tableSchemasAsArray, runAsPartOfSetupDatabase )
+
+        this.tableSchemas = null // Free up the memory that is not needed any more
+      }
+    } )
+  }
+
+  loadATableSchema( tableSchemasAsArray, runAsPartOfSetupDatabase: boolean ): void
+  {
+    if( tableSchemasAsArray.length > 0 )
+    {
+      const tableName = tableSchemasAsArray[ 0 ][ 0 ]
+      const tableSchema = tableSchemasAsArray[ 0 ][ 1 ]
+
+      tableSchemasAsArray.splice( 0, 1 )
+
+      ExpressCassandraClient.loadSchema(
+        tableName,
+        tableSchema,
+        ( err ) =>
+        {
+          if( err )
+          {
+            console.error( err.message )
+            process.exit( 1 )
+          }
+          else
+          {
+            if( runAsPartOfSetupDatabase )
+              console.log( "Table ready: " + ExpressCassandraClient.modelInstance[ tableName ]._properties.name )
+
+            this.loadATableSchema( tableSchemasAsArray, runAsPartOfSetupDatabase ) // Load the next table
+          }
+        }
+      )
+    }
+    else if( runAsPartOfSetupDatabase )
+    {
+      console.log( "Success" )
+      process.exit( )
+    }
   }
 }

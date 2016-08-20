@@ -1,13 +1,18 @@
 /* @flow weak */
 
 import DataLoader from 'dataloader'
-import { cursorForObjectInConnection } from "graphql-relay"
+import { cursorForObjectInConnection } from 'graphql-relay'
 
 import AnonymousUserToken2 from '../configuration/server/AnonymousUserToken2'
 import defaultPersister from '../configuration/graphql/defaultPersister'
 import log from '../server/log'
 import User from '../configuration/graphql/model/User'
 
+import _schemas_system from './model/_schemas'
+import _schemas from '../configuration/graphql/_schemas'
+
+_schemas_system;
+_schemas;
 
 // Anonymous user
 const User_0 = new User( {
@@ -24,6 +29,9 @@ const User_0 = new User( {
 
 // Static set of entity definitions
 const entityDefinitions = { }
+
+// Static array of object managers
+const setPersisters = new Set( )
 
 export default class ObjectManager
 {
@@ -47,6 +55,9 @@ export default class ObjectManager
     // Determine persister - default, or otherwise
     if( persister == null )
       persister = defaultPersister
+
+    // A set would retain only one copy of a persister
+    setPersisters.add( persister )
 
     entityDefinitions[ entityName ] = {
       EntityName: entityName,
@@ -281,6 +292,12 @@ export default class ObjectManager
     }
 
     return cursor
+  }
+
+  static initializePersisters( runAsPartOfSetupDatabase: boolean ): void
+  {
+    for( let persister of setPersisters )
+      persister.initialize( runAsPartOfSetupDatabase )
   }
 }
 

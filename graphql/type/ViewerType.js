@@ -1,7 +1,7 @@
 /* @flow weak */
 
 import { GraphQLBoolean, GraphQLString, GraphQLObjectType } from "graphql"
-import { globalIdField } from "graphql-relay"
+import { globalIdField } from 'graphql-relay'
 
 import defaultPersister from '../../configuration/graphql/defaultPersister'
 import NodeInterface from "../NodeInterface"

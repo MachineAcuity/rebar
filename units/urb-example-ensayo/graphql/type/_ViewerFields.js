@@ -1,7 +1,7 @@
 /* @flow weak */
 
 import { GraphQLID } from "graphql";
-import { fromGlobalId, connectionArgs, connectionFromArray } from "graphql-relay";
+import { fromGlobalId, connectionArgs, connectionFromArray } from 'graphql-relay';
 
 import EnsayosConnection from "./EnsayosConnection";
 import EnsayoType from "./EnsayoType";
