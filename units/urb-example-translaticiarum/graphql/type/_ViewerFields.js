@@ -9,6 +9,6 @@ export default {
   Translaticiarums: {
     type: TranslaticiarumsConnection.connectionType,
     args: { ...connectionArgs },
-    resolve: ( obj, { ...args }, context, { rootValue: objectManager } ) => objectManager.getListBy( 'Translaticiarum', 'Translaticiarum_User_id', objectManager.getViewerUserId( ) ).then( ( arr ) => connectionFromArray( arr, args ) )
+    resolve: ( obj, { ...args }, context, { rootValue: objectManager } ) => objectManager.getObjectList( 'Translaticiarum', { Translaticiarum_User_id: objectManager.getViewerUserId( ) } ).then( ( arr ) => connectionFromArray( arr, args ) )
   },
 }

@@ -27,7 +27,6 @@ export default class PersisterCassandra
   {
     this.tableSchemas = new Map( )
     this.canAddMoreTableSchemas = true
-
   }
 
   getOneObject( entityName: string, ObjectType: any, filters: Array<any> ): Promise

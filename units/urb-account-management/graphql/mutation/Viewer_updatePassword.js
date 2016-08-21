@@ -19,7 +19,7 @@ export default mutationWithClientMutationId( {
   outputFields: {
     Viewer: {
       type: ViewerType,
-      resolve: ( parent, args, context, { rootValue: objectManager } ) => objectManager.getOneById( 'User', objectManager.getViewerUserId( ) )
+      resolve: ( parent, args, context, { rootValue: objectManager } ) => objectManager.getOneObject( 'User', { id: objectManager.getViewerUserId( ) } )
     },
     ErrorMessage: {
       type: GraphQLString,
@@ -32,7 +32,7 @@ export default mutationWithClientMutationId( {
     let ErrorMessage = ""; // No error if empty
 
     return delayPromise( 1000 ) // Wait for a second to slow down a possible potential force attack
-    .then( ( ) => objectManager.getOneById( 'User', local_id ) )
+    .then( ( ) => objectManager.getOneObject( 'User', { id: local_id } ) )
     .then( ( a_User ) =>
       new Promise( (resolve) =>
         bcrypt.compare( User_AccountPassword_Current, a_User.User_AccountPassword, ( err, User_AccountPasswordIsCorrect ) =>

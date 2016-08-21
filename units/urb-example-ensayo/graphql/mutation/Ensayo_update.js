@@ -16,7 +16,7 @@ export default mutationWithClientMutationId( {
   outputFields: {
     Ensayo: {
       type: EnsayoType,
-      resolve: ( {local_id}, { ...args }, context, { rootValue: objectManager } ) => objectManager.getOneById( 'Ensayo', local_id ),
+      resolve: ( {local_id}, { ...args }, context, { rootValue: objectManager } ) => objectManager.getOneObject( 'Ensayo', { id: local_id } ),
     }
   },
   mutateAndGetPayload: ( {id, Ensayo_Content, Ensayo_Title, Ensayo_Description }, context, { rootValue: objectManager } ) => {

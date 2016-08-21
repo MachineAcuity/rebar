@@ -11,7 +11,7 @@ Boilerplate + examples for React Native (iOS, Android), React (isomorphic, Mater
 
 [Project Details](http://codefoundries.com/developer/rebar/).
 
-[Live demo](http://universal-relay-boilerplate.herokuapp.com/).
+[Live demo](http://universal-relay-boilerplate.herokuapp.com/). Live demo is broken pending fixing [#198](https://github.com/codefoundries/UniversalRelayBoilerplate/issues/198).
 
 
 

@@ -16,11 +16,11 @@ export default mutationWithClientMutationId( {
   outputFields: {
     changedToDos: {
       type: new GraphQLList(ToDoType),
-      resolve: ( {arr_local_ids_Changed_ToDos}, args, context, { rootValue: objectManager } ) => arr_local_ids_Changed_ToDos.map( local_id => objectManager.getOneById( 'ToDo', local_id ) ),
+      resolve: ( {arr_local_ids_Changed_ToDos}, args, context, { rootValue: objectManager } ) => arr_local_ids_Changed_ToDos.map( local_id => objectManager.getOneObject( 'ToDo', { id: local_id } ) ),
     },
     Viewer: {
       type: ViewerType,
-      resolve: ( parent, args, context, { rootValue: objectManager } ) => objectManager.getOneById( 'User', objectManager.getViewerUserId( ) )
+      resolve: ( parent, args, context, { rootValue: objectManager } ) => objectManager.getOneObject( 'User', { id: objectManager.getViewerUserId( ) } )
     },
   },
   mutateAndGetPayload: ( {ToDo_Complete}, context, { rootValue: objectManager } ) =>

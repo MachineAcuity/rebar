@@ -2,7 +2,7 @@ import Compendium from '../model/Compendium'
 
 export default function Compendium_getListOrCreate( objectManager )
 {
-  return objectManager.getListBy( 'Compendium', 'Compendium_User_id', objectManager.getViewerUserId( ) )
+  return objectManager.getObjectList( 'Compendium', { Compendium_User_id: objectManager.getViewerUserId( ) } )
   .then( ( arr ) => {
     if( arr.length > 0 )
       return arr;

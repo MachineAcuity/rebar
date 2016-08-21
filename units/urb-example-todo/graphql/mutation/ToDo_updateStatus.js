@@ -16,11 +16,11 @@ export default mutationWithClientMutationId( {
   outputFields: {
     ToDo: {
       type: ToDoType,
-      resolve: ( {local_id}, { ...args }, context, { rootValue: objectManager } ) => objectManager.getOneById( 'ToDo', local_id ),
+      resolve: ( {local_id}, { ...args }, context, { rootValue: objectManager } ) => objectManager.getOneObject( 'ToDo', { id: local_id } ),
     },
     Viewer: {
       type: ViewerType,
-      resolve: ( parent, args, context, { rootValue: objectManager } ) => objectManager.getOneById( 'User', objectManager.getViewerUserId( ) )
+      resolve: ( parent, args, context, { rootValue: objectManager } ) => objectManager.getOneObject( 'User', { id: objectManager.getViewerUserId( ) } )
     },
   },
   mutateAndGetPayload: ( { id, ToDo_Complete }, context, { rootValue: objectManager } ) => {

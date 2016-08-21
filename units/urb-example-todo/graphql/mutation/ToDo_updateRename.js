@@ -14,7 +14,7 @@ export default mutationWithClientMutationId( {
   outputFields: {
     ToDo: {
       type: ToDoType,
-      resolve: ( {local_id}, { ...args }, context, { rootValue: objectManager } ) => objectManager.getOneById( 'ToDo', local_id )
+      resolve: ( {local_id}, { ...args }, context, { rootValue: objectManager } ) => objectManager.getOneObject( 'ToDo', { id: local_id } )
     }
   },
   mutateAndGetPayload: ( {id, ToDo_Text}, context, { rootValue: objectManager } ) => {

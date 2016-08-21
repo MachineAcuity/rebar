@@ -27,7 +27,7 @@ export function getUserByCookie( objectManager, req)
     return Promise.reject( "Could not read auth cookie. " + err )
   }
 
-  return objectManager.getOneById( 'User', user_id )
+  return objectManager.getOneObject( 'User', { id: user_id } )
   .then( ( a_User ) => {
     if( a_User )
     {

@@ -26,7 +26,7 @@ auth.post( '/login', ( req, res ) =>
   let User_AccountPassword = req.body.User_AccountPassword;
 
   delayPromise( 1000 ) // Wait for a second to slow down a possible potential force attack
-  .then( ( ) => objectManager.getListBy( 'User', 'User_AccountName', User_AccountName ) )
+  .then( ( ) => objectManager.getObjectList( 'User', { User_AccountName: User_AccountName } ) )
   .then( ( arr_Users ) =>
   {
     if( arr_Users.length == 0 )
@@ -66,7 +66,7 @@ auth.post( '/createuser', ( req, res ) =>
 
   let User_AccountName = req.body.User_AccountName.toLowerCase( );
   let User_AccountPassword = req.body.User_AccountPassword;
-  objectManager.getListBy( 'User', 'User_AccountName', User_AccountName )
+  objectManager.getObjectList( 'User', { User_AccountName: User_AccountName } )
   .then( ( arr_Users ) =>
   {
     if( arr_Users.length > 0 )
@@ -94,7 +94,7 @@ auth.post( '/createuser', ( req, res ) =>
       } )
   } )
   // Question - why are we loading the user? It might not yet be in DB ....
-  .then( ( user_id ) => objectManager.getOneById( 'User', user_id ) )
+  .then( ( user_id ) => objectManager.getOneObject( 'User', { id: user_id } ) )
   .then( ( a_User ) =>
   {
     // User has been created thus we create a JWT token

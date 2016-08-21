@@ -1,6 +1,6 @@
 export default function ToDo_list_updateMarkAll( objectManager, ToDo_CompleteNew )
 {
-  return objectManager.getListBy( 'ToDo', 'ToDo_User_id', objectManager.getViewerUserId( ) )
+  return objectManager.getObjectList( 'ToDo', { ToDo_User_id: objectManager.getViewerUserId( ) } )
   .then( ( arr ) => {
     const arr_filtered = arr.filter( a_ToDo => a_ToDo.ToDo_Complete != ToDo_CompleteNew );
 

@@ -11,11 +11,11 @@ export default {
   Ensayos: {
     type: EnsayosConnection.connectionType,
     args: { ...connectionArgs },
-    resolve: ( obj, { ...args }, context, { rootValue: objectManager } ) => objectManager.getListBy( 'Ensayo', 'Ensayo_User_id', objectManager.getViewerUserId( ) ).then( ( arr ) => connectionFromArray( arr, args ) )
+    resolve: ( obj, { ...args }, context, { rootValue: objectManager } ) => objectManager.getObjectList( 'Ensayo', { Ensayo_User_id: objectManager.getViewerUserId( ) } ).then( ( arr ) => connectionFromArray( arr, args ) )
   },
   Ensayo: {
     type: EnsayoType,
     args: { ...{ id: { type: GraphQLID } } },
-    resolve: ( parent, { id }, context, { rootValue: objectManager } ) => objectManager.getOneById( 'Ensayo', fromGlobalId(id).id ),
+    resolve: ( parent, { id }, context, { rootValue: objectManager } ) => objectManager.getOneObject( 'Ensayo', { id: fromGlobalId( id ).id } ),
   },
 }
