@@ -29,37 +29,85 @@ export default class PersisterDynamoDB
   constructor( )
   {
     this.tables = { }
-    // TODO x0500 Implement code for DynamoDB/vogel here
-  }
-
-  getStore( entityName: string )
-  {
-    // TODO x0500 Implement code for DynamoDB/vogel here
-  }
-
-  findIndexes( entityName: string, filter: object )
-  {
-    // TODO x0500 Implement code for DynamoDB/vogel here
-  }
-
-  findObjects( entityName: string, filter: object )
-  {
-    // TODO x0500 Implement code for DynamoDB/vogel here
+    this.canAddMoreTableSchemas = true
   }
 
   getOneObject( entityName: string, ObjectType: any, filters: Array<any> ): Promise
   {
-    // TODO x0500 Implement code for DynamoDB/vogel here
+    const resultPromises = [ ]
+    console.log( 'XXX getOneObject entry' )
+
+    for( let filter of filters )
+      resultPromises.push(
+        new Promise( ( resolve, reject ) =>
+        {
+          //this.updateUuidsInFields( entityName, filter )
+          this.tables[ entityName ].get( filter, ( err, entity ) => {
+            console.log( 'XXX getOneObject' )
+            console.log( err )
+            console.log( entity )
+            if( err )
+              reject( err )
+            else
+            {
+              if( entity != null )
+                resolve( new ObjectType( entity ) )
+              else
+                resolve( null )
+            }
+          } )
+        } )
+      )
+
+    return Promise.all( resultPromises )
   }
 
   getObjectList( entityName: string, ObjectType: any, filters: Array<any> ): Promise
   {
-    // TODO x0500 Implement code for DynamoDB/vogel here
+    const resultPromises = [ ]
+
+    for( let filter of filters )
+      resultPromises.push(
+        new Promise( ( resolve, reject ) =>
+        {
+          //this.updateUuidsInFields( entityName, filter )
+
+
+          // TODO x0500 How should WHERE conditions be passed to query???
+          //this.tables[ entityName ].query( filter ).exec( ( err, queryResults ) => {
+
+
+          this.tables[ entityName ].scan( ).exec( ( err, queryResults ) => {
+            if( err )
+              reject( err )
+            else
+            {
+              const arrRetObj = [ ]
+              for( let entity of queryResults.Items )
+                arrRetObj.push( new ObjectType( entity ) )
+              resolve( arrRetObj )
+            }
+          } )
+        } )
+      )
+
+    return Promise.all( resultPromises )
   }
 
   add( entityName: string, fields: any, ObjectType: any )
   {
-    // TODO x0500 Implement code for DynamoDB/vogel here
+    //this.updateUuidsInFields( entityName, fields )
+
+    return new Promise( ( resolve, reject ) =>
+    {
+      this.tables[ entityName ].create( fields, ( err ) =>
+      {
+        if( err )
+          reject( err )
+        else
+          resolve( )
+      } )
+    } )
   }
 
   update( entityName: string, fields: any ): Promise
@@ -108,6 +156,11 @@ export default class PersisterDynamoDB
 
   addTableSchema( tableName: string, tableSchema: object ): void
   {
+    if( ! this.canAddMoreTableSchemas )
+    {
+      console.error( "Attempting to add table schemas to Vogel after createTables." )
+      process.exit( 1 )
+    }
     //console.log( JSON.stringify( tableSchema ) )
 
     const vogelsSchema = {
@@ -161,17 +214,22 @@ export default class PersisterDynamoDB
 
   initialize( runAsPartOfSetupDatabase: boolean ): void
   {
+    console.log( 'Initializing DynamoDB persister - start' )
+
+    // All table schemas should have been added by now.
+    this.canAddMoreTableSchemas = false
+
     vogels.createTables( ( err ) => {
       if( err )
       {
-        console.log( "Table creation failed" )
+        console.log( "Initializing DynamoDB persister - error" )
         console.log( err )
-        reject( err )
       }
-      else if( runAsPartOfSetupDatabase )
+      else
       {
-        console.log( "Success" )
-        process.exit( )
+        console.log( "Initializing DynamoDB persister - success" )
+        if( runAsPartOfSetupDatabase )
+          process.exit( )
       }
     } )
   }

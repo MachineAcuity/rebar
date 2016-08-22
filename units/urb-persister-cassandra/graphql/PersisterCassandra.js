@@ -38,7 +38,7 @@ export default class PersisterCassandra
         new Promise( ( resolve, reject ) =>
         {
           this.updateUuidsInFields( entityName, filter )
-          ExpressCassandraClient.instance[ entityName ].findOne( filter, { raw: true }, (err, entity ) => {
+          ExpressCassandraClient.instance[ entityName ].findOne( filter, { raw: true }, ( err, entity ) => {
             if( err )
               reject( err )
             else
@@ -64,7 +64,7 @@ export default class PersisterCassandra
         new Promise( ( resolve, reject ) =>
         {
           this.updateUuidsInFields( entityName, filter )
-          ExpressCassandraClient.instance[ entityName ].find( filter, { raw: true }, (err, arrEntities ) => {
+          ExpressCassandraClient.instance[ entityName ].find( filter, { raw: true }, ( err, arrEntities ) => {
             if( err )
               reject( err )
             else
@@ -175,7 +175,7 @@ export default class PersisterCassandra
 
   initialize( runAsPartOfSetupDatabase: boolean ): void
   {
-    console.log( 'Initializing Cassandra persister' )
+    console.log( 'Initializing Cassandra persister - start' )
 
     // All table schemas should have been added by now.
     this.canAddMoreTableSchemas = false
@@ -215,6 +215,7 @@ export default class PersisterCassandra
         {
           if( err )
           {
+            console.log( 'Initializing Cassandra persister - error' )
             console.error( err.message )
             process.exit( 1 )
           }
@@ -228,10 +229,9 @@ export default class PersisterCassandra
         }
       )
     }
-    else if( runAsPartOfSetupDatabase )
-    {
-      console.log( "Success" )
+
+    console.log( 'Initializing Cassandra persister - start' )
+    if( runAsPartOfSetupDatabase )
       process.exit( )
-    }
   }
 }
