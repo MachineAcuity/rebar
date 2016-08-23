@@ -193,7 +193,7 @@ export default class PersisterDynamoDB
       if( fieldType == 'uuid' )
         vogelFieldDefinition = vogels.types.uuid( )
       else if( fieldType == 'text' )
-        vogelFieldDefinition = Joi.string( )
+        vogelFieldDefinition = Joi.string( ).allow('')
       else if( fieldType == 'timestamp' )
         vogelFieldDefinition = Joi.date( )
       else if( fieldType == 'int' )
