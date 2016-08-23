@@ -1,6 +1,7 @@
 /* @flow weak */
 
 import Joi from 'joi'
+import uuid from 'node-uuid'
 import vogels from 'vogels'
 import winston from 'winston'
 
@@ -35,23 +36,18 @@ export default class PersisterDynamoDB
   getOneObject( entityName: string, ObjectType: any, filters: Array<any> ): Promise
   {
     const resultPromises = [ ]
-    console.log( 'XXX getOneObject entry' )
 
     for( let filter of filters )
       resultPromises.push(
         new Promise( ( resolve, reject ) =>
         {
-          //this.updateUuidsInFields( entityName, filter )
           this.tables[ entityName ].get( filter, ( err, entity ) => {
-            console.log( 'XXX getOneObject' )
-            console.log( err )
-            console.log( entity )
             if( err )
               reject( err )
             else
             {
               if( entity != null )
-                resolve( new ObjectType( entity ) )
+                resolve( new ObjectType( entity.get( ) ) )
               else
                 resolve( null )
             }
@@ -70,21 +66,22 @@ export default class PersisterDynamoDB
       resultPromises.push(
         new Promise( ( resolve, reject ) =>
         {
-          //this.updateUuidsInFields( entityName, filter )
+          let query = this.tables[ entityName ].scan( )
+          for( let fieldName in filter )
+          {
+            query = query
+              .where( fieldName )
+              .equals( filter[ fieldName ] )
+          }
 
-
-          // TODO x0500 How should WHERE conditions be passed to query???
-          //this.tables[ entityName ].query( filter ).exec( ( err, queryResults ) => {
-
-
-          this.tables[ entityName ].scan( ).exec( ( err, queryResults ) => {
+          query.exec( ( err, queryResults ) => {
             if( err )
               reject( err )
             else
             {
               const arrRetObj = [ ]
               for( let entity of queryResults.Items )
-                arrRetObj.push( new ObjectType( entity ) )
+                arrRetObj.push( new ObjectType( entity.get( ) ) )
               resolve( arrRetObj )
             }
           } )
@@ -96,8 +93,6 @@ export default class PersisterDynamoDB
 
   add( entityName: string, fields: any, ObjectType: any )
   {
-    //this.updateUuidsInFields( entityName, fields )
-
     return new Promise( ( resolve, reject ) =>
     {
       this.tables[ entityName ].create( fields, ( err ) =>
@@ -112,12 +107,30 @@ export default class PersisterDynamoDB
 
   update( entityName: string, fields: any ): Promise
   {
-    // TODO x0500 Implement code for DynamoDB/vogel here
+    return new Promise( ( resolve, reject ) =>
+    {
+      this.tables[ entityName ].update( fields , ( err ) =>
+      {
+        if( err )
+          reject( err )
+        else
+          resolve( )
+      } )
+    } )
   }
 
   remove( entityName: string, fields: any ): Promise
   {
-    // TODO x0500 Implement code for DynamoDB/vogel here
+    return new Promise( ( resolve, reject ) =>
+    {
+      this.tables[ entityName ].destroy( fields , ( err ) =>
+      {
+        if( err )
+          reject( err )
+        else
+          resolve( )
+      } )
+    } )
   }
 
   createLogger( )
@@ -134,12 +147,7 @@ export default class PersisterDynamoDB
 
   uuidRandom( ): string
   {
-    // TODO x0500 Implement code for DynamoDB/vogel here. The code below naturally will not work.
-    let tail = "000000000" + ( uuidSeed++ )
-    tail = tail.substr( tail.length - 9  )
-    const newUUID = '00000000-0000-0000-0000-' + tail // Just use srings
-
-    return newUUID
+    return uuid.v1( )
   }
 
   uuidToString( id: any )

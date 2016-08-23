@@ -76,6 +76,7 @@
     "material-ui-credit-card-icons": "3.0.1",
     "mobile-detect": "1.3.3",
     "node-fetch": "1.6.0",
+    "node-uuid": "1.4.7",
     "react": "15.2.1",
     "react-dimensions": "1.3.0",
     "react-dom": "15.2.1",
@@ -132,7 +133,7 @@
     "type": "git",
     "url": "git+https://github.com/codefoundries/UniversalRelayBoilerplate.git"
   },
-  "version": "9.4.2",
+  "version": "9.4.3",
   "private": false,
   "license": "MIT"
 }

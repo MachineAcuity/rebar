@@ -1,8 +1,7 @@
 /* @flow weak */
 
+import uuid from 'node-uuid'
 import winston from 'winston'
-
-let uuidSeed = 1
 
 export default class PersisterMemory
 {
@@ -121,11 +120,7 @@ export default class PersisterMemory
 
   uuidRandom( ): string
   {
-    let tail = "000000000" + ( uuidSeed++ )
-    tail = tail.substr( tail.length - 9  )
-    const newUUID = '00000000-0000-0000-0000-' + tail // Just use srings
-
-    return newUUID
+    return uuid.v1( )
   }
 
   uuidToString( id: any )
