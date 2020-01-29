@@ -85,8 +85,8 @@ The setup is for OS X only:
 ### Setup
 
 ```
-docker pull scylladb/scylla:3.1.1
-docker run --name scylly -d -p 9042:9042 scylladb/scylla:3.1.1
+docker pull scylladb/scylla:3.2.1
+docker run --name scylly -d -p 9042:9042 scylladb/scylla:3.2.1
 ```
 
 ### Start/Stop
