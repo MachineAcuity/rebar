@@ -1,5 +1,6 @@
 // @flow
 
+import Alert from '@material-ui/lab/Alert'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -8,9 +9,11 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import TextField from '@material-ui/core/TextField'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import React from 'react'
+
 import routeAfterLogin from '../../_configuration/rb-account-management-webapp/routeAfterLogin'
+
+//
 
 const styles = (theme) => ({
   dialogPaper: {
@@ -27,6 +30,8 @@ const styles = (theme) => ({
     paddingRight: 10,
   },
 })
+
+//
 
 class LoginDialog extends React.Component<
   {
@@ -86,9 +91,7 @@ class LoginDialog extends React.Component<
       if (responseData.success) {
         // In case of success, realod the application from server
         window.location.replace(
-          window.location.pathname === '/'
-            ? routeAfterLogin
-            : window.location.pathname,
+          window.location.pathname === '/' ? routeAfterLogin : window.location.pathname,
         )
       } else {
         // In case of error, tell user what the error is
@@ -132,36 +135,28 @@ class LoginDialog extends React.Component<
     const { UserAccount_Identifier, User_Secret } = this.state
 
     return (
-      <Dialog
-        classes={{ paper: classes.dialogPaper }}
-        open={open}
-        onClose={this._handle_Close}
-      >
+      <Dialog classes={{ paper: classes.dialogPaper }} open={open} onClose={this._handle_Close}>
         <DialogTitle>Log In</DialogTitle>
 
         <DialogContent>
           <TextField
-            autoComplete='username'
+            autoComplete="username"
             fullWidth={true}
-            label='E-Mail Address'
-            margin='normal'
+            label="E-Mail Address"
+            margin="normal"
             value={UserAccount_Identifier}
-            variant='outlined'
-            onChange={(event) =>
-              this.setState({ UserAccount_Identifier: event.target.value })
-            }
+            variant="outlined"
+            onChange={(event) => this.setState({ UserAccount_Identifier: event.target.value })}
           />
           <TextField
-            autoComplete='current-password'
+            autoComplete="current-password"
             fullWidth={true}
-            label='Password'
-            margin='normal'
-            type='password'
+            label="Password"
+            margin="normal"
+            type="password"
             value={User_Secret}
-            variant='outlined'
-            onChange={(event) =>
-              this.setState({ User_Secret: event.target.value })
-            }
+            variant="outlined"
+            onChange={(event) => this.setState({ User_Secret: event.target.value })}
             onKeyPress={(ev) => {
               if (ev.key === 'Enter') {
                 this._handle_onClick_LogIn()
@@ -171,12 +166,12 @@ class LoginDialog extends React.Component<
           />
         </DialogContent>
         <DialogActions>
-          <Button color='primary' onClick={this._handle_onCLick_NewUser}>
+          <Button color="primary" onClick={this._handle_onCLick_NewUser}>
             New User
           </Button>
           <div className={classes.grow} />
           <Button onClick={this._handle_Close}>Cancel</Button>
-          <Button color='primary' onClick={this._handle_onClick_LogIn}>
+          <Button color="primary" onClick={this._handle_onClick_LogIn}>
             Log In
           </Button>
         </DialogActions>
@@ -189,27 +184,22 @@ class LoginDialog extends React.Component<
     const { UserAccount_Identifier } = this.state
 
     return (
-      <Dialog
-        classes={{ paper: classes.dialogPaper }}
-        open={open}
-        onClose={this._handle_Close}
-      >
+      <Dialog classes={{ paper: classes.dialogPaper }} open={open} onClose={this._handle_Close}>
         <DialogTitle>Logging in</DialogTitle>
 
         <DialogContent>
-          <Typography component='p'>
+          <br />
+          <Alert variant="outlined" severity="info">
             Logging in as
-            <span className={classes.userName}>
-              {UserAccount_Identifier}
-            </span>{' '}
-            ...
-          </Typography>
+            <span className={classes.userName}>{UserAccount_Identifier}</span>
+            Please wait ...
+          </Alert>
           <br />
           <br />
-          <LinearProgress mode='query' />
+          <LinearProgress mode="query" />
         </DialogContent>
         <DialogActions>
-          <Button color='primary' onClick={this._handle_onCLick_CancelLogIn}>
+          <Button color="primary" onClick={this._handle_onCLick_CancelLogIn}>
             Cancel
           </Button>
         </DialogActions>
@@ -222,21 +212,16 @@ class LoginDialog extends React.Component<
     const { UserAccount_Identifier, errorMessage } = this.state
 
     return (
-      <Dialog
-        classes={{ paper: classes.dialogPaper }}
-        open={open}
-        onClose={this._handle_Close}
-      >
+      <Dialog classes={{ paper: classes.dialogPaper }} open={open} onClose={this._handle_Close}>
         <DialogTitle>Log In Failed</DialogTitle>
 
         <DialogContent>
-          <Typography component='p'>
+          <br />
+          <Alert variant="outlined" severity="error">
             Failed loggin in as
-            <span className={classes.userName}>
-              {UserAccount_Identifier}
-            </span>{' '}
-            because: {errorMessage}!
-          </Typography>
+            <span className={classes.userName}>{UserAccount_Identifier}</span> because:{' '}
+            {errorMessage}!
+          </Alert>
         </DialogContent>
         <DialogActions>
           <Button onClick={this._handle_onClick_TryAgain}>Try Again</Button>

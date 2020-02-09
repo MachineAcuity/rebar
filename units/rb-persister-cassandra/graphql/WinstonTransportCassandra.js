@@ -217,10 +217,12 @@ export default class WinstonTransportCassandra extends transport {
       if (level === 'error') {
         if (err_message) console.error(chalk.black.bgYellowBright(err_message))
         if (message) console.error(chalk.redBright.bgBlack(message))
+        if (details) console.error(chalk.gray.bgBlack(details))
         if (err_stack) console.error(err_stack)
       } else {
         if (err_message) console.log(chalk.black.bgBlueBright(err_message))
         if (message) console.log(chalk.blueBright.bgBlack(message))
+        if (details) console.error(chalk.gray.bgBlack(details))
         if (err_stack) console.log(err_stack)
       }
     }

@@ -1970,6 +1970,10 @@ declare module '@material-ui/core/Hidden/index' {
   declare module.exports: any;
 }
 
+declare module '@material-ui/core/Icon' {
+  declare module.exports: any;
+}
+
 declare module '@material-ui/core/Icon/Icon' {
   declare module.exports: any;
 }
@@ -2238,6 +2242,10 @@ declare module '@material-ui/core/MenuList/MenuList' {
   declare module.exports: any;
 }
 
+declare module '@material-ui/core/MobileStepper' {
+  declare module.exports: any;
+}
+
 declare module '@material-ui/core/MobileStepper/index' {
   declare module.exports: any;
 }
@@ -2406,6 +2414,10 @@ declare module '@material-ui/core/SnackbarContent/SnackbarContent' {
   declare module.exports: any;
 }
 
+declare module '@material-ui/core/Step' {
+  declare module.exports: any;
+}
+
 declare module '@material-ui/core/Step/index' {
   declare module.exports: any;
 }
@@ -2430,6 +2442,10 @@ declare module '@material-ui/core/StepConnector/StepConnector' {
   declare module.exports: any;
 }
 
+declare module '@material-ui/core/StepContent' {
+  declare module.exports: any;
+}
+
 declare module '@material-ui/core/StepContent/index' {
   declare module.exports: any;
 }
@@ -2446,11 +2462,19 @@ declare module '@material-ui/core/StepIcon/StepIcon' {
   declare module.exports: any;
 }
 
+declare module '@material-ui/core/StepLabel' {
+  declare module.exports: any;
+}
+
 declare module '@material-ui/core/StepLabel/index' {
   declare module.exports: any;
 }
 
 declare module '@material-ui/core/StepLabel/StepLabel' {
+  declare module.exports: any;
+}
+
+declare module '@material-ui/core/Stepper' {
   declare module.exports: any;
 }
 

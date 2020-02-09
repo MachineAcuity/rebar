@@ -44,13 +44,15 @@ async function report(req, res) {
       .replace('O', '0')
       .replace('I', '1')
 
-    log('error', 'WWW', {
-      err: req.body.err,
-      err_info: req.body.err_info,
-      objectManager,
-      req,
-      issue_id,
-    })
+    if (req.body.err.message) {
+      log('error', 'WWW', {
+        err: req.body.err,
+        err_info: req.body.err_info,
+        objectManager,
+        req,
+        issue_id,
+      })
+    }
 
     res.json({ success: true, issue_id })
   } catch (err) {

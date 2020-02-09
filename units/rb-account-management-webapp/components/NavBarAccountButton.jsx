@@ -9,6 +9,7 @@ import IconAccount from 'mdi-material-ui/Account'
 import IconAccountOutline from 'mdi-material-ui/AccountOutline'
 import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
+
 import {
   registerAuthenticationRequiredCallback,
   unregisterAuthenticationRequiredCallback,
@@ -44,7 +45,7 @@ class NavBarAccountButton extends React.Component<
   }
 
   // Handle popping open the login dialog if authentication is required
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     registerAuthenticationRequiredCallback(this._handle_onClick_Login)
   }
 
@@ -95,13 +96,7 @@ class NavBarAccountButton extends React.Component<
         <IconButton
           aria-haspopup="true"
           component="div"
-          onClick={
-            User_IsAnonymous ? (
-              this._handle_onClick_Login
-            ) : (
-              this._handle_onClick_UserMenu
-            )
-          }
+          onClick={User_IsAnonymous ? this._handle_onClick_Login : this._handle_onClick_UserMenu}
           color="inherit"
         >
           {User_IsAnonymous ? <IconAccountOutline /> : <IconAccount />}
@@ -119,25 +114,13 @@ class NavBarAccountButton extends React.Component<
           open={userMenuIsOpen}
           onClose={this._handle_UserMenu_Close}
         >
-          <MenuItem
-            component="div"
-            key="profile"
-            onClick={this._handle_onClick_Profile}
-          >
+          <MenuItem component="div" key="profile" onClick={this._handle_onClick_Profile}>
             {User_DisplayName}
           </MenuItem>
-          <MenuItem
-            component="div"
-            key="login"
-            onClick={this._handle_onClick_Login}
-          >
+          <MenuItem component="div" key="login" onClick={this._handle_onClick_Login}>
             Change user
           </MenuItem>
-          <MenuItem
-            component="div"
-            key="logout"
-            onClick={this._handle_onClick_Logout}
-          >
+          <MenuItem component="div" key="logout" onClick={this._handle_onClick_Logout}>
             Log out
           </MenuItem>
         </Menu>
@@ -146,14 +129,11 @@ class NavBarAccountButton extends React.Component<
   }
 }
 
-export default createFragmentContainer(
-  withStyles(styles)(withRouter(NavBarAccountButton)),
-  {
-    Viewer: graphql`
-      fragment NavBarAccountButton_Viewer on Viewer {
-        User_IsAnonymous
-        User_DisplayName
-      }
-    `,
-  },
-)
+export default createFragmentContainer(withStyles(styles)(withRouter(NavBarAccountButton)), {
+  Viewer: graphql`
+    fragment NavBarAccountButton_Viewer on Viewer {
+      User_IsAnonymous
+      User_DisplayName
+    }
+  `,
+})

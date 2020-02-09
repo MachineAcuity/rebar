@@ -10,7 +10,7 @@ const Uuid = CassandraDriver.types.Uuid
 const Uuid_Null_String = '00000000-0000-0000-0000-000000000000'
 const Uuid_Null = Uuid.fromString(Uuid_Null_String)
 
-const ExpressCassandraClient = ExpressCassandra.createClient({
+export const ExpressCassandraClient = ExpressCassandra.createClient({
   clientOptions: CassandraOptions, // Options are pre-set in a separate part of the application, they are correct
   ormOptions: {
     defaultReplicationStrategy: {
@@ -30,11 +30,7 @@ export default class PersisterCassandra {
     this.tableSchemas = new Map()
   }
 
-  getOneObject(
-    entityName: string,
-    ObjectType: any,
-    filters: Array<any>,
-  ): Promise<any> {
+  getOneObject(entityName: string, ObjectType: any, filters: Array<any>): Promise<any> {
     const resultPromises = []
 
     for (let filter of filters) {
@@ -59,9 +55,7 @@ export default class PersisterCassandra {
           try {
             this.updateUuidsInFields(entityName, filter)
 
-            ExpressCassandraClient.instance[
-              entityName
-            ].findOne(filter, options, (err, entity) => {
+            ExpressCassandraClient.instance[entityName].findOne(filter, options, (err, entity) => {
               if (err) {
                 reject(
                   'getOneObject findOne failed: ' +
@@ -94,11 +88,7 @@ export default class PersisterCassandra {
     return Promise.all(resultPromises)
   }
 
-  getObjectList(
-    entityName: string,
-    ObjectType: any,
-    filters: Array<any>,
-  ): Promise<Array<any>> {
+  getObjectList(entityName: string, ObjectType: any, filters: Array<any>): Promise<Array<any>> {
     const resultPromises = []
 
     for (let filter of filters) {
@@ -137,8 +127,7 @@ export default class PersisterCassandra {
                 )
               } else {
                 const arrRetObj = []
-                for (let entity of arrEntities)
-                  arrRetObj.push(new ObjectType(entity))
+                for (let entity of arrEntities) arrRetObj.push(new ObjectType(entity))
                 resolve(arrRetObj)
               }
             })
@@ -161,8 +150,7 @@ export default class PersisterCassandra {
   }
 
   updateUuidsInFields(entityName: string, fields: any) {
-    const schemaFields =
-      ExpressCassandraClient.instance[entityName]._properties.schema.fields
+    const schemaFields = ExpressCassandraClient.instance[entityName]._properties.schema.fields
 
     for (let fieldName in fields) {
       const fieldValue = fields[fieldName]
@@ -265,19 +253,14 @@ export default class PersisterCassandra {
 
   confirmHealth(): Promise<any> {
     return new Promise((resolve, reject) => {
-      ExpressCassandraClient.modelInstance.User.get_cql_client(
-        (err, client) => {
-          if (err) reject(err)
-          else
-            client.execute(
-              'select release_version from system.local;',
-              (err, result) => {
-                if (err) reject(err)
-                else resolve()
-              },
-            )
-        },
-      )
+      ExpressCassandraClient.modelInstance.User.get_cql_client((err, client) => {
+        if (err) reject(err)
+        else
+          client.execute('select release_version from system.local;', (err, result) => {
+            if (err) reject(err)
+            else resolve()
+          })
+      })
     })
   }
 
@@ -308,25 +291,15 @@ export default class PersisterCassandra {
       if (runAsPartOfSetupDatabase) {
         console.log(' Prepare table ' + tableName + '.')
       }
-      ExpressCassandraClient.loadSchema(
-        tableName,
-        tableSchema,
-      ).syncDB((err) => {
+      ExpressCassandraClient.loadSchema(tableName, tableSchema).syncDB((err) => {
         // When used with scylla, this always happens. Just ignore the message
-        if (
-          err &&
-          err.message.startsWith(
-            'Given Schema does not match existing DB Table',
-          )
-        ) {
+        if (err && err.message.startsWith('Given Schema does not match existing DB Table')) {
           err = null
         }
 
         if (err) {
           console.log(
-            'Error:  Initializing Cassandra persister - error while creating ' +
-              tableName +
-              '!',
+            'Error:  Initializing Cassandra persister - error while creating ' + tableName + '!',
           )
           console.error(err.message)
           process.exit(1)
@@ -334,15 +307,10 @@ export default class PersisterCassandra {
           if (runAsPartOfSetupDatabase)
             console.log(
               ' Table ' +
-                ExpressCassandraClient.modelInstance[tableName]._properties
-                  .name +
+                ExpressCassandraClient.modelInstance[tableName]._properties.name +
                 ' ready.',
             )
-          this.loadOneTableSchemaFromArray(
-            arrSchemas,
-            runAsPartOfSetupDatabase,
-            cb,
-          )
+          this.loadOneTableSchemaFromArray(arrSchemas, runAsPartOfSetupDatabase, cb)
           // Load the next table
           return
         }
