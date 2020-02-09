@@ -40,7 +40,7 @@
     "react-relay": "6.0.0",
     "react-rte": "0.16.1",
     "relay-runtime": "6.0.0",
-    "serialize-javascript": "1.9.0",
+    "serialize-javascript": "2.1.1",
     "sorted-json-stringify": "0.1.1",
     "winston": "3.2.1",
     "winston-transport": "4.3.0"
