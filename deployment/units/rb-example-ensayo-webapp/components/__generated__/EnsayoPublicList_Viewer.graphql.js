@@ -27,6 +27,7 @@
               export type EnsayoPublicList_Viewer$key = {
                 +$data?: EnsayoPublicList_Viewer$data,
                 +$fragmentRefs: EnsayoPublicList_Viewer$ref,
+                ...
               };
               */
 

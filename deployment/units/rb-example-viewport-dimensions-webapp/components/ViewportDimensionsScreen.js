@@ -22,7 +22,7 @@ var _react = _interopRequireDefault(require("react"));
 var _reactRelay = require("react-relay");
 
 var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));
-var _ViewportContext = _interopRequireDefault(require("../../rb-appbase-webapp/components/ViewportContext"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _ViewportContext = _interopRequireDefault(require("../../rb-appbase-webapp/components/ViewportContext"));var _ViewportDimensionsScreen_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const styles = {
   card: {
@@ -80,5 +80,5 @@ class ViewportDimensionsScreen extends _react.default.Component
 (0, _reactRelay.createFragmentContainer)(
 (0, _styles.withStyles)(styles)(ViewportDimensionsScreen),
 {
-  Viewer: function () {return require("./__generated__/ViewportDimensionsScreen_Viewer.graphql");} });exports.default = _default;
+  Viewer: _ViewportDimensionsScreen_Viewer !== void 0 ? _ViewportDimensionsScreen_Viewer : _ViewportDimensionsScreen_Viewer = require("./__generated__/ViewportDimensionsScreen_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=ViewportDimensionsScreen.js.map

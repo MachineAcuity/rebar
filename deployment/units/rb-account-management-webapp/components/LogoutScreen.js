@@ -1,5 +1,6 @@
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
+var _Alert = _interopRequireDefault(require("@material-ui/lab/Alert"));
 var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
 var _Card = _interopRequireDefault(require("@material-ui/core/Card"));
 var _CardActions = _interopRequireDefault(require("@material-ui/core/CardActions"));
@@ -9,10 +10,11 @@ var _styles = require("@material-ui/core/styles");
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 var _Logout = _interopRequireDefault(require("mdi-material-ui/Logout"));
 var _react = _interopRequireDefault(require("react"));
+
 var _CompositeCardHeader = _interopRequireWildcard(require("../../rb-appbase-webapp/components/CompositeCardHeader"));
 
 
-var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function () {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};if (obj != null) {var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function () {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 //
 
@@ -78,8 +80,7 @@ class LogoutScreen extends _react.default.Component
         this.setState({
           currentOperation: 'failure',
           errorMessage:
-          'Did not receive proper response from server. Please try again. Message:' +
-          err.message });
+          'Did not receive proper response from server. Please try again. Message:' + err.message });
 
       }
     };this.
@@ -114,8 +115,11 @@ class LogoutScreen extends _react.default.Component
 
 
       _react.default.createElement(_Card.default, { className: classes.card },
+      _react.default.createElement("br", null),
+      _react.default.createElement(_Alert.default, { variant: "outlined", severity: "info" }, "Logging out. Please wait ..."),
+
+
       _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement(_Typography.default, { component: "p" }, "Logging out. Please wait ..."),
       _react.default.createElement("br", null), " ", _react.default.createElement("br", null),
       _react.default.createElement(_LinearProgress.default, { mode: "query" })),
 
@@ -140,7 +144,10 @@ class LogoutScreen extends _react.default.Component
 
       _react.default.createElement(_Card.default, { className: classes.card },
       _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement(_Typography.default, { component: "p" }, "You have been logged out.")),
+      _react.default.createElement("br", null),
+      _react.default.createElement(_Alert.default, { variant: "outlined", severity: "success" }, "You have been logged out.",
+      ' ')),
+
 
       _react.default.createElement(_CardActions.default, null,
       _react.default.createElement(_Button.default, { onClick: this._handle_onClick_Continue }, "Continue")))));
@@ -164,7 +171,8 @@ class LogoutScreen extends _react.default.Component
 
       _react.default.createElement(_Card.default, { className: classes.card },
       _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement(_Typography.default, { component: "p" }, "Failed logging out because: ",
+      _react.default.createElement("br", null),
+      _react.default.createElement(_Alert.default, { variant: "outlined", severity: "error" }, "Failed logging out because: ",
       errorMessage, "!")),
 
 
@@ -189,7 +197,8 @@ class LogoutScreen extends _react.default.Component
 
       _react.default.createElement(_Card.default, { className: classes.card },
       _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement(_Typography.default, { component: "p" }, "You are currently logged in. Are you sure you want to log out?")),
+      _react.default.createElement("br", null),
+      _react.default.createElement(_Typography.default, { component: "h6" }, "You are currently logged in. Are you sure you want to log out?")),
 
 
 

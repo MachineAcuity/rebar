@@ -13,10 +13,9 @@ var _reactHelmet = require("react-helmet");
 var _reactRelay = require("react-relay");
 
 var _AppDrawerNavItems = _interopRequireDefault(require("../../_configuration/rb-appdrawer-webapp/AppDrawerNavItems"));
-var _AppDrawerTitle = _interopRequireDefault(require("../../_configuration/rb-appdrawer-webapp/AppDrawerTitle"));
 var _NavBarDefaultTitle = _interopRequireDefault(require("../../_configuration/rb-appdrawer-webapp/NavBarDefaultTitle"));
 
-var _AppFrameContext = _interopRequireDefault(require("./AppFrameContext"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _AppFrameContext = _interopRequireDefault(require("./AppFrameContext"));var _AppFrame_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const drawerWidth = 240;
 
@@ -70,18 +69,6 @@ const styles = theme => ({
       marginLeft: 12,
       marginTop: 12 } },
 
-
-
-  drawerInner: {
-    // Make the items inside not wrap when transitioning:
-    width: drawerWidth },
-
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: '0 8px',
-    ...theme.mixins.toolbar },
 
   drawerPaper: {
     position: 'relative',
@@ -153,12 +140,6 @@ class AppFrame extends _react.default.Component
 
 
       _react.default.createElement(_Drawer.default, { open: drawerIsOpen, onClose: this._handle_Drawer_Close },
-      _react.default.createElement("div", { className: classes.drawerInner },
-      _react.default.createElement("div", { className: classes.drawerHeader },
-      _react.default.createElement(_AppDrawerTitle.default, { handle_GoTo: this._handle_GoTo }))),
-
-
-
       _react.default.createElement(_AppDrawerNavItems.default, { Viewer: Viewer, onClick: this._handle_GoTo })),
 
 
@@ -171,8 +152,6 @@ class AppFrame extends _react.default.Component
   }}var _default =
 
 
-(0, _reactRelay.createFragmentContainer)(
-(0, _styles.withStyles)(styles)((0, _found.withRouter)(AppFrame)),
-{
-  Viewer: function () {return require("./__generated__/AppFrame_Viewer.graphql");} });exports.default = _default;
+(0, _reactRelay.createFragmentContainer)((0, _styles.withStyles)(styles)((0, _found.withRouter)(AppFrame)), {
+  Viewer: _AppFrame_Viewer !== void 0 ? _AppFrame_Viewer : _AppFrame_Viewer = require("./__generated__/AppFrame_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=AppFrame.js.map

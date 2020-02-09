@@ -1,8 +1,8 @@
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-var _reactRelay = require("react-relay"); //  weak
+var _reactRelay = require("react-relay");var _ToDoUpdateRenameMutation;
 
-const mutation = function () {return require("./__generated__/ToDoUpdateRenameMutation.graphql");};
+const mutation = _ToDoUpdateRenameMutation !== void 0 ? _ToDoUpdateRenameMutation : _ToDoUpdateRenameMutation = require("./__generated__/ToDoUpdateRenameMutation.graphql");
 
 
 

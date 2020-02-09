@@ -21,6 +21,7 @@
               export type AppDrawerNavItems_Viewer$key = {
                 +$data?: AppDrawerNavItems_Viewer$data,
                 +$fragmentRefs: AppDrawerNavItems_Viewer$ref,
+                ...
               };
               */
 

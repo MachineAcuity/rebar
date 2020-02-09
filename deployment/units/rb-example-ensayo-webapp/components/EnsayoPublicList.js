@@ -12,7 +12,7 @@ var _found = require("found");
 var _react = _interopRequireDefault(require("react"));
 var _reactRelay = require("react-relay");
 
-var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));var _EnsayoPublicList_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const styles = theme => ({
   card: {
@@ -51,5 +51,5 @@ class EnsayoPublicList extends _react.default.Component
 (0, _reactRelay.createFragmentContainer)(
 (0, _styles.withStyles)(styles)((0, _found.withRouter)(EnsayoPublicList)),
 {
-  Viewer: function () {return require("./__generated__/EnsayoPublicList_Viewer.graphql");} });exports.default = _default;
+  Viewer: _EnsayoPublicList_Viewer !== void 0 ? _EnsayoPublicList_Viewer : _EnsayoPublicList_Viewer = require("./__generated__/EnsayoPublicList_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=EnsayoPublicList.js.map

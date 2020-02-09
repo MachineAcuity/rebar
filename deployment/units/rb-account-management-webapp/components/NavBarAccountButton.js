@@ -9,11 +9,12 @@ var _Account = _interopRequireDefault(require("mdi-material-ui/Account"));
 var _AccountOutline = _interopRequireDefault(require("mdi-material-ui/AccountOutline"));
 var _react = _interopRequireDefault(require("react"));
 var _reactRelay = require("react-relay");
+
 var _RequiresAuthentication = require("./RequiresAuthentication");
 
 
 
-var _LoginDialog = _interopRequireDefault(require("./LoginDialog"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _LoginDialog = _interopRequireDefault(require("./LoginDialog"));var _NavBarAccountButton_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 //
 
@@ -84,7 +85,7 @@ class NavBarAccountButton extends _react.default.Component
 
       this.props.router.push('/user/new');
     };this.state = { anchorEl: undefined, loginDialogIsOpen: false, userMenuIsOpen: false };} // Handle popping open the login dialog if authentication is required
-  UNSAFE_componentWillMount() {(0, _RequiresAuthentication.registerAuthenticationRequiredCallback)(this._handle_onClick_Login);}componentWillUnmount() {(0, _RequiresAuthentication.unregisterAuthenticationRequiredCallback)();}
+  componentDidMount() {(0, _RequiresAuthentication.registerAuthenticationRequiredCallback)(this._handle_onClick_Login);}componentWillUnmount() {(0, _RequiresAuthentication.unregisterAuthenticationRequiredCallback)();}
   render() {
     const { Viewer } = this.props;
     const { User_IsAnonymous, User_DisplayName } = Viewer;
@@ -95,13 +96,7 @@ class NavBarAccountButton extends _react.default.Component
       _react.default.createElement(_IconButton.default, {
         "aria-haspopup": "true",
         component: "div",
-        onClick:
-        User_IsAnonymous ?
-        this._handle_onClick_Login :
-
-        this._handle_onClick_UserMenu,
-
-
+        onClick: User_IsAnonymous ? this._handle_onClick_Login : this._handle_onClick_UserMenu,
         color: "inherit" },
 
       User_IsAnonymous ? _react.default.createElement(_AccountOutline.default, null) : _react.default.createElement(_Account.default, null)),
@@ -119,25 +114,13 @@ class NavBarAccountButton extends _react.default.Component
         open: userMenuIsOpen,
         onClose: this._handle_UserMenu_Close },
 
-      _react.default.createElement(_MenuItem.default, {
-        component: "div",
-        key: "profile",
-        onClick: this._handle_onClick_Profile },
-
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "profile", onClick: this._handle_onClick_Profile },
       User_DisplayName),
 
-      _react.default.createElement(_MenuItem.default, {
-        component: "div",
-        key: "login",
-        onClick: this._handle_onClick_Login }, "Change user"),
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "login", onClick: this._handle_onClick_Login }, "Change user"),
 
 
-
-      _react.default.createElement(_MenuItem.default, {
-        component: "div",
-        key: "logout",
-        onClick: this._handle_onClick_Logout }, "Log out"))));
-
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "logout", onClick: this._handle_onClick_Logout }, "Log out"))));
 
 
 
@@ -146,8 +129,6 @@ class NavBarAccountButton extends _react.default.Component
   }}var _default =
 
 
-(0, _reactRelay.createFragmentContainer)(
-(0, _styles.withStyles)(styles)((0, _found.withRouter)(NavBarAccountButton)),
-{
-  Viewer: function () {return require("./__generated__/NavBarAccountButton_Viewer.graphql");} });exports.default = _default;
+(0, _reactRelay.createFragmentContainer)((0, _styles.withStyles)(styles)((0, _found.withRouter)(NavBarAccountButton)), {
+  Viewer: _NavBarAccountButton_Viewer !== void 0 ? _NavBarAccountButton_Viewer : _NavBarAccountButton_Viewer = require("./__generated__/NavBarAccountButton_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=NavBarAccountButton.js.map

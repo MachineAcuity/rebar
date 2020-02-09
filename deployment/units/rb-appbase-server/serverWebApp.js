@@ -36,6 +36,7 @@ serverWebApp.use(async (req, res) => {
         passUserToken1ToHeaders = true;
       }
 
+      //$AssureFlow
       const content = await (0, _contentCreatorWebApp_async.default)(
       siteInformation,
       reqUrl,
@@ -44,29 +45,19 @@ serverWebApp.use(async (req, res) => {
       passUserToken1ToHeaders);
 
 
-      if (content.status === 200) {
-        res.status(200).send(content.htmlContent);
-      } else if (content.status === 302) {
+      if (content.status === 302) {
         res.redirect(302, content.redirectUrl);
-      } else if (content.status === 404) {
-        res.status(404);
-      } else if (content.status === 403) {
-        // Log out for next attempt
-        res.cookie('UserToken1', '', { httpOnly: true, expires: new Date(1) });
-        // Return error information
-        res.
-        status(403).
-        send(
-        _server.default.renderToString(_react.default.createElement(_ErrorComponent.default, { httpStatus: 403 })));
+      } else {
+        if (content.status === 403) {
+          // Log out for next attempt
+          res.cookie('UserToken1', '', { httpOnly: true, expires: new Date(1) });
+        }
 
+        res.status(content.status).send(content.htmlContent);
       }
     } catch (err) {
       (0, _log.default)('error', 'rb-appbase-server serverWebApp.use : Failed', { err });
-      res.
-      status(500).
-      send(
-      _server.default.renderToString(_react.default.createElement(_ErrorComponent.default, { httpStatus: 500 })));
-
+      res.status(500).send(_server.default.renderToString(_react.default.createElement(_ErrorComponent.default, { httpStatus: 500 })));
     }
   } else {
     res.status(200).send('disassociated');

@@ -1,5 +1,6 @@
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.validateEmail = validateEmail;exports.default = void 0;
 
+var _Alert = _interopRequireDefault(require("@material-ui/lab/Alert"));
 var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
 var _Card = _interopRequireDefault(require("@material-ui/core/Card"));
 var _CardActions = _interopRequireDefault(require("@material-ui/core/CardActions"));
@@ -7,14 +8,13 @@ var _CardContent = _interopRequireDefault(require("@material-ui/core/CardContent
 var _LinearProgress = _interopRequireDefault(require("@material-ui/core/LinearProgress"));
 var _styles = require("@material-ui/core/styles");
 var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
-var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 var _Account = _interopRequireDefault(require("mdi-material-ui/Account"));
 var _react = _interopRequireDefault(require("react"));
 var _CompositeCardHeader = _interopRequireWildcard(require("../../rb-appbase-webapp/components/CompositeCardHeader"));
 
 
 var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));
-var _NewUserSecretInput = _interopRequireDefault(require("./NewUserSecretInput"));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function () {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};if (obj != null) {var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _NewUserSecretInput = _interopRequireDefault(require("./NewUserSecretInput"));function _getRequireWildcardCache() {if (typeof WeakMap !== "function") return null;var cache = new WeakMap();_getRequireWildcardCache = function () {return cache;};return cache;}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;}if (obj === null || typeof obj !== "object" && typeof obj !== "function") {return { default: obj };}var cache = _getRequireWildcardCache();if (cache && cache.has(obj)) {return cache.get(obj);}var newObj = {};var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) {var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;if (desc && (desc.get || desc.set)) {Object.defineProperty(newObj, key, desc);} else {newObj[key] = obj[key];}}}newObj.default = obj;if (cache) {cache.set(obj, newObj);}return newObj;}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 //
 
@@ -109,8 +109,7 @@ class NewUserScreen extends _react.default.Component
         this.setState({
           currentOperation: 'failure',
           executionStatus:
-          'Did not receive proper response from server. Please try again. Message:' +
-          err.message });
+          'Did not receive proper response from server. Please try again. Message:' + err.message });
 
       }
     };this.
@@ -231,15 +230,11 @@ class NewUserScreen extends _react.default.Component
 
     _handle_onUpdateSecret = secret => {
       this.setState({ User_Secret: secret });
-    };this.state = { currentOperation: 'prompt', executionStatus: '', UserAccount_Identifier: '', UserAccount_IdentifierValidity: false, User_Secret: '' };}renderCreating() {const { classes } = this.props;const { UserAccount_Identifier } = this.state;return _react.default.createElement("div", null, _react.default.createElement(_CompositeCardHeader.default, { icon: _react.default.createElement(_Account.default, { htmlColor: "#003c78" }), subTitle: "Creating, please wait", title: "New User" }), _react.default.createElement(_Card.default, { className: classes.card }, _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, { component: "p" }, "Creating user", _react.default.createElement("span", { className: classes.userName }, UserAccount_Identifier), ", please wait."), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_LinearProgress.default, { mode: "query" })), _react.default.createElement(_CardActions.default, null, _react.default.createElement(_Button.default, { onClick: this._handle_onClick_CancelCreation }, "Cancel"))));}renderSuccess() {const { classes } = this.props;const { UserAccount_Identifier } = this.state;return _react.default.createElement("div", null, _react.default.createElement(_CompositeCardHeader.default, { icon: _react.default.createElement(_Account.default, { htmlColor: "#003c78" }), subTitle: "Created", title: "New User" }), _react.default.createElement(_Card.default, { className: classes.card }, _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, { component: "p" }, "Created user", _react.default.createElement("span", { className: classes.userName }, UserAccount_Identifier), ".")), _react.default.createElement(_CardActions.default, null, _react.default.createElement(_Button.default, { onClick: this._handle_onClick_Continue }, "Continue"))));}renderFailure() {const { classes } = this.props;const { UserAccount_Identifier, executionStatus } = this.state;return _react.default.createElement("div", null, _react.default.createElement(_CompositeCardHeader.default, { icon: _react.default.createElement(_Account.default, { htmlColor: "#ff0000" }), subTitle: "Failed", title: "New User" }), _react.default.createElement(_Card.default, { className: classes.card }, _react.default.createElement(_CardContent.default, null, _react.default.createElement(_Typography.default, { component: "p" }, "Failed creating user", _react.default.createElement("span", { className: classes.userName }, UserAccount_Identifier), "because ", executionStatus, ".")), _react.default.createElement(_CardActions.default, null, _react.default.createElement(_Button.default, { onClick: this._handle_onClick_TryAgain }, "Try Again"))));}
+    };this.state = { currentOperation: 'prompt', executionStatus: '', UserAccount_Identifier: '', UserAccount_IdentifierValidity: false, User_Secret: '' };}renderCreating() {const { classes } = this.props;const { UserAccount_Identifier } = this.state;return _react.default.createElement("div", null, _react.default.createElement(_CompositeCardHeader.default, { icon: _react.default.createElement(_Account.default, { htmlColor: "#003c78" }), subTitle: "Creating, please wait", title: "New User" }), _react.default.createElement(_Card.default, { className: classes.card }, _react.default.createElement(_CardContent.default, null, _react.default.createElement("br", null), _react.default.createElement(_Alert.default, { variant: "outlined", severity: "info" }, "Creating user", _react.default.createElement("span", { className: classes.userName }, UserAccount_Identifier), ", please wait ..."), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_LinearProgress.default, { mode: "query" })), _react.default.createElement(_CardActions.default, null, _react.default.createElement(_Button.default, { onClick: this._handle_onClick_CancelCreation }, "Cancel"))));}renderSuccess() {const { classes } = this.props;const { UserAccount_Identifier } = this.state;return _react.default.createElement("div", null, _react.default.createElement(_CompositeCardHeader.default, { icon: _react.default.createElement(_Account.default, { htmlColor: "#003c78" }), subTitle: "Created", title: "New User" }), _react.default.createElement(_Card.default, { className: classes.card }, _react.default.createElement(_CardContent.default, null, _react.default.createElement("br", null), _react.default.createElement(_Alert.default, { variant: "outlined", severity: "success" }, "Created user", _react.default.createElement("span", { className: classes.userName }, UserAccount_Identifier))), _react.default.createElement(_CardActions.default, null, _react.default.createElement(_Button.default, { onClick: this._handle_onClick_Continue }, "Continue"))));}renderFailure() {const { classes } = this.props;const { UserAccount_Identifier, executionStatus } = this.state;return _react.default.createElement("div", null, _react.default.createElement(_CompositeCardHeader.default, { icon: _react.default.createElement(_Account.default, { htmlColor: "#ff0000" }), subTitle: "Failed", title: "New User" }), _react.default.createElement(_Card.default, { className: classes.card }, _react.default.createElement(_CardContent.default, null, _react.default.createElement("br", null), _react.default.createElement(_Alert.default, { variant: "outlined", severity: "error" }, "Failed creating user", _react.default.createElement("span", { className: classes.userName }, UserAccount_Identifier), "because ", executionStatus, ".")), _react.default.createElement(_CardActions.default, null, _react.default.createElement(_Button.default, { onClick: this._handle_onClick_TryAgain }, "Try Again"))));}
 
   renderPrompt() {
     const { classes } = this.props;
-    const {
-      UserAccount_Identifier,
-      UserAccount_IdentifierValidity,
-      User_Secret } =
-    this.state;
+    const { UserAccount_Identifier, UserAccount_IdentifierValidity, User_Secret } = this.state;
 
     // User account identifier must be valid and secret must be present
     const createDisabled = !UserAccount_IdentifierValidity || User_Secret === '';
@@ -270,10 +265,7 @@ class NewUserScreen extends _react.default.Component
       _react.default.createElement(_NewUserSecretInput.default, { onUpdateSecret: this._handle_onUpdateSecret })),
 
       _react.default.createElement(_CardActions.default, null,
-      _react.default.createElement(_Button.default, {
-        disabled: createDisabled,
-        onClick: this._handle_onClick_Create }, "Create")))));
-
+      _react.default.createElement(_Button.default, { disabled: createDisabled, onClick: this._handle_onClick_Create }, "Create")))));
 
 
 

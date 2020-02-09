@@ -14,7 +14,7 @@ var _reactRelay = require("react-relay");
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 
 var _RequiresAuthentication = _interopRequireDefault(require("../../rb-account-management-webapp/components/RequiresAuthentication"));
-var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));var _ForceLogin_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const styles = theme => ({
   card: {
@@ -48,5 +48,5 @@ class ForceLogin extends _react.default.Component {
 
 
 (0, _reactRelay.createFragmentContainer)((0, _styles.withStyles)(styles)(ForceLogin), {
-  Viewer: function () {return require("./__generated__/ForceLogin_Viewer.graphql");} });exports.default = _default;
+  Viewer: _ForceLogin_Viewer !== void 0 ? _ForceLogin_Viewer : _ForceLogin_Viewer = require("./__generated__/ForceLogin_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=ForceLogin.js.map

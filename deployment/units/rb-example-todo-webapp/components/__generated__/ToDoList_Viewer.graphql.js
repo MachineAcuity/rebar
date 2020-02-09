@@ -33,6 +33,7 @@
               export type ToDoList_Viewer$key = {
                 +$data?: ToDoList_Viewer$data,
                 +$fragmentRefs: ToDoList_Viewer$ref,
+                ...
               };
               */
 

@@ -4,8 +4,8 @@ var _graphql = require("graphql");
 var _error = require("graphql/error");
 var _language = require("graphql/language");
 
-
-
+// The code in this file is largely modified version of:
+// https://github.com/soundtrackyourbrand/graphql-custom-datetype/blob/master/datetype.js
 
 function coerceDate(value) {
   value = new Date(value);

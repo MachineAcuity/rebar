@@ -1,6 +1,6 @@
 /**
  * 
- * @relayHash 5cfd5c5c29473ead4f43a8f978f95f51
+ * @relayHash 57649febc186d41c2f733b86769f4019
  */
 
 /* eslint-disable */
@@ -35,6 +35,16 @@
                    }
                  }
                  
+                 fragment ToDoItem_ToDo on ToDo {
+                   id
+                   ToDo_Complete
+                   ToDo_Text
+                 }
+                 
+                 fragment ToDoItem_Viewer on Viewer {
+                   id
+                 }
+                 
                  fragment ToDoList_Viewer on Viewer {
                    ToDos(status: $status, first: 2147483647) {
                      edges {
@@ -55,16 +65,6 @@
                    ToDo_TotalCount
                    ToDo_CompletedCount
                    ...ToDoItem_Viewer
-                 }
-                 
-                 fragment ToDoItem_ToDo on ToDo {
-                   id
-                   ToDo_Complete
-                   ToDo_Text
-                 }
-                 
-                 fragment ToDoItem_Viewer on Viewer {
-                   id
                  }
                  */
 
@@ -258,7 +258,7 @@ const node /*: ConcreteRequest*/ = function () {
       "operationKind": "query",
       "name": "routeAppFrameTodo_ToDoList_Query",
       "id": null,
-      "text": "query routeAppFrameTodo_ToDoList_Query(\n  $status: String!\n) {\n  Viewer {\n    ...ToDoList_Viewer\n    id\n  }\n}\n\nfragment ToDoList_Viewer on Viewer {\n  ToDos(status: $status, first: 2147483647) {\n    edges {\n      node {\n        id\n        ToDo_Complete\n        ...ToDoItem_ToDo\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n  ToDo_TotalCount\n  ToDo_CompletedCount\n  ...ToDoItem_Viewer\n}\n\nfragment ToDoItem_ToDo on ToDo {\n  id\n  ToDo_Complete\n  ToDo_Text\n}\n\nfragment ToDoItem_Viewer on Viewer {\n  id\n}\n",
+      "text": "query routeAppFrameTodo_ToDoList_Query(\n  $status: String!\n) {\n  Viewer {\n    ...ToDoList_Viewer\n    id\n  }\n}\n\nfragment ToDoItem_ToDo on ToDo {\n  id\n  ToDo_Complete\n  ToDo_Text\n}\n\nfragment ToDoItem_Viewer on Viewer {\n  id\n}\n\nfragment ToDoList_Viewer on Viewer {\n  ToDos(status: $status, first: 2147483647) {\n    edges {\n      node {\n        id\n        ToDo_Complete\n        ...ToDoItem_ToDo\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n  ToDo_TotalCount\n  ToDo_CompletedCount\n  ...ToDoItem_Viewer\n}\n",
       "metadata": {} } };
 
 
