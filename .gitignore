@@ -65,4 +65,4 @@ units/**/__generated__/
 #
 logs
 *.log
-units/rb-log-viewer-tools/log/*
+#units/rb-log-viewer-tools/log/*

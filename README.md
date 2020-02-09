@@ -69,16 +69,30 @@ Multi-tenant SaaS boilerplate + examples for universal web application with Reac
 
 The setup is for OS X only:
 
+* **watchman**: install using `brew install watchman`.
 * **[Node.js](https://nodejs.org)**: minimum version as specified in [`package.json`](package.json#L106).  
 * **yarn**: install using `npm install -g yarn`.
-* **[cqlah](http://cassandra.apache.org/doc/latest/tools/cqlsh.html)**: optionally installed locally.
+* **[cqlsh](http://cassandra.apache.org/doc/latest/tools/cqlsh.html)**: optionally installed locally.
+
+## Recommended VSCode extensions
+
+* [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2).
+* [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+* [Flow Language Support](https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode).
+* [GraphQL for VSCode](https://marketplace.visualstudio.com/items?itemName=kumar-harsh.graphql-for-vscode).
+* [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced).
+* [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme).
+* [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense).
+* [Prettier Now](https://marketplace.visualstudio.com/items?itemName=remimarsal.prettier-now).
+* [vscode-language-todo](https://marketplace.visualstudio.com/items?itemName=fireyy.vscode-language-todo).
 
 ## Setting up Scylla in docker
 
 ### Setup
 
 ```
-docker pull scylladb/scylla:3.0.8
+docker pull scylladb/scylla:3.2.1
+docker run --name scylly -d -p 9042:9042 scylladb/scylla:3.2.1
 ```
 
 ### Start/Stop
@@ -91,20 +105,16 @@ docker stop scylly
 ### Troubleshooting
 
 ```
-cqlsh
-docker logs scylly
+docker exec -it scylly scylla --version
+docker exec -it scylly nodetool status
+docker exec -it scylly cqlsh
+docker logs scylly | tail
 ```
 
-If cqlsh does not manage to connect to docker, or is not installed locally, use:
-
-```
-docker run --privileged -it --link scylly --rm scylladb/scylla:3.0.8 cqlsh scylly
-```
 
 ### Cleanup
 
 ```
-docker stop scylly
 docker rm scylly
 ```
 

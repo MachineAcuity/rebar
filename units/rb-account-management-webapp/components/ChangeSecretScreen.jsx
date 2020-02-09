@@ -1,5 +1,6 @@
 // @flow
 
+import Alert from '@material-ui/lab/Alert'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -7,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
 import IconLockReset from 'mdi-material-ui/LockReset'
 import React from 'react'
 
@@ -93,8 +93,7 @@ class ChangeSecretScreen extends React.Component<
       this.setState({
         currentOperation: 'failure',
         executionStatus:
-          'Did not receive proper response from server. Please try again. Message:' +
-          err.message,
+          'Did not receive proper response from server. Please try again. Message:' + err.message,
       })
     }
   }
@@ -126,12 +125,15 @@ class ChangeSecretScreen extends React.Component<
         <CompositeCardHeader
           icon={<IconLockReset htmlColor="#003c78" />}
           subTitle=""
-          title="Changing password"
+          title="Updating password"
         />
 
         <Card className={classes.card} raised={true}>
           <CardContent>
-            <Typography component="p">Updating, please wait.</Typography>
+            <br />
+            <Alert variant="outlined" severity="info">
+              Updating password. Please wait ...
+            </Alert>
             <br />
             <br />
             <LinearProgress mode="query" />
@@ -157,9 +159,10 @@ class ChangeSecretScreen extends React.Component<
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography component="p">
+            <br />
+            <Alert variant="outlined" severity="success">
               Password successfully changed.
-            </Typography>
+            </Alert>
           </CardContent>
           <CardActions>
             <Button onClick={this._handle_onClick_Continue}>Continue</Button>
@@ -178,14 +181,15 @@ class ChangeSecretScreen extends React.Component<
         <CompositeCardHeader
           icon={<IconLockReset htmlColor="#003c78" />}
           subTitle=""
-          title="Failed to change password"
+          title="Failed to update password"
         />
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography component="p">
-              Changing password failed because {executionStatus}.
-            </Typography>
+            <br />
+            <Alert variant="outlined" severity="error">
+              Updating password failed because {executionStatus}.
+            </Alert>
           </CardContent>
           <CardActions>
             <Button onClick={this._handle_onClick_TryAgain}>Try Again</Button>
@@ -210,8 +214,7 @@ class ChangeSecretScreen extends React.Component<
     const { User_CurrentSecret, User_NewSecret } = this.state
 
     // User account identifier must be valid and secret must be present
-    const createDisabled =
-      User_CurrentSecret.length < 5 || User_NewSecret === ''
+    const createDisabled = User_CurrentSecret.length < 5 || User_NewSecret === ''
 
     return (
       <div>
@@ -240,10 +243,7 @@ class ChangeSecretScreen extends React.Component<
             <NewUserSecretInput onUpdateSecret={this._handle_onUpdateSecret} />
           </CardContent>
           <CardActions>
-            <Button
-              disabled={createDisabled}
-              onClick={this._handle_onClick_Change}
-            >
+            <Button disabled={createDisabled} onClick={this._handle_onClick_Change}>
               Change
             </Button>
           </CardActions>

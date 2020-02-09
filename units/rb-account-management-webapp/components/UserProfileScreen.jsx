@@ -10,9 +10,11 @@ import { withStyles } from '@material-ui/core/styles'
 import IconAccountSettings from 'mdi-material-ui/AccountSettings'
 import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
+
 import CompositeCardHeader, {
   cardHeaderContentStyles,
 } from '../../rb-appbase-webapp/components/CompositeCardHeader'
+import ImageManagerUploader from '../../rb-image-manager-webapp/components/ImageManagerUploader'
 import UserUpdateMutation from '../../rb-account-management-client/relay/UserUpdateMutation'
 import RequiresAuthenticationNotice from '../../rb-account-management-webapp/components/RequiresAuthentication'
 import ResponsiveContentArea from '../../rb-appbase-webapp/components/ResponsiveContentArea'
@@ -42,6 +44,7 @@ class UserProfileScreen extends React.Component<
     },
   },
   {
+    imageURL: string,
     User_DisplayName: string,
     User_PrimaryEmail: string,
     User_PrimaryPhone: string,
@@ -50,13 +53,11 @@ class UserProfileScreen extends React.Component<
   constructor(props, context) {
     super(props, context)
 
-    const {
-      User_DisplayName,
-      User_PrimaryEmail,
-      User_PrimaryPhone,
-    } = props.Viewer
+    const { User_DisplayName, User_PrimaryEmail, User_PrimaryPhone } = props.Viewer
 
-    this.state = { User_DisplayName, User_PrimaryEmail, User_PrimaryPhone }
+    const imageURL = 'Place original image url? How do we know if there is a photo?'
+
+    this.state = { imageURL, User_DisplayName, User_PrimaryEmail, User_PrimaryPhone }
   }
 
   _handle_onChange_DisplayName = (event) => {
@@ -82,11 +83,7 @@ class UserProfileScreen extends React.Component<
   }
 
   _handle_onClick_Update = () => {
-    const {
-      User_DisplayName,
-      User_PrimaryEmail,
-      User_PrimaryPhone,
-    } = this.state
+    const { User_DisplayName, User_PrimaryEmail, User_PrimaryPhone } = this.state
     const { relay } = this.props
 
     UserUpdateMutation.commit(
@@ -102,11 +99,7 @@ class UserProfileScreen extends React.Component<
 
     if (Viewer.User_IsAnonymous) return <RequiresAuthenticationNotice />
 
-    const {
-      User_DisplayName,
-      User_PrimaryEmail,
-      User_PrimaryPhone,
-    } = this.state
+    const { imageURL, User_DisplayName, User_PrimaryEmail, User_PrimaryPhone } = this.state
 
     return (
       <ResponsiveContentArea>
@@ -118,6 +111,15 @@ class UserProfileScreen extends React.Component<
 
         <Card className={classes.card}>
           <CardContent>
+            <ImageManagerUploader
+              label="Profile photo"
+              parameters={{ isUserProfilePhoto: 'true' }}
+              value={imageURL}
+              onChange={(value) => {
+                this.setState({ imageURL: value })
+              }}
+            />
+
             <TextField
               autoComplete="name"
               fullWidth={true}
@@ -151,9 +153,7 @@ class UserProfileScreen extends React.Component<
 
           <CardActions>
             <Button onClick={this._handle_onClick_Update}>Update</Button>
-            <Button onClick={this._handle_onClick_ChangePassword}>
-              Change password
-            </Button>
+            <Button onClick={this._handle_onClick_ChangePassword}>Change password</Button>
           </CardActions>
         </Card>
       </ResponsiveContentArea>
@@ -161,17 +161,14 @@ class UserProfileScreen extends React.Component<
   }
 }
 
-export default createFragmentContainer(
-  withStyles(styles)(withRouter(UserProfileScreen)),
-  {
-    Viewer: graphql`
-      fragment UserProfileScreen_Viewer on Viewer {
-        id
-        User_IsAnonymous
-        User_DisplayName
-        User_PrimaryEmail
-        User_PrimaryPhone
-      }
-    `,
-  },
-)
+export default createFragmentContainer(withStyles(styles)(withRouter(UserProfileScreen)), {
+  Viewer: graphql`
+    fragment UserProfileScreen_Viewer on Viewer {
+      id
+      User_IsAnonymous
+      User_DisplayName
+      User_PrimaryEmail
+      User_PrimaryPhone
+    }
+  `,
+})

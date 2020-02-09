@@ -23,15 +23,21 @@ import '../_configuration/rb-appbase-webapp/global.css'
 async function rebarErrorHandler(err, err_info) {
   try {
     // Do not report errors that do not carry meaningful information
-    if (typeof err === 'string' && err.trimLeft() === '') return
-    if (typeof err.message === 'string' && err.message.trimLeft() === '') return
-    if (
-      typeof err.message === 'string' &&
-      err.message.startsWith(
-        'An error was thrown inside one of your components, but React does not know what it was.',
-      )
-    )
-      return
+    if (typeof err === 'string') {
+      if (err.trimLeft() === '') return
+    } else {
+      if (err.message == null) return
+      if (typeof err.message === 'string' && err.message.trimLeft() === '') return
+      // TODO Disable react errors from client?
+      // XXX Disable react errors from client?
+      // if (
+      //   typeof err.message === 'string' &&
+      //   err.message.startsWith(
+      //     'An error was thrown inside one of your components, but React does not know what it was.',
+      //   )
+      // )
+      //   return
+    }
 
     // Determine the host server
     const loc = window.location
@@ -64,15 +70,10 @@ async function rebarErrorHandler(err, err_info) {
           responseAsObject.issue_id,
       )
     } else {
-      alert(
-        'An error has occurred. Attempt to assign an identifier has failed.',
-      )
+      alert('An error has occurred. Attempt to assign an identifier has failed.')
     }
   } catch (err) {
-    alert(
-      'An error has occurred. We were not able to assign an identifier to it.\nReason:' +
-        err,
-    )
+    alert('An error has occurred. We were not able to assign an identifier to it.\nReason:' + err)
   }
 }
 
@@ -80,14 +81,13 @@ async function rebarErrorHandler(err, err_info) {
 
 const render = createRender({})
 ;(async () => {
-  const {
-    relayPayloads,
-    siteConfiguration,
-    UserToken1,
-  } = window.__rebar_properties__
+  const { relayPayloads, siteConfiguration, UserToken1 } = window.__rebar_properties__
 
-  // It is critical that the app frame has UserToken2 retrieved
-  setUserToken2(relayPayloads[0].data.Viewer.UserToken2)
+  // It is critical that the app frame has UserToken2 retrieved. In the case of a rendering error like
+  // 404 relaypayloads will be empty
+  if (relayPayloads.length > 0) {
+    setUserToken2(relayPayloads[0].data.Viewer.UserToken2)
+  }
 
   // eslint-disable-next-line no-underscore-dangle
   const fetcher = new FetcherClient(
@@ -107,10 +107,7 @@ const render = createRender({})
   })
 
   const contentComponent = (
-    <AppWrapper
-      siteConfiguration={siteConfiguration}
-      url={document.location.href}
-    >
+    <AppWrapper siteConfiguration={siteConfiguration} url={document.location.href}>
       <Router resolver={resolver} />
     </AppWrapper>
   )

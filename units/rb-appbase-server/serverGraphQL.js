@@ -10,10 +10,7 @@ import { requestLoggerGraphQL } from '../_configuration/rb-base-server/requestLo
 import logServerRequest from '../rb-base-server/logServerRequest'
 import { getObjectManager } from '../rb-base-server/ObjectManager'
 
-import {
-  getUserAndSessionIDByUserToken1_async,
-  verifyUserToken2
-} from './checkCredentials'
+import { getUserAndSessionIDByUserToken1_async, verifyUserToken2 } from './checkCredentials'
 import schema from './graphql/schema' // Schema for GraphQL server
 
 // Guarantee that all object registrations and schema definitions are executed
@@ -26,9 +23,7 @@ const serverGraphQL = express()
 serverGraphQL.use(bodyParser.json())
 
 // Set up logging
-serverGraphQL.use((req, res, next) =>
-  logServerRequest(req, res, next, requestLoggerGraphQL)
-)
+serverGraphQL.use((req, res, next) => logServerRequest(req, res, next, requestLoggerGraphQL))
 
 //
 
@@ -40,14 +35,14 @@ function graphQLError(message) {
         locations: [
           {
             line: 888,
-            column: 777
-          }
+            column: 777,
+          },
         ],
         stack: 'No stack information available',
-        path: ['node']
-      }
+        path: [ 'node' ],
+      },
     ],
-    data: null
+    data: null,
   })
 }
 
@@ -59,19 +54,11 @@ async function root(req, res, next) {
     for (let ixTry = 1; ; ixTry++) {
       objectManager = await getObjectManager(req, res)
 
-      const UserAndSession = await getUserAndSessionIDByUserToken1_async(
-        objectManager,
-        req,
-        true
-      )
+      const UserAndSession = await getUserAndSessionIDByUserToken1_async(objectManager, req, true)
       if (!UserAndSession) {
         res
           .status(500)
-          .send(
-            graphQLError(
-              'GraphQL server was given a session, but the session is invalid'
-            )
-          )
+          .send(graphQLError('GraphQL server was given a session, but the session is invalid'))
         return
       }
 
@@ -95,19 +82,13 @@ async function root(req, res, next) {
         await delayPromise(100 * ixTry)
         console.log('XXX user not eventually consistently found')
       } else if (verificationResult) {
-        log(
-          'warn',
-          'rb-appbase-server serverGraphQL root: Checking credentials failed',
-          {
-            ixTry,
-            verificationResult,
-            req,
-            res,
-            UserSession_id: UserAndSession.UserSession
-              ? UserAndSession.UserSession.id
-              : 'no session'
-          }
-        )
+        log('warn', 'rb-appbase-server serverGraphQL root: Checking credentials failed', {
+          ixTry,
+          verificationResult,
+          req,
+          res,
+          UserSession_id: UserAndSession.UserSession ? UserAndSession.UserSession.id : 'no session',
+        })
 
         // Expire cookie. This is the only way to 'delete' a cookie
         res.cookie('UserToken1', '', { httpOnly: true, expires: new Date(1) })
@@ -126,18 +107,16 @@ async function root(req, res, next) {
         schema: schema,
         rootValue: objectManager,
         pretty: true,
-        graphiql: false // IDEA Look into re-enabling GraphiQL
+        graphiql: false, // IDEA Look into re-enabling GraphiQL
       }
     })(req, res, next)
   } catch (err) {
     log('error', 'rb-appbase-server serverGraphQL root: Failed ', {
       err,
       req,
-      objectManager
+      objectManager,
     })
-    res
-      .status(500)
-      .send(graphQLError('An error has occurred while running GraphQL query'))
+    res.status(500).send(graphQLError('An error has occurred while running GraphQL query'))
   }
 }
 serverGraphQL.use('/', root)

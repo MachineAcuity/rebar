@@ -1,7 +1,6 @@
 // @flow
 
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
-
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import React from 'react'
 import EventListener from 'react-event-listener'
 
@@ -16,14 +15,14 @@ export default class AppWrapperBase extends React.Component<
   },
   { totalWidth: number, totalHeight: number },
 > {
-  constructor( props: Object, context: Object ) {
-    super( props, context )
+  constructor(props: Object, context: Object) {
+    super(props, context)
 
     this.state = { totalWidth: 100, totalHeight: 100 }
   }
 
-  componentDidCatch( err: any, err_info: any ) {
-    if ( window && window.__rebar_error_handler__ ) {
+  componentDidCatch(err: any, err_info: any) {
+    if (window && window.__rebar_error_handler__) {
       window.__rebar_error_handler__({ err, err_info })
     }
   }
@@ -51,7 +50,9 @@ export default class AppWrapperBase extends React.Component<
       <EventListener target="window" onResize={this.handle_onResize}>
         <MuiThemeProvider theme={this.createMUITheme()}>
           <ViewportContext.Provider value={{ totalWidth, totalHeight }}>
-            <SiteConfigurationContext.Provider value={this.props.siteConfiguration}>
+            <SiteConfigurationContext.Provider
+              value={this.props.siteConfiguration}
+            >
               {this.props.children}
             </SiteConfigurationContext.Provider>
           </ViewportContext.Provider>

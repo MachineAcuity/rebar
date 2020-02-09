@@ -13,7 +13,6 @@ import { Helmet } from 'react-helmet'
 import { createFragmentContainer, graphql } from 'react-relay'
 
 import AppDrawerNavItems from '../../_configuration/rb-appdrawer-webapp/AppDrawerNavItems'
-import AppDrawerTitle from '../../_configuration/rb-appdrawer-webapp/AppDrawerTitle'
 import NavBarDefaultTitle from '../../_configuration/rb-appdrawer-webapp/NavBarDefaultTitle'
 
 import AppFrameContext from './AppFrameContext'
@@ -70,18 +69,6 @@ const styles = (theme) => ({
       marginLeft: 12,
       marginTop: 12,
     },
-  },
-
-  drawerInner: {
-    // Make the items inside not wrap when transitioning:
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
   },
   drawerPaper: {
     position: 'relative',
@@ -153,12 +140,6 @@ class AppFrame extends React.Component<
           </Fab>
 
           <Drawer open={drawerIsOpen} onClose={this._handle_Drawer_Close}>
-            <div className={classes.drawerInner}>
-              <div className={classes.drawerHeader}>
-                <AppDrawerTitle handle_GoTo={this._handle_GoTo} />
-              </div>
-            </div>
-
             <AppDrawerNavItems Viewer={Viewer} onClick={this._handle_GoTo} />
           </Drawer>
 
@@ -171,14 +152,11 @@ class AppFrame extends React.Component<
   }
 }
 
-export default createFragmentContainer(
-  withStyles(styles)(withRouter(AppFrame)),
-  {
-    Viewer: graphql`
-      fragment AppFrame_Viewer on Viewer {
-        UserToken2
-        ...AppDrawerNavItems_Viewer
-      }
-    `,
-  },
-)
+export default createFragmentContainer(withStyles(styles)(withRouter(AppFrame)), {
+  Viewer: graphql`
+    fragment AppFrame_Viewer on Viewer {
+      UserToken2
+      ...AppDrawerNavItems_Viewer
+    }
+  `,
+})

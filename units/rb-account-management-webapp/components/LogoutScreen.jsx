@@ -1,5 +1,6 @@
 // @flow
 
+import Alert from '@material-ui/lab/Alert'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -9,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import IconLogout from 'mdi-material-ui/Logout'
 import React from 'react'
+
 import CompositeCardHeader, {
   cardHeaderContentStyles,
 } from '../../rb-appbase-webapp/components/CompositeCardHeader'
@@ -78,8 +80,7 @@ class LogoutScreen extends React.Component<
       this.setState({
         currentOperation: 'failure',
         errorMessage:
-          'Did not receive proper response from server. Please try again. Message:' +
-          err.message,
+          'Did not receive proper response from server. Please try again. Message:' + err.message,
       })
     }
   }
@@ -114,8 +115,11 @@ class LogoutScreen extends React.Component<
         />
 
         <Card className={classes.card}>
+          <br />
+          <Alert variant="outlined" severity="info">
+            Logging out. Please wait ...
+          </Alert>
           <CardContent>
-            <Typography component="p">Logging out. Please wait ...</Typography>
             <br /> <br />
             <LinearProgress mode="query" />
           </CardContent>
@@ -140,7 +144,10 @@ class LogoutScreen extends React.Component<
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography component="p">You have been logged out.</Typography>
+            <br />
+            <Alert variant="outlined" severity="success">
+              You have been logged out.{' '}
+            </Alert>
           </CardContent>
           <CardActions>
             <Button onClick={this._handle_onClick_Continue}>Continue</Button>
@@ -164,9 +171,10 @@ class LogoutScreen extends React.Component<
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography component="p">
+            <br />
+            <Alert variant="outlined" severity="error">
               Failed logging out because: {errorMessage}!
-            </Typography>
+            </Alert>
           </CardContent>
           <CardActions>
             <Button onClick={this._handle_onClick_TryAgain}>Try Again</Button>
@@ -189,7 +197,8 @@ class LogoutScreen extends React.Component<
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography component="p">
+            <br />
+            <Typography component="h6">
               You are currently logged in. Are you sure you want to log out?
             </Typography>
           </CardContent>

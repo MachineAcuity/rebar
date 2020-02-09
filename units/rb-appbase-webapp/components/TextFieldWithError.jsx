@@ -1,13 +1,9 @@
 // @flow
 
 import FormControl from '@material-ui/core/FormControl'
-
 import FormHelperText from '@material-ui/core/FormHelperText'
-
 import Input from '@material-ui/core/Input'
-
 import InputLabel from '@material-ui/core/InputLabel'
-
 import { withStyles } from '@material-ui/core/styles'
 
 import React from 'react'
@@ -19,32 +15,20 @@ class TextFieldWithError extends React.Component<{
   errorText: string,
   id: string,
   label: string,
+  helperText: string,
+  value: string,
   onChange: Function,
-  value: string
 }> {
   render() {
-    const { errorText, id, label, onChange, value } = this.props
+    const { errorText, id, label, helperText, onChange, value } = this.props
 
     const isError = errorText !== ''
 
-    // TODO TextFieldWithError does not show outline border
     return (
-      <FormControl
-        error={isError}
-        fullWidth={true}
-        id={id}
-        margin="dense"
-        variant="outlined"
-      >
-        <InputLabel
-          htmlFor={isError ? 'name-simple' : 'name-error'}
-          margin="dense"
-          variant="outlined"
-        >
-          {label}
-        </InputLabel>
+      <FormControl error={isError} fullWidth={true} id={id}>
+        <InputLabel htmlFor={isError ? 'name-simple' : 'name-error'}>{label}</InputLabel>
         <Input id="value" value={value} onChange={onChange} />
-        <FormHelperText>{isError ? errorText : ''}</FormHelperText>
+        <FormHelperText>{isError ? errorText : helperText}</FormHelperText>
       </FormControl>
     )
   }

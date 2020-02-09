@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import React from 'react'
+
 import {
   uniqueLettersAwardUntilRepetitions,
   userSecretStrengthGood,
@@ -38,8 +39,7 @@ function scoreSecret(
   }
 
   let variationCount = 0
-  for (let check in variations)
-    variationCount += variations[check] === true ? 1 : 0
+  for (let check in variations) variationCount += variations[check] === true ? 1 : 0
 
   score += (variationCount - 1) * variationAwardCoefficient
 
@@ -184,8 +184,7 @@ class NewUserSecretInput extends React.Component<
         <LinearProgress
           classes={{
             colorPrimary: classes.strengthColorPrimary,
-            barColorPrimary:
-              classes['strengthBarColorPrimary_' + userSecretQuality],
+            barColorPrimary: classes['strengthBarColorPrimary_' + userSecretQuality],
           }}
           value={50 * userSecretStrength / userSecretStrengthGood}
           variant="determinate"

@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express-fileupload": "1.1.6",
+    "fs-promise": "2.0.3",
+    "sharp": "0.24.0"
+  }
+}

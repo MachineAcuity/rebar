@@ -1,5 +1,6 @@
 // @flow
 
+import Alert from '@material-ui/lab/Alert'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -7,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography'
 import IconAccount from 'mdi-material-ui/Account'
 import React from 'react'
 import CompositeCardHeader, {
@@ -109,8 +109,7 @@ class NewUserScreen extends React.Component<
       this.setState({
         currentOperation: 'failure',
         executionStatus:
-          'Did not receive proper response from server. Please try again. Message:' +
-          err.message,
+          'Did not receive proper response from server. Please try again. Message:' + err.message,
       })
     }
   }
@@ -147,19 +146,18 @@ class NewUserScreen extends React.Component<
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography component="p">
+            <br />
+            <Alert variant="outlined" severity="info">
               Creating user
               <span className={classes.userName}>{UserAccount_Identifier}</span>
-              , please wait.
-            </Typography>
+              , please wait ...
+            </Alert>
             <br />
             <br />
             <LinearProgress mode="query" />
           </CardContent>
           <CardActions>
-            <Button onClick={this._handle_onClick_CancelCreation}>
-              Cancel
-            </Button>
+            <Button onClick={this._handle_onClick_CancelCreation}>Cancel</Button>
           </CardActions>
         </Card>
       </div>
@@ -180,11 +178,11 @@ class NewUserScreen extends React.Component<
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography component="p">
+            <br />
+            <Alert variant="outlined" severity="success">
               Created user
               <span className={classes.userName}>{UserAccount_Identifier}</span>
-              .
-            </Typography>
+            </Alert>
           </CardContent>
           <CardActions>
             <Button onClick={this._handle_onClick_Continue}>Continue</Button>
@@ -208,11 +206,12 @@ class NewUserScreen extends React.Component<
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography component="p">
+            <br />
+            <Alert variant="outlined" severity="error">
               Failed creating user
               <span className={classes.userName}>{UserAccount_Identifier}</span>
               because {executionStatus}.
-            </Typography>
+            </Alert>
           </CardContent>
           <CardActions>
             <Button onClick={this._handle_onClick_TryAgain}>Try Again</Button>
@@ -235,11 +234,7 @@ class NewUserScreen extends React.Component<
 
   renderPrompt() {
     const { classes } = this.props
-    const {
-      UserAccount_Identifier,
-      UserAccount_IdentifierValidity,
-      User_Secret,
-    } = this.state
+    const { UserAccount_Identifier, UserAccount_IdentifierValidity, User_Secret } = this.state
 
     // User account identifier must be valid and secret must be present
     const createDisabled = !UserAccount_IdentifierValidity || User_Secret === ''
@@ -270,10 +265,7 @@ class NewUserScreen extends React.Component<
             <NewUserSecretInput onUpdateSecret={this._handle_onUpdateSecret} />
           </CardContent>
           <CardActions>
-            <Button
-              disabled={createDisabled}
-              onClick={this._handle_onClick_Create}
-            >
+            <Button disabled={createDisabled} onClick={this._handle_onClick_Create}>
               Create
             </Button>
           </CardActions>

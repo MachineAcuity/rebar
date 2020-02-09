@@ -9,7 +9,7 @@ class AppFrameUpdateExecutor extends React.Component<{
   setTitle: Function,
   clearTitle: Function,
 }> {
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     const { title, setTitle } = this.props
 
     setTitle(title)

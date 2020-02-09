@@ -13,7 +13,8 @@ import servers from '../_configuration/rb-base-server/servers'
 import log from './log'
 import { initializeObjectCache } from './ObjectCache'
 import ObjectManager from './ObjectManager'
-import serverHealthz from './serverHealthz' // Health check endpoint server
+import serverHealthz from './serverHealthz'
+import serverNightlyMaintenance from './serverNightlyMaintenance'
 
 //
 
@@ -22,24 +23,19 @@ require('dotenv').config()
 
 const port = process.env.PORT
 if (port == null || typeof port !== 'string')
-  throw new Error(
-    'rb-base-server/server.js requires the environment variable PORT to be set'
-  )
+  throw new Error('rb-base-server/server.js requires the environment variable PORT to be set')
 
 const host = process.env.HOST
 if (host == null || typeof host !== 'string')
-  throw new Error(
-    'rb-base-server/server.js requires the environment variable HOST to be set'
-  )
+  throw new Error('rb-base-server/server.js requires the environment variable HOST to be set')
 
-const accessControlAllowedOriginsAsString =
-  process.env.ACCESS_CONTROL_ALLOWED_ORIGINS
+const accessControlAllowedOriginsAsString = process.env.ACCESS_CONTROL_ALLOWED_ORIGINS
 if (
   accessControlAllowedOriginsAsString == null ||
   typeof accessControlAllowedOriginsAsString !== 'string'
 )
   throw new Error(
-    'rb-base-server/server.js requires the environment variable ACCESS_CONTROL_ALLOWED_ORIGINS to be set'
+    'rb-base-server/server.js requires the environment variable ACCESS_CONTROL_ALLOWED_ORIGINS to be set',
   )
 let accessControlAllowedOrigins = []
 try {
@@ -47,7 +43,7 @@ try {
   if (!Array.isArray(accessControlAllowedOrigins)) throw new Error()
 } catch (ex) {
   throw new Error(
-    'rb-base-server/server.js requires the environment variable ACCESS_CONTROL_ALLOWED_ORIGINS to be array of strings'
+    'rb-base-server/server.js requires the environment variable ACCESS_CONTROL_ALLOWED_ORIGINS to be array of strings',
   )
 }
 
@@ -84,7 +80,7 @@ log('info', 'rb-base-server start', {
   name,
   version,
   NODE_ENV: process.env.NODE_ENV,
-  accessControlAllowedOrigins
+  accessControlAllowedOrigins,
 })
 
 // Get object cache ready
@@ -104,16 +100,10 @@ server.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', origin)
 
     // Request methods you wish to allow
-    res.setHeader(
-      'Access-Control-Allow-Methods',
-      'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-    )
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
 
     // Request headers you wish to allow
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'X-Requested-With,content-type'
-    )
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
@@ -134,6 +124,11 @@ const firstPathElement = firstPathElementIsArtifactName ? '/:artifact_name' : ''
 // Health server
 server.use(firstPathElement + '/healthz', serverHealthz)
 
+// Nightly maintenance server, if defined
+if (serverNightlyMaintenance) {
+  server.use(firstPathElement + '/serverNightlyMaintenance', serverNightlyMaintenance)
+}
+
 // Static public files server. Serve both using first path elements, and as in root. The reason
 // is that between gantry, and actual deployment, assets requested by client.js and loaded by
 // webpack, both paths could be used
@@ -143,8 +138,8 @@ const staticServer = express.static(
     maxAge:
       1 *
       // day
-      86400
-  }
+      86400,
+  },
 )
 server.use('/', staticServer)
 if (firstPathElement !== '') {

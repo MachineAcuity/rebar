@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select'
 import { withStyles } from '@material-ui/core/styles'
 import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
+
 import {
   registerAuthenticationRequiredCallback,
   unregisterAuthenticationRequiredCallback,
@@ -46,10 +47,8 @@ class AppDrawerAccountItem extends React.Component<
   }
 
   // Handle popping open the login dialog if authentication is required
-  UNSAFE_componentWillMount() {
-    registerAuthenticationRequiredCallback(() =>
-      this.setState({ loginDialogIsOpen: true }),
-    )
+  componentDidMount() {
+    registerAuthenticationRequiredCallback(() => this.setState({ loginDialogIsOpen: true }))
   }
 
   componentWillUnmount() {
@@ -118,11 +117,7 @@ class AppDrawerAccountItem extends React.Component<
               variant="filled"
               onChange={this._handle_onChange_Account}
             >
-              <MenuItem
-                component="div"
-                key="userdisplayname"
-                value="userdisplayname"
-              >
+              <MenuItem component="div" key="userdisplayname" value="userdisplayname">
                 <em>{User_DisplayName}</em>
               </MenuItem>
               <MenuItem component="div" key="profile" value="profile">
@@ -149,14 +144,11 @@ class AppDrawerAccountItem extends React.Component<
   }
 }
 
-export default createFragmentContainer(
-  withStyles(styles)(AppDrawerAccountItem),
-  {
-    Viewer: graphql`
-      fragment AppDrawerAccountItem_Viewer on Viewer {
-        User_IsAnonymous
-        User_DisplayName
-      }
-    `,
-  },
-)
+export default createFragmentContainer(withStyles(styles)(AppDrawerAccountItem), {
+  Viewer: graphql`
+    fragment AppDrawerAccountItem_Viewer on Viewer {
+      User_IsAnonymous
+      User_DisplayName
+    }
+  `,
+})

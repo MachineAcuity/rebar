@@ -2,6 +2,7 @@ import path from 'path'
 
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import ModuleConcatenationPlugin from 'webpack/lib/optimize/ModuleConcatenationPlugin'
 
 // Read environment
 require('dotenv').config()
@@ -10,14 +11,11 @@ const version = require('./package.json').version
 const host = process.env.HOST
 const port_webpack = process.env.PORT_WEBPACK
 const node_env = process.env.NODE_ENV
-const sassets_configuration_version =
-  process.env.CFSB_SASSETS_CONFIGURATION_VERSION
+const sassets_configuration_version = process.env.CFSB_SASSETS_CONFIGURATION_VERSION
 
 const publicPath = sassets_configuration_version
   ? `/sassets/${version}.${sassets_configuration_version}/`
-  : node_env === 'production'
-    ? `/assets/${version}/`
-    : `http://${host}:${port_webpack}/${version}/`
+  : node_env === 'production' ? `/assets/${version}/` : `http://${host}:${port_webpack}/${version}/`
 
 console.log(
   'Webpack ' +
@@ -30,6 +28,7 @@ console.log(
 )
 
 const ifNotProd = (plugin) => (node_env !== 'production' ? plugin : undefined)
+const ifProd = (plugin) => (node_env === 'production' ? plugin : undefined)
 const removeEmpty = (array) => array.filter((p) => !!p)
 
 const config = {
@@ -40,10 +39,7 @@ const config = {
   },
 
   entry: {
-    client: [
-      'whatwg-fetch',
-      path.resolve('units/rb-appbase-webapp/client.js'),
-    ],
+    client: [ 'whatwg-fetch', path.resolve('units/rb-appbase-webapp/client.js') ],
     vendor: [
       'babel-polyfill',
       'farce',
@@ -149,6 +145,7 @@ const config = {
       },
     }),
     ifNotProd(new webpack.NamedModulesPlugin()),
+    ifProd(new ModuleConcatenationPlugin()),
   ]),
 }
 
@@ -160,7 +157,7 @@ if (node_env !== 'production') {
   // is in the process of restarting
   config.watch = true
   config.watchOptions = {
-    aggregateTimeout: 6000,
+    aggregateTimeout: 10000,
     poll: false,
   }
 }
