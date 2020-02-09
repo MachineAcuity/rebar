@@ -24,7 +24,7 @@ var _react = _interopRequireDefault(require("react"));
 var _reactRelay = require("react-relay");
 
 var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));
-var _SiteConfigurationContext = _interopRequireDefault(require("../../rb-appbase-webapp/components/SiteConfigurationContext"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _SiteConfigurationContext = _interopRequireDefault(require("../../rb-appbase-webapp/components/SiteConfigurationContext"));var _HomePageScreen_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const styles = {
   card: {
@@ -142,5 +142,5 @@ class HomePageScreen extends _react.default.Component
 
 
 (0, _reactRelay.createFragmentContainer)((0, _styles.withStyles)(styles)(HomePageScreen), {
-  Viewer: function () {return require("./__generated__/HomePageScreen_Viewer.graphql");} });exports.default = _default;
+  Viewer: _HomePageScreen_Viewer !== void 0 ? _HomePageScreen_Viewer : _HomePageScreen_Viewer = require("./__generated__/HomePageScreen_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=HomePageScreen.js.map

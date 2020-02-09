@@ -5,6 +5,7 @@ var _styles = require("@material-ui/core/styles");
 var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
 var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
 var _react = _interopRequireDefault(require("react"));
+
 var _userIDAndSecret = require("../../_configuration/rb-account-management-webapp/userIDAndSecret");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 
@@ -12,7 +13,7 @@ var _userIDAndSecret = require("../../_configuration/rb-account-management-webap
 
 
 
-
+//
 
 function scoreSecret(
 secret,
@@ -38,8 +39,7 @@ variationAwardCoefficient)
 
 
   let variationCount = 0;
-  for (let check in variations)
-  variationCount += variations[check] === true ? 1 : 0;
+  for (let check in variations) variationCount += variations[check] === true ? 1 : 0;
 
   score += (variationCount - 1) * variationAwardCoefficient;
 
@@ -184,8 +184,7 @@ class NewUserSecretInput extends _react.default.Component
       _react.default.createElement(_LinearProgress.default, {
         classes: {
           colorPrimary: classes.strengthColorPrimary,
-          barColorPrimary:
-          classes['strengthBarColorPrimary_' + userSecretQuality] },
+          barColorPrimary: classes['strengthBarColorPrimary_' + userSecretQuality] },
 
         value: 50 * userSecretStrength / _userIDAndSecret.userSecretStrengthGood,
         variant: "determinate" })));

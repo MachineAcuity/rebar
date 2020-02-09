@@ -30,6 +30,7 @@
               export type EnsayoInPaceEditList_Viewer$key = {
                 +$data?: EnsayoInPaceEditList_Viewer$data,
                 +$fragmentRefs: EnsayoInPaceEditList_Viewer$ref,
+                ...
               };
               */
 

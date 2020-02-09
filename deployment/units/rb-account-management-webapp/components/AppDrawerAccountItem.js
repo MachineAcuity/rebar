@@ -10,11 +10,12 @@ var _Select = _interopRequireDefault(require("@material-ui/core/Select"));
 var _styles = require("@material-ui/core/styles");
 var _react = _interopRequireDefault(require("react"));
 var _reactRelay = require("react-relay");
+
 var _RequiresAuthentication = require("./RequiresAuthentication");
 
 
 
-var _LoginDialog = _interopRequireDefault(require("./LoginDialog"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _LoginDialog = _interopRequireDefault(require("./LoginDialog"));var _AppDrawerAccountItem_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 //
 
@@ -39,8 +40,6 @@ class AppDrawerAccountItem extends _react.default.Component
 {
   constructor(props, context) {
     super(props, context);this.
-
-
 
 
 
@@ -81,7 +80,7 @@ class AppDrawerAccountItem extends _react.default.Component
 
       this.props.onClick('/user/new');
     };this.state = { loginDialogIsOpen: false };} // Handle popping open the login dialog if authentication is required
-  UNSAFE_componentWillMount() {(0, _RequiresAuthentication.registerAuthenticationRequiredCallback)(() => this.setState({ loginDialogIsOpen: true }));}componentWillUnmount() {(0, _RequiresAuthentication.unregisterAuthenticationRequiredCallback)();}
+  componentDidMount() {(0, _RequiresAuthentication.registerAuthenticationRequiredCallback)(() => this.setState({ loginDialogIsOpen: true }));}componentWillUnmount() {(0, _RequiresAuthentication.unregisterAuthenticationRequiredCallback)();}
   render() {
     const { classes, Viewer } = this.props;
     const { User_IsAnonymous, User_DisplayName } = Viewer;
@@ -118,11 +117,7 @@ class AppDrawerAccountItem extends _react.default.Component
         variant: "filled",
         onChange: this._handle_onChange_Account },
 
-      _react.default.createElement(_MenuItem.default, {
-        component: "div",
-        key: "userdisplayname",
-        value: "userdisplayname" },
-
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "userdisplayname", value: "userdisplayname" },
       _react.default.createElement("em", null, User_DisplayName)),
 
       _react.default.createElement(_MenuItem.default, { component: "div", key: "profile", value: "profile" }, "Edit Profile"),
@@ -149,8 +144,6 @@ class AppDrawerAccountItem extends _react.default.Component
   }}var _default =
 
 
-(0, _reactRelay.createFragmentContainer)(
-(0, _styles.withStyles)(styles)(AppDrawerAccountItem),
-{
-  Viewer: function () {return require("./__generated__/AppDrawerAccountItem_Viewer.graphql");} });exports.default = _default;
+(0, _reactRelay.createFragmentContainer)((0, _styles.withStyles)(styles)(AppDrawerAccountItem), {
+  Viewer: _AppDrawerAccountItem_Viewer !== void 0 ? _AppDrawerAccountItem_Viewer : _AppDrawerAccountItem_Viewer = require("./__generated__/AppDrawerAccountItem_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=AppDrawerAccountItem.js.map

@@ -21,6 +21,7 @@
               export type ToDoItem_ToDo$key = {
                 +$data?: ToDoItem_ToDo$data,
                 +$fragmentRefs: ToDoItem_ToDo$ref,
+                ...
               };
               */
 

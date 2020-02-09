@@ -1,7 +1,6 @@
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-var _MuiThemeProvider = _interopRequireDefault(require("@material-ui/core/styles/MuiThemeProvider"));
-
+var _styles = require("@material-ui/core/styles");
 var _react = _interopRequireDefault(require("react"));
 var _reactEventListener = _interopRequireDefault(require("react-event-listener"));
 
@@ -49,9 +48,11 @@ class AppWrapperBase extends _react.default.Component
 
     return (
       _react.default.createElement(_reactEventListener.default, { target: "window", onResize: this.handle_onResize },
-      _react.default.createElement(_MuiThemeProvider.default, { theme: this.createMUITheme() },
+      _react.default.createElement(_styles.ThemeProvider, { theme: this.createMUITheme() },
       _react.default.createElement(_ViewportContext.default.Provider, { value: { totalWidth, totalHeight } },
-      _react.default.createElement(_SiteConfigurationContext.default.Provider, { value: this.props.siteConfiguration },
+      _react.default.createElement(_SiteConfigurationContext.default.Provider, {
+        value: this.props.siteConfiguration },
+
       this.props.children)))));
 
 

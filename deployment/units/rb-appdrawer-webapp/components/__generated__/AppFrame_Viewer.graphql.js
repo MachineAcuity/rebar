@@ -21,6 +21,7 @@
               export type AppFrame_Viewer$key = {
                 +$data?: AppFrame_Viewer$data,
                 +$fragmentRefs: AppFrame_Viewer$ref,
+                ...
               };
               */
 

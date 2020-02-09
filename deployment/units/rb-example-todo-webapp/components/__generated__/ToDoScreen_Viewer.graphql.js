@@ -19,6 +19,7 @@
               export type ToDoScreen_Viewer$key = {
                 +$data?: ToDoScreen_Viewer$data,
                 +$fragmentRefs: ToDoScreen_Viewer$ref,
+                ...
               };
               */
 

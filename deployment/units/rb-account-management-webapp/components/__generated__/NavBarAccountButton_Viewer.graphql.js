@@ -20,6 +20,7 @@
               export type NavBarAccountButton_Viewer$key = {
                 +$data?: NavBarAccountButton_Viewer$data,
                 +$fragmentRefs: NavBarAccountButton_Viewer$ref,
+                ...
               };
               */
 
