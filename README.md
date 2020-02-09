@@ -14,28 +14,34 @@ Multi-tenant SaaS boilerplate + examples for universal web application with Reac
 | **Technology** | **Description**|
 |----------------|----------------|
 | [found](https://github.com/4Catalyzer/found)                    | Extensible route-based routing for React applications. |
+| [found-relay](https://github.com/relay-tools/found-relay)       | Relay integration for Found. |
 | [GraphQL](http://graphql.org/docs/getting-started/)             | A query language for describing the capabilities and requirements of data models for client‐server applications. |
 | [JSS](http://cssinjs.org/)                                      | JSS is a more powerful abstraction over CSS. It uses JavaScript as a language to describe styles in a declarative and maintainable way. |
 | [Material UI](http://www.material-ui.com/)                      | Library for implementing [Material Design](https://www.google.com/design/spec/material-design/introduction.html) in React. All user interface in this kit is built predominantly using Material UI components. |
+| [mdi-material-ui](https://www.npmjs.com/package/mdi-material-ui)| This module provides Material-UI <SvgIcon /> components for all Material Design Icons. |
 | [React](https://facebook.github.io/react/)                      | The best library for building modern browser-based and mobile UIs. |
 | [React Helmet](https://github.com/nfl/react-helmet)             | Reusable React component will manage all of your changes to the document head with support for document title, meta, link, script, and base tags. |
 | [Relay](https://facebook.github.io/relay/)                      | A Javascript framework for building data-driven react applications. |
 
-## Server
+## Database Server
 
-| **Database** | **Description**|
+| **Technology** | **Description**|
 |----------------|----------------|
 | [Cassandra](http://cassandra.apache.org/)                       | The right choice when you need scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data. Cassandra's support for replicating across multiple datacenters is best-in-class, providing lower latency for your users and the peace of mind of knowing that you can survive regional outages. |
 | [Elassandra](http://www.strapdata.com/)                         | Elassandra Combines Cassandra And Elasticsearch In A Single Powerful Integrated Solution. |
 | [Scylla](https://www.scylladb.com/)                             | The Real-Time Big Data Database. Scale-up performance of 1,000,000 IOPS per node, scale-out to hundreds of nodes and 99% latency of <1 msec. |
 
+## Web Server
+
 | **Technology** | **Description**|
 |----------------|----------------|
+| [bcryptjs](https://www.npmjs.com/package/bcryptjs)              | Optimized bcrypt in JavaScript with zero dependencies. Compatible to the C++ bcrypt binding on node.js and also working in the browser. |
 | [Data Loader](https://github.com/facebook/dataloader)           | Generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching. |
 | [Express](https://expressjs.com)                                | Fast, unopinionated, minimalist web framework for Node.js. |
 | [express-cassandra](https://express-cassandra.readthedocs.io)   | Cassandra ORM/ODM/OGM for Node.js with optional support for Elassandra & JanusGraph. |
 | [Express GraphQL](https://github.com/graphql/express-graphql)   | A Node.js express library that allows the creation of GraphQL servers. |
 | [JWT](https://jwt.io/)                                          | JSON Web Tokens is an industry standard [RFC 7519](https://tools.ietf.org/html/rfc7519) method for representing claims securely between two parties. |
+| [nested-error-stacks](https://www.npmjs.com/package/nested-error-stacks) | With this module, you can wrap a caught exception with extra context for better debugging. |
 | [Node.js](https://nodejs.org/en/)                               | Event-driven, non-blocking I/O runtime based on JavaScript that is lightweight and efficient. |
 | [Winston](https://github.com/winstonjs/winston)                 | A logger for just about everything. |
 

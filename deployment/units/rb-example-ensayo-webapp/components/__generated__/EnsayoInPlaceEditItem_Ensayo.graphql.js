@@ -22,6 +22,7 @@
               export type EnsayoInPlaceEditItem_Ensayo$key = {
                 +$data?: EnsayoInPlaceEditItem_Ensayo$data,
                 +$fragmentRefs: EnsayoInPlaceEditItem_Ensayo$ref,
+                ...
               };
               */
 

@@ -11,7 +11,7 @@ var _htmlToReact = require("html-to-react");
 var _react = _interopRequireDefault(require("react"));
 var _reactRelay = require("react-relay");
 
-var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));var _EnsayoPublicItem_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 class EnsayoPublicItem extends _react.default.Component {
   render() {
@@ -43,5 +43,5 @@ class EnsayoPublicItem extends _react.default.Component {
 
 
 (0, _reactRelay.createFragmentContainer)(EnsayoPublicItem, {
-  Viewer: function () {return require("./__generated__/EnsayoPublicItem_Viewer.graphql");} });exports.default = _default;
+  Viewer: _EnsayoPublicItem_Viewer !== void 0 ? _EnsayoPublicItem_Viewer : _EnsayoPublicItem_Viewer = require("./__generated__/EnsayoPublicItem_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=EnsayoPublicItem.js.map

@@ -2,7 +2,7 @@
   "applications": [
     {
       "local": {
-        "applicationPort": 28611
+        "applicationPort": 28605
       },
       "instance": [
         {

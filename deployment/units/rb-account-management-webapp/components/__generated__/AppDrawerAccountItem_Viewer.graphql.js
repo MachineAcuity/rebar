@@ -20,6 +20,7 @@
               export type AppDrawerAccountItem_Viewer$key = {
                 +$data?: AppDrawerAccountItem_Viewer$data,
                 +$fragmentRefs: AppDrawerAccountItem_Viewer$ref,
+                ...
               };
               */
 

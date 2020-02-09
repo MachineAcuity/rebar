@@ -6,7 +6,7 @@ var _reactRelay = require("react-relay");
 
 var _AppFrame = _interopRequireDefault(require("../../_configuration/rb-appbase-webapp/AppFrame"));
 var _routesAppFrame = _interopRequireDefault(require("../../_configuration/rb-appbase-webapp/routesAppFrame"));
-var _routesRoot = _interopRequireDefault(require("../../_configuration/rb-appbase-webapp/routesRoot"));var _graphql;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+var _routesRoot = _interopRequireDefault(require("../../_configuration/rb-appbase-webapp/routesRoot"));var _createDefaultRoutes_AppFrame_Query;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 
 siteConfiguration => {
   let artifactNamePrefix = '';
@@ -18,7 +18,7 @@ siteConfiguration => {
     _react.default.createElement(_Route.default, {
       path: "/",
       Component: _AppFrame.default,
-      query: _graphql || (_graphql = function () {return require("./__generated__/createDefaultRoutes_AppFrame_Query.graphql");}) },
+      query: _createDefaultRoutes_AppFrame_Query !== void 0 ? _createDefaultRoutes_AppFrame_Query : _createDefaultRoutes_AppFrame_Query = require("./__generated__/createDefaultRoutes_AppFrame_Query.graphql") },
 
 
 

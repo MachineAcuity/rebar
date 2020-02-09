@@ -19,6 +19,7 @@
               export type HomePageScreen_Viewer$key = {
                 +$data?: HomePageScreen_Viewer$data,
                 +$fragmentRefs: HomePageScreen_Viewer$ref,
+                ...
               };
               */
 

@@ -22,7 +22,7 @@ var _Tab = _interopRequireDefault(require("@material-ui/core/Tab"));
 
 var _ToDoListUpdateMarkAllMutation = _interopRequireDefault(require("../../rb-example-todo-client/relay/ToDoListUpdateMarkAllMutation"));
 
-var _ToDoItem = _interopRequireDefault(require("./ToDoItem"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _ToDoItem = _interopRequireDefault(require("./ToDoItem"));var _ToDoList_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const styles = theme => ({});
 
@@ -113,5 +113,5 @@ class ToDoList extends _react.default.Component
 (0, _reactRelay.createFragmentContainer)(
 (0, _styles.withStyles)(styles)((0, _found.withRouter)(ToDoList)),
 {
-  Viewer: function () {return require("./__generated__/ToDoList_Viewer.graphql");} });exports.default = _default;
+  Viewer: _ToDoList_Viewer !== void 0 ? _ToDoList_Viewer : _ToDoList_Viewer = require("./__generated__/ToDoList_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=ToDoList.js.map

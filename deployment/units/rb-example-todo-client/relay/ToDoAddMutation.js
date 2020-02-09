@@ -8,9 +8,9 @@ var _reactRelay = require("react-relay");
 
 
 
-var _relayRuntime = require("relay-runtime");
+var _relayRuntime = require("relay-runtime");var _ToDoAddMutation;
 
-const mutation = function () {return require("./__generated__/ToDoAddMutation.graphql");};
+const mutation = _ToDoAddMutation !== void 0 ? _ToDoAddMutation : _ToDoAddMutation = require("./__generated__/ToDoAddMutation.graphql");
 
 
 

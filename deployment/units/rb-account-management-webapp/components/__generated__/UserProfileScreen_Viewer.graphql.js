@@ -23,6 +23,7 @@
               export type UserProfileScreen_Viewer$key = {
                 +$data?: UserProfileScreen_Viewer$data,
                 +$fragmentRefs: UserProfileScreen_Viewer$ref,
+                ...
               };
               */
 

@@ -15,7 +15,7 @@ var _react = _interopRequireDefault(require("react"));
 var _reactRelay = require("react-relay");
 
 var _AppDrawerAccountItem = _interopRequireDefault(require("../../rb-account-management-webapp/components/AppDrawerAccountItem"));
-var _NavMenuItemWithIcon = _interopRequireDefault(require("../../rb-appdrawer-webapp/components/NavMenuItemWithIcon"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _NavMenuItemWithIcon = _interopRequireDefault(require("../../rb-appdrawer-webapp/components/NavMenuItemWithIcon"));var _AppDrawerNavItems_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 //
 
@@ -89,5 +89,5 @@ class AppDrawerNavItems extends _react.default.Component
 //export default withStyles(styles)(AppDrawerNavItems)
 var _default =
 (0, _reactRelay.createFragmentContainer)((0, _styles.withStyles)(styles)(AppDrawerNavItems), {
-  Viewer: function () {return require("./__generated__/AppDrawerNavItems_Viewer.graphql");} });exports.default = _default;
+  Viewer: _AppDrawerNavItems_Viewer !== void 0 ? _AppDrawerNavItems_Viewer : _AppDrawerNavItems_Viewer = require("./__generated__/AppDrawerNavItems_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=AppDrawerNavItems.js.map

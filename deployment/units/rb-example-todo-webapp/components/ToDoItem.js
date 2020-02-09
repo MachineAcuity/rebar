@@ -22,7 +22,7 @@ var _ToDoUpdateStatusMutation = _interopRequireDefault(require("../../rb-example
 var _ToDoDeleteMutation = _interopRequireDefault(require("../../rb-example-todo-client/relay/ToDoDeleteMutation"));
 var _ToDoUpdateRenameMutation = _interopRequireDefault(require("../../rb-example-todo-client/relay/ToDoUpdateRenameMutation"));
 
-var _ToDoProperties = _interopRequireDefault(require("./ToDoProperties"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _ToDoProperties = _interopRequireDefault(require("./ToDoProperties"));var _ToDoItem_Viewer, _ToDoItem_ToDo;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 class ToDoItem extends _react.default.Component
 
@@ -141,10 +141,10 @@ class ToDoItem extends _react.default.Component
 
 
 (0, _reactRelay.createFragmentContainer)(ToDoItem, {
-  Viewer: function () {return require("./__generated__/ToDoItem_Viewer.graphql");},
+  Viewer: _ToDoItem_Viewer !== void 0 ? _ToDoItem_Viewer : _ToDoItem_Viewer = require("./__generated__/ToDoItem_Viewer.graphql"),
 
 
 
 
-  ToDo: function () {return require("./__generated__/ToDoItem_ToDo.graphql");} });exports.default = _default;
+  ToDo: _ToDoItem_ToDo !== void 0 ? _ToDoItem_ToDo : _ToDoItem_ToDo = require("./__generated__/ToDoItem_ToDo.graphql") });exports.default = _default;
 //# sourceMappingURL=ToDoItem.js.map

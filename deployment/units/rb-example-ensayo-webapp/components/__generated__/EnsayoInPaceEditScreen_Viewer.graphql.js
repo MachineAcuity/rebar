@@ -19,6 +19,7 @@
               export type EnsayoInPaceEditScreen_Viewer$key = {
                 +$data?: EnsayoInPaceEditScreen_Viewer$data,
                 +$fragmentRefs: EnsayoInPaceEditScreen_Viewer$ref,
+                ...
               };
               */
 

@@ -12,7 +12,7 @@ var _reactRelay = require("react-relay");
 var _TextField = _interopRequireDefault(require("@material-ui/core/TextField"));
 
 var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));
-var _ToDoAddMutation = _interopRequireDefault(require("../../rb-example-todo-client/relay/ToDoAddMutation"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _ToDoAddMutation = _interopRequireDefault(require("../../rb-example-todo-client/relay/ToDoAddMutation"));var _ToDoScreen_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const styles = theme => ({
   card: {
@@ -84,5 +84,5 @@ class ToDoScreen extends _react.default.Component
 
 
 (0, _reactRelay.createFragmentContainer)((0, _styles.withStyles)(styles)(ToDoScreen), {
-  Viewer: function () {return require("./__generated__/ToDoScreen_Viewer.graphql");} });exports.default = _default;
+  Viewer: _ToDoScreen_Viewer !== void 0 ? _ToDoScreen_Viewer : _ToDoScreen_Viewer = require("./__generated__/ToDoScreen_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=ToDoScreen.js.map

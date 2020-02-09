@@ -11,9 +11,6 @@ var _logServerRequest = _interopRequireDefault(require("../rb-base-server/logSer
 var _ObjectManager = require("../rb-base-server/ObjectManager");
 
 var _checkCredentials = require("./checkCredentials");
-
-
-
 var _schema = _interopRequireDefault(require("./graphql/schema"));
 
 
@@ -26,9 +23,7 @@ const serverGraphQL = (0, _express.default)();
 serverGraphQL.use(_bodyParser.default.json());
 
 // Set up logging
-serverGraphQL.use((req, res, next) =>
-(0, _logServerRequest.default)(req, res, next, _requestLoggers.requestLoggerGraphQL));
-
+serverGraphQL.use((req, res, next) => (0, _logServerRequest.default)(req, res, next, _requestLoggers.requestLoggerGraphQL));
 
 //
 
@@ -59,19 +54,11 @@ async function root(req, res, next) {
     for (let ixTry = 1;; ixTry++) {
       objectManager = await (0, _ObjectManager.getObjectManager)(req, res);
 
-      const UserAndSession = await (0, _checkCredentials.getUserAndSessionIDByUserToken1_async)(
-      objectManager,
-      req,
-      true);
-
+      const UserAndSession = await (0, _checkCredentials.getUserAndSessionIDByUserToken1_async)(objectManager, req, true);
       if (!UserAndSession) {
         res.
         status(500).
-        send(
-        graphQLError(
-        'GraphQL server was given a session, but the session is invalid'));
-
-
+        send(graphQLError('GraphQL server was given a session, but the session is invalid'));
         return;
       }
 
@@ -95,18 +82,12 @@ async function root(req, res, next) {
         await (0, _delayPromise.default)(100 * ixTry);
         console.log('XXX user not eventually consistently found');
       } else if (verificationResult) {
-        (0, _log.default)(
-        'warn',
-        'rb-appbase-server serverGraphQL root: Checking credentials failed',
-        {
+        (0, _log.default)('warn', 'rb-appbase-server serverGraphQL root: Checking credentials failed', {
           ixTry,
           verificationResult,
           req,
           res,
-          UserSession_id: UserAndSession.UserSession ?
-          UserAndSession.UserSession.id :
-          'no session' });
-
+          UserSession_id: UserAndSession.UserSession ? UserAndSession.UserSession.id : 'no session' });
 
 
         // Expire cookie. This is the only way to 'delete' a cookie
@@ -135,9 +116,7 @@ async function root(req, res, next) {
       req,
       objectManager });
 
-    res.
-    status(500).
-    send(graphQLError('An error has occurred while running GraphQL query'));
+    res.status(500).send(graphQLError('An error has occurred while running GraphQL query'));
   }
 }
 serverGraphQL.use('/', root);var _default =

@@ -14,7 +14,7 @@ var _reactRelay = require("react-relay");
 var _EnsayoDeleteMutation = _interopRequireDefault(require("../../rb-example-ensayo-client/relay/EnsayoDeleteMutation"));
 var _EnsayoUpdateMutation = _interopRequireDefault(require("../../rb-example-ensayo-client/relay/EnsayoUpdateMutation"));
 
-var _EnsayoInPlaceEditProperties = _interopRequireDefault(require("./EnsayoInPlaceEditProperties"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _EnsayoInPlaceEditProperties = _interopRequireDefault(require("./EnsayoInPlaceEditProperties"));var _EnsayoInPlaceEditItem_Viewer, _EnsayoInPlaceEditItem_Ensayo;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 class EnsayoInPlaceEditItem extends _react.default.Component
 
@@ -117,10 +117,10 @@ class EnsayoInPlaceEditItem extends _react.default.Component
 
 
 (0, _reactRelay.createFragmentContainer)(EnsayoInPlaceEditItem, {
-  Viewer: function () {return require("./__generated__/EnsayoInPlaceEditItem_Viewer.graphql");},
+  Viewer: _EnsayoInPlaceEditItem_Viewer !== void 0 ? _EnsayoInPlaceEditItem_Viewer : _EnsayoInPlaceEditItem_Viewer = require("./__generated__/EnsayoInPlaceEditItem_Viewer.graphql"),
 
 
 
 
-  Ensayo: function () {return require("./__generated__/EnsayoInPlaceEditItem_Ensayo.graphql");} });exports.default = _default;
+  Ensayo: _EnsayoInPlaceEditItem_Ensayo !== void 0 ? _EnsayoInPlaceEditItem_Ensayo : _EnsayoInPlaceEditItem_Ensayo = require("./__generated__/EnsayoInPlaceEditItem_Ensayo.graphql") });exports.default = _default;
 //# sourceMappingURL=EnsayoInPlaceEditItem.js.map

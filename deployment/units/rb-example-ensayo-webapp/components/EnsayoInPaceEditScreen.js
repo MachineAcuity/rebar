@@ -17,7 +17,7 @@ var _reactRelay = require("react-relay");
 var _EnsayoAddMutation = _interopRequireDefault(require("../../rb-example-ensayo-client/relay/EnsayoAddMutation"));
 var _ResponsiveContentArea = _interopRequireDefault(require("../../rb-appbase-webapp/components/ResponsiveContentArea"));
 
-var _EnsayoInPlaceEditProperties = _interopRequireDefault(require("./EnsayoInPlaceEditProperties"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _EnsayoInPlaceEditProperties = _interopRequireDefault(require("./EnsayoInPlaceEditProperties"));var _EnsayoInPaceEditScreen_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const styles = theme => ({
   card: {
@@ -109,5 +109,5 @@ class EnsayoInPaceEditScreen extends _react.default.Component
 (0, _reactRelay.createFragmentContainer)(
 (0, _styles.withStyles)(styles)(EnsayoInPaceEditScreen),
 {
-  Viewer: function () {return require("./__generated__/EnsayoInPaceEditScreen_Viewer.graphql");} });exports.default = _default;
+  Viewer: _EnsayoInPaceEditScreen_Viewer !== void 0 ? _EnsayoInPaceEditScreen_Viewer : _EnsayoInPaceEditScreen_Viewer = require("./__generated__/EnsayoInPaceEditScreen_Viewer.graphql") });exports.default = _default;
 //# sourceMappingURL=EnsayoInPaceEditScreen.js.map

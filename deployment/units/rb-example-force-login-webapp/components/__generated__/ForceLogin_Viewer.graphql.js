@@ -19,6 +19,7 @@
               export type ForceLogin_Viewer$key = {
                 +$data?: ForceLogin_Viewer$data,
                 +$fragmentRefs: ForceLogin_Viewer$ref,
+                ...
               };
               */
 

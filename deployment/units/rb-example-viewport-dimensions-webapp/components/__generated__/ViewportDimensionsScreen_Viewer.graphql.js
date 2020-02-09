@@ -19,6 +19,7 @@
               export type ViewportDimensionsScreen_Viewer$key = {
                 +$data?: ViewportDimensionsScreen_Viewer$data,
                 +$fragmentRefs: ViewportDimensionsScreen_Viewer$ref,
+                ...
               };
               */
 

@@ -217,10 +217,12 @@ class WinstonTransportCassandra extends _winstonTransport.default {
       if (level === 'error') {
         if (err_message) console.error(_chalk.default.black.bgYellowBright(err_message));
         if (message) console.error(_chalk.default.redBright.bgBlack(message));
+        if (details) console.error(_chalk.default.gray.bgBlack(details));
         if (err_stack) console.error(err_stack);
       } else {
         if (err_message) console.log(_chalk.default.black.bgBlueBright(err_message));
         if (message) console.log(_chalk.default.blueBright.bgBlack(message));
+        if (details) console.error(_chalk.default.gray.bgBlack(details));
         if (err_stack) console.log(err_stack);
       }
     }

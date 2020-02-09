@@ -144,5 +144,5 @@
     "test": "jest",
     "update-ip": "./node_modules/.bin/babel-node ./units/rb-base-tools/updateIP.js"
   },
-  "version": "4.3.1"
+  "version": "4.4.1"
 }

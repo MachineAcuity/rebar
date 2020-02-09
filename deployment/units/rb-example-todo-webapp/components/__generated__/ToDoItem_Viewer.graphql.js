@@ -19,6 +19,7 @@
               export type ToDoItem_Viewer$key = {
                 +$data?: ToDoItem_Viewer$data,
                 +$fragmentRefs: ToDoItem_Viewer$ref,
+                ...
               };
               */
 

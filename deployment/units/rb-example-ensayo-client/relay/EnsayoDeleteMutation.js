@@ -1,9 +1,9 @@
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 var _reactRelay = require("react-relay");
-var _relayRuntime = require("relay-runtime"); //  weak
+var _relayRuntime = require("relay-runtime");var _EnsayoDeleteMutation;
 
-const mutation = function () {return require("./__generated__/EnsayoDeleteMutation.graphql");};
+const mutation = _EnsayoDeleteMutation !== void 0 ? _EnsayoDeleteMutation : _EnsayoDeleteMutation = require("./__generated__/EnsayoDeleteMutation.graphql");
 
 
 

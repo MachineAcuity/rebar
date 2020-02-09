@@ -19,6 +19,7 @@
               export type EnsayoInPlaceEditItem_Viewer$key = {
                 +$data?: EnsayoInPlaceEditItem_Viewer$data,
                 +$fragmentRefs: EnsayoInPlaceEditItem_Viewer$ref,
+                ...
               };
               */
 

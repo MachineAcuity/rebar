@@ -8,7 +8,7 @@ var _ObjectManager = require("../rb-base-server/ObjectManager");
 
 var _checkCredentials = require("./checkCredentials");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
-
+// Read environment
 require('dotenv').config();
 
 //
@@ -44,13 +44,15 @@ async function report(req, res) {
     replace('O', '0').
     replace('I', '1');
 
-    (0, _log.default)('error', 'WWW', {
-      err: req.body.err,
-      err_info: req.body.err_info,
-      objectManager,
-      req,
-      issue_id });
+    if (req.body.err.message) {
+      (0, _log.default)('error', 'WWW', {
+        err: req.body.err,
+        err_info: req.body.err_info,
+        objectManager,
+        req,
+        issue_id });
 
+    }
 
     res.json({ success: true, issue_id });
   } catch (err) {
