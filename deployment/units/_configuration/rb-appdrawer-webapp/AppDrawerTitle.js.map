@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../units/_configuration/rb-appdrawer-webapp/AppDrawerTitle.jsx"],"names":["AppDrawerTitle"],"mappings":";;AAEA,wG;;AAEeA,uB","sourcesContent":["// @flow\n\nimport AppDrawerTitle from '../../rb-demo-webapp/components/AppDrawerTitle'\n\nexport default AppDrawerTitle\n"],"file":"AppDrawerTitle.js"}

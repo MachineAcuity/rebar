@@ -9,11 +9,6 @@ var _graphql = require("graphql");
 
 var _graphqlRelay = require("graphql-relay");
 
-
-
-
-
-
 var _defaultPersister = _interopRequireDefault(require("../../../_configuration/rb-base-server/graphql/defaultPersister"));
 var _NodeInterface = _interopRequireDefault(require("../NodeInterface"));
 var _ViewerFields2 = _interopRequireDefault(require("../../../_configuration/rb-base-server/graphql/_ViewerFields"));
@@ -32,8 +27,7 @@ new _graphql.GraphQLObjectType({
     id: (0, _graphqlRelay.globalIdField)('Viewer'),
     User_IsAnonymous: {
       type: _graphql.GraphQLBoolean,
-      resolve: (obj) =>
-      _defaultPersister.default.uuidEquals(obj.id, _defaultPersister.default.uuidNull()) },
+      resolve: obj => _defaultPersister.default.uuidEquals(obj.id, _defaultPersister.default.uuidNull()) },
 
     UserToken2: { type: _graphql.GraphQLString, resolve: obj => obj.UserToken2 },
     User_DisplayName: {
@@ -59,18 +53,10 @@ new _graphql.GraphQLObjectType({
 
 
 
-      resolve: async (
-      obj,
-      { ...args },
-      context,
-      { rootValue: objectManager }) =>
-      {
+      resolve: async (obj, { ...args }, context, { rootValue: objectManager }) => {
         const { UserPermissionForObject_ObjectType } = args;
-        const arr = await objectManager.getObjectList_async(
-        'UserPermissionForObject',
-        {
+        const arr = await objectManager.getObjectList_async('UserPermissionForObject', {
           UserPermissionForObject_ObjectType });
-
 
         return (0, _graphqlRelay.connectionFromArray)(arr, args);
       } },
@@ -81,24 +67,16 @@ new _graphql.GraphQLObjectType({
 
       args: { ...{ id: { type: _graphql.GraphQLID } } },
 
-      resolve: async (
-      parent,
-      { id },
-      context,
-      { rootValue: objectManager }) =>
-      {
+      resolve: async (parent, { id }, context, { rootValue: objectManager }) => {
         const local_id = objectManager.uuidFromString(
         'UserPermissionForObject',
         (0, _graphqlRelay.fromGlobalId)(id).id);
 
 
-        // TODO Materialized view UserPermissionForObject_by_ID does not exist
-        return await objectManager.getOneObject_async(
-        'UserPermissionForObject',
-        {
+        // IDEA [Project E] Materialized view UserPermissionForObject_by_ID does not exist
+        return await objectManager.getOneObject_async('UserPermissionForObject', {
           id: local_id,
           _materialized_view: 'UserPermissionForObject_by_ID' });
-
 
       } },
 
@@ -108,16 +86,8 @@ new _graphql.GraphQLObjectType({
 
       args: { ..._graphqlRelay.connectionArgs },
 
-      resolve: async (
-      obj,
-      { ...args },
-      context,
-      { rootValue: objectManager }) =>
-      {
-        const arr = await objectManager.getObjectList_async(
-        'UserQuotaForObject',
-        {});
-
+      resolve: async (obj, { ...args }, context, { rootValue: objectManager }) => {
+        const arr = await objectManager.getObjectList_async('UserQuotaForObject', {});
         return (0, _graphqlRelay.connectionFromArray)(arr, args);
       } },
 
@@ -127,21 +97,13 @@ new _graphql.GraphQLObjectType({
 
       args: { ...{ id: { type: _graphql.GraphQLID } } },
 
-      resolve: async (
-      parent,
-      { id },
-      context,
-      { rootValue: objectManager }) =>
-      {
-        const local_id = objectManager.uuidFromString(
-        'UserQuotaForObject',
-        (0, _graphqlRelay.fromGlobalId)(id).id);
-
+      resolve: async (parent, { id }, context, { rootValue: objectManager }) => {
+        const local_id = objectManager.uuidFromString('UserQuotaForObject', (0, _graphqlRelay.fromGlobalId)(id).id);
 
         return await objectManager.getOneObject_async('UserQuotaForObject', {
           id: local_id,
 
-          // TODO Materialized view UserQuotaForObject_by_ID does not exist
+          // IDEA [Project E] Materialized view UserQuotaForObject_by_ID does not exist
           _materialized_view: 'UserQuotaForObject_by_ID' });
 
       } },

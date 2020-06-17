@@ -19,10 +19,7 @@ class StructuredLoggerWriter {
   }
 
   write() {
-    _fs.default.writeFileSync(
-    'units/rb-log-viewer-tools/log/log.json',
-    JSON.stringify(this.arrLog, null, 2));
-
+    _fs.default.writeFileSync('units/rb-log-viewer-tools/log/log.json', JSON.stringify(this.arrLog, null, 2));
   }}exports.StructuredLoggerWriter = StructuredLoggerWriter;
 
 
@@ -66,9 +63,7 @@ class StructuredLogger {
     const key = arrParamsSuffix[ixParams];
     let logger = this.children[key];
     if (!logger) {
-      logger = this.children[key] = new StructuredLogger(
-      this.structuredLoggerWriter);
-
+      logger = this.children[key] = new StructuredLogger(this.structuredLoggerWriter);
 
       logger.arrParamsRoot = this.arrParamsRoot.concat([key]);
       logger.parent = this;

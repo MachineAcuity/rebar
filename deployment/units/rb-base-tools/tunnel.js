@@ -1,5 +1,4 @@
-"use strict"; //const { spawn } = require('child_process')
-const http = require('http');
+"use strict";const http = require('http');
 const process = require('process');
 
 const localtunnel = require('localtunnel');
@@ -31,47 +30,7 @@ function createDevHostProxy(headers, proxyPort, serverPort) {
   server.listen(proxyPort);
 }
 
-/*
-  function establishTunnel(domainName, proxyPort, applicationPort) {
-    console.log(
-      'Establishing ' +
-        domainName +
-        '.localtunnel.me - > :' +
-        proxyPort +
-        ' (bound to :' +
-        applicationPort +
-        ')',
-    )
-  
-    const child = spawn('./node_modules/.bin/lt', [
-      '--port',
-      '' + proxyPort,
-      '--subdomain',
-      domainName,
-    ])
-  
-    child.stdout.on('data', (data) => {
-      console.log('' + data)
-    })
-  
-    child.stderr.on('data', (data) => {
-      console.error('' + data)
-    })
-  
-    child.on('exit', (code) => {
-      if (code !== 0) {
-        console.error(
-          'lighttunnel for port ' +
-            proxyPort +
-            ' exited with ' +
-            code +
-            ', restarting ...',
-        )
-        setTimeout(() => establishTunnel(domainName, proxyPort))
-      }
-    })
-  }
-  */
+//
 
 async function establishTunnel_async(subdomain, proxyPort, applicationPort) {
   console.log(
@@ -84,9 +43,10 @@ async function establishTunnel_async(subdomain, proxyPort, applicationPort) {
   ')');
 
 
-  console.log({ port: proxyPort, subdomain });
-
   const tunnel = await localtunnel({ port: proxyPort, subdomain });
+
+  console.log('Established  ' + tunnel.url);
+
   tunnel.on('close', () => {
     console.log('Closing tunnel for ' + subdomain + ' on proxy port ' + proxyPort);
   });

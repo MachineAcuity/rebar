@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 5295dc0ca5907421b635b917fa1ebb28
- */
+
+
+
 
 /* eslint-disable */
 
@@ -37,66 +36,67 @@
                  */
 
 const node /*: ConcreteRequest*/ = {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "routeAppFrameDemo_HomePageScreen_Query",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": [],
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "routeAppFrameDemo_HomePageScreen_Query",
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
+        "args": null,
         "kind": "FragmentSpread",
-        "name": "HomePageScreen_Viewer",
-        "args": null }] }] },
+        "name": "HomePageScreen_Viewer" }],
 
 
+      "storageKey": null }],
 
 
+    "type": "Query" },
 
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "routeAppFrameDemo_HomePageScreen_Query",
-    "argumentDefinitions": [],
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "id",
         "args": null,
-        "storageKey": null }] }] },
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null }],
 
 
+      "storageKey": null }] },
 
 
 
   "params": {
-    "operationKind": "query",
-    "name": "routeAppFrameDemo_HomePageScreen_Query",
     "id": null,
-    "text": "query routeAppFrameDemo_HomePageScreen_Query {\n  Viewer {\n    ...HomePageScreen_Viewer\n    id\n  }\n}\n\nfragment HomePageScreen_Viewer on Viewer {\n  id\n}\n",
-    "metadata": {} } };
+    "metadata": {},
+    "name": "routeAppFrameDemo_HomePageScreen_Query",
+    "operationKind": "query",
+    "text": "query routeAppFrameDemo_HomePageScreen_Query {\n  Viewer {\n    ...HomePageScreen_Viewer\n    id\n  }\n}\n\nfragment HomePageScreen_Viewer on Viewer {\n  id\n}\n" } };
 
 
 // prettier-ignore
 node /*: any*/.hash = 'dd5a657362a3fea622cbb7f0dfde2a72';
+
 module.exports = node;
 //# sourceMappingURL=routeAppFrameDemo_HomePageScreen_Query.graphql.js.map

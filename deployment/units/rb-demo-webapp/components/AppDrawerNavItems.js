@@ -46,37 +46,37 @@ class AppDrawerNavItems extends _react.default.Component
   render() {
     const { classes, Viewer, onClick } = this.props;
 
-    return (
-      _react.default.createElement("div", { className: classes.container },
+    return /*#__PURE__*/(
+      _react.default.createElement("div", { className: classes.container }, /*#__PURE__*/
       _react.default.createElement(_AppDrawerAccountItem.default, {
         key: "account",
         Viewer: Viewer,
-        onClick: this.props.onClick }),
+        onClick: this.props.onClick }), /*#__PURE__*/
 
-      _react.default.createElement(_List.default, { className: classes.list },
+      _react.default.createElement(_List.default, { className: classes.list }, /*#__PURE__*/
       _react.default.createElement(_NavMenuItemWithIcon.default, {
-        icon: _react.default.createElement(_Inbox.default, null),
+        icon: /*#__PURE__*/_react.default.createElement(_Inbox.default, null),
         label: "To Dos",
-        onClick: () => onClick('/todo/') }),
+        onClick: () => onClick('/todo/') }), /*#__PURE__*/
 
       _react.default.createElement(_NavMenuItemWithIcon.default, {
-        icon: _react.default.createElement(_Pencil.default, null),
+        icon: /*#__PURE__*/_react.default.createElement(_Pencil.default, null),
         label: "Ensayo Edit",
-        onClick: () => onClick('/ensayo/in-place-edit/') }),
+        onClick: () => onClick('/ensayo/in-place-edit/') }), /*#__PURE__*/
 
       _react.default.createElement(_NavMenuItemWithIcon.default, {
-        icon: _react.default.createElement(_Contacts.default, null),
+        icon: /*#__PURE__*/_react.default.createElement(_Contacts.default, null),
         label: "Ensayo Public",
-        onClick: () => onClick('/ensayo/') }),
+        onClick: () => onClick('/ensayo/') }), /*#__PURE__*/
 
-      _react.default.createElement(_Divider.default, null),
+      _react.default.createElement(_Divider.default, null), /*#__PURE__*/
       _react.default.createElement(_NavMenuItemWithIcon.default, {
-        icon: _react.default.createElement(_MoveResize.default, null),
+        icon: /*#__PURE__*/_react.default.createElement(_MoveResize.default, null),
         label: "Viewport Dimensions",
-        onClick: () => onClick('/viewport-dimensions/') }),
+        onClick: () => onClick('/viewport-dimensions/') }), /*#__PURE__*/
 
       _react.default.createElement(_NavMenuItemWithIcon.default, {
-        icon: _react.default.createElement(_Lock.default, null),
+        icon: /*#__PURE__*/_react.default.createElement(_Lock.default, null),
         label: "Force Login",
         onClick: () => onClick('/force-login/') }))));
 

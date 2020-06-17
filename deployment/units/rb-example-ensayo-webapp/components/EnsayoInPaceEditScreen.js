@@ -72,17 +72,17 @@ class EnsayoInPaceEditScreen extends _react.default.Component
     const { classes } = this.props;
     const { propertiesIsOpen } = this.state;
 
-    return (
-      _react.default.createElement(_ResponsiveContentArea.default, null,
-      _react.default.createElement(_Card.default, { className: classes.card },
-      _react.default.createElement(_CardHeader.default, { title: "Ensayo", subheader: "List of essays" }),
+    return /*#__PURE__*/(
+      _react.default.createElement(_ResponsiveContentArea.default, null, /*#__PURE__*/
+      _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
+      _react.default.createElement(_CardHeader.default, { title: "Ensayo", subheader: "List of essays" }), /*#__PURE__*/
 
-      _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement("div", { className: classes.addNewButton },
+      _react.default.createElement(_CardContent.default, null, /*#__PURE__*/
+      _react.default.createElement("div", { className: classes.addNewButton }, /*#__PURE__*/
       _react.default.createElement(_Fab.default, {
         color: "primary",
         className: classes.button,
-        onClick: this._handle_onClick_Add },
+        onClick: this._handle_onClick_Add }, /*#__PURE__*/
 
       _react.default.createElement(_Plus.default, null))),
 
@@ -91,7 +91,7 @@ class EnsayoInPaceEditScreen extends _react.default.Component
       this.props.children),
 
 
-      propertiesIsOpen &&
+      propertiesIsOpen && /*#__PURE__*/
       _react.default.createElement(_EnsayoInPlaceEditProperties.default, {
         Ensayo_Title: "",
         Ensayo_Content: "",

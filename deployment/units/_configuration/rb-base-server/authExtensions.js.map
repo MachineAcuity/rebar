@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../units/_configuration/rb-base-server/authExtensions.js"],"names":["auth"],"mappings":";;AAEe,kBAAUA,IAAV,EAAyB;AACtC;AACD","sourcesContent":["// @flow\n\nexport default function( auth: Object ) {\n  // Here [auth] is the auth router. If you need to attach additional routes to it, do it below\n}\n"],"file":"authExtensions.js"}

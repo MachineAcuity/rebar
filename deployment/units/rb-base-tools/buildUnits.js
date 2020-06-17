@@ -9,15 +9,16 @@ var _sortedJsonStringify = _interopRequireDefault(require("sorted-json-stringify
 
 var _eslintrc = _interopRequireDefault(require("../../.eslintrc.json"));
 var _fsExists = _interopRequireDefault(require("../rb-base-server/fsExists"));
-var _package = _interopRequireDefault(require("../../package.json"));
-var _buildUnits = _interopRequireDefault(require("../_configuration/rb-base-tools/buildUnits"));
-var _ensureFileContent = _interopRequireDefault(require("../rb-base-server/ensureFileContent"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // $AssureFlow Not sure why it gives an error. The file does exist
 
+var _prettierrc = _interopRequireDefault(require("../../.prettierrc.json"));
+var _buildUnits = _interopRequireDefault(require("../_configuration/rb-base-tools/buildUnits"));
+var _ensureFileContent = _interopRequireDefault(require("../rb-base-server/ensureFileContent"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // $FlowIgnore Not sure why it gives an error. The file does exist
+// $FlowIgnore it is a valid path actually
 const fs = _fs.default.promises;
 
 const prettierESLintOptions = {
   eslintConfig: _eslintrc.default,
-  prettierOptions: _package.default.prettier };
+  prettierOptions: _prettierrc.default };
 
 
 function mergeScripts(scripts1, scripts2) {
@@ -39,9 +40,7 @@ function mergeScripts(scripts1, scripts2) {
 
 async function createPackageJson(units) {
   const packageJsonFileName = _path.default.resolve('./package.json');
-  const currentPackageAsJSONString = (await fs.readFile(
-  packageJsonFileName)).
-  toString();
+  const currentPackageAsJSONString = (await fs.readFile(packageJsonFileName)).toString();
   const currentPackageAsObject = JSON.parse(currentPackageAsJSONString);
   const packageAsObject = {
     dependencies: {},
@@ -49,7 +48,7 @@ async function createPackageJson(units) {
     engines: {},
     husky: {},
     name: null,
-    prettier: {},
+    //prettier: {},
     scripts: {},
     version: null };
 
@@ -60,32 +59,20 @@ async function createPackageJson(units) {
 
   // Add packages to object
   for (let unitName of units) {
-    const packageAsObjectName = _path.default.resolve(
-    './units',
-    unitName,
-    'package.part.json');
-
+    const packageAsObjectName = _path.default.resolve('./units', unitName, 'package.part.json');
     if (await (0, _fsExists.default)(packageAsObjectName)) {
-      const packageToAddAsObject = JSON.parse(
-      (await fs.readFile(packageAsObjectName)).toString());
-
+      const packageToAddAsObject = JSON.parse((await fs.readFile(packageAsObjectName)).toString());
 
       if (packageToAddAsObject.dependencies)
-      Object.assign(
-      packageAsObject.dependencies,
-      packageToAddAsObject.dependencies);
-
+      Object.assign(packageAsObject.dependencies, packageToAddAsObject.dependencies);
       if (packageToAddAsObject.devDependencies)
-      Object.assign(
-      packageAsObject.devDependencies,
-      packageToAddAsObject.devDependencies);
-
+      Object.assign(packageAsObject.devDependencies, packageToAddAsObject.devDependencies);
       if (packageToAddAsObject.engines)
       Object.assign(packageAsObject.engines, packageToAddAsObject.engines);
       if (packageToAddAsObject.husky)
       Object.assign(packageAsObject.husky, packageToAddAsObject.husky);
-      if (packageToAddAsObject.prettier)
-      Object.assign(packageAsObject.prettier, packageToAddAsObject.prettier);
+      // if (packageToAddAsObject.prettier)
+      //   Object.assign(packageAsObject.prettier, packageToAddAsObject.prettier)
       if (packageToAddAsObject.scripts)
       packageAsObject.scripts = mergeScripts(
       packageAsObject.scripts,
@@ -114,18 +101,15 @@ async function createMutations(units) {
 
       for (let mutationFileName of mutationFileNames) {
         if (mutationFileName.endsWith('.js')) {
-          const mutation = mutationFileName.substring(
-          0,
-          mutationFileName.length - 3);
-
+          const mutation = mutationFileName.substring(0, mutationFileName.length - 3);
           mutationsImports.push(
           'import ' +
           mutation.replace('.', '_') +
-          ' from \'../../../' +
+          " from '../../../" +
           unitName +
           '/graphql/mutation/' +
           mutation +
-          '\'');
+          "'");
 
           mutationsExports.push('  ' + mutation + ',');
         }
@@ -158,16 +142,9 @@ async function createSchemas(units) {
 
       for (let objectTypeFileName of objectTypeFileNames) {
         if (objectTypeFileName.endsWith('.js')) {
-          const objectType = objectTypeFileName.substring(
-          0,
-          objectTypeFileName.length - 3);
-
+          const objectType = objectTypeFileName.substring(0, objectTypeFileName.length - 3);
           schemasImports.push(
-          'import \'../../../' +
-          unitName +
-          '/graphql/model/' +
-          objectType +
-          '\'');
+          "import '../../../" + unitName + '/graphql/model/' + objectType + "'");
 
         }
       }
@@ -202,9 +179,9 @@ async function createViewerFields(units) {
       viewerFieldsImports.push(
       'import ' +
       viewerFieldsImportName +
-      ' from \'../../../' +
+      " from '../../../" +
       unitName +
-      '/graphql/type/_ViewerFields\'');
+      "/graphql/type/_ViewerFields'");
 
       viewerFieldsExports.push('  ...' + viewerFieldsImportName + ',');
     }
@@ -217,9 +194,7 @@ async function createViewerFields(units) {
   viewerFields = viewerFields.concat(['}']);
 
   await (0, _ensureFileContent.default)(
-  _path.default.resolve(
-  './units/_configuration/rb-base-server/graphql/_ViewerFields.js'),
-
+  _path.default.resolve('./units/_configuration/rb-base-server/graphql/_ViewerFields.js'),
   null,
   (0, _prettierEslint.default)({
     text: viewerFields.join('\r\n'),

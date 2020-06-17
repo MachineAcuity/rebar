@@ -37,16 +37,15 @@
 
 const node /*: ReaderFragment*/ = function () {
   var v0 = {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "id",
     "args": null,
+    "kind": "ScalarField",
+    "name": "id",
     "storageKey": null };
 
   return {
+    "argumentDefinitions": [],
     "kind": "Fragment",
-    "name": "EnsayoInPaceEditList_Viewer",
-    "type": "Viewer",
     "metadata": {
       "connection": [
       {
@@ -59,96 +58,98 @@ const node /*: ReaderFragment*/ = function () {
 
 
 
-    "argumentDefinitions": [],
+    "name": "EnsayoInPaceEditList_Viewer",
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": "Ensayos",
-      "name": "__EnsayoList_Ensayos_connection",
-      "storageKey": null,
       "args": null,
       "concreteType": "EnsayosConnection",
+      "kind": "LinkedField",
+      "name": "__EnsayoList_Ensayos_connection",
       "plural": false,
       "selections": [
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "edges",
-        "storageKey": null,
         "args": null,
         "concreteType": "EnsayosEdge",
+        "kind": "LinkedField",
+        "name": "edges",
         "plural": true,
         "selections": [
         {
-          "kind": "LinkedField",
           "alias": null,
-          "name": "node",
-          "storageKey": null,
           "args": null,
           "concreteType": "Ensayo",
+          "kind": "LinkedField",
+          "name": "node",
           "plural": false,
           "selections": [
           v0 /*: any*/,
           {
-            "kind": "ScalarField",
             "alias": null,
-            "name": "__typename",
             "args": null,
+            "kind": "ScalarField",
+            "name": "__typename",
             "storageKey": null },
 
           {
+            "args": null,
             "kind": "FragmentSpread",
-            "name": "EnsayoInPlaceEditItem_Ensayo",
-            "args": null }] },
+            "name": "EnsayoInPlaceEditItem_Ensayo" }],
 
 
-
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "cursor",
-          "args": null,
-          "storageKey": null }] },
-
-
-
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "pageInfo",
-        "storageKey": null,
-        "args": null,
-        "concreteType": "PageInfo",
-        "plural": false,
-        "selections": [
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "endCursor",
-          "args": null,
           "storageKey": null },
 
         {
-          "kind": "ScalarField",
           "alias": null,
-          "name": "hasNextPage",
           "args": null,
-          "storageKey": null }] }] },
+          "kind": "ScalarField",
+          "name": "cursor",
+          "storageKey": null }],
 
 
+        "storageKey": null },
+
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "PageInfo",
+        "kind": "LinkedField",
+        "name": "pageInfo",
+        "plural": false,
+        "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "endCursor",
+          "storageKey": null },
+
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "hasNextPage",
+          "storageKey": null }],
 
 
+        "storageKey": null }],
+
+
+      "storageKey": null },
 
     v0 /*: any*/,
     {
+      "args": null,
       "kind": "FragmentSpread",
-      "name": "EnsayoInPlaceEditItem_Viewer",
-      "args": null }] };
+      "name": "EnsayoInPlaceEditItem_Viewer" }],
 
 
+    "type": "Viewer" };
 
 }();
 // prettier-ignore
 node /*: any*/.hash = '0264c9c908d073effc0c969d9ac3ecd2';
+
 module.exports = node;
 //# sourceMappingURL=EnsayoInPaceEditList_Viewer.graphql.js.map

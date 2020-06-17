@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 64ae8f1b04f06ffb887800a9cdaa6eac
- */
+
+
+
 
 /* eslint-disable */
 
@@ -48,87 +47,88 @@
                  */
 
 const node /*: ConcreteRequest*/ = {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "createDefaultRoutes_AppFrame_Query",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": [],
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "createDefaultRoutes_AppFrame_Query",
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
+        "args": null,
         "kind": "FragmentSpread",
-        "name": "AppFrame_Viewer",
-        "args": null }] }] },
+        "name": "AppFrame_Viewer" }],
 
 
+      "storageKey": null }],
 
 
+    "type": "Query" },
 
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "createDefaultRoutes_AppFrame_Query",
-    "argumentDefinitions": [],
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "UserToken2",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "User_IsAnonymous",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "User_DisplayName",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "id",
         "args": null,
-        "storageKey": null }] }] },
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null }],
 
 
+      "storageKey": null }] },
 
 
 
   "params": {
-    "operationKind": "query",
-    "name": "createDefaultRoutes_AppFrame_Query",
     "id": null,
-    "text": "query createDefaultRoutes_AppFrame_Query {\n  Viewer {\n    ...AppFrame_Viewer\n    id\n  }\n}\n\nfragment AppDrawerAccountItem_Viewer on Viewer {\n  User_IsAnonymous\n  User_DisplayName\n}\n\nfragment AppDrawerNavItems_Viewer on Viewer {\n  ...AppDrawerAccountItem_Viewer\n  User_IsAnonymous\n}\n\nfragment AppFrame_Viewer on Viewer {\n  UserToken2\n  ...AppDrawerNavItems_Viewer\n}\n",
-    "metadata": {} } };
+    "metadata": {},
+    "name": "createDefaultRoutes_AppFrame_Query",
+    "operationKind": "query",
+    "text": "query createDefaultRoutes_AppFrame_Query {\n  Viewer {\n    ...AppFrame_Viewer\n    id\n  }\n}\n\nfragment AppDrawerAccountItem_Viewer on Viewer {\n  User_IsAnonymous\n  User_DisplayName\n}\n\nfragment AppDrawerNavItems_Viewer on Viewer {\n  ...AppDrawerAccountItem_Viewer\n  User_IsAnonymous\n}\n\nfragment AppFrame_Viewer on Viewer {\n  UserToken2\n  ...AppDrawerNavItems_Viewer\n}\n" } };
 
 
 // prettier-ignore
 node /*: any*/.hash = '62f17a519f10c2f80031922d04c75329';
+
 module.exports = node;
 //# sourceMappingURL=createDefaultRoutes_AppFrame_Query.graphql.js.map

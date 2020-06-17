@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 82f69d74db4042bcf6fdc52cac25a574
- */
+
+
+
 
 /* eslint-disable */
 
@@ -37,66 +36,67 @@
                  */
 
 const node /*: ConcreteRequest*/ = {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "routeAppFrameTodo_ToDoScreen_Query",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": [],
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "routeAppFrameTodo_ToDoScreen_Query",
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
+        "args": null,
         "kind": "FragmentSpread",
-        "name": "ToDoScreen_Viewer",
-        "args": null }] }] },
+        "name": "ToDoScreen_Viewer" }],
 
 
+      "storageKey": null }],
 
 
+    "type": "Query" },
 
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "routeAppFrameTodo_ToDoScreen_Query",
-    "argumentDefinitions": [],
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "id",
         "args": null,
-        "storageKey": null }] }] },
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null }],
 
 
+      "storageKey": null }] },
 
 
 
   "params": {
-    "operationKind": "query",
-    "name": "routeAppFrameTodo_ToDoScreen_Query",
     "id": null,
-    "text": "query routeAppFrameTodo_ToDoScreen_Query {\n  Viewer {\n    ...ToDoScreen_Viewer\n    id\n  }\n}\n\nfragment ToDoScreen_Viewer on Viewer {\n  id\n}\n",
-    "metadata": {} } };
+    "metadata": {},
+    "name": "routeAppFrameTodo_ToDoScreen_Query",
+    "operationKind": "query",
+    "text": "query routeAppFrameTodo_ToDoScreen_Query {\n  Viewer {\n    ...ToDoScreen_Viewer\n    id\n  }\n}\n\nfragment ToDoScreen_Viewer on Viewer {\n  id\n}\n" } };
 
 
 // prettier-ignore
 node /*: any*/.hash = 'a9ef7a4f1fcf9f2f638608c83eabb62a';
+
 module.exports = node;
 //# sourceMappingURL=routeAppFrameTodo_ToDoScreen_Query.graphql.js.map

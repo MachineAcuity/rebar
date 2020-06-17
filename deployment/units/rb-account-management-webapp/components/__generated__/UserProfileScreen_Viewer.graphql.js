@@ -29,50 +29,51 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "UserProfileScreen_Viewer",
-  "type": "Viewer",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "UserProfileScreen_Viewer",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "id",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "User_IsAnonymous",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "User_DisplayName",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "User_PrimaryEmail",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "User_PrimaryPhone",
     "args": null,
-    "storageKey": null }] };
+    "kind": "ScalarField",
+    "name": "User_PrimaryPhone",
+    "storageKey": null }],
 
 
+  "type": "Viewer" };
 
 // prettier-ignore
 node /*: any*/.hash = '0bacd47e4714e448ac9e04f60fc3501e';
+
 module.exports = node;
 //# sourceMappingURL=UserProfileScreen_Viewer.graphql.js.map

@@ -5,7 +5,6 @@ var _bodyParser = _interopRequireDefault(require("body-parser"));
 var _express = _interopRequireDefault(require("express"));
 var _jwtSimple = _interopRequireDefault(require("jwt-simple"));
 
-var _authExtensions = _interopRequireDefault(require("../_configuration/rb-base-server/authExtensions"));
 var _delayPromise = _interopRequireDefault(require("../rb-base-universal/delayPromise"));
 var _getNewUser = _interopRequireDefault(require("../_configuration/rb-base-server/graphql/model/getNewUser"));
 var _log = _interopRequireDefault(require("../rb-base-server/log"));
@@ -31,11 +30,9 @@ throw new Error(
 const serverAuth = (0, _express.default)();
 
 serverAuth.use(_bodyParser.default.json());
-serverAuth.use((req, res, next) =>
-(0, _logServerRequest.default)(req, res, next, _requestLoggers.requestLoggerAuth));
+serverAuth.use((req, res, next) => (0, _logServerRequest.default)(req, res, next, _requestLoggers.requestLoggerAuth));
 
-
-// IDEA: When logging in as a different user, logout of the old session should be performed first so that the session is deleted.
+// IDEA [Code Quality] When logging in as a different user, logout of the old session should be performed first so that the session is deleted.
 
 //
 
@@ -43,7 +40,7 @@ async function login(req, res) {
   let step = 'initialize';
 
   try {
-    // $AssureFlow yes, the Object Manager will have all the fields
+    // $FlowIgnore yes, the Object Manager will have all the fields
     const objectManager = await (0, _ObjectManager.getObjectManager)(req, res);
 
     if (!objectManager.siteInformation) {
@@ -57,13 +54,10 @@ async function login(req, res) {
 
     step = 'Find user';
 
-    const arr_UserAccount = await objectManager.getObjectList_async(
-    'UserAccount',
-    {
+    const arr_UserAccount = await objectManager.getObjectList_async('UserAccount', {
       UserAccount_artifact_id: objectManager.siteInformation.artifact_id,
       UserAccount_Identifier,
-      UserAccount_Type: 'un' });
-
+      UserAccount_Type: 'sec' });
 
 
     if (arr_UserAccount.length === 0) {
@@ -77,10 +71,8 @@ async function login(req, res) {
     step = 'Check password';
     if (
     !(await new Promise((resolve) =>
-    _bcryptjs.default.compare(
-    User_Secret,
-    a_UserAccount.UserAccount_Secret,
-    (err, passwordMatch) => resolve(passwordMatch)))))
+    _bcryptjs.default.compare(User_Secret, a_UserAccount.UserAccount_Secret, (err, passwordMatch) =>
+    resolve(passwordMatch)))))
 
 
     {
@@ -107,7 +99,7 @@ async function login(req, res) {
 
     step = 'Create JWT token';
     const UserToken1 = _jwtSimple.default.encode(
-    // $AssureFlow - id will be filled in by ObjectManager.add
+    // $FlowIgnore - id will be filled in by ObjectManager.add
     { session_id: a_UserSession.id },
     envJWTSecret);
 
@@ -151,12 +143,13 @@ async function createuser(req, res) {
     const UserAccount_Identifier = req.body.UserAccount_Identifier.toLowerCase();
     const User_Secret = req.body.User_Secret;
 
-    const arr_UserAccount = await objectManager.getObjectList_async(
-    'UserAccount',
-    {
+    if (UserAccount_Identifier === '' || User_Secret === '') {
+      throw new Error('Attempted log in with empty account identifier or password');
+    }
+
+    const arr_UserAccount = await objectManager.getObjectList_async('UserAccount', {
       UserAccount_artifact_id: objectManager.siteInformation.artifact_id,
       UserAccount_Identifier });
-
 
 
     if (arr_UserAccount.length > 0) {
@@ -174,31 +167,18 @@ async function createuser(req, res) {
 
     // If account name looks like email address, use it as email
     const accountNameIsValidEmail = (0, _validation.validateEmail)(UserAccount_Identifier);
-    const User_PrimaryEmail = accountNameIsValidEmail ?
-    UserAccount_Identifier :
-    '';
+    const User_PrimaryEmail = accountNameIsValidEmail ? UserAccount_Identifier : '';
 
-    step = 'Create the user object';
-    const a_User = Object.assign(
-    (0, _getNewUser.default)(objectManager.siteInformation.artifact_id),
-    {
+    step = 'Create the new user object';
+    const a_User = Object.assign((0, _getNewUser.default)(objectManager.siteInformation.artifact_id), {
       User_artifact_id: objectManager.siteInformation.artifact_id,
       UserToken2:
-      Math.random().
-      toString(36).
-      substring(2) +
-      Math.random().
-      toString(36).
-      substring(2) +
-      Math.random().
-      toString(36).
-      substring(2) +
-      Math.random().
-      toString(36).
-      substring(2),
+      Math.random().toString(36).substring(2) +
+      Math.random().toString(36).substring(2) +
+      Math.random().toString(36).substring(2) +
+      Math.random().toString(36).substring(2),
       User_DisplayName: UserAccount_Identifier,
       User_PrimaryEmail: User_PrimaryEmail });
-
 
     objectManager.assignPrimaryKey('User', a_User);
     objectManager.setViewerUserId(a_User.id);
@@ -220,7 +200,7 @@ async function createuser(req, res) {
       UserAccount_User_id: a_User.id,
       UserAccount_Identifier,
       UserAccount_Secret,
-      UserAccount_Type: 'un' };
+      UserAccount_Type: 'sec' };
 
 
     step = 'Add user session and account to database';
@@ -235,7 +215,7 @@ async function createuser(req, res) {
 
     step = 'Create a JWT token';
     const UserToken1 = _jwtSimple.default.encode(
-    // $AssureFlow - id will be filled in by ObjectManager.add
+    // $FlowIgnore - id will be filled in by ObjectManager.add
     { session_id: a_UserSession.id },
     envJWTSecret);
 
@@ -255,7 +235,7 @@ async function createuser(req, res) {
 
     res.status(500).send(
     JSON.stringify({
-      error: 'An error has occurred while attempting to create user' }));
+      error: 'An error has occurred while attempting to create new user' }));
 
 
   }
@@ -273,11 +253,8 @@ async function changeSecret(req, res) {
 
     step = 'Locate user account';
     // user id and artifact id will be picked up from object manager
-    const arr_UserAccount = await objectManager.getObjectList_async(
-    'UserAccount',
-    {
-      UserAccount_Type: 'un' });
-
+    const arr_UserAccount = await objectManager.getObjectList_async('UserAccount', {
+      UserAccount_Type: 'sec' });
 
 
     if (arr_UserAccount.length === 0) {
@@ -334,10 +311,7 @@ async function logout(req, res) {
 
     // Notice that get user and session will return null if user is not found, hence the next line would
     // fail. This is OK because we have a catch in the end.
-    const userSession = (await (0, _checkCredentials.getUserAndSessionIDByUserToken1_async)(
-    objectManager,
-    req,
-    false)).
+    const userSession = (await (0, _checkCredentials.getUserAndSessionIDByUserToken1_async)(objectManager, req, false)).
     UserSession;
 
     await objectManager.remove('UserSession', {
@@ -355,10 +329,7 @@ async function logout(req, res) {
 
   }
 }
-serverAuth.post('/logout', logout);
-
-// Add extensions - custom configurations
-(0, _authExtensions.default)(serverAuth);var _default =
+serverAuth.post('/logout', logout);var _default =
 
 serverAuth;exports.default = _default;
 //# sourceMappingURL=serverAuth.js.map

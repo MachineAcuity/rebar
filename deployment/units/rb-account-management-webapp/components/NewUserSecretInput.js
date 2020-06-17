@@ -152,8 +152,8 @@ class NewUserSecretInput extends _react.default.Component
       userSecretStrength } =
     this.state;
 
-    return (
-      _react.default.createElement("div", null,
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
       _react.default.createElement(_TextField.default, {
         autoComplete: "new-password",
         fullWidth: true,
@@ -162,7 +162,7 @@ class NewUserSecretInput extends _react.default.Component
         type: "password",
         value: userSecret,
         variant: "outlined",
-        onChange: this._handle_onChange_Secret }),
+        onChange: this._handle_onChange_Secret }), /*#__PURE__*/
 
 
       _react.default.createElement(_TextField.default, {
@@ -173,12 +173,12 @@ class NewUserSecretInput extends _react.default.Component
         type: "password",
         value: userSecretConfirm,
         variant: "outlined",
-        onChange: this._handle_onChange_SecretConfirm }),
+        onChange: this._handle_onChange_SecretConfirm }), /*#__PURE__*/
 
 
-      _react.default.createElement(_Typography.default, { variant: "subtitle1", gutterBottom: true },
+      _react.default.createElement(_Typography.default, { variant: "subtitle1", gutterBottom: true }, /*#__PURE__*/
       _react.default.createElement("br", null),
-      userSecretPrompt),
+      userSecretPrompt), /*#__PURE__*/
 
 
       _react.default.createElement(_LinearProgress.default, {

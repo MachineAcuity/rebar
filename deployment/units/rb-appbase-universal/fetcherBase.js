@@ -28,7 +28,7 @@ class FetcherBase {
 
     try {
       if (this.UserToken1) {
-        // $AssureFlow we can add the cookie, will be used on server
+        // $FlowIgnore we can add the cookie, will be used on server
         request.headers.UserToken1 = this.UserToken1;
       }
 

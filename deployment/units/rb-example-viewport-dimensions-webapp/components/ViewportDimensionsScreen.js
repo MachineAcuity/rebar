@@ -37,8 +37,8 @@ class ViewportDimensionsScreen extends _react.default.Component
   render() {
     const { classes } = this.props;
 
-    return (
-      _react.default.createElement(_ResponsiveContentArea.default, null,
+    return /*#__PURE__*/(
+      _react.default.createElement(_ResponsiveContentArea.default, null, /*#__PURE__*/
       _react.default.createElement(_ViewportContext.default.Consumer, null,
       ({ totalWidth, totalHeight }) => {
         const data = [
@@ -46,25 +46,25 @@ class ViewportDimensionsScreen extends _react.default.Component
         { name: 'totalHeight', value: totalHeight }];
 
 
-        return (
-          _react.default.createElement(_Card.default, { className: classes.card },
-          _react.default.createElement(_CardHeader.default, { title: "Viewport Dimensions" }),
-          _react.default.createElement(_Table.default, null,
-          _react.default.createElement(_TableHead.default, null,
-          _react.default.createElement(_TableRow.default, null,
-          _react.default.createElement(_TableCell.default, null, "Property"),
-          _react.default.createElement(_TableCell.default, { align: "right" }, "Value"))),
+        return /*#__PURE__*/(
+          _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
+          _react.default.createElement(_CardHeader.default, { title: "Viewport Dimensions" }), /*#__PURE__*/
+          _react.default.createElement(_Table.default, null, /*#__PURE__*/
+          _react.default.createElement(_TableHead.default, null, /*#__PURE__*/
+          _react.default.createElement(_TableRow.default, null, /*#__PURE__*/
+          _react.default.createElement(_TableCell.default, null, "Property"), /*#__PURE__*/
+          _react.default.createElement(_TableCell.default, { align: "right" }, "Value"))), /*#__PURE__*/
 
 
           _react.default.createElement(_TableBody.default, null,
           data.map(n => {
-            return (
-              _react.default.createElement(_TableRow.default, { key: n.name },
-              _react.default.createElement(_TableCell.default, null, n.name),
+            return /*#__PURE__*/(
+              _react.default.createElement(_TableRow.default, { key: n.name }, /*#__PURE__*/
+              _react.default.createElement(_TableCell.default, null, n.name), /*#__PURE__*/
               _react.default.createElement(_TableCell.default, { align: "right" }, n.value)));
 
 
-          }))),
+          }))), /*#__PURE__*/
 
 
           _react.default.createElement(_CardContent.default, null)));
