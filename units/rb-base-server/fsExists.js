@@ -8,14 +8,14 @@ const fs = fsWithCallbacks.promises
 
 //
 
-export default ( async function fsExists( path: string ) {
+export default (async function fsExists(path: string) {
   try {
-    await fs.access( path )
+    await fs.access(path)
     return true
-  } catch ( err ) {
-    if ( err.code === 'ENOENT' ) return false
+  } catch (err) {
+    if (err.code === 'ENOENT') return false
     else {
-      throw new NestedError( 'rb-base-server fsExists: Failed', err )
+      throw new NestedError('rb-base-server fsExists: Failed', err)
     }
   }
 })

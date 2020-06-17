@@ -36,7 +36,7 @@ serverWebApp.use(async (req, res) => {
         passUserToken1ToHeaders = true
       }
 
-      //$AssureFlow
+      //$FlowIgnore
       const content = await contentCreatorWebApp_async(
         siteInformation,
         reqUrl,

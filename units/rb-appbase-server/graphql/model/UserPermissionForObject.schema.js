@@ -2,17 +2,20 @@
 
 import defaultPersister from '../../../_configuration/rb-base-server/graphql/defaultPersister'
 
-defaultPersister.addTableSchema( 'UserPermissionForObject', {
+defaultPersister.addTableSchema('UserPermissionForObject', {
   fields: {
     id: 'uuid',
     UserPermissionForObject_artifact_id: 'uuid',
     UserPermissionForObject_user_id: 'uuid',
+
     UserPermissionForObject_ObjectType: 'text',
     UserPermissionForObject_object_id: 'uuid',
+
     UserPermissionForObject_PermitRead: 'boolean',
+    UserPermissionForObject_PermitInsert: 'boolean',
     UserPermissionForObject_PermitUpdate: 'boolean',
     UserPermissionForObject_PermitDelete: 'boolean',
-    UserPermissionForObject_PermitMiscAsJSON: 'text',
+
     UserPermissionForObject_created_by: 'uuid',
     UserPermissionForObject_created_on: 'timestamp',
     UserPermissionForObject_modified_by: 'uuid',

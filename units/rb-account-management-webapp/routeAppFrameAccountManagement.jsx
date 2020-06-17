@@ -1,24 +1,24 @@
 // @flow
 
-import Route from 'found/lib/Route'
+import Route from 'found/Route'
 import Async from 'react-code-splitting'
 import React from 'react'
 import { graphql } from 'react-relay'
 
-const ChangeSecretScreen = props => (
-  <Async load={import( './components/ChangeSecretScreen' )} componentProps={props} />
+const ChangeSecretScreen = (props) => (
+  <Async load={import('./components/ChangeSecretScreen')} componentProps={props} />
 )
 
-const UserProfileScreen = props => (
-  <Async load={import( './components/UserProfileScreen' )} componentProps={props} />
+const UserProfileScreen = (props) => (
+  <Async load={import('./components/UserProfileScreen')} componentProps={props} />
 )
 
-const LogoutScreen = props => (
-  <Async load={import( './components/LogoutScreen' )} componentProps={props} />
+const LogoutScreen = (props) => (
+  <Async load={import('./components/LogoutScreen')} componentProps={props} />
 )
 
-const NewUserScreen = props => (
-  <Async load={import( './components/NewUserScreen' )} componentProps={props} />
+const NewUserScreen = (props) => (
+  <Async load={import('./components/NewUserScreen')} componentProps={props} />
 )
 
 export default (

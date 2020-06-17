@@ -50,9 +50,7 @@ export default class AppWrapperBase extends React.Component<
       <EventListener target="window" onResize={this.handle_onResize}>
         <MuiThemeProvider theme={this.createMUITheme()}>
           <ViewportContext.Provider value={{ totalWidth, totalHeight }}>
-            <SiteConfigurationContext.Provider
-              value={this.props.siteConfiguration}
-            >
+            <SiteConfigurationContext.Provider value={this.props.siteConfiguration}>
               {this.props.children}
             </SiteConfigurationContext.Provider>
           </ViewportContext.Provider>

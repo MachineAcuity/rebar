@@ -47,16 +47,17 @@ class RequiresAuthenticationNotice extends React.Component<{
 
     return (
       <ResponsiveContentArea>
-        <CompositeCardHeader
-          icon={<IconShieldKeyOutline htmlColor="#003c78" />}
-          subTitle=""
-          title="Please log in"
-        />
+        <CompositeCardHeader icon={<IconShieldKeyOutline />} subTitle="" title="Please log in" />
 
         <Card className={classes.card}>
           <CardContent>
             <Typography paragraph>
+              <br />
               Accessing this area of the application requires you to be logged in.
+              <br />
+              <br />
+              Please use the left menu (burger icon on the top left to open, if closed) and choose{' '}
+              <strong>LOG IN</strong> to proceed.
             </Typography>
           </CardContent>
         </Card>

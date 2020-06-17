@@ -4,6 +4,9 @@ import ObjectManager from '../rb-base-server/ObjectManager'
 
 //
 
+/**
+ * Base class for image upload configuration
+ */
 export default class ImageUploadConfiguration {
   /** Detemines whether this configuration applies to the provided request */
   isProperConfiguration(req: Object): boolean {

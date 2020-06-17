@@ -102,7 +102,15 @@ declare module '@material-ui/core/Button/index' {
   declare module.exports: any;
 }
 
+declare module '@material-ui/core/Breadcrumbs' {
+  declare module.exports: any;
+}
+
 declare module '@material-ui/core/Button' {
+  declare module.exports: any;
+}
+
+declare module '@material-ui/core/Link' {
   declare module.exports: any;
 }
 
@@ -2154,6 +2162,10 @@ declare module '@material-ui/core/ListItem/MergeListContext' {
   declare module.exports: any;
 }
 
+declare module '@material-ui/core/ListItemAvatar' {
+  declare module.exports: any;
+}
+
 declare module '@material-ui/core/ListItemAvatar/index' {
   declare module.exports: any;
 }
@@ -2402,6 +2414,10 @@ declare module '@material-ui/core/Snackbar/index' {
   declare module.exports: any;
 }
 
+declare module '@material-ui/core/Snackbar' {
+  declare module.exports: any;
+}
+
 declare module '@material-ui/core/Snackbar/Snackbar' {
   declare module.exports: any;
 }
@@ -2589,6 +2605,10 @@ declare module '@material-ui/core/styles/withTheme' {
 }
 
 declare module '@material-ui/core/styles/zIndex' {
+  declare module.exports: any;
+}
+
+declare module '@material-ui/core/SvgIcon' {
   declare module.exports: any;
 }
 

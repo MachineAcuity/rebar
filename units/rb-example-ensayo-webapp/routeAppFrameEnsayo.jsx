@@ -1,9 +1,9 @@
 // @flow
 
+import Route from 'found/Route'
 import Async from 'react-code-splitting'
 import { graphql } from 'react-relay'
 import React from 'react'
-import Route from 'found/lib/Route'
 
 const EnsayoInPaceEditList = props => (
   <Async load={import( './components/EnsayoInPaceEditList' )} componentProps={props} />

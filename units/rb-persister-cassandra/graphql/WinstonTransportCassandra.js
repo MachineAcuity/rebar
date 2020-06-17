@@ -128,9 +128,7 @@ export default class WinstonTransportCassandra extends transport {
         if (req.body && req.body.__DO_NOT_INCLUDE__ !== true) {
           req_body = stringifyIfRequired(req.body)
         }
-        req_ip = stringifyIfRequired(
-          req.headers['x-real-ip'] || req.connection.remoteAddress,
-        )
+        req_ip = stringifyIfRequired(req.headers['x-real-ip'] || req.connection.remoteAddress)
       }
     } catch (ignoreErr) {
       console.error(ignoreErr)
@@ -278,12 +276,7 @@ export default class WinstonTransportCassandra extends transport {
         callback,
       )
     } catch (writeErr) {
-      console.error(
-        'Failed to write to log because ' +
-          writeErr.message +
-          '\n' +
-          writeErr.stack,
-      )
+      console.error('Failed to write to log because ' + writeErr.message + '\n' + writeErr.stack)
     }
   }
 }

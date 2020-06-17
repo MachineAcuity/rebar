@@ -3,9 +3,6 @@
 // In order to use ES7 async/await
 import 'babel-polyfill'
 
-import BrowserProtocol from 'farce/lib/BrowserProtocol'
-import createInitialFarceRouter from 'found/lib/createInitialFarceRouter'
-import createRender from 'found/lib/createRender'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -16,20 +13,28 @@ import FetcherClient from './fetcherClient'
 import { createResolver, historyMiddlewares, routeConfig } from './router'
 import { getUserToken2, setUserToken2 } from './scripts/userToken2'
 
+import BrowserProtocol from 'farce/BrowserProtocol'
+import createInitialFarceRouter from 'found/createInitialFarceRouter'
+import createRender from 'found/createRender'
+
 // Include global CSS used in all units. Will not be chunked
 import '../_configuration/rb-appbase-webapp/global.css'
 
 // Handler for error reporting
-async function rebarErrorHandler(err, err_info) {
+async function rebarErrorHandler(err: Error, err_info) {
   try {
     // Do not report errors that do not carry meaningful information
     if (typeof err === 'string') {
       if (err.trimLeft() === '') return
     } else {
-      if (err.message == null) return
-      if (typeof err.message === 'string' && err.message.trimLeft() === '') return
-      // TODO Disable react errors from client?
-      // XXX Disable react errors from client?
+      if (err.message == null) {
+        return
+      }
+
+      if (typeof err.message === 'string' && err.message.trimLeft() === '') {
+        return
+      }
+
       // if (
       //   typeof err.message === 'string' &&
       //   err.message.startsWith(
@@ -49,8 +54,6 @@ async function rebarErrorHandler(err, err_info) {
       err: { message: err.message, stack: err.stack },
       err_info,
     })
-
-    // TODO Must provide correct name to client
 
     // Send away
     const response = await fetch(host + '/client-error/report', {
@@ -113,10 +116,10 @@ const render = createRender({})
   )
   ReactDOM.hydrate(
     contentComponent,
-    // $AssureFlow
+    // $FlowIgnore
     document.getElementById('root'),
     () => {
-      // IDEA Research if removal of styles if necessary
+      // IDEA [Code Quality] Research if removal of styles if necessary
       // Previous version of react required removing of JSS styles but the new one seems to handle
       // them OK.
       // // We don't need the static css any more once we have launched our application.

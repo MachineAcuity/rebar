@@ -17,7 +17,7 @@ export default class MasterWriter {
   basePath: string
   logToConsole: boolean
   directories: Map<string, boolean>
-  // $AssureFlow
+  // $FlowIgnore
   arrPromises: Array<Promise>
 
   constructor(basePath: string, logToConsole: boolean) {
@@ -36,7 +36,7 @@ export default class MasterWriter {
         if (err.code !== 'EEXIST') {
           throw new NestedError(
             'rb-base-server MasterWriter ensureRelativePathExistsHelper: Failed',
-            err
+            err,
           )
         }
       }
@@ -57,9 +57,7 @@ export default class MasterWriter {
   async copyFile(sourceAbsolute: string, destinationRelative: string) {
     await this.ensureRelativePathExists(destinationRelative)
 
-    this.arrPromises.push(
-      fs.copyFile(sourceAbsolute, this.basePath + '/' + destinationRelative)
-    )
+    this.arrPromises.push(fs.copyFile(sourceAbsolute, this.basePath + '/' + destinationRelative))
   }
 
   async writeFile(destinationRelative: string, fileContent: string) {
@@ -70,8 +68,8 @@ export default class MasterWriter {
         this.basePath + '/' + destinationRelative,
         null,
         fileContent,
-        this.logToConsole
-      )
+        this.logToConsole,
+      ),
     )
   }
 

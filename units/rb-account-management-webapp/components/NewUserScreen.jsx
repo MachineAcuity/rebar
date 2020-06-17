@@ -139,7 +139,7 @@ class NewUserScreen extends React.Component<
     return (
       <div>
         <CompositeCardHeader
-          icon={<IconAccount htmlColor="#003c78" />}
+          icon={<IconAccount />}
           subTitle="Creating, please wait"
           title="New User"
         />
@@ -170,11 +170,7 @@ class NewUserScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconAccount htmlColor="#003c78" />}
-          subTitle="Created"
-          title="New User"
-        />
+        <CompositeCardHeader icon={<IconAccount />} subTitle="Created" title="New User" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -241,11 +237,7 @@ class NewUserScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconAccount htmlColor="#003c78" />}
-          subTitle="Create new user"
-          title="New User"
-        />
+        <CompositeCardHeader icon={<IconAccount />} subTitle="Create new user" title="New User" />
 
         <Card className={classes.card}>
           <CardContent>

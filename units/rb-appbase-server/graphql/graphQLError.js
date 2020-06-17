@@ -14,60 +14,59 @@ export const IsUserError = Symbol()
 
 // UserErrors will be sent to the user
 export class UserError extends Error {
-  // $AssureFlow
-  constructor( ...args ) {
-    super( ...args )
+  // $FlowIgnore
+  constructor(...args) {
+    super(...args)
     this.name = 'Error'
     this.message = args[0]
 
-    // $AssureFlow
+    // $FlowIgnore
     this[IsUserError] = true
 
-    Error.captureStackTrace( this, 'Error' )
+    Error.captureStackTrace(this, 'Error')
   }
 }
 
 // Modifies errors before sending to the user
-export let defaultHandler = function( err: any ) {
-  if ( err[IsUserError]) {
+export let defaultHandler = function(err: any) {
+  if (err[IsUserError]) {
     return err
   }
 
-  log( 'error', 'rb-appbase-server graphQLError', { err })
+  log('error', 'rb-appbase-server graphQLError', { err })
 
-  err.message = 'Internal Error'
-  return err
+  return new Error('GraphQL internal error')
 }
 
 // Changes the default error handler function
-export function setDefaultHandler( handlerFn: any ) {
+export function setDefaultHandler(handlerFn: any) {
   defaultHandler = handlerFn
 }
 
 // Masks graphql schemas, types or individual fields
-export function maskErrors( thing: any, fn: any = defaultHandler ) {
-  if ( thing instanceof GraphQLSchema ) {
-    maskSchema( thing, fn )
-  } else if ( thing instanceof GraphQLObjectType ) {
-    maskType( thing, fn )
+export function maskErrors(thing: any, fn: any = defaultHandler) {
+  if (thing instanceof GraphQLSchema) {
+    maskSchema(thing, fn)
+  } else if (thing instanceof GraphQLObjectType) {
+    maskType(thing, fn)
   } else {
-    maskField( thing, fn )
+    maskField(thing, fn)
   }
 }
 
-function maskField( field, fn ) {
+function maskField(field, fn) {
   const resolveFn = field.resolve
-  if ( field[Processed] || !resolveFn ) {
+  if (field[Processed] || !resolveFn) {
     return
   }
 
   field[Processed] = true
-  field.resolve = async function( ...args ) {
+  field.resolve = async function(...args) {
     try {
-      const out = resolveFn.call( this, ...args )
-      return await Promise.resolve( out )
-    } catch ( e ) {
-      throw fn( e )
+      const out = resolveFn.call(this, ...args)
+      return await Promise.resolve(out)
+    } catch (e) {
+      throw fn(e)
     }
   }
 
@@ -75,28 +74,28 @@ function maskField( field, fn ) {
   field.resolve._resolveFn = resolveFn
 }
 
-function maskType( type, fn ) {
-  if ( type[Processed] || !type.getFields ) {
+function maskType(type, fn) {
+  if (type[Processed] || !type.getFields) {
     return
   }
 
   const fields = type.getFields()
-  for ( const fieldName in fields ) {
-    if ( !Object.hasOwnProperty.call( fields, fieldName ) ) {
+  for (const fieldName in fields) {
+    if (!Object.hasOwnProperty.call(fields, fieldName)) {
       continue
     }
 
-    maskField( fields[fieldName], fn )
+    maskField(fields[fieldName], fn)
   }
 }
 
-function maskSchema( schema, fn ) {
+function maskSchema(schema, fn) {
   const types = schema.getTypeMap()
-  for ( const typeName in types ) {
-    if ( !Object.hasOwnProperty.call( types, typeName ) ) {
+  for (const typeName in types) {
+    if (!Object.hasOwnProperty.call(types, typeName)) {
       continue
     }
 
-    maskType( types[typeName], fn )
+    maskType(types[typeName], fn)
   }
 }

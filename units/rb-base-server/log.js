@@ -25,10 +25,6 @@ const logger = winston.createLogger({ transports })
 
 //
 
-export default function log(
-  level: 'error' | 'warn' | 'info',
-  message: string,
-  details: Object
-) {
+export default function log(level: 'error' | 'warn' | 'info', message: string, details: Object) {
   logger.log({ level, message, details })
 }

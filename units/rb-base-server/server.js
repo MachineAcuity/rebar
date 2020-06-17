@@ -11,7 +11,7 @@ import { name, version } from '../../package.json'
 import servers from '../_configuration/rb-base-server/servers'
 
 import log from './log'
-import { initializeObjectCache } from './ObjectCache'
+import ObjectCache from './ObjectCache'
 import ObjectManager from './ObjectManager'
 import serverHealthz from './serverHealthz'
 import serverNightlyMaintenance from './serverNightlyMaintenance'
@@ -84,7 +84,7 @@ log('info', 'rb-base-server start', {
 })
 
 // Get object cache ready
-initializeObjectCache()
+ObjectCache.initializeObjectCache()
 
 // Main router
 const server = express()

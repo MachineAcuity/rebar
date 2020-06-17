@@ -6,12 +6,21 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import Divider from '@material-ui/core/Divider'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import React from 'react'
 
+import authPassportConfiguration from '../../_configuration/rb-appbase-universal/authPassportConfiguration'
 import routeAfterLogin from '../../_configuration/rb-account-management-webapp/routeAfterLogin'
+
+import LoginDialogThirdPartyLoginButton from './LoginDialogThirdPartyLoginButton'
+
+//
+
+const arrAuthPassportConfigurationEntries = Object.entries(authPassportConfiguration)
 
 //
 
@@ -28,6 +37,14 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  thirdPartyButtonsContainer: {
+    alignItems: 'justify',
+    display: 'grid',
+    gridGap: 16,
+    gridTemplateColumns: 'auto auto',
+    justifyItems: 'center',
+    padding: 16,
   },
 })
 
@@ -130,15 +147,26 @@ class LoginDialog extends React.Component<
     })
   }
 
+  renderThirdPartyLogin(party) {}
+
   renderChallenge() {
     const { classes, open } = this.props
     const { UserAccount_Identifier, User_Secret } = this.state
 
     return (
-      <Dialog classes={{ paper: classes.dialogPaper }} open={open} onClose={this._handle_Close}>
+      <Dialog
+        classes={{ paper: classes.dialogPaper }}
+        open={open}
+        scroll="body"
+        onClose={this._handle_Close}
+      >
         <DialogTitle>Log In</DialogTitle>
 
+        <Divider />
         <DialogContent>
+          <Typography variant="subtitle1" gutterBottom>
+            Using user name and password:
+          </Typography>
           <TextField
             autoComplete="username"
             fullWidth={true}
@@ -165,6 +193,7 @@ class LoginDialog extends React.Component<
             }}
           />
         </DialogContent>
+
         <DialogActions>
           <Button color="primary" onClick={this._handle_onCLick_NewUser}>
             New User
@@ -175,6 +204,23 @@ class LoginDialog extends React.Component<
             Log In
           </Button>
         </DialogActions>
+
+        {arrAuthPassportConfigurationEntries.length > 0 && (
+          <div>
+            <br />
+            <Divider />
+            <DialogContent>
+              <Typography variant="subtitle1" gutterBottom>
+                Using a third party:
+              </Typography>
+              <div className={classes.thirdPartyButtonsContainer}>
+                {arrAuthPassportConfigurationEntries.map(([ party, partyDetails ]) => (
+                  <LoginDialogThirdPartyLoginButton key={party} party={party} />
+                ))}
+              </div>
+            </DialogContent>
+          </div>
+        )}
       </Dialog>
     )
   }

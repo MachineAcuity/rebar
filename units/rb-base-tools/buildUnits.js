@@ -6,10 +6,11 @@ import path from 'path'
 import prettierESLint from 'prettier-eslint'
 import sortedJSONStringify from 'sorted-json-stringify'
 
-// $AssureFlow Not sure why it gives an error. The file does exist
+// $FlowIgnore Not sure why it gives an error. The file does exist
 import eslintRC from '../../.eslintrc.json'
 import fsExists from '../rb-base-server/fsExists'
-import packageJSON from '../../package.json'
+// $FlowIgnore it is a valid path actually
+import prettierOptions from '../../.prettierrc.json'
 import buildUnits from '../_configuration/rb-base-tools/buildUnits'
 import ensureFileContent from '../rb-base-server/ensureFileContent'
 
@@ -17,7 +18,7 @@ const fs = fsWithCallbacks.promises
 
 const prettierESLintOptions = {
   eslintConfig: eslintRC,
-  prettierOptions: packageJSON.prettier
+  prettierOptions,
 }
 
 function mergeScripts(scripts1, scripts2) {
@@ -39,9 +40,7 @@ function mergeScripts(scripts1, scripts2) {
 
 async function createPackageJson(units: Array<string>) {
   const packageJsonFileName = path.resolve('./package.json')
-  const currentPackageAsJSONString = (await fs.readFile(
-    packageJsonFileName
-  )).toString()
+  const currentPackageAsJSONString = (await fs.readFile(packageJsonFileName)).toString()
   const currentPackageAsObject = JSON.parse(currentPackageAsJSONString)
   const packageAsObject = {
     dependencies: {},
@@ -49,9 +48,9 @@ async function createPackageJson(units: Array<string>) {
     engines: {},
     husky: {},
     name: null,
-    prettier: {},
+    //prettier: {},
     scripts: {},
-    version: null
+    version: null,
   }
 
   // Make sure not to overwrite version information
@@ -60,36 +59,24 @@ async function createPackageJson(units: Array<string>) {
 
   // Add packages to object
   for (let unitName of units) {
-    const packageAsObjectName = path.resolve(
-      './units',
-      unitName,
-      'package.part.json'
-    )
+    const packageAsObjectName = path.resolve('./units', unitName, 'package.part.json')
     if (await fsExists(packageAsObjectName)) {
-      const packageToAddAsObject = JSON.parse(
-        (await fs.readFile(packageAsObjectName)).toString()
-      )
+      const packageToAddAsObject = JSON.parse((await fs.readFile(packageAsObjectName)).toString())
 
       if (packageToAddAsObject.dependencies)
-        Object.assign(
-          packageAsObject.dependencies,
-          packageToAddAsObject.dependencies
-        )
+        Object.assign(packageAsObject.dependencies, packageToAddAsObject.dependencies)
       if (packageToAddAsObject.devDependencies)
-        Object.assign(
-          packageAsObject.devDependencies,
-          packageToAddAsObject.devDependencies
-        )
+        Object.assign(packageAsObject.devDependencies, packageToAddAsObject.devDependencies)
       if (packageToAddAsObject.engines)
         Object.assign(packageAsObject.engines, packageToAddAsObject.engines)
       if (packageToAddAsObject.husky)
         Object.assign(packageAsObject.husky, packageToAddAsObject.husky)
-      if (packageToAddAsObject.prettier)
-        Object.assign(packageAsObject.prettier, packageToAddAsObject.prettier)
+      // if (packageToAddAsObject.prettier)
+      //   Object.assign(packageAsObject.prettier, packageToAddAsObject.prettier)
       if (packageToAddAsObject.scripts)
         packageAsObject.scripts = mergeScripts(
           packageAsObject.scripts,
-          packageToAddAsObject.scripts
+          packageToAddAsObject.scripts,
         )
     }
   }
@@ -98,7 +85,7 @@ async function createPackageJson(units: Array<string>) {
     packageJsonFileName,
     currentPackageAsJSONString,
     sortedJSONStringify(packageAsObject, null, 2),
-    true
+    true,
   )
 }
 
@@ -114,18 +101,15 @@ async function createMutations(units: Array<string>) {
 
         for (let mutationFileName of mutationFileNames) {
           if (mutationFileName.endsWith('.js')) {
-            const mutation = mutationFileName.substring(
-              0,
-              mutationFileName.length - 3
-            )
+            const mutation = mutationFileName.substring(0, mutationFileName.length - 3)
             mutationsImports.push(
               'import ' +
                 mutation.replace('.', '_') +
-                ' from \'../../../' +
+                " from '../../../" +
                 unitName +
                 '/graphql/mutation/' +
                 mutation +
-                '\''
+                "'",
             )
             mutationsExports.push('  ' + mutation + ',')
           }
@@ -133,17 +117,17 @@ async function createMutations(units: Array<string>) {
       }
     }
 
-  let mutations = ['// @flow', '']
+  let mutations = [ '// @flow', '' ]
   mutations = mutations.concat(mutationsImports)
-  mutations = mutations.concat(['', 'export default {'])
+  mutations = mutations.concat([ '', 'export default {' ])
   mutations = mutations.concat(mutationsExports)
-  mutations = mutations.concat(['}'])
+  mutations = mutations.concat([ '}' ])
 
   await ensureFileContent(
     path.resolve('./units/_configuration/rb-base-server/graphql/_mutations.js'),
     null,
     prettierESLint({ text: mutations.join('\r\n'), ...prettierESLintOptions }),
-    true
+    true,
   )
 }
 
@@ -158,31 +142,24 @@ async function createSchemas(units: Array<string>) {
 
         for (let objectTypeFileName of objectTypeFileNames) {
           if (objectTypeFileName.endsWith('.js')) {
-            const objectType = objectTypeFileName.substring(
-              0,
-              objectTypeFileName.length - 3
-            )
+            const objectType = objectTypeFileName.substring(0, objectTypeFileName.length - 3)
             schemasImports.push(
-              'import \'../../../' +
-                unitName +
-                '/graphql/model/' +
-                objectType +
-                '\''
+              "import '../../../" + unitName + '/graphql/model/' + objectType + "'",
             )
           }
         }
       }
     }
 
-  let schemas = ['// @flow', '']
+  let schemas = [ '// @flow', '' ]
   schemas = schemas.concat(schemasImports)
-  schemas = schemas.concat(['', 'export default true'])
+  schemas = schemas.concat([ '', 'export default true' ])
 
   await ensureFileContent(
     path.resolve('./units/_configuration/rb-base-server/graphql/_schemas.js'),
     null,
     prettierESLint({ text: schemas.join('\r\n'), ...prettierESLintOptions }),
-    true
+    true,
   )
 }
 
@@ -195,43 +172,41 @@ async function createViewerFields(units: Array<string>) {
       const viewerFieldsFileName = path.resolve(
         './units',
         unitName,
-        'graphql/type/_ViewerFields.js'
+        'graphql/type/_ViewerFields.js',
       )
       if (await fsExists(viewerFieldsFileName)) {
         const viewerFieldsImportName = unitName.replace(/-/g, '_')
         viewerFieldsImports.push(
           'import ' +
             viewerFieldsImportName +
-            ' from \'../../../' +
+            " from '../../../" +
             unitName +
-            '/graphql/type/_ViewerFields\''
+            "/graphql/type/_ViewerFields'",
         )
         viewerFieldsExports.push('  ...' + viewerFieldsImportName + ',')
       }
     }
 
-  let viewerFields = ['// @flow', '']
+  let viewerFields = [ '// @flow', '' ]
   viewerFields = viewerFields.concat(viewerFieldsImports)
-  viewerFields = viewerFields.concat(['', 'export default {'])
+  viewerFields = viewerFields.concat([ '', 'export default {' ])
   viewerFields = viewerFields.concat(viewerFieldsExports)
-  viewerFields = viewerFields.concat(['}'])
+  viewerFields = viewerFields.concat([ '}' ])
 
   await ensureFileContent(
-    path.resolve(
-      './units/_configuration/rb-base-server/graphql/_ViewerFields.js'
-    ),
+    path.resolve('./units/_configuration/rb-base-server/graphql/_ViewerFields.js'),
     null,
     prettierESLint({
       text: viewerFields.join('\r\n'),
-      ...prettierESLintOptions
+      ...prettierESLintOptions,
     }),
-    true
+    true,
   )
 }
 
 async function getUnits() {
   const units = (await fs.readdir('./units/')).filter(
-    fileName => fileName !== '.DS_Store' && fileName !== '_configuration'
+    (fileName) => fileName !== '.DS_Store' && fileName !== '_configuration',
   )
   return units
 }
@@ -244,7 +219,7 @@ async function main() {
     createViewerFields(units),
     createSchemas(units),
     createMutations(units),
-    buildUnits(units)
+    buildUnits(units),
   ]
 
   await Promise.all(taskPromises)

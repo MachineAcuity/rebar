@@ -122,11 +122,7 @@ class ChangeSecretScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconLockReset htmlColor="#003c78" />}
-          subTitle=""
-          title="Updating password"
-        />
+        <CompositeCardHeader icon={<IconLockReset />} subTitle="" title="Updating password" />
 
         <Card className={classes.card} raised={true}>
           <CardContent>
@@ -151,11 +147,7 @@ class ChangeSecretScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconLockReset htmlColor="#003c78" />}
-          subTitle=""
-          title="Password changed"
-        />
+        <CompositeCardHeader icon={<IconLockReset />} subTitle="" title="Password changed" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -179,7 +171,7 @@ class ChangeSecretScreen extends React.Component<
     return (
       <div>
         <CompositeCardHeader
-          icon={<IconLockReset htmlColor="#003c78" />}
+          icon={<IconLockReset />}
           subTitle=""
           title="Failed to update password"
         />
@@ -218,11 +210,7 @@ class ChangeSecretScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconLockReset htmlColor="#003c78" />}
-          subTitle=""
-          title="Change password"
-        />
+        <CompositeCardHeader icon={<IconLockReset />} subTitle="" title="Change password" />
 
         <Card className={classes.card}>
           <CardContent>
