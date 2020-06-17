@@ -24,15 +24,15 @@ new _graphql.GraphQLObjectType({
       type: _graphql.GraphQLBoolean,
       resolve: obj => obj.UserPermissionForObject_PermitRead },
 
+    UserPermissionForObject_PermitInsert: {
+      type: _graphql.GraphQLBoolean,
+      resolve: obj => obj.UserPermissionForObject_PermitInsert },
+
     UserPermissionForObject_PermitUpdate: {
       type: _graphql.GraphQLBoolean,
       resolve: obj => obj.UserPermissionForObject_PermitUpdate },
 
     UserPermissionForObject_PermitDelete: {
       type: _graphql.GraphQLBoolean,
-      resolve: obj => obj.UserPermissionForObject_PermitDelete },
-
-    UserPermissionForObject_PermitMiscAsJSON: {
-      type: _graphql.GraphQLString,
-      resolve: obj => obj.UserPermissionForObject_PermitMiscAsJSON } } });exports.default = _default;
+      resolve: obj => obj.UserPermissionForObject_PermitDelete } } });exports.default = _default;
 //# sourceMappingURL=UserPermissionForObjectType.js.map

@@ -43,13 +43,15 @@ const styles = theme => ({
 const reGetFileNameExtension = /(.+?)\.([^.]*$|$)/;
 
 function extractFileNameAndExtension(fileNameFull) {
-  // $AssureFlow we will get two items
+  // $FlowIgnore we will get two items
   let arrName = reGetFileNameExtension.exec(fileNameFull);
   if (!arrName) {
     arrName = [null, fileNameFull, 'jpg'];
   }
 
+  // $FlowIgnore
   const fileNamePrototype = arrName[1];
+
   let fileName = '';
   let previousNonLetter = true;
   for (let i = 0; i < fileNamePrototype.length; i++) {
@@ -71,6 +73,8 @@ function extractFileNameAndExtension(fileNameFull) {
       previousNonLetter = true;
     }
   }
+
+  if (!arrName[2]) throw new Error();
 
   const fileNameExtension = arrName[2].toLowerCase();
 
@@ -121,7 +125,7 @@ class ImageManagerUploader extends _react.default.Component
       if (filesDropped.length < 1) {
         return;
       } else if (filesDropped.length < 1) {
-        // IDEA Replace alert with Material-UI alert
+        // IDEA [User Experience Quality] Replace alert with Material-UI alert
         alert('Please choose one image');
         return;
       } else {
@@ -195,7 +199,7 @@ class ImageManagerUploader extends _react.default.Component
     };this.
 
     _handle_onUploadFailure = responseText => {
-      // IDEA Replace alert with Material-UI alert
+      // IDEA [User Experience Quality] Replace alert with Material-UI alert
       alert('Image upload failed');
 
       this.releasePreview();
@@ -221,35 +225,35 @@ class ImageManagerUploader extends _react.default.Component
     const { classes, customizeFileName, label } = this.props;
     const { fileName, fileDroppedPreview } = this.state;
 
-    return (
-      _react.default.createElement("div", null,
-      _react.default.createElement(_FormControl.default, { fullWidth: true },
-      _react.default.createElement(_InputLabel.default, null, label)),
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
+      _react.default.createElement(_FormControl.default, { fullWidth: true }, /*#__PURE__*/
+      _react.default.createElement(_InputLabel.default, null, label)), /*#__PURE__*/
 
-      _react.default.createElement("br", null),
-      _react.default.createElement("br", null),
-      _react.default.createElement("br", null),
+      _react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
 
-      _react.default.createElement("div", { className: classes.dropZone },
+      _react.default.createElement("div", { className: classes.dropZone }, /*#__PURE__*/
       _react.default.createElement("img", { alt: "Preview", className: classes.currentImage, src: fileDroppedPreview })),
 
 
-      customizeFileName && _react.default.createElement("br", null),
-      customizeFileName &&
-      _react.default.createElement(_FormControl.default, { fullWidth: true },
-      _react.default.createElement(_InputLabel.default, null, "File Name"),
-      _react.default.createElement(_Input.default, { value: fileName, onChange: this._handle_onChangeFileName })),
+      customizeFileName && /*#__PURE__*/_react.default.createElement("br", null),
+      customizeFileName && /*#__PURE__*/
+      _react.default.createElement(_FormControl.default, { fullWidth: true }, /*#__PURE__*/
+      _react.default.createElement(_InputLabel.default, null, "File Name"), /*#__PURE__*/
+      _react.default.createElement(_Input.default, { value: fileName, onChange: this._handle_onChangeFileName })), /*#__PURE__*/
 
 
 
-      _react.default.createElement(_Button.default, { className: classes.buttonProperties, onClick: this._handle_onClickUpload }, "Upload"),
+      _react.default.createElement(_Button.default, { className: classes.buttonProperties, onClick: this._handle_onClickUpload }, "Upload"), /*#__PURE__*/
 
 
-      _react.default.createElement(_Button.default, { className: classes.buttonProperties, onClick: this._handle_onClickCalcelUpload }, "Clear"),
+      _react.default.createElement(_Button.default, { className: classes.buttonProperties, onClick: this._handle_onClickCalcelUpload }, "Clear"), /*#__PURE__*/
 
 
 
-      _react.default.createElement("br", null),
+      _react.default.createElement("br", null), /*#__PURE__*/
       _react.default.createElement("br", null)));
 
 
@@ -264,7 +268,7 @@ class ImageManagerUploader extends _react.default.Component
     Object.entries(parameters).
     map(
     ([paramKey, paramValue]) =>
-    //$AssureFlow
+    //$FlowIgnore
     encodeURIComponent(paramKey) + '=' + encodeURIComponent(paramValue) + '&').
 
     join('') +
@@ -277,14 +281,14 @@ class ImageManagerUploader extends _react.default.Component
 
     console.log({ XXX: backgroundImage });
 
-    return (
-      _react.default.createElement("div", null,
-      _react.default.createElement(_FormControl.default, { fullWidth: true },
-      _react.default.createElement(_InputLabel.default, null, label)),
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
+      _react.default.createElement(_FormControl.default, { fullWidth: true }, /*#__PURE__*/
+      _react.default.createElement(_InputLabel.default, null, label)), /*#__PURE__*/
 
-      _react.default.createElement("br", null),
-      _react.default.createElement("br", null),
-      _react.default.createElement("br", null),
+      _react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
 
       _react.default.createElement(_reactDropzone.default, {
         multiple: false,
@@ -294,28 +298,28 @@ class ImageManagerUploader extends _react.default.Component
         activeClassName: classes.dzActive,
         rejectClassName: classes.dzReject },
 
-      ({ getRootProps, getInputProps }) =>
+      ({ getRootProps, getInputProps }) => /*#__PURE__*/
       _react.default.createElement("div",
       getRootProps({
         className: classes.currentImage,
         style: {
-          backgroundImage } }),
+          backgroundImage } }), /*#__PURE__*/
 
 
 
       _react.default.createElement("input", getInputProps()),
-      value !== '' && _react.default.createElement("p", null),
-      value === '' &&
-      _react.default.createElement("div", { style: { textAlign: 'center' } },
-      _react.default.createElement("br", null),
-      _react.default.createElement("br", null), "Click or drag"))),
+      value !== '' && /*#__PURE__*/_react.default.createElement("p", null),
+      value === '' && /*#__PURE__*/
+      _react.default.createElement("div", { style: { textAlign: 'center' } }, /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement("br", null), "Click or drag"))), /*#__PURE__*/
 
 
 
 
 
 
-      _react.default.createElement("br", null),
+      _react.default.createElement("br", null), /*#__PURE__*/
       _react.default.createElement("br", null)));
 
 

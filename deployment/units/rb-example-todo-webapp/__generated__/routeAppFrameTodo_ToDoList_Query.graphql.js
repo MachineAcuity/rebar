@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 57649febc186d41c2f733b86769f4019
- */
+
+
+
 
 /* eslint-disable */
 
@@ -71,10 +70,10 @@
 const node /*: ConcreteRequest*/ = function () {
   var v0 = [
   {
+    "defaultValue": null,
     "kind": "LocalArgument",
     "name": "status",
-    "type": "String!",
-    "defaultValue": null }],
+    "type": "String!" }],
 
 
   v1 = [
@@ -90,180 +89,181 @@ const node /*: ConcreteRequest*/ = function () {
 
 
   v2 = {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "id",
     "args": null,
+    "kind": "ScalarField",
+    "name": "id",
     "storageKey": null };
 
   return {
-    "kind": "Request",
     "fragment": {
-      "kind": "Fragment",
-      "name": "routeAppFrameTodo_ToDoList_Query",
-      "type": "Query",
-      "metadata": null,
       "argumentDefinitions": v0 /*: any*/,
+      "kind": "Fragment",
+      "metadata": null,
+      "name": "routeAppFrameTodo_ToDoList_Query",
       "selections": [
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "Viewer",
-        "storageKey": null,
         "args": null,
         "concreteType": "Viewer",
+        "kind": "LinkedField",
+        "name": "Viewer",
         "plural": false,
         "selections": [
         {
+          "args": null,
           "kind": "FragmentSpread",
-          "name": "ToDoList_Viewer",
-          "args": null }] }] },
+          "name": "ToDoList_Viewer" }],
 
 
+        "storageKey": null }],
 
 
+      "type": "Query" },
 
+    "kind": "Request",
     "operation": {
+      "argumentDefinitions": v0 /*: any*/,
       "kind": "Operation",
       "name": "routeAppFrameTodo_ToDoList_Query",
-      "argumentDefinitions": v0 /*: any*/,
       "selections": [
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "Viewer",
-        "storageKey": null,
         "args": null,
         "concreteType": "Viewer",
+        "kind": "LinkedField",
+        "name": "Viewer",
         "plural": false,
         "selections": [
         {
-          "kind": "LinkedField",
           "alias": null,
-          "name": "ToDos",
-          "storageKey": null,
           "args": v1 /*: any*/,
           "concreteType": "ToDosConnection",
+          "kind": "LinkedField",
+          "name": "ToDos",
           "plural": false,
           "selections": [
           {
-            "kind": "LinkedField",
             "alias": null,
-            "name": "edges",
-            "storageKey": null,
             "args": null,
             "concreteType": "ToDosEdge",
+            "kind": "LinkedField",
+            "name": "edges",
             "plural": true,
             "selections": [
             {
-              "kind": "LinkedField",
               "alias": null,
-              "name": "node",
-              "storageKey": null,
               "args": null,
               "concreteType": "ToDo",
+              "kind": "LinkedField",
+              "name": "node",
               "plural": false,
               "selections": [
               v2 /*: any*/,
               {
-                "kind": "ScalarField",
                 "alias": null,
+                "args": null,
+                "kind": "ScalarField",
                 "name": "ToDo_Complete",
-                "args": null,
                 "storageKey": null },
 
               {
-                "kind": "ScalarField",
                 "alias": null,
+                "args": null,
+                "kind": "ScalarField",
                 "name": "ToDo_Text",
-                "args": null,
                 "storageKey": null },
 
               {
-                "kind": "ScalarField",
                 "alias": null,
-                "name": "__typename",
                 "args": null,
-                "storageKey": null }] },
+                "kind": "ScalarField",
+                "name": "__typename",
+                "storageKey": null }],
 
 
-
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "cursor",
-              "args": null,
-              "storageKey": null }] },
-
-
-
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "pageInfo",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "PageInfo",
-            "plural": false,
-            "selections": [
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "endCursor",
-              "args": null,
               "storageKey": null },
 
             {
-              "kind": "ScalarField",
               "alias": null,
-              "name": "hasNextPage",
               "args": null,
-              "storageKey": null }] }] },
+              "kind": "ScalarField",
+              "name": "cursor",
+              "storageKey": null }],
 
 
+            "storageKey": null },
+
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "PageInfo",
+            "kind": "LinkedField",
+            "name": "pageInfo",
+            "plural": false,
+            "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "endCursor",
+              "storageKey": null },
+
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "hasNextPage",
+              "storageKey": null }],
 
 
-
-        {
-          "kind": "LinkedHandle",
-          "alias": null,
-          "name": "ToDos",
-          "args": v1 /*: any*/,
-          "handle": "connection",
-          "key": "ToDoList_ToDos",
-          "filters": [
-          "status"] },
+            "storageKey": null }],
 
 
-        v2 /*: any*/,
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "ToDo_TotalCount",
-          "args": null,
           "storageKey": null },
 
         {
-          "kind": "ScalarField",
           "alias": null,
-          "name": "ToDo_CompletedCount",
+          "args": v1 /*: any*/,
+          "filters": [
+          "status"],
+
+          "handle": "connection",
+          "key": "ToDoList_ToDos",
+          "kind": "LinkedHandle",
+          "name": "ToDos" },
+
+        v2 /*: any*/,
+        {
+          "alias": null,
           "args": null,
-          "storageKey": null }] }] },
+          "kind": "ScalarField",
+          "name": "ToDo_TotalCount",
+          "storageKey": null },
+
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "ToDo_CompletedCount",
+          "storageKey": null }],
 
 
+        "storageKey": null }] },
 
 
 
     "params": {
-      "operationKind": "query",
-      "name": "routeAppFrameTodo_ToDoList_Query",
       "id": null,
-      "text": "query routeAppFrameTodo_ToDoList_Query(\n  $status: String!\n) {\n  Viewer {\n    ...ToDoList_Viewer\n    id\n  }\n}\n\nfragment ToDoItem_ToDo on ToDo {\n  id\n  ToDo_Complete\n  ToDo_Text\n}\n\nfragment ToDoItem_Viewer on Viewer {\n  id\n}\n\nfragment ToDoList_Viewer on Viewer {\n  ToDos(status: $status, first: 2147483647) {\n    edges {\n      node {\n        id\n        ToDo_Complete\n        ...ToDoItem_ToDo\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n  ToDo_TotalCount\n  ToDo_CompletedCount\n  ...ToDoItem_Viewer\n}\n",
-      "metadata": {} } };
+      "metadata": {},
+      "name": "routeAppFrameTodo_ToDoList_Query",
+      "operationKind": "query",
+      "text": "query routeAppFrameTodo_ToDoList_Query(\n  $status: String!\n) {\n  Viewer {\n    ...ToDoList_Viewer\n    id\n  }\n}\n\nfragment ToDoItem_ToDo on ToDo {\n  id\n  ToDo_Complete\n  ToDo_Text\n}\n\nfragment ToDoItem_Viewer on Viewer {\n  id\n}\n\nfragment ToDoList_Viewer on Viewer {\n  ToDos(status: $status, first: 2147483647) {\n    edges {\n      node {\n        id\n        ToDo_Complete\n        ...ToDoItem_ToDo\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n  ToDo_TotalCount\n  ToDo_CompletedCount\n  ...ToDoItem_Viewer\n}\n" } };
 
 
 }();
 // prettier-ignore
 node /*: any*/.hash = 'b3982d9527957360d56deccda064f888';
+
 module.exports = node;
 //# sourceMappingURL=routeAppFrameTodo_ToDoList_Query.graphql.js.map

@@ -45,18 +45,19 @@ class RequiresAuthenticationNotice extends _react.default.Component
   render() {
     const { classes } = this.props;
 
-    return (
-      _react.default.createElement(_ResponsiveContentArea.default, null,
-      _react.default.createElement(_CompositeCardHeader.default, {
-        icon: _react.default.createElement(_ShieldKeyOutline.default, { htmlColor: "#003c78" }),
-        subTitle: "",
-        title: "Please log in" }),
+    return /*#__PURE__*/(
+      _react.default.createElement(_ResponsiveContentArea.default, null, /*#__PURE__*/
+      _react.default.createElement(_CompositeCardHeader.default, { icon: /*#__PURE__*/_react.default.createElement(_ShieldKeyOutline.default, null), subTitle: "", title: "Please log in" }), /*#__PURE__*/
 
+      _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
+      _react.default.createElement(_CardContent.default, null, /*#__PURE__*/
+      _react.default.createElement(_Typography.default, { paragraph: true }, /*#__PURE__*/
+      _react.default.createElement("br", null), "Accessing this area of the application requires you to be logged in.", /*#__PURE__*/
 
-      _react.default.createElement(_Card.default, { className: classes.card },
-      _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement(_Typography.default, { paragraph: true }, "Accessing this area of the application requires you to be logged in.")))));
-
+      _react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement("br", null), "Please use the left menu (burger icon on the top left to open, if closed) and choose",
+      ' ', /*#__PURE__*/
+      _react.default.createElement("strong", null, "LOG IN"), " to proceed.")))));
 
 
 

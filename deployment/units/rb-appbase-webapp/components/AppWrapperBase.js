@@ -46,13 +46,11 @@ class AppWrapperBase extends _react.default.Component
   createMUITheme() {return null;}render() {
     const { totalWidth, totalHeight } = this.state;
 
-    return (
-      _react.default.createElement(_reactEventListener.default, { target: "window", onResize: this.handle_onResize },
-      _react.default.createElement(_styles.ThemeProvider, { theme: this.createMUITheme() },
-      _react.default.createElement(_ViewportContext.default.Provider, { value: { totalWidth, totalHeight } },
-      _react.default.createElement(_SiteConfigurationContext.default.Provider, {
-        value: this.props.siteConfiguration },
-
+    return /*#__PURE__*/(
+      _react.default.createElement(_reactEventListener.default, { target: "window", onResize: this.handle_onResize }, /*#__PURE__*/
+      _react.default.createElement(_styles.ThemeProvider, { theme: this.createMUITheme() }, /*#__PURE__*/
+      _react.default.createElement(_ViewportContext.default.Provider, { value: { totalWidth, totalHeight } }, /*#__PURE__*/
+      _react.default.createElement(_SiteConfigurationContext.default.Provider, { value: this.props.siteConfiguration },
       this.props.children)))));
 
 

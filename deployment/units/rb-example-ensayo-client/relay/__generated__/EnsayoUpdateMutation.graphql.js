@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 9de1960560ace2c377e046324415b700
- */
+
+
+
 
 /* eslint-disable */
 
@@ -54,18 +53,15 @@
 const node /*: ConcreteRequest*/ = function () {
   var v0 = [
   {
+    "defaultValue": null,
     "kind": "LocalArgument",
     "name": "input",
-    "type": "EnsayoUpdateInput!",
-    "defaultValue": null }],
+    "type": "EnsayoUpdateInput!" }],
 
 
   v1 = [
   {
-    "kind": "LinkedField",
     "alias": null,
-    "name": "EnsayoUpdate",
-    "storageKey": null,
     "args": [
     {
       "kind": "Variable",
@@ -74,76 +70,80 @@ const node /*: ConcreteRequest*/ = function () {
 
 
     "concreteType": "EnsayoUpdatePayload",
+    "kind": "LinkedField",
+    "name": "EnsayoUpdate",
     "plural": false,
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Ensayo",
-      "storageKey": null,
       "args": null,
       "concreteType": "Ensayo",
+      "kind": "LinkedField",
+      "name": "Ensayo",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "id",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "Ensayo_Title",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "Ensayo_Description",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "Ensayo_Content",
         "args": null,
-        "storageKey": null }] }] }];
+        "kind": "ScalarField",
+        "name": "Ensayo_Content",
+        "storageKey": null }],
 
 
+      "storageKey": null }],
 
 
+    "storageKey": null }];
 
 
   return {
-    "kind": "Request",
     "fragment": {
-      "kind": "Fragment",
-      "name": "EnsayoUpdateMutation",
-      "type": "Mutation",
-      "metadata": null,
       "argumentDefinitions": v0 /*: any*/,
-      "selections": v1 /*: any*/ },
+      "kind": "Fragment",
+      "metadata": null,
+      "name": "EnsayoUpdateMutation",
+      "selections": v1 /*: any*/,
+      "type": "Mutation" },
 
+    "kind": "Request",
     "operation": {
+      "argumentDefinitions": v0 /*: any*/,
       "kind": "Operation",
       "name": "EnsayoUpdateMutation",
-      "argumentDefinitions": v0 /*: any*/,
       "selections": v1 /*: any*/ },
 
     "params": {
-      "operationKind": "mutation",
-      "name": "EnsayoUpdateMutation",
       "id": null,
-      "text": "mutation EnsayoUpdateMutation(\n  $input: EnsayoUpdateInput!\n) {\n  EnsayoUpdate(input: $input) {\n    Ensayo {\n      id\n      Ensayo_Title\n      Ensayo_Description\n      Ensayo_Content\n    }\n  }\n}\n",
-      "metadata": {} } };
+      "metadata": {},
+      "name": "EnsayoUpdateMutation",
+      "operationKind": "mutation",
+      "text": "mutation EnsayoUpdateMutation(\n  $input: EnsayoUpdateInput!\n) {\n  EnsayoUpdate(input: $input) {\n    Ensayo {\n      id\n      Ensayo_Title\n      Ensayo_Description\n      Ensayo_Content\n    }\n  }\n}\n" } };
 
 
 }();
 // prettier-ignore
 node /*: any*/.hash = '6fc4902bbb734ef3ec064c06c70a2198';
+
 module.exports = node;
 //# sourceMappingURL=EnsayoUpdateMutation.graphql.js.map

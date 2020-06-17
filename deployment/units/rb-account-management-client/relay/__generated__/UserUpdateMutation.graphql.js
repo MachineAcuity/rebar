@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 219ab1b25d23babeca9cca71cdbbe0ac
- */
+
+
+
 
 /* eslint-disable */
 
@@ -52,10 +51,10 @@
 const node /*: ConcreteRequest*/ = function () {
   var v0 = [
   {
+    "defaultValue": null,
     "kind": "LocalArgument",
     "name": "input",
-    "type": "UserUpdateInput!",
-    "defaultValue": null }],
+    "type": "UserUpdateInput!" }],
 
 
   v1 = [
@@ -66,111 +65,112 @@ const node /*: ConcreteRequest*/ = function () {
 
 
   v2 = {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "User_DisplayName",
     "args": null,
+    "kind": "ScalarField",
+    "name": "User_DisplayName",
     "storageKey": null },
 
   v3 = {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "User_PrimaryEmail",
     "args": null,
+    "kind": "ScalarField",
+    "name": "User_PrimaryEmail",
     "storageKey": null },
 
   v4 = {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "User_PrimaryPhone",
     "args": null,
+    "kind": "ScalarField",
+    "name": "User_PrimaryPhone",
     "storageKey": null };
 
   return {
-    "kind": "Request",
     "fragment": {
-      "kind": "Fragment",
-      "name": "UserUpdateMutation",
-      "type": "Mutation",
-      "metadata": null,
       "argumentDefinitions": v0 /*: any*/,
+      "kind": "Fragment",
+      "metadata": null,
+      "name": "UserUpdateMutation",
       "selections": [
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "UserUpdate",
-        "storageKey": null,
         "args": v1 /*: any*/,
         "concreteType": "UserUpdatePayload",
+        "kind": "LinkedField",
+        "name": "UserUpdate",
         "plural": false,
         "selections": [
         {
-          "kind": "LinkedField",
           "alias": null,
-          "name": "Viewer",
-          "storageKey": null,
           "args": null,
           "concreteType": "Viewer",
+          "kind": "LinkedField",
+          "name": "Viewer",
           "plural": false,
           "selections": [
           v2 /*: any*/,
           v3 /*: any*/,
-          v4 /*: any*/] }] }] },
+          v4 /*: any*/],
+
+          "storageKey": null }],
 
 
+        "storageKey": null }],
 
 
+      "type": "Mutation" },
 
-
+    "kind": "Request",
     "operation": {
+      "argumentDefinitions": v0 /*: any*/,
       "kind": "Operation",
       "name": "UserUpdateMutation",
-      "argumentDefinitions": v0 /*: any*/,
       "selections": [
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "UserUpdate",
-        "storageKey": null,
         "args": v1 /*: any*/,
         "concreteType": "UserUpdatePayload",
+        "kind": "LinkedField",
+        "name": "UserUpdate",
         "plural": false,
         "selections": [
         {
-          "kind": "LinkedField",
           "alias": null,
-          "name": "Viewer",
-          "storageKey": null,
           "args": null,
           "concreteType": "Viewer",
+          "kind": "LinkedField",
+          "name": "Viewer",
           "plural": false,
           "selections": [
           v2 /*: any*/,
           v3 /*: any*/,
           v4 /*: any*/,
           {
-            "kind": "ScalarField",
             "alias": null,
-            "name": "id",
             "args": null,
-            "storageKey": null }] }] }] },
+            "kind": "ScalarField",
+            "name": "id",
+            "storageKey": null }],
 
 
+          "storageKey": null }],
 
 
+        "storageKey": null }] },
 
 
 
     "params": {
-      "operationKind": "mutation",
-      "name": "UserUpdateMutation",
       "id": null,
-      "text": "mutation UserUpdateMutation(\n  $input: UserUpdateInput!\n) {\n  UserUpdate(input: $input) {\n    Viewer {\n      User_DisplayName\n      User_PrimaryEmail\n      User_PrimaryPhone\n      id\n    }\n  }\n}\n",
-      "metadata": {} } };
+      "metadata": {},
+      "name": "UserUpdateMutation",
+      "operationKind": "mutation",
+      "text": "mutation UserUpdateMutation(\n  $input: UserUpdateInput!\n) {\n  UserUpdate(input: $input) {\n    Viewer {\n      User_DisplayName\n      User_PrimaryEmail\n      User_PrimaryPhone\n      id\n    }\n  }\n}\n" } };
 
 
 }();
 // prettier-ignore
 node /*: any*/.hash = 'abeb70f0be768871d470d7f4f52a7e96';
+
 module.exports = node;
 //# sourceMappingURL=UserUpdateMutation.graphql.js.map

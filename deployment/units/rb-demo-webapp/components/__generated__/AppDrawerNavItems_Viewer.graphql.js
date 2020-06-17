@@ -27,27 +27,28 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "AppDrawerNavItems_Viewer",
-  "type": "Viewer",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "AppDrawerNavItems_Viewer",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "User_IsAnonymous",
     "args": null,
+    "kind": "ScalarField",
+    "name": "User_IsAnonymous",
     "storageKey": null },
 
   {
+    "args": null,
     "kind": "FragmentSpread",
-    "name": "AppDrawerAccountItem_Viewer",
-    "args": null }] };
+    "name": "AppDrawerAccountItem_Viewer" }],
 
 
+  "type": "Viewer" };
 
 // prettier-ignore
 node /*: any*/.hash = '1cb0d6078d9c9144955d3294daed7f6c';
+
 module.exports = node;
 //# sourceMappingURL=AppDrawerNavItems_Viewer.graphql.js.map

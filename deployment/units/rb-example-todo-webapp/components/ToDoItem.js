@@ -94,19 +94,19 @@ class ToDoItem extends _react.default.Component
   render() {
     const { ToDo_Complete, ToDo_Text } = this.props.ToDo;
 
-    return (
-      _react.default.createElement("div", null,
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
       _react.default.createElement(_ListItem.default, {
         button: true,
         "aria-haspopup": "true",
         "aria-controls": "lock-menu",
-        onClick: event => this._handle_onClickCheckbox(event, !ToDo_Complete) },
+        onClick: event => this._handle_onClickCheckbox(event, !ToDo_Complete) }, /*#__PURE__*/
 
-      _react.default.createElement(_Checkbox.default, { checked: ToDo_Complete }),
-      _react.default.createElement(_ListItemText.default, { primary: ToDo_Text }),
-      _react.default.createElement(_ListItemSecondaryAction.default, null,
-      _react.default.createElement(_IconButton.default, { onClick: this.handleClickListItem },
-      _react.default.createElement(_DotsVertical.default, null)))),
+      _react.default.createElement(_Checkbox.default, { checked: ToDo_Complete }), /*#__PURE__*/
+      _react.default.createElement(_ListItemText.default, { primary: ToDo_Text }), /*#__PURE__*/
+      _react.default.createElement(_ListItemSecondaryAction.default, null, /*#__PURE__*/
+      _react.default.createElement(_IconButton.default, { onClick: this.handleClickListItem }, /*#__PURE__*/
+      _react.default.createElement(_DotsVertical.default, null)))), /*#__PURE__*/
 
 
 
@@ -114,17 +114,17 @@ class ToDoItem extends _react.default.Component
         id: "lock-menu",
         anchorEl: this.state.anchorEl,
         open: this.state.menuIsOpen,
-        onClose: this.handleRequestClose },
+        onClose: this.handleRequestClose }, /*#__PURE__*/
 
       _react.default.createElement(_MenuItem.default, {
         key: "edit",
-        onClick: event => this._handle_Menu_onClick_Edit(event) }, "Edit"),
+        onClick: event => this._handle_Menu_onClick_Edit(event) }, "Edit"), /*#__PURE__*/
 
 
 
       _react.default.createElement(_MenuItem.default, {
         key: "delete",
-        onClick: event => this._handle_Menu_onClick_Delete(event) }, "Delete")),
+        onClick: event => this._handle_Menu_onClick_Delete(event) }, "Delete")), /*#__PURE__*/
 
 
 

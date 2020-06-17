@@ -14,9 +14,9 @@ class NavMenuItemWithIcon extends _react.default.Component
 
 {
   render() {
-    return (
-      _react.default.createElement(_ListItem.default, { button: true, onClick: this.props.onClick },
-      _react.default.createElement(_ListItemIcon.default, null, this.props.icon),
+    return /*#__PURE__*/(
+      _react.default.createElement(_ListItem.default, { button: true, onClick: this.props.onClick }, /*#__PURE__*/
+      _react.default.createElement(_ListItemIcon.default, null, this.props.icon), /*#__PURE__*/
       _react.default.createElement(_ListItemText.default, { primary: this.props.label })));
 
 

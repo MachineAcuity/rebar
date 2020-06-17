@@ -9,7 +9,7 @@ class UserAccount {
 
 
 
-  // UserName, Social account
+  // Secret / Passport
 
 
 

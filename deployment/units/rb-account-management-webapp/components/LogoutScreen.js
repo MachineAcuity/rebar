@@ -106,24 +106,20 @@ class LogoutScreen extends _react.default.Component
   renderCreating() {
     const { classes } = this.props;
 
-    return (
-      _react.default.createElement("div", null,
-      _react.default.createElement(_CompositeCardHeader.default, {
-        icon: _react.default.createElement(_Logout.default, { htmlColor: "#003c78" }),
-        subTitle: "",
-        title: "Log Out" }),
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
+      _react.default.createElement(_CompositeCardHeader.default, { icon: /*#__PURE__*/_react.default.createElement(_Logout.default, null), subTitle: "", title: "Log Out" }), /*#__PURE__*/
+
+      _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement(_Alert.default, { variant: "outlined", severity: "info" }, "Logging out. Please wait ..."), /*#__PURE__*/
 
 
-      _react.default.createElement(_Card.default, { className: classes.card },
-      _react.default.createElement("br", null),
-      _react.default.createElement(_Alert.default, { variant: "outlined", severity: "info" }, "Logging out. Please wait ..."),
+      _react.default.createElement(_CardContent.default, null, /*#__PURE__*/
+      _react.default.createElement("br", null), " ", /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement(_LinearProgress.default, { mode: "query" })), /*#__PURE__*/
 
-
-      _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement("br", null), " ", _react.default.createElement("br", null),
-      _react.default.createElement(_LinearProgress.default, { mode: "query" })),
-
-      _react.default.createElement(_CardActions.default, null,
+      _react.default.createElement(_CardActions.default, null, /*#__PURE__*/
       _react.default.createElement(_Button.default, { onClick: this._handle_onClick_CancelLogout }, "Cancel")))));
 
 
@@ -134,22 +130,18 @@ class LogoutScreen extends _react.default.Component
   renderSuccess() {
     const { classes } = this.props;
 
-    return (
-      _react.default.createElement("div", null,
-      _react.default.createElement(_CompositeCardHeader.default, {
-        icon: _react.default.createElement(_Logout.default, { htmlColor: "#003c78" }),
-        subTitle: "",
-        title: "Log Out" }),
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
+      _react.default.createElement(_CompositeCardHeader.default, { icon: /*#__PURE__*/_react.default.createElement(_Logout.default, null), subTitle: "", title: "Log Out" }), /*#__PURE__*/
 
-
-      _react.default.createElement(_Card.default, { className: classes.card },
-      _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement("br", null),
+      _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
+      _react.default.createElement(_CardContent.default, null, /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
       _react.default.createElement(_Alert.default, { variant: "outlined", severity: "success" }, "You have been logged out.",
-      ' ')),
+      ' ')), /*#__PURE__*/
 
 
-      _react.default.createElement(_CardActions.default, null,
+      _react.default.createElement(_CardActions.default, null, /*#__PURE__*/
       _react.default.createElement(_Button.default, { onClick: this._handle_onClick_Continue }, "Continue")))));
 
 
@@ -161,22 +153,18 @@ class LogoutScreen extends _react.default.Component
     const { classes } = this.props;
     const { errorMessage } = this.state;
 
-    return (
-      _react.default.createElement("div", null,
-      _react.default.createElement(_CompositeCardHeader.default, {
-        icon: _react.default.createElement(_Logout.default, { htmlColor: "#003c78" }),
-        subTitle: "",
-        title: "Log Out" }),
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
+      _react.default.createElement(_CompositeCardHeader.default, { icon: /*#__PURE__*/_react.default.createElement(_Logout.default, null), subTitle: "", title: "Log Out" }), /*#__PURE__*/
 
-
-      _react.default.createElement(_Card.default, { className: classes.card },
-      _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement("br", null),
+      _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
+      _react.default.createElement(_CardContent.default, null, /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
       _react.default.createElement(_Alert.default, { variant: "outlined", severity: "error" }, "Failed logging out because: ",
-      errorMessage, "!")),
+      errorMessage, "!")), /*#__PURE__*/
 
 
-      _react.default.createElement(_CardActions.default, null,
+      _react.default.createElement(_CardActions.default, null, /*#__PURE__*/
       _react.default.createElement(_Button.default, { onClick: this._handle_onClick_TryAgain }, "Try Again")))));
 
 
@@ -187,22 +175,18 @@ class LogoutScreen extends _react.default.Component
   renderPrompt() {
     const { classes } = this.props;
 
-    return (
-      _react.default.createElement("div", null,
-      _react.default.createElement(_CompositeCardHeader.default, {
-        icon: _react.default.createElement(_Logout.default, { htmlColor: "#003c78" }),
-        subTitle: "",
-        title: "Log Out" }),
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
+      _react.default.createElement(_CompositeCardHeader.default, { icon: /*#__PURE__*/_react.default.createElement(_Logout.default, null), subTitle: "", title: "Log Out" }), /*#__PURE__*/
 
-
-      _react.default.createElement(_Card.default, { className: classes.card },
-      _react.default.createElement(_CardContent.default, null,
-      _react.default.createElement("br", null),
-      _react.default.createElement(_Typography.default, { component: "h6" }, "You are currently logged in. Are you sure you want to log out?")),
+      _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
+      _react.default.createElement(_CardContent.default, null, /*#__PURE__*/
+      _react.default.createElement("br", null), /*#__PURE__*/
+      _react.default.createElement(_Typography.default, { component: "h6" }, "You are currently logged in. Are you sure you want to log out?")), /*#__PURE__*/
 
 
 
-      _react.default.createElement(_CardActions.default, null,
+      _react.default.createElement(_CardActions.default, null, /*#__PURE__*/
       _react.default.createElement(_Button.default, { onClick: this._handle_onClick_Logout }, "Yes, Log Out")))));
 
 
@@ -213,7 +197,7 @@ class LogoutScreen extends _react.default.Component
   render() {
     const { currentOperation } = this.state;
 
-    return (
+    return /*#__PURE__*/(
       _react.default.createElement(_ResponsiveContentArea.default, null,
       currentOperation === 'confirm' && this.renderPrompt(),
       currentOperation === 'logging out' && this.renderCreating(),

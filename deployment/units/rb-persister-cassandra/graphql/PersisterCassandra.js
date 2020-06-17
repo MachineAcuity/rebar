@@ -270,9 +270,9 @@ class PersisterCassandra {
     this.tableSchemas = null; // Free up the memory that is not needed any more and indicate that we can not add any more
 
     const arrSchemas = [];
-    // $AssureFlow enrolledTables should be populated here
+    // $FlowIgnore enrolledTables should be populated here
     for (let tableName of enrolledTables.keys()) {
-      // $AssureFlow enrolledTables should be populated here
+      // $FlowIgnore enrolledTables should be populated here
       arrSchemas.push([tableName, enrolledTables.get(tableName)]);
     }
     this.loadOneTableSchemaFromArray(arrSchemas, runAsPartOfSetupDatabase, cb);

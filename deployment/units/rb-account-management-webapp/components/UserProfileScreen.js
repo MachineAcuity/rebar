@@ -97,27 +97,27 @@ class UserProfileScreen extends _react.default.Component
   render() {
     const { classes, Viewer } = this.props;
 
-    if (Viewer.User_IsAnonymous) return _react.default.createElement(_RequiresAuthentication.default, null);
+    if (Viewer.User_IsAnonymous) return /*#__PURE__*/_react.default.createElement(_RequiresAuthentication.default, null);
 
     const { imageURL, User_DisplayName, User_PrimaryEmail, User_PrimaryPhone } = this.state;
 
-    return (
-      _react.default.createElement(_ResponsiveContentArea.default, null,
+    return /*#__PURE__*/(
+      _react.default.createElement(_ResponsiveContentArea.default, null, /*#__PURE__*/
       _react.default.createElement(_CompositeCardHeader.default, {
-        icon: _react.default.createElement(_AccountSettings.default, { htmlColor: "#003c78" }),
+        icon: /*#__PURE__*/_react.default.createElement(_AccountSettings.default, null),
         subTitle: "Profile & settings",
-        title: "User" }),
+        title: "User" }), /*#__PURE__*/
 
 
-      _react.default.createElement(_Card.default, { className: classes.card },
-      _react.default.createElement(_CardContent.default, null,
+      _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
+      _react.default.createElement(_CardContent.default, null, /*#__PURE__*/
       _react.default.createElement(_ImageManagerUploader.default, {
         label: "Profile photo",
         parameters: { isUserProfilePhoto: 'true' },
         value: imageURL,
         onChange: value => {
           this.setState({ imageURL: value });
-        } }),
+        } }), /*#__PURE__*/
 
 
       _react.default.createElement(_TextField.default, {
@@ -127,7 +127,7 @@ class UserProfileScreen extends _react.default.Component
         margin: "normal",
         value: User_DisplayName,
         variant: "outlined",
-        onChange: this._handle_onChange_DisplayName }),
+        onChange: this._handle_onChange_DisplayName }), /*#__PURE__*/
 
 
       _react.default.createElement(_TextField.default, {
@@ -137,7 +137,7 @@ class UserProfileScreen extends _react.default.Component
         margin: "normal",
         value: User_PrimaryEmail,
         variant: "outlined",
-        onChange: this._handle_onChange_PrimaryEmail }),
+        onChange: this._handle_onChange_PrimaryEmail }), /*#__PURE__*/
 
 
       _react.default.createElement(_TextField.default, {
@@ -147,12 +147,12 @@ class UserProfileScreen extends _react.default.Component
         margin: "normal",
         value: User_PrimaryPhone,
         variant: "outlined",
-        onChange: this._handle_onChange_PrimaryPhone })),
+        onChange: this._handle_onChange_PrimaryPhone })), /*#__PURE__*/
 
 
 
-      _react.default.createElement(_CardActions.default, null,
-      _react.default.createElement(_Button.default, { onClick: this._handle_onClick_Update }, "Update"),
+      _react.default.createElement(_CardActions.default, null, /*#__PURE__*/
+      _react.default.createElement(_Button.default, { onClick: this._handle_onClick_Update }, "Update"), /*#__PURE__*/
       _react.default.createElement(_Button.default, { onClick: this._handle_onClick_ChangePassword }, "Change password")))));
 
 

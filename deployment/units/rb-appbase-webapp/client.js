@@ -3,9 +3,6 @@
 
 require("babel-polyfill");
 
-var _BrowserProtocol = _interopRequireDefault(require("farce/lib/BrowserProtocol"));
-var _createInitialFarceRouter = _interopRequireDefault(require("found/lib/createInitialFarceRouter"));
-var _createRender = _interopRequireDefault(require("found/lib/createRender"));
 var _react = _interopRequireDefault(require("react"));
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
@@ -15,6 +12,10 @@ var _AppWrapper = _interopRequireDefault(require("../_configuration/rb-appbase-w
 var _fetcherClient = _interopRequireDefault(require("./fetcherClient"));
 var _router = require("./router");
 var _userToken = require("./scripts/userToken2");
+
+var _BrowserProtocol = _interopRequireDefault(require("farce/BrowserProtocol"));
+var _createInitialFarceRouter = _interopRequireDefault(require("found/createInitialFarceRouter"));
+var _createRender = _interopRequireDefault(require("found/createRender"));
 
 
 require("../_configuration/rb-appbase-webapp/global.css");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // In order to use ES7 async/await
@@ -26,10 +27,14 @@ async function rebarErrorHandler(err, err_info) {
     if (typeof err === 'string') {
       if (err.trimLeft() === '') return;
     } else {
-      if (err.message == null) return;
-      if (typeof err.message === 'string' && err.message.trimLeft() === '') return;
-      // TODO Disable react errors from client?
-      // XXX Disable react errors from client?
+      if (err.message == null) {
+        return;
+      }
+
+      if (typeof err.message === 'string' && err.message.trimLeft() === '') {
+        return;
+      }
+
       // if (
       //   typeof err.message === 'string' &&
       //   err.message.startsWith(
@@ -49,8 +54,6 @@ async function rebarErrorHandler(err, err_info) {
       err: { message: err.message, stack: err.stack },
       err_info });
 
-
-    // TODO Must provide correct name to client
 
     // Send away
     const response = await fetch(host + '/client-error/report', {
@@ -106,17 +109,17 @@ const render = (0, _createRender.default)({});
     render });
 
 
-  const contentComponent =
-  _react.default.createElement(_AppWrapper.default, { siteConfiguration: siteConfiguration, url: document.location.href },
+  const contentComponent = /*#__PURE__*/
+  _react.default.createElement(_AppWrapper.default, { siteConfiguration: siteConfiguration, url: document.location.href }, /*#__PURE__*/
   _react.default.createElement(Router, { resolver: resolver }));
 
 
   _reactDom.default.hydrate(
   contentComponent,
-  // $AssureFlow
+  // $FlowIgnore
   document.getElementById('root'),
   () => {
-    // IDEA Research if removal of styles if necessary
+    // IDEA [Code Quality] Research if removal of styles if necessary
     // Previous version of react required removing of JSS styles but the new one seems to handle
     // them OK.
     // // We don't need the static css any more once we have launched our application.

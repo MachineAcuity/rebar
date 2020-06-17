@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 29c403eeaa06015c0c6f8e3c35eab82c
- */
+
+
+
 
 /* eslint-disable */
 
@@ -59,164 +58,165 @@ const node /*: ConcreteRequest*/ = function () {
 
 
   v1 = {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "id",
     "args": null,
+    "kind": "ScalarField",
+    "name": "id",
     "storageKey": null };
 
   return {
-    "kind": "Request",
     "fragment": {
-      "kind": "Fragment",
-      "name": "routeAppFrameEnsayo_EnsayoPublicList_Query",
-      "type": "Query",
-      "metadata": null,
       "argumentDefinitions": [],
+      "kind": "Fragment",
+      "metadata": null,
+      "name": "routeAppFrameEnsayo_EnsayoPublicList_Query",
       "selections": [
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "Viewer",
-        "storageKey": null,
         "args": null,
         "concreteType": "Viewer",
+        "kind": "LinkedField",
+        "name": "Viewer",
         "plural": false,
         "selections": [
         {
+          "args": null,
           "kind": "FragmentSpread",
-          "name": "EnsayoPublicList_Viewer",
-          "args": null }] }] },
+          "name": "EnsayoPublicList_Viewer" }],
 
 
+        "storageKey": null }],
 
 
+      "type": "Query" },
 
+    "kind": "Request",
     "operation": {
+      "argumentDefinitions": [],
       "kind": "Operation",
       "name": "routeAppFrameEnsayo_EnsayoPublicList_Query",
-      "argumentDefinitions": [],
       "selections": [
       {
-        "kind": "LinkedField",
         "alias": null,
-        "name": "Viewer",
-        "storageKey": null,
         "args": null,
         "concreteType": "Viewer",
+        "kind": "LinkedField",
+        "name": "Viewer",
         "plural": false,
         "selections": [
         {
-          "kind": "LinkedField",
           "alias": null,
-          "name": "Ensayos",
-          "storageKey": "Ensayos(first:2147483647)",
           "args": v0 /*: any*/,
           "concreteType": "EnsayosConnection",
+          "kind": "LinkedField",
+          "name": "Ensayos",
           "plural": false,
           "selections": [
           {
-            "kind": "LinkedField",
             "alias": null,
-            "name": "edges",
-            "storageKey": null,
             "args": null,
             "concreteType": "EnsayosEdge",
+            "kind": "LinkedField",
+            "name": "edges",
             "plural": true,
             "selections": [
             {
-              "kind": "LinkedField",
               "alias": null,
-              "name": "node",
-              "storageKey": null,
               "args": null,
               "concreteType": "Ensayo",
+              "kind": "LinkedField",
+              "name": "node",
               "plural": false,
               "selections": [
               v1 /*: any*/,
               {
-                "kind": "ScalarField",
                 "alias": null,
+                "args": null,
+                "kind": "ScalarField",
                 "name": "Ensayo_Title",
-                "args": null,
                 "storageKey": null },
 
               {
-                "kind": "ScalarField",
                 "alias": null,
+                "args": null,
+                "kind": "ScalarField",
                 "name": "Ensayo_Description",
-                "args": null,
                 "storageKey": null },
 
               {
-                "kind": "ScalarField",
                 "alias": null,
-                "name": "__typename",
                 "args": null,
-                "storageKey": null }] },
+                "kind": "ScalarField",
+                "name": "__typename",
+                "storageKey": null }],
 
 
-
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "cursor",
-              "args": null,
-              "storageKey": null }] },
-
-
-
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "pageInfo",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "PageInfo",
-            "plural": false,
-            "selections": [
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "endCursor",
-              "args": null,
               "storageKey": null },
 
             {
-              "kind": "ScalarField",
               "alias": null,
-              "name": "hasNextPage",
               "args": null,
-              "storageKey": null }] }] },
+              "kind": "ScalarField",
+              "name": "cursor",
+              "storageKey": null }],
 
 
+            "storageKey": null },
+
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "PageInfo",
+            "kind": "LinkedField",
+            "name": "pageInfo",
+            "plural": false,
+            "selections": [
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "endCursor",
+              "storageKey": null },
+
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "hasNextPage",
+              "storageKey": null }],
 
 
+            "storageKey": null }],
+
+
+          "storageKey": "Ensayos(first:2147483647)" },
 
         {
-          "kind": "LinkedHandle",
           "alias": null,
-          "name": "Ensayos",
           "args": v0 /*: any*/,
+          "filters": null,
           "handle": "connection",
           "key": "EnsayoPublicList_Ensayos",
-          "filters": null },
+          "kind": "LinkedHandle",
+          "name": "Ensayos" },
 
-        v1 /*: any*/] }] },
+        v1 /*: any*/],
 
+        "storageKey": null }] },
 
 
 
     "params": {
-      "operationKind": "query",
-      "name": "routeAppFrameEnsayo_EnsayoPublicList_Query",
       "id": null,
-      "text": "query routeAppFrameEnsayo_EnsayoPublicList_Query {\n  Viewer {\n    ...EnsayoPublicList_Viewer\n    id\n  }\n}\n\nfragment EnsayoPublicList_Viewer on Viewer {\n  Ensayos(first: 2147483647) {\n    edges {\n      node {\n        id\n        Ensayo_Title\n        Ensayo_Description\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
-      "metadata": {} } };
+      "metadata": {},
+      "name": "routeAppFrameEnsayo_EnsayoPublicList_Query",
+      "operationKind": "query",
+      "text": "query routeAppFrameEnsayo_EnsayoPublicList_Query {\n  Viewer {\n    ...EnsayoPublicList_Viewer\n    id\n  }\n}\n\nfragment EnsayoPublicList_Viewer on Viewer {\n  Ensayos(first: 2147483647) {\n    edges {\n      node {\n        id\n        Ensayo_Title\n        Ensayo_Description\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n" } };
 
 
 }();
 // prettier-ignore
 node /*: any*/.hash = '71297ef603df148c2085eae0625e0433';
+
 module.exports = node;
 //# sourceMappingURL=routeAppFrameEnsayo_EnsayoPublicList_Query.graphql.js.map

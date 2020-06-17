@@ -6,9 +6,9 @@ function _default() {
   const interfaces = _os.default.networkInterfaces();
 
   for (let k in interfaces) {
-    // $AssureFlow it will be there
+    // $FlowIgnore it will be there
     for (let k2 in interfaces[k]) {
-      // $AssureFlow it will be there
+      // $FlowIgnore it will be there
       const address = interfaces[k][k2];
       if (address.family === 'IPv4' && !address.internal) return address.address;
     }

@@ -91,33 +91,33 @@ class NavBarAccountButton extends _react.default.Component
     const { User_IsAnonymous, User_DisplayName } = Viewer;
     const { loginDialogIsOpen, userMenuIsOpen } = this.state;
 
-    return (
-      _react.default.createElement("div", null,
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
       _react.default.createElement(_IconButton.default, {
         "aria-haspopup": "true",
         component: "div",
         onClick: User_IsAnonymous ? this._handle_onClick_Login : this._handle_onClick_UserMenu,
         color: "inherit" },
 
-      User_IsAnonymous ? _react.default.createElement(_AccountOutline.default, null) : _react.default.createElement(_Account.default, null)),
+      User_IsAnonymous ? /*#__PURE__*/_react.default.createElement(_AccountOutline.default, null) : /*#__PURE__*/_react.default.createElement(_Account.default, null)), /*#__PURE__*/
 
 
       _react.default.createElement(_LoginDialog.default, {
         open: loginDialogIsOpen,
         handlerClose: this._handle_Login_Close,
-        handlerNewUser: this._handle_Login_NewUser }),
+        handlerNewUser: this._handle_Login_NewUser }), /*#__PURE__*/
 
 
       _react.default.createElement(_Menu.default, {
         id: "lock-menu",
         anchorEl: this.state.anchorEl,
         open: userMenuIsOpen,
-        onClose: this._handle_UserMenu_Close },
+        onClose: this._handle_UserMenu_Close }, /*#__PURE__*/
 
       _react.default.createElement(_MenuItem.default, { component: "div", key: "profile", onClick: this._handle_onClick_Profile },
-      User_DisplayName),
+      User_DisplayName), /*#__PURE__*/
 
-      _react.default.createElement(_MenuItem.default, { component: "div", key: "login", onClick: this._handle_onClick_Login }, "Change user"),
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "login", onClick: this._handle_onClick_Login }, "Change user"), /*#__PURE__*/
 
 
       _react.default.createElement(_MenuItem.default, { component: "div", key: "logout", onClick: this._handle_onClick_Logout }, "Log out"))));

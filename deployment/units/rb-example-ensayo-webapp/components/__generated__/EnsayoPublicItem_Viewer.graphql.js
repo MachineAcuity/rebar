@@ -29,10 +29,6 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "EnsayoPublicItem_Viewer",
-  "type": "Viewer",
-  "metadata": null,
   "argumentDefinitions": [
   {
     "kind": "RootArgument",
@@ -40,12 +36,12 @@ const node /*: ReaderFragment*/ = {
     "type": "ID" }],
 
 
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "EnsayoPublicItem_Viewer",
   "selections": [
   {
-    "kind": "LinkedField",
     "alias": null,
-    "name": "Ensayo",
-    "storageKey": null,
     "args": [
     {
       "kind": "Variable",
@@ -54,34 +50,39 @@ const node /*: ReaderFragment*/ = {
 
 
     "concreteType": "Ensayo",
+    "kind": "LinkedField",
+    "name": "Ensayo",
     "plural": false,
     "selections": [
     {
-      "kind": "ScalarField",
       "alias": null,
+      "args": null,
+      "kind": "ScalarField",
       "name": "Ensayo_Title",
-      "args": null,
       "storageKey": null },
 
     {
-      "kind": "ScalarField",
       "alias": null,
+      "args": null,
+      "kind": "ScalarField",
       "name": "Ensayo_Description",
-      "args": null,
       "storageKey": null },
 
     {
-      "kind": "ScalarField",
       "alias": null,
-      "name": "Ensayo_Content",
       "args": null,
-      "storageKey": null }] }] };
+      "kind": "ScalarField",
+      "name": "Ensayo_Content",
+      "storageKey": null }],
 
 
+    "storageKey": null }],
 
 
+  "type": "Viewer" };
 
 // prettier-ignore
 node /*: any*/.hash = 'c89d0591d3683ab3a528213ea89d139f';
+
 module.exports = node;
 //# sourceMappingURL=EnsayoPublicItem_Viewer.graphql.js.map

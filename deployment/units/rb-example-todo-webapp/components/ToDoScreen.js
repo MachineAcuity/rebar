@@ -64,12 +64,12 @@ class ToDoScreen extends _react.default.Component
   render() {
     const { classes } = this.props;
 
-    return (
-      _react.default.createElement(_ResponsiveContentArea.default, null,
-      _react.default.createElement(_Card.default, { className: classes.card },
+    return /*#__PURE__*/(
+      _react.default.createElement(_ResponsiveContentArea.default, null, /*#__PURE__*/
+      _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
       _react.default.createElement(_CardHeader.default, { title: "TO DOs", subheader: "List of TO DOs for user" }),
-      this.props.children,
-      _react.default.createElement("div", { style: { marginLeft: 4, marginRight: 4 } }),
+      this.props.children, /*#__PURE__*/
+      _react.default.createElement("div", { style: { marginLeft: 4, marginRight: 4 } }), /*#__PURE__*/
       _react.default.createElement(_TextField.default, {
         label: "What needs to be done?",
         value: this.state.ToDo_Text_New,
