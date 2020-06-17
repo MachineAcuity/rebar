@@ -11,7 +11,7 @@ var _package = require("../../package.json");
 var _servers = _interopRequireDefault(require("../_configuration/rb-base-server/servers"));
 
 var _log = _interopRequireDefault(require("./log"));
-var _ObjectCache = require("./ObjectCache");
+var _ObjectCache = _interopRequireDefault(require("./ObjectCache"));
 var _ObjectManager = _interopRequireDefault(require("./ObjectManager"));
 var _serverHealthz = _interopRequireDefault(require("./serverHealthz"));
 var _serverNightlyMaintenance = _interopRequireDefault(require("./serverNightlyMaintenance"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
@@ -84,7 +84,7 @@ process.on('uncaughtException', function (err) {
 
 
 // Get object cache ready
-(0, _ObjectCache.initializeObjectCache)();
+_ObjectCache.default.initializeObjectCache();
 
 // Main router
 const server = (0, _express.default)();

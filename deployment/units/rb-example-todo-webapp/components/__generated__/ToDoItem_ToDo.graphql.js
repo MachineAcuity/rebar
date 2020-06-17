@@ -27,36 +27,37 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "ToDoItem_ToDo",
-  "type": "ToDo",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "ToDoItem_ToDo",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "id",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "ToDo_Complete",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "ToDo_Text",
     "args": null,
-    "storageKey": null }] };
+    "kind": "ScalarField",
+    "name": "ToDo_Text",
+    "storageKey": null }],
 
 
+  "type": "ToDo" };
 
 // prettier-ignore
 node /*: any*/.hash = 'b4582da6b8371980f5147d0ea118c859';
+
 module.exports = node;
 //# sourceMappingURL=ToDoItem_ToDo.graphql.js.map

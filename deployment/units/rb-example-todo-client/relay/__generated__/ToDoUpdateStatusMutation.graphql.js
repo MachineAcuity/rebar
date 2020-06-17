@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash c1919329b051782e3460ef530ffed773
- */
+
+
+
 
 /* eslint-disable */
 
@@ -56,25 +55,22 @@
 const node /*: ConcreteRequest*/ = function () {
   var v0 = [
   {
+    "defaultValue": null,
     "kind": "LocalArgument",
     "name": "input",
-    "type": "ToDoUpdateStatusInput!",
-    "defaultValue": null }],
+    "type": "ToDoUpdateStatusInput!" }],
 
 
   v1 = {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "id",
     "args": null,
+    "kind": "ScalarField",
+    "name": "id",
     "storageKey": null },
 
   v2 = [
   {
-    "kind": "LinkedField",
     "alias": null,
-    "name": "ToDoUpdateStatus",
-    "storageKey": null,
     "args": [
     {
       "kind": "Variable",
@@ -83,75 +79,79 @@ const node /*: ConcreteRequest*/ = function () {
 
 
     "concreteType": "ToDoUpdateStatusPayload",
+    "kind": "LinkedField",
+    "name": "ToDoUpdateStatus",
     "plural": false,
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       v1 /*: any*/,
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "ToDo_CompletedCount",
         "args": null,
-        "storageKey": null }] },
+        "kind": "ScalarField",
+        "name": "ToDo_CompletedCount",
+        "storageKey": null }],
 
 
+      "storageKey": null },
 
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "ToDo",
-      "storageKey": null,
       "args": null,
       "concreteType": "ToDo",
+      "kind": "LinkedField",
+      "name": "ToDo",
       "plural": false,
       "selections": [
       v1 /*: any*/,
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "ToDo_Complete",
         "args": null,
-        "storageKey": null }] }] }];
+        "kind": "ScalarField",
+        "name": "ToDo_Complete",
+        "storageKey": null }],
 
 
+      "storageKey": null }],
 
 
+    "storageKey": null }];
 
 
   return {
-    "kind": "Request",
     "fragment": {
-      "kind": "Fragment",
-      "name": "ToDoUpdateStatusMutation",
-      "type": "Mutation",
-      "metadata": null,
       "argumentDefinitions": v0 /*: any*/,
-      "selections": v2 /*: any*/ },
+      "kind": "Fragment",
+      "metadata": null,
+      "name": "ToDoUpdateStatusMutation",
+      "selections": v2 /*: any*/,
+      "type": "Mutation" },
 
+    "kind": "Request",
     "operation": {
+      "argumentDefinitions": v0 /*: any*/,
       "kind": "Operation",
       "name": "ToDoUpdateStatusMutation",
-      "argumentDefinitions": v0 /*: any*/,
       "selections": v2 /*: any*/ },
 
     "params": {
-      "operationKind": "mutation",
-      "name": "ToDoUpdateStatusMutation",
       "id": null,
-      "text": "mutation ToDoUpdateStatusMutation(\n  $input: ToDoUpdateStatusInput!\n) {\n  ToDoUpdateStatus(input: $input) {\n    Viewer {\n      id\n      ToDo_CompletedCount\n    }\n    ToDo {\n      id\n      ToDo_Complete\n    }\n  }\n}\n",
-      "metadata": {} } };
+      "metadata": {},
+      "name": "ToDoUpdateStatusMutation",
+      "operationKind": "mutation",
+      "text": "mutation ToDoUpdateStatusMutation(\n  $input: ToDoUpdateStatusInput!\n) {\n  ToDoUpdateStatus(input: $input) {\n    Viewer {\n      id\n      ToDo_CompletedCount\n    }\n    ToDo {\n      id\n      ToDo_Complete\n    }\n  }\n}\n" } };
 
 
 }();
 // prettier-ignore
 node /*: any*/.hash = '05dd206726300c3f5a9866475072d101';
+
 module.exports = node;
 //# sourceMappingURL=ToDoUpdateStatusMutation.graphql.js.map

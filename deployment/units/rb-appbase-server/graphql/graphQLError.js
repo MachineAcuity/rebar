@@ -14,13 +14,13 @@ exports.Processed = Processed;const IsUserError = Symbol();
 
 // UserErrors will be sent to the user
 exports.IsUserError = IsUserError;class UserError extends Error {
-  // $AssureFlow
+  // $FlowIgnore
   constructor(...args) {
     super(...args);
     this.name = 'Error';
     this.message = args[0];
 
-    // $AssureFlow
+    // $FlowIgnore
     this[IsUserError] = true;
 
     Error.captureStackTrace(this, 'Error');
@@ -35,8 +35,7 @@ exports.UserError = UserError;let defaultHandler = function (err) {
 
   (0, _log.default)('error', 'rb-appbase-server graphQLError', { err });
 
-  err.message = 'Internal Error';
-  return err;
+  return new Error('GraphQL internal error');
 };
 
 // Changes the default error handler function

@@ -25,22 +25,23 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "EnsayoInPaceEditScreen_Viewer",
-  "type": "Viewer",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "EnsayoInPaceEditScreen_Viewer",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "id",
     "args": null,
-    "storageKey": null }] };
+    "kind": "ScalarField",
+    "name": "id",
+    "storageKey": null }],
 
 
+  "type": "Viewer" };
 
 // prettier-ignore
 node /*: any*/.hash = 'f1f409a6abe1cb35bffc9124153858ca';
+
 module.exports = node;
 //# sourceMappingURL=EnsayoInPaceEditScreen_Viewer.graphql.js.map

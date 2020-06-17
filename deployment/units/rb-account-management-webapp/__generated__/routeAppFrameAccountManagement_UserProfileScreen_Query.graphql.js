@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 4b480e74c00d1c5b216dc58e004379b1
- */
+
+
+
 
 /* eslint-disable */
 
@@ -41,94 +40,95 @@
                  */
 
 const node /*: ConcreteRequest*/ = {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "routeAppFrameAccountManagement_UserProfileScreen_Query",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": [],
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "routeAppFrameAccountManagement_UserProfileScreen_Query",
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
+        "args": null,
         "kind": "FragmentSpread",
-        "name": "UserProfileScreen_Viewer",
-        "args": null }] }] },
+        "name": "UserProfileScreen_Viewer" }],
 
 
+      "storageKey": null }],
 
 
+    "type": "Query" },
 
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "routeAppFrameAccountManagement_UserProfileScreen_Query",
-    "argumentDefinitions": [],
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "id",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "User_IsAnonymous",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "User_DisplayName",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
+        "args": null,
+        "kind": "ScalarField",
         "name": "User_PrimaryEmail",
-        "args": null,
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "User_PrimaryPhone",
         "args": null,
-        "storageKey": null }] }] },
+        "kind": "ScalarField",
+        "name": "User_PrimaryPhone",
+        "storageKey": null }],
 
 
+      "storageKey": null }] },
 
 
 
   "params": {
-    "operationKind": "query",
-    "name": "routeAppFrameAccountManagement_UserProfileScreen_Query",
     "id": null,
-    "text": "query routeAppFrameAccountManagement_UserProfileScreen_Query {\n  Viewer {\n    ...UserProfileScreen_Viewer\n    id\n  }\n}\n\nfragment UserProfileScreen_Viewer on Viewer {\n  id\n  User_IsAnonymous\n  User_DisplayName\n  User_PrimaryEmail\n  User_PrimaryPhone\n}\n",
-    "metadata": {} } };
+    "metadata": {},
+    "name": "routeAppFrameAccountManagement_UserProfileScreen_Query",
+    "operationKind": "query",
+    "text": "query routeAppFrameAccountManagement_UserProfileScreen_Query {\n  Viewer {\n    ...UserProfileScreen_Viewer\n    id\n  }\n}\n\nfragment UserProfileScreen_Viewer on Viewer {\n  id\n  User_IsAnonymous\n  User_DisplayName\n  User_PrimaryEmail\n  User_PrimaryPhone\n}\n" } };
 
 
 // prettier-ignore
 node /*: any*/.hash = '86c0fd69fab10667ae14755453488393';
+
 module.exports = node;
 //# sourceMappingURL=routeAppFrameAccountManagement_UserProfileScreen_Query.graphql.js.map

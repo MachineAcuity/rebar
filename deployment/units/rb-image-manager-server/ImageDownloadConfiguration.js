@@ -4,6 +4,9 @@ var _ObjectManager = _interopRequireDefault(require("../rb-base-server/ObjectMan
 
 //
 
+/**
+ * Base class for image download configuration
+ */
 class ImageDownloadConfiguration {
   /** Detemines whether this configuration applies to the provided request */
   isProperConfiguration(req) {

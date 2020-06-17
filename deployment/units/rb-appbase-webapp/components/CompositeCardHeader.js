@@ -25,12 +25,12 @@ const styles = {
 
   cardHeaderIcon: {
     alignItems: 'center',
-    background: 'linear-gradient(20deg, #ffa000, #ffbe4d)',
+    //background: 'linear-gradient(20deg, #ffa000, #ffbe4d)',
+    background: 'linear-gradient(60deg, #105cac, #003c78)',
     borderBottomLeftRadius: 4,
     borderTopLeftRadius: 4,
-    // TODO Box Shadow on the icon of the header most probably does not need shadow on the right
     boxShadow:
-    '0 12px 20px -10px rgba(255, 128, 0, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(128, 152, 0, 0.2)',
+    '0 12px 20px -10px rgba(0, 60, 120, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 152, 128, 0.2)',
     color: '#ffffff',
     display: 'grid',
     justifyItems: 'center',
@@ -38,7 +38,7 @@ const styles = {
     width: 72 },
 
   cardHeaderSeparator: {
-    backgroundColor: '#ffffff',
+    backgroundColor: 'rgb(0, 0, 0, 0)',
     width: 1 },
 
   cardHeaderInformation: {
@@ -121,26 +121,18 @@ class CompositeCardHeader extends React.Component
   render() {
     const { classes, icon, subTitle, title } = this.props;
 
-    return (
-      React.createElement("div", { className: classes.cardHeaderRoot },
-      React.createElement("div", { className: classes.cardHeaderIcon }, icon),
-      React.createElement("div", { className: classes.cardHeaderSeparator }),
-      React.createElement("div", { className: classes.cardHeaderInformation },
-      React.createElement("div", null,
-      React.createElement(_Typography.default, {
-        className: classes.cardHeaderTitle,
-        component: "div",
-        variant: "h6" },
-
-      title)),
+    return /*#__PURE__*/(
+      React.createElement("div", { className: classes.cardHeaderRoot }, /*#__PURE__*/
+      React.createElement("div", { className: classes.cardHeaderIcon }, icon), /*#__PURE__*/
+      React.createElement("div", { className: classes.cardHeaderSeparator }), /*#__PURE__*/
+      React.createElement("div", { className: classes.cardHeaderInformation }, /*#__PURE__*/
+      React.createElement("div", null, /*#__PURE__*/
+      React.createElement(_Typography.default, { className: classes.cardHeaderTitle, component: "div", variant: "h6" },
+      title)), /*#__PURE__*/
 
 
-      React.createElement("div", null,
-      React.createElement(_Typography.default, {
-        className: classes.cardHeaderSubHeader,
-        component: "div",
-        variant: "subtitle1" },
-
+      React.createElement("div", null, /*#__PURE__*/
+      React.createElement(_Typography.default, { className: classes.cardHeaderSubHeader, component: "div", variant: "subtitle1" },
       subTitle)))));
 
 

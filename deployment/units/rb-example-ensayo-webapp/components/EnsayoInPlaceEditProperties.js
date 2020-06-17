@@ -83,38 +83,38 @@ class EnsayoInPlaceEditProperties extends _react.default.Component
     const { classes } = this.props;
     const { Ensayo_Title, Ensayo_Description } = this.state;
 
-    return (
-      _react.default.createElement("div", null,
-      _react.default.createElement(_Dialog.default, { open: true, onClose: this._handle_Close },
-      _react.default.createElement(_DialogTitle.default, null, "Ensayo"),
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
+      _react.default.createElement(_Dialog.default, { open: true, onClose: this._handle_Close }, /*#__PURE__*/
+      _react.default.createElement(_DialogTitle.default, null, "Ensayo"), /*#__PURE__*/
 
-      _react.default.createElement(_DialogContent.default, null,
+      _react.default.createElement(_DialogContent.default, null, /*#__PURE__*/
       _react.default.createElement(_TextField.default, {
         label: "Title",
         fullWidth: true,
         value: Ensayo_Title,
-        onChange: event => this.setState({ Ensayo_Title: event.target.value }) }),
+        onChange: event => this.setState({ Ensayo_Title: event.target.value }) }), /*#__PURE__*/
 
       _react.default.createElement(_TextField.default, {
         label: "Description",
         fullWidth: true,
         value: Ensayo_Description,
-        onChange: event => this.setState({ Ensayo_Description: event.target.value }) }),
+        onChange: event => this.setState({ Ensayo_Description: event.target.value }) }), /*#__PURE__*/
 
       _react.default.createElement("div", { className: classes.richTextContainer },
-      _reactRte.default == null ?
-      _react.default.createElement("div", null) :
+      _reactRte.default == null ? /*#__PURE__*/
+      _react.default.createElement("div", null) : /*#__PURE__*/
 
       _react.default.createElement(_reactRte.default, {
         value: this.state.Ensayo_Content_RTE,
-        onChange: this._handle_OnChange_RTE_Ensayo_Content }))),
+        onChange: this._handle_OnChange_RTE_Ensayo_Content }))), /*#__PURE__*/
 
 
 
 
 
-      _react.default.createElement(_DialogActions.default, null,
-      _react.default.createElement(_Button.default, { onClick: this._handle_Close }, "Cancel"),
+      _react.default.createElement(_DialogActions.default, null, /*#__PURE__*/
+      _react.default.createElement(_Button.default, { onClick: this._handle_Close }, "Cancel"), /*#__PURE__*/
       _react.default.createElement(_Button.default, { onClick: this._handle_OK, color: "primary" }, "OK")))));
 
 

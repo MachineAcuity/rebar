@@ -79,30 +79,30 @@ class EnsayoInPlaceEditItem extends _react.default.Component
     const { Ensayo_Title, Ensayo_Description, Ensayo_Content } = this.props.Ensayo;
     const { propertiesIsOpen } = this.state;
 
-    return (
-      _react.default.createElement("div", null,
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
       _react.default.createElement(_ListItem.default, {
         button: true,
         "aria-haspopup": "true",
         "aria-controls": "lock-menu",
-        onClick: this.handleClickListItem },
+        onClick: this.handleClickListItem }, /*#__PURE__*/
 
-      _react.default.createElement(_ListItemText.default, { primary: Ensayo_Title, secondary: Ensayo_Description })),
+      _react.default.createElement(_ListItemText.default, { primary: Ensayo_Title, secondary: Ensayo_Description })), /*#__PURE__*/
 
       _react.default.createElement(_Menu.default, {
         id: "lock-menu",
         anchorEl: this.state.anchorEl,
         open: this.state.menuIsOpen,
-        onClose: this.handleRequestClose },
+        onClose: this.handleRequestClose }, /*#__PURE__*/
 
-      _react.default.createElement(_MenuItem.default, { key: "edit", onClick: event => this._handle_Menu_onClick_Edit(event) }, "Edit"),
+      _react.default.createElement(_MenuItem.default, { key: "edit", onClick: event => this._handle_Menu_onClick_Edit(event) }, "Edit"), /*#__PURE__*/
 
 
       _react.default.createElement(_MenuItem.default, { key: "delete", onClick: event => this._handle_Menu_onClick_Delete(event) }, "Delete")),
 
 
 
-      propertiesIsOpen &&
+      propertiesIsOpen && /*#__PURE__*/
       _react.default.createElement(_EnsayoInPlaceEditProperties.default, {
         Ensayo_Title: Ensayo_Title,
         Ensayo_Description: Ensayo_Description,

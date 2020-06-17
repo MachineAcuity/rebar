@@ -12,7 +12,7 @@ var _ensureFileContent = _interopRequireDefault(require("../../../rb-base-server
 var _eslintrc = _interopRequireDefault(require("../../../../.eslintrc.json"));
 var _fsExists = _interopRequireDefault(require("../../../rb-base-server/fsExists"));
 var _package = _interopRequireDefault(require("../../../../package.json"));
-var _schema = _interopRequireDefault(require("../../../rb-appbase-server/graphql/schema"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // $AssureFlow Not sure why it gives an error. The file does exist
+var _schema = _interopRequireDefault(require("../../../rb-appbase-server/graphql/schema"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} // $FlowIgnore Not sure why it gives an error. The file does exist
 
 const fs = _fs.default.promises;
 
@@ -23,7 +23,7 @@ const prettierESLintOptions = { eslintConfig: _eslintrc.default, prettierOptions
 const reRemoveComments = new RegExp('"""[^"]*"""', 'g');
 
 async function createGraphQLSchema(units) {
-  const result = await (0, _graphql.graphql)(_schema.default, _utilities.introspectionQuery);
+  const result = await (0, _graphql.graphql)(_schema.default, (0, _utilities.getIntrospectionQuery)());
   if (result.errors)
   throw new Error('Failed introspecting schema: ' + JSON.stringify(result.errors, null, 2));
 
@@ -74,13 +74,13 @@ async function createRoutes(units) {
         if (routeFileName.startsWith('routeAppFrame')) {
           const route = routeFileName.substring(0, routeFileName.length - 4);
           routesAppFrameImports.push(
-          'import ' + route + ' from \'../../' + unitName + '/' + route + '\'');
+          'import ' + route + " from '../../" + unitName + '/' + route + "'");
 
           routesAppFrameExports.push('  ' + route + ',');
         } else if (routeFileName.startsWith('routeRoot')) {
           const route = routeFileName.substring(0, routeFileName.length - 4);
           routesRootImports.push(
-          'import ' + route + ' from \'../../' + unitName + '/' + route + '\'');
+          'import ' + route + " from '../../" + unitName + '/' + route + "'");
 
           routesRootExports.push('  ' + route + ',');
         }

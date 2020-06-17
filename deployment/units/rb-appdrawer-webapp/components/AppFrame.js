@@ -14,6 +14,7 @@ var _reactRelay = require("react-relay");
 
 var _AppDrawerNavItems = _interopRequireDefault(require("../../_configuration/rb-appdrawer-webapp/AppDrawerNavItems"));
 var _NavBarDefaultTitle = _interopRequireDefault(require("../../_configuration/rb-appdrawer-webapp/NavBarDefaultTitle"));
+var _ViewportContext = _interopRequireDefault(require("../../rb-appbase-webapp/components/ViewportContext"));
 
 var _AppFrameContext = _interopRequireDefault(require("./AppFrameContext"));var _AppFrame_Viewer;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
@@ -70,6 +71,10 @@ const styles = theme => ({
       marginTop: 12 } },
 
 
+  contentContainerWithPermanentDrawer: {
+    marginLeft: drawerWidth,
+    width: '100%' },
+
   drawerPaper: {
     position: 'relative',
     height: '100%',
@@ -122,30 +127,50 @@ class AppFrame extends _react.default.Component
     const { children, classes, Viewer } = this.props;
     const { drawerIsOpen, title } = this.state;
 
-    return (
-      _react.default.createElement("div", { className: classes.root },
-      _react.default.createElement(_reactHelmet.Helmet, null,
-      _react.default.createElement("title", null, title)),
+    return /*#__PURE__*/(
+      _react.default.createElement("div", { className: classes.root }, /*#__PURE__*/
+      _react.default.createElement(_reactHelmet.Helmet, null, /*#__PURE__*/
+      _react.default.createElement("title", null, title)), /*#__PURE__*/
 
 
-      _react.default.createElement("div", { className: classes.appFrame },
-      _react.default.createElement(_Fab.default, {
-        "aria-label": "open drawer",
-        className: classes.menuButton,
-        color: "primary",
-        size: "small",
-        onClick: this._handle_Drawer_Open },
+      _react.default.createElement(_ViewportContext.default.Consumer, null,
+      ({ totalWidth }) => {
+        const bPermanentDrawer = totalWidth > 1300 + drawerWidth;
 
-      _react.default.createElement(_Menu.default, null)),
+        const chilrenContained = bPermanentDrawer ? /*#__PURE__*/
+        _react.default.createElement("div", { className: classes.contentContainerWithPermanentDrawer }, children) :
 
-
-      _react.default.createElement(_Drawer.default, { open: drawerIsOpen, onClose: this._handle_Drawer_Close },
-      _react.default.createElement(_AppDrawerNavItems.default, { Viewer: Viewer, onClick: this._handle_GoTo })),
+        children;
 
 
-      _react.default.createElement(_AppFrameContext.default.Provider, { value: { setTitle, clearTitle } },
-      children))));
+        return /*#__PURE__*/(
+          _react.default.createElement("div", { className: classes.appFrame },
+          !bPermanentDrawer && /*#__PURE__*/
+          _react.default.createElement(_Fab.default, {
+            "aria-label": "open drawer",
+            className: classes.menuButton,
+            color: "primary",
+            size: "small",
+            onClick: this._handle_Drawer_Open }, /*#__PURE__*/
 
+          _react.default.createElement(_Menu.default, { htmlColor: "#ffc400" })), /*#__PURE__*/
+
+
+
+          _react.default.createElement(_Drawer.default, {
+            open: drawerIsOpen,
+            variant: bPermanentDrawer ? 'permanent' : 'temporary',
+            onClose: this._handle_Drawer_Close }, /*#__PURE__*/
+
+          _react.default.createElement(_AppDrawerNavItems.default, { Viewer: Viewer, onClick: this._handle_GoTo })), /*#__PURE__*/
+
+
+          _react.default.createElement(_AppFrameContext.default.Provider, { value: { setTitle, clearTitle } },
+          chilrenContained)));
+
+
+
+      })));
 
 
 

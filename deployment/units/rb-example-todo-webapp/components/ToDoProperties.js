@@ -57,20 +57,20 @@ class ToDo_Properties extends _react.default.Component
   render() {
     const { ToDo_Text } = this.state;
 
-    return (
-      _react.default.createElement("div", null,
-      _react.default.createElement(_Dialog.default, { open: this.props.open, onClose: this._handle_Close },
-      _react.default.createElement(_DialogTitle.default, null, "ToDo"),
-      _react.default.createElement(_DialogContent.default, null,
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
+      _react.default.createElement(_Dialog.default, { open: this.props.open, onClose: this._handle_Close }, /*#__PURE__*/
+      _react.default.createElement(_DialogTitle.default, null, "ToDo"), /*#__PURE__*/
+      _react.default.createElement(_DialogContent.default, null, /*#__PURE__*/
       _react.default.createElement(_TextField.default, {
         label: "To Do",
         fullWidth: true,
         value: ToDo_Text,
-        onChange: event => this.setState({ ToDo_Text: event.target.value }) })),
+        onChange: event => this.setState({ ToDo_Text: event.target.value }) })), /*#__PURE__*/
 
 
-      _react.default.createElement(_DialogActions.default, null,
-      _react.default.createElement(_Button.default, { onClick: this._handle_Close }, "Cancel"),
+      _react.default.createElement(_DialogActions.default, null, /*#__PURE__*/
+      _react.default.createElement(_Button.default, { onClick: this._handle_Close }, "Cancel"), /*#__PURE__*/
       _react.default.createElement(_Button.default, { onClick: this._handle_OK, color: "primary" }, "OK")))));
 
 

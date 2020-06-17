@@ -45,8 +45,8 @@ class ResponsiveContentArea extends _react.default.Component
   render() {
     const { classes } = this.props;
 
-    return (
-      _react.default.createElement("main", { className: classes.container },
+    return /*#__PURE__*/(
+      _react.default.createElement("main", { className: classes.container }, /*#__PURE__*/
       _react.default.createElement("div", { className: classes.content }, this.props.children)));
 
 

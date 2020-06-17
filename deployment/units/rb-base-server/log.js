@@ -25,11 +25,7 @@ const logger = _winston.default.createLogger({ transports });
 
 //
 
-function log(
-level,
-message,
-details)
-{
+function log(level, message, details) {
   logger.log({ level, message, details });
 }
 //# sourceMappingURL=log.js.map

@@ -25,22 +25,23 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "ForceLogin_Viewer",
-  "type": "Viewer",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "ForceLogin_Viewer",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "User_IsAnonymous",
     "args": null,
-    "storageKey": null }] };
+    "kind": "ScalarField",
+    "name": "User_IsAnonymous",
+    "storageKey": null }],
 
 
+  "type": "Viewer" };
 
 // prettier-ignore
 node /*: any*/.hash = 'd151b8b9bbc5ff9646c6ee42bbfda029';
+
 module.exports = node;
 //# sourceMappingURL=ForceLogin_Viewer.graphql.js.map

@@ -36,7 +36,7 @@ serverWebApp.use(async (req, res) => {
         passUserToken1ToHeaders = true;
       }
 
-      //$AssureFlow
+      //$FlowIgnore
       const content = await (0, _contentCreatorWebApp_async.default)(
       siteInformation,
       reqUrl,
@@ -57,7 +57,7 @@ serverWebApp.use(async (req, res) => {
       }
     } catch (err) {
       (0, _log.default)('error', 'rb-appbase-server serverWebApp.use : Failed', { err });
-      res.status(500).send(_server.default.renderToString(_react.default.createElement(_ErrorComponent.default, { httpStatus: 500 })));
+      res.status(500).send(_server.default.renderToString( /*#__PURE__*/_react.default.createElement(_ErrorComponent.default, { httpStatus: 500 })));
     }
   } else {
     res.status(200).send('disassociated');
