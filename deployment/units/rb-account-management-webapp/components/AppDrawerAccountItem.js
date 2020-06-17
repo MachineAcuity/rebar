@@ -86,10 +86,10 @@ class AppDrawerAccountItem extends _react.default.Component
     const { User_IsAnonymous, User_DisplayName } = Viewer;
     const { loginDialogIsOpen } = this.state;
 
-    return (
+    return /*#__PURE__*/(
       _react.default.createElement("div", { key: "appdrawer-account" },
-      User_IsAnonymous &&
-      _react.default.createElement("div", { className: classes.loginButtonContainer },
+      User_IsAnonymous && /*#__PURE__*/
+      _react.default.createElement("div", { className: classes.loginButtonContainer }, /*#__PURE__*/
       _react.default.createElement(_Button.default, {
         color: "primary",
         fullWidth: true,
@@ -102,32 +102,32 @@ class AppDrawerAccountItem extends _react.default.Component
 
 
 
-      !User_IsAnonymous &&
+      !User_IsAnonymous && /*#__PURE__*/
       _react.default.createElement(_FormControl.default, {
         fullWidth: true,
         key: "account-list",
         variant: "filled",
-        className: classes.formControl },
+        className: classes.formControl }, /*#__PURE__*/
 
-      _react.default.createElement(_InputLabel.default, { htmlFor: "user-account-select" }, "Current User"),
+      _react.default.createElement(_InputLabel.default, { htmlFor: "user-account-select" }, "Current User"), /*#__PURE__*/
       _react.default.createElement(_Select.default, {
         id: "user-account-select",
-        input: _react.default.createElement(_FilledInput.default, { name: "account" }),
+        input: /*#__PURE__*/_react.default.createElement(_FilledInput.default, { name: "account" }),
         value: "userdisplayname",
         variant: "filled",
-        onChange: this._handle_onChange_Account },
+        onChange: this._handle_onChange_Account }, /*#__PURE__*/
 
-      _react.default.createElement(_MenuItem.default, { component: "div", key: "userdisplayname", value: "userdisplayname" },
-      _react.default.createElement("em", null, User_DisplayName)),
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "userdisplayname", value: "userdisplayname" }, /*#__PURE__*/
+      _react.default.createElement("em", null, User_DisplayName)), /*#__PURE__*/
 
-      _react.default.createElement(_MenuItem.default, { component: "div", key: "profile", value: "profile" }, "Edit Profile"),
-
-
-      _react.default.createElement(_Divider.default, null),
-      _react.default.createElement(_MenuItem.default, { component: "div", key: "login", value: "login" }, "Change user"),
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "profile", value: "profile" }, "Edit Profile"), /*#__PURE__*/
 
 
-      _react.default.createElement(_MenuItem.default, { component: "div", key: "logout", value: "logout" }, "Log out"))),
+      _react.default.createElement(_Divider.default, null), /*#__PURE__*/
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "login", value: "login" }, "Change user"), /*#__PURE__*/
+
+
+      _react.default.createElement(_MenuItem.default, { component: "div", key: "logout", value: "logout" }, "Log out"))), /*#__PURE__*/
 
 
 

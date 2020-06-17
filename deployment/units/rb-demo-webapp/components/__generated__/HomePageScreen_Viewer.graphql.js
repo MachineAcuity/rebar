@@ -25,22 +25,23 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "HomePageScreen_Viewer",
-  "type": "Viewer",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "HomePageScreen_Viewer",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "id",
     "args": null,
-    "storageKey": null }] };
+    "kind": "ScalarField",
+    "name": "id",
+    "storageKey": null }],
 
 
+  "type": "Viewer" };
 
 // prettier-ignore
 node /*: any*/.hash = 'a4151d7bf6e5e81b618cd0f4579ed173';
+
 module.exports = node;
 //# sourceMappingURL=HomePageScreen_Viewer.graphql.js.map

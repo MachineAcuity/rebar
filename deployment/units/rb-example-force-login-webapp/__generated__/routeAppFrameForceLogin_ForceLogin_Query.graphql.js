@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash b10a2489b344b33f704a0b9b5c3d51fa
- */
+
+
+
 
 /* eslint-disable */
 
@@ -37,73 +36,74 @@
                  */
 
 const node /*: ConcreteRequest*/ = {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "routeAppFrameForceLogin_ForceLogin_Query",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": [],
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "routeAppFrameForceLogin_ForceLogin_Query",
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
+        "args": null,
         "kind": "FragmentSpread",
-        "name": "ForceLogin_Viewer",
-        "args": null }] }] },
+        "name": "ForceLogin_Viewer" }],
 
 
+      "storageKey": null }],
 
 
+    "type": "Query" },
 
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "routeAppFrameForceLogin_ForceLogin_Query",
-    "argumentDefinitions": [],
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "User_IsAnonymous",
         "args": null,
+        "kind": "ScalarField",
+        "name": "User_IsAnonymous",
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "id",
         "args": null,
-        "storageKey": null }] }] },
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null }],
 
 
+      "storageKey": null }] },
 
 
 
   "params": {
-    "operationKind": "query",
-    "name": "routeAppFrameForceLogin_ForceLogin_Query",
     "id": null,
-    "text": "query routeAppFrameForceLogin_ForceLogin_Query {\n  Viewer {\n    ...ForceLogin_Viewer\n    id\n  }\n}\n\nfragment ForceLogin_Viewer on Viewer {\n  User_IsAnonymous\n}\n",
-    "metadata": {} } };
+    "metadata": {},
+    "name": "routeAppFrameForceLogin_ForceLogin_Query",
+    "operationKind": "query",
+    "text": "query routeAppFrameForceLogin_ForceLogin_Query {\n  Viewer {\n    ...ForceLogin_Viewer\n    id\n  }\n}\n\nfragment ForceLogin_Viewer on Viewer {\n  User_IsAnonymous\n}\n" } };
 
 
 // prettier-ignore
 node /*: any*/.hash = 'c6caf31fca5281f05d717603162982b7';
+
 module.exports = node;
 //# sourceMappingURL=routeAppFrameForceLogin_ForceLogin_Query.graphql.js.map

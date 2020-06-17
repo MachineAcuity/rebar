@@ -1,10 +1,6 @@
 "use strict";var _template = require("../rb-base-universal/template");
 var _templateTags = require("../rb-base-universal/templateTags");
 
-
-
-
-
 test('equal arrays, condition is arr tag', () => {
   expect(
   (0, _template.matchArray)([{ word: { text: 'father' } }, { word: { text: 'mother' } }], {
@@ -59,11 +55,7 @@ test('unequal arrays, criterion is starts later, condition is arr tag, float', (
 test('unequal arrays, criterion is encased, condition is arr tag', () => {
   expect(
   (0, _template.matchArray)(
-  [
-  { word: { text: 'father' } },
-  { word: { text: 'child' } },
-  { word: { text: 'mother' } }],
-
+  [{ word: { text: 'father' } }, { word: { text: 'child' } }, { word: { text: 'mother' } }],
   { template: [{ word: { text: 'child' } }] })).
 
   toEqual({ match: false });
@@ -72,11 +64,7 @@ test('unequal arrays, criterion is encased, condition is arr tag', () => {
 test('unequal arrays, criterion is encased, condition is arr tag, float', () => {
   expect(
   (0, _template.matchArray)(
-  [
-  { word: { text: 'father' } },
-  { word: { text: 'child' } },
-  { word: { text: 'mother' } }],
-
+  [{ word: { text: 'father' } }, { word: { text: 'child' } }, { word: { text: 'mother' } }],
   { float: true, template: [{ word: { text: 'child' } }] })).
 
   toEqual({ ixStart: 1, ixStop: 1, match: true, variables: {} });
@@ -124,10 +112,7 @@ test('matching arrays, condition is arr tag, with array or', () => {
     template: [
     { word: { text: 'father' } },
     {
-      [_templateTags.templTag_arrOr]: [
-      [{ word: { text: 'mother' } }],
-      [{ word: { text: 'child' } }]] }] })).
-
+      [_templateTags.templTag_arrOr]: [[{ word: { text: 'mother' } }], [{ word: { text: 'child' } }]] }] })).
 
 
 
@@ -140,10 +125,7 @@ test('non matching arrays, condition is arr tag, with array or', () => {
     template: [
     { word: { text: 'father' } },
     {
-      [_templateTags.templTag_arrOr]: [
-      [{ word: { text: 'son' } }],
-      [{ word: { text: 'daughter' } }]] }] })).
-
+      [_templateTags.templTag_arrOr]: [[{ word: { text: 'son' } }], [{ word: { text: 'daughter' } }]] }] })).
 
 
 
@@ -153,11 +135,7 @@ test('non matching arrays, condition is arr tag, with array or', () => {
 test('matching arrays, condition is arr tag, with array or, multi-word', () => {
   expect(
   (0, _template.matchArray)(
-  [
-  { word: { text: 'father' } },
-  { word: { text: 'mother' } },
-  { word: { text: 'of' } }],
-
+  [{ word: { text: 'father' } }, { word: { text: 'mother' } }, { word: { text: 'of' } }],
   {
     template: [
     { word: { text: 'father' } },
@@ -474,10 +452,7 @@ const templateRepeatInRepeatWithOr = [
   [_templateTags.templTag_arrRep]: {
     items: [
     {
-      [_templateTags.templTag_arrOr]: [
-      [{ word: { text: 'my' } }],
-      [{ word: { text: 'our' } }]] },
-
+      [_templateTags.templTag_arrOr]: [[{ word: { text: 'my' } }], [{ word: { text: 'our' } }]] },
 
     {
       [_templateTags.templTag_arrRep]: {
@@ -495,16 +470,9 @@ const templateRepeatInRepeatWithOr = [
 
 test('Repeat in repeat with OR, just first word, match at the end', () => {
   expect(
-  (0, _template.matchArray)(
-  [
-  { word: { text: 'may' } },
-  { word: { text: 'I' } },
-  { word: { text: 'take' } }],
-
-  {
+  (0, _template.matchArray)([{ word: { text: 'may' } }, { word: { text: 'I' } }, { word: { text: 'take' } }], {
     float: true,
     template: templateRepeatInRepeatWithOr })).
-
 
   toEqual({ ixStart: 2, ixStop: 2, match: true, variables: {} });
 });
@@ -563,9 +531,9 @@ test('Repeat in repeat with OR, just first word, longest match', () => {
   toEqual({ ixStart: 2, ixStop: 4, match: true, variables: {} });
 });
 
-// TODO Make versions of the above tests with variable extraction, both true and false
+// IDEA [Project E] Make versions of the above tests with variable extraction, both true and false
 
-// TODO Implement variables in matching sub-arrays
+// IDEA [Project E] Implement variables in matching sub-arrays
 
-// TODO Repeat with OR condition
+// IDEA [Project E] Repeat with OR condition
 //# sourceMappingURL=template-matchArray.test.js.map

@@ -1,14 +1,14 @@
 // @flow
 
+import Route from 'found/Route'
 import Async from 'react-code-splitting'
 import { graphql } from 'react-relay'
 import React from 'react'
-import Route from 'found/lib/Route'
 
-const ToDoList = props => <Async load={import( './components/ToDoList' )} componentProps={props} />
+const ToDoList = (props) => <Async load={import('./components/ToDoList')} componentProps={props} />
 
-const ToDoScreen = props => (
-  <Async load={import( './components/ToDoScreen' )} componentProps={props} />
+const ToDoScreen = (props) => (
+  <Async load={import('./components/ToDoScreen')} componentProps={props} />
 )
 
 const ToDoListQuery = graphql`
@@ -35,7 +35,7 @@ export default (
     <Route
       Component={ToDoList}
       query={ToDoListQuery}
-      prepareVariables={params => ({ ...params, status: 'any' })}
+      prepareVariables={(params) => ({ ...params, status: 'any' })}
     />
     <Route path=":status" Component={ToDoList} query={ToDoListQuery} />
   </Route>

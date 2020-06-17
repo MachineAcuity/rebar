@@ -1,82 +1,40 @@
-type Ensayo implements Node {
-  #
-  id: ID!
-  Ensayo_Title: String
-  Ensayo_Description: String
-  Ensayo_Content: String
-}
-
-input EnsayoAddInput {
-  Ensayo_Title: String!
-  Ensayo_Description: String!
-  Ensayo_Content: String!
-  clientMutationId: String
-}
-
-type EnsayoAddPayload {
-  EnsayosEdge: EnsayosEdge
+type Query {
+  node(id: ID!): Node
   Viewer: Viewer
-  clientMutationId: String
-}
-
-input EnsayoDeleteInput {
-  id: ID!
-  clientMutationId: String
-}
-
-type EnsayoDeletePayload {
-  deletedId: ID
-  Viewer: Viewer
-  clientMutationId: String
-}
-
-#
-type EnsayosConnection {
-  #
-  pageInfo: PageInfo!
-
-  #
-  edges: [EnsayosEdge]
-}
-
-#
-type EnsayosEdge {
-  #
-  node: Ensayo
-
-  #
-  cursor: String!
-}
-
-input EnsayoUpdateInput {
-  id: ID!
-  Ensayo_Title: String!
-  Ensayo_Description: String!
-  Ensayo_Content: String!
-  clientMutationId: String
-}
-
-type EnsayoUpdatePayload {
-  Ensayo: Ensayo
-  clientMutationId: String
-}
-
-type Mutation {
-  UserUpdate(input: UserUpdateInput!): UserUpdatePayload
-  EnsayoAdd(input: EnsayoAddInput!): EnsayoAddPayload
-  EnsayoDelete(input: EnsayoDeleteInput!): EnsayoDeletePayload
-  EnsayoUpdate(input: EnsayoUpdateInput!): EnsayoUpdatePayload
-  ToDoAdd(input: ToDoAddInput!): ToDoAddPayload
-  ToDoDelete(input: ToDoDeleteInput!): ToDoDeletePayload
-  ToDoListUpdateMarkAll(input: ToDoListUpdateMarkAllInput!): ToDoListUpdateMarkAllPayload
-  ToDoUpdateRename(input: ToDoUpdateRenameInput!): ToDoUpdateRenamePayload
-  ToDoUpdateStatus(input: ToDoUpdateStatusInput!): ToDoUpdateStatusPayload
 }
 
 #
 interface Node {
   #
   id: ID!
+}
+
+type Viewer implements Node {
+  #
+  id: ID!
+  User_IsAnonymous: Boolean
+  UserToken2: String
+  User_DisplayName: String
+  User_PrimaryEmail: String
+  User_PrimaryPhone: String
+  UserPermissionForObjects(after: String, first: Int, before: String, last: Int, UserPermissionForObject_ObjectType: String!): UserPermissionForObjectsConnection
+  UserPermissionForObject(id: ID): UserPermissionForObject
+  UserQuotaForObjects(after: String, first: Int, before: String, last: Int): UserQuotaForObjectsConnection
+  UserQuotaForObject(id: ID): UserQuotaForObject
+  Ensayos(after: String, first: Int, before: String, last: Int): EnsayosConnection
+  Ensayo(id: ID): Ensayo
+  ToDos(status: String = "any", after: String, first: Int, before: String, last: Int): ToDosConnection
+  ToDo_TotalCount: Int
+  ToDo_CompletedCount: Int
+}
+
+#
+type UserPermissionForObjectsConnection {
+  #
+  pageInfo: PageInfo!
+
+  #
+  edges: [UserPermissionForObjectsEdge]
 }
 
 #
@@ -94,112 +52,6 @@ type PageInfo {
   endCursor: String
 }
 
-type Query {
-  node(id: ID!): Node
-  Viewer: Viewer
-}
-
-type ToDo implements Node {
-  #
-  id: ID!
-  ToDo_Text: String
-  ToDo_Complete: Boolean
-}
-
-input ToDoAddInput {
-  ToDo_Text: String!
-  clientMutationId: String
-}
-
-type ToDoAddPayload {
-  ToDosEdge: ToDosEdge
-  Viewer: Viewer
-  clientMutationId: String
-}
-
-input ToDoDeleteInput {
-  id: ID!
-  clientMutationId: String
-}
-
-type ToDoDeletePayload {
-  deletedId: ID
-  Viewer: Viewer
-  clientMutationId: String
-}
-
-input ToDoListUpdateMarkAllInput {
-  ToDo_Complete: Boolean!
-  clientMutationId: String
-}
-
-type ToDoListUpdateMarkAllPayload {
-  changedToDos: [ToDo]
-  Viewer: Viewer
-  clientMutationId: String
-}
-
-#
-type ToDosConnection {
-  #
-  pageInfo: PageInfo!
-
-  #
-  edges: [ToDosEdge]
-}
-
-#
-type ToDosEdge {
-  #
-  node: ToDo
-
-  #
-  cursor: String!
-}
-
-input ToDoUpdateRenameInput {
-  id: ID!
-  ToDo_Text: String!
-  clientMutationId: String
-}
-
-type ToDoUpdateRenamePayload {
-  ToDo: ToDo
-  clientMutationId: String
-}
-
-input ToDoUpdateStatusInput {
-  id: ID!
-  ToDo_Complete: Boolean!
-  clientMutationId: String
-}
-
-type ToDoUpdateStatusPayload {
-  ToDo: ToDo
-  Viewer: Viewer
-  clientMutationId: String
-}
-
-type UserPermissionForObject implements Node {
-  #
-  id: ID!
-  UserPermissionForObject_ObjectType: String
-  UserPermissionForObject_object_id: String
-  UserPermissionForObject_PermitRead: Boolean
-  UserPermissionForObject_PermitUpdate: Boolean
-  UserPermissionForObject_PermitDelete: Boolean
-  UserPermissionForObject_PermitMiscAsJSON: String
-}
-
-#
-type UserPermissionForObjectsConnection {
-  #
-  pageInfo: PageInfo!
-
-  #
-  edges: [UserPermissionForObjectsEdge]
-}
-
 #
 type UserPermissionForObjectsEdge {
   #
@@ -209,15 +61,15 @@ type UserPermissionForObjectsEdge {
   cursor: String!
 }
 
-type UserQuotaForObject implements Node {
+type UserPermissionForObject implements Node {
   #
   id: ID!
-  UserQuotaForObject_Name: String
-  UserQuotaForObject_MinAmount: Int
-  UserQuotaForObject_MinWarning: Int
-  UserQuotaForObject_MaxAmount: Int
-  UserQuotaForObject_MaxWarning: Int
-  UserQuotaForObject_AllowMiscAsJSON: String
+  UserPermissionForObject_ObjectType: String
+  UserPermissionForObject_object_id: String
+  UserPermissionForObject_PermitRead: Boolean
+  UserPermissionForObject_PermitInsert: Boolean
+  UserPermissionForObject_PermitUpdate: Boolean
+  UserPermissionForObject_PermitDelete: Boolean
 }
 
 #
@@ -238,11 +90,78 @@ type UserQuotaForObjectsEdge {
   cursor: String!
 }
 
-input UserUpdateInput {
-  User_DisplayName: String!
-  User_PrimaryEmail: String!
-  User_PrimaryPhone: String!
-  clientMutationId: String
+type UserQuotaForObject implements Node {
+  #
+  id: ID!
+  UserQuotaForObject_Name: String
+  UserQuotaForObject_MinAmount: Int
+  UserQuotaForObject_MinWarning: Int
+  UserQuotaForObject_MaxAmount: Int
+  UserQuotaForObject_MaxWarning: Int
+  UserQuotaForObject_AllowMiscAsJSON: String
+}
+
+#
+type EnsayosConnection {
+  #
+  pageInfo: PageInfo!
+
+  #
+  edges: [EnsayosEdge]
+}
+
+#
+type EnsayosEdge {
+  #
+  node: Ensayo
+
+  #
+  cursor: String!
+}
+
+type Ensayo implements Node {
+  #
+  id: ID!
+  Ensayo_Title: String
+  Ensayo_Description: String
+  Ensayo_Content: String
+}
+
+#
+type ToDosConnection {
+  #
+  pageInfo: PageInfo!
+
+  #
+  edges: [ToDosEdge]
+}
+
+#
+type ToDosEdge {
+  #
+  node: ToDo
+
+  #
+  cursor: String!
+}
+
+type ToDo implements Node {
+  #
+  id: ID!
+  ToDo_Text: String
+  ToDo_Complete: Boolean
+}
+
+type Mutation {
+  UserUpdate(input: UserUpdateInput!): UserUpdatePayload
+  EnsayoAdd(input: EnsayoAddInput!): EnsayoAddPayload
+  EnsayoDelete(input: EnsayoDeleteInput!): EnsayoDeletePayload
+  EnsayoUpdate(input: EnsayoUpdateInput!): EnsayoUpdatePayload
+  ToDoAdd(input: ToDoAddInput!): ToDoAddPayload
+  ToDoDelete(input: ToDoDeleteInput!): ToDoDeletePayload
+  ToDoListUpdateMarkAll(input: ToDoListUpdateMarkAllInput!): ToDoListUpdateMarkAllPayload
+  ToDoUpdateRename(input: ToDoUpdateRenameInput!): ToDoUpdateRenamePayload
+  ToDoUpdateStatus(input: ToDoUpdateStatusInput!): ToDoUpdateStatusPayload
 }
 
 type UserUpdatePayload {
@@ -250,21 +169,102 @@ type UserUpdatePayload {
   clientMutationId: String
 }
 
-type Viewer implements Node {
-  #
+input UserUpdateInput {
+  User_DisplayName: String!
+  User_PrimaryEmail: String!
+  User_PrimaryPhone: String!
+  clientMutationId: String
+}
+
+type EnsayoAddPayload {
+  EnsayosEdge: EnsayosEdge
+  Viewer: Viewer
+  clientMutationId: String
+}
+
+input EnsayoAddInput {
+  Ensayo_Title: String!
+  Ensayo_Description: String!
+  Ensayo_Content: String!
+  clientMutationId: String
+}
+
+type EnsayoDeletePayload {
+  deletedId: ID
+  Viewer: Viewer
+  clientMutationId: String
+}
+
+input EnsayoDeleteInput {
   id: ID!
-  User_IsAnonymous: Boolean
-  UserToken2: String
-  User_DisplayName: String
-  User_PrimaryEmail: String
-  User_PrimaryPhone: String
-  UserPermissionForObjects(after: String, first: Int, before: String, last: Int, UserPermissionForObject_ObjectType: String!): UserPermissionForObjectsConnection
-  UserPermissionForObject(id: ID): UserPermissionForObject
-  UserQuotaForObjects(after: String, first: Int, before: String, last: Int): UserQuotaForObjectsConnection
-  UserQuotaForObject(id: ID): UserQuotaForObject
-  Ensayos(after: String, first: Int, before: String, last: Int): EnsayosConnection
-  Ensayo(id: ID): Ensayo
-  ToDos(status: String = "any", after: String, first: Int, before: String, last: Int): ToDosConnection
-  ToDo_TotalCount: Int
-  ToDo_CompletedCount: Int
+  clientMutationId: String
+}
+
+type EnsayoUpdatePayload {
+  Ensayo: Ensayo
+  clientMutationId: String
+}
+
+input EnsayoUpdateInput {
+  id: ID!
+  Ensayo_Title: String!
+  Ensayo_Description: String!
+  Ensayo_Content: String!
+  clientMutationId: String
+}
+
+type ToDoAddPayload {
+  ToDosEdge: ToDosEdge
+  Viewer: Viewer
+  clientMutationId: String
+}
+
+input ToDoAddInput {
+  ToDo_Text: String!
+  clientMutationId: String
+}
+
+type ToDoDeletePayload {
+  deletedId: ID
+  Viewer: Viewer
+  clientMutationId: String
+}
+
+input ToDoDeleteInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type ToDoListUpdateMarkAllPayload {
+  changedToDos: [ToDo]
+  Viewer: Viewer
+  clientMutationId: String
+}
+
+input ToDoListUpdateMarkAllInput {
+  ToDo_Complete: Boolean!
+  clientMutationId: String
+}
+
+type ToDoUpdateRenamePayload {
+  ToDo: ToDo
+  clientMutationId: String
+}
+
+input ToDoUpdateRenameInput {
+  id: ID!
+  ToDo_Text: String!
+  clientMutationId: String
+}
+
+type ToDoUpdateStatusPayload {
+  ToDo: ToDo
+  Viewer: Viewer
+  clientMutationId: String
+}
+
+input ToDoUpdateStatusInput {
+  id: ID!
+  ToDo_Complete: Boolean!
+  clientMutationId: String
 }

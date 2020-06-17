@@ -21,8 +21,13 @@ class TimeStamp {
      * able to use generated time stamp for usage frequency management.
      */
   static generate(ndtOldTimeStamp) {
-    return ndtOldTimeStamp == null ?
-    ndtStampHalf :
-    (ndtOldTimeStamp + ndtStamp) / 2;
+    return ndtOldTimeStamp == null ? ndtStampHalf : (ndtOldTimeStamp + ndtStamp) / 2;
+  }
+
+  /**
+     * Last generated current time timestamp
+     */
+  static lastNdtCurrentTime() {
+    return ndtStamp;
   }}exports.default = TimeStamp;
 //# sourceMappingURL=TimeStamp.js.map

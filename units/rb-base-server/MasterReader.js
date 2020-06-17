@@ -85,9 +85,7 @@ export default class MasterReader {
         continue
       }
 
-      const stat = await fs.stat(
-        this.basePath + '/' + dir.relativePath + '/' + fileName
-      )
+      const stat = await fs.stat(this.basePath + '/' + dir.relativePath + '/' + fileName)
 
       let fileOrDirToAdd
 
@@ -96,15 +94,12 @@ export default class MasterReader {
 
         fileOrDirToAdd = file
       } else if (stat.isDirectory()) {
-        const subDir = await this.readDirectory(
-          arrRelativePath.concat(fileName)
-        )
+        const subDir = await this.readDirectory(arrRelativePath.concat(fileName))
 
         fileOrDirToAdd = subDir
       } else
         throw new Error(
-          'MasterReader: Neither file nor directory' +
-            JSON.stringify(arrRelativePath)
+          'MasterReader: Neither file nor directory' + JSON.stringify(arrRelativePath),
         )
 
       dir.arrContents.push(fileOrDirToAdd)
@@ -119,7 +114,7 @@ export default class MasterReader {
     if (currentContent) return currentContent
 
     const newContent = (await fs.readFile(this.basePath + '/' + fileName, {
-      encoding: 'utf8'
+      encoding: 'utf8',
     })).toString()
     this.fileContentsByRelativePath.set(fileName, newContent)
 

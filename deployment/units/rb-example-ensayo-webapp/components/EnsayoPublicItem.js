@@ -20,18 +20,18 @@ class EnsayoPublicItem extends _react.default.Component {
     let contentH1 = Viewer.Ensayo.Ensayo_Title.substring(0, 100);
     let contentH2 = Viewer.Ensayo.Ensayo_Description.substring(0, 100);
 
-    return (
-      _react.default.createElement(_ResponsiveContentArea.default, null,
+    return /*#__PURE__*/(
+      _react.default.createElement(_ResponsiveContentArea.default, null, /*#__PURE__*/
       _react.default.createElement(_reactHelmet.default, {
         title: Viewer.Ensayo.Ensayo_Title,
         meta: [
-        { name: 'description', content: Viewer.Ensayo.Ensayo_Description }] }),
+        { name: 'description', content: Viewer.Ensayo.Ensayo_Description }] }), /*#__PURE__*/
 
 
-      _react.default.createElement(_Card.default, null,
+      _react.default.createElement(_Card.default, null, /*#__PURE__*/
       _react.default.createElement(_CardHeader.default, {
-        title: _react.default.createElement("h1", null, contentH1),
-        subheader: _react.default.createElement("h2", null, contentH2) }),
+        title: /*#__PURE__*/_react.default.createElement("h1", null, contentH1),
+        subheader: /*#__PURE__*/_react.default.createElement("h2", null, contentH2) }), /*#__PURE__*/
 
       _react.default.createElement(_CardContent.default, null,
       new _htmlToReact.Parser().parse(Viewer.Ensayo.Ensayo_Content)))));

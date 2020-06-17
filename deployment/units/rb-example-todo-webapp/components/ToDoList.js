@@ -67,11 +67,11 @@ class ToDoList extends _react.default.Component
 
     const tabsValue = status === 'active' ? 1 : status === 'completed' ? 2 : 0;
 
-    return (
-      _react.default.createElement(_AppBar.default, { position: "static" },
-      _react.default.createElement(_Tabs.default, { value: tabsValue, onChange: this._handle_onChange },
-      _react.default.createElement(_Tab.default, { label: "All" }),
-      _react.default.createElement(_Tab.default, { label: "Active" }),
+    return /*#__PURE__*/(
+      _react.default.createElement(_AppBar.default, { position: "static" }, /*#__PURE__*/
+      _react.default.createElement(_Tabs.default, { value: tabsValue, onChange: this._handle_onChange }, /*#__PURE__*/
+      _react.default.createElement(_Tab.default, { label: "All" }), /*#__PURE__*/
+      _react.default.createElement(_Tab.default, { label: "Active" }), /*#__PURE__*/
       _react.default.createElement(_Tab.default, { label: "Completed" }))));
 
 
@@ -86,22 +86,22 @@ class ToDoList extends _react.default.Component
       return null;
     }
 
-    return (
+    return /*#__PURE__*/(
       _react.default.createElement("div", null,
-      this.renderTabs(),
-      _react.default.createElement(_FormGroup.default, { row: true },
+      this.renderTabs(), /*#__PURE__*/
+      _react.default.createElement(_FormGroup.default, { row: true }, /*#__PURE__*/
       _react.default.createElement(_FormControlLabel.default, {
-        control:
+        control: /*#__PURE__*/
         _react.default.createElement(_Checkbox.default, {
           checked: ToDo_TotalCount === ToDo_CompletedCount,
           onChange: this._handle_onClick_MarkAll }),
 
 
-        label: "Mark all as complete" })),
+        label: "Mark all as complete" })), /*#__PURE__*/
 
 
       _react.default.createElement(_List.default, null,
-      ToDos.edges.map(({ node }) =>
+      ToDos.edges.map(({ node }) => /*#__PURE__*/
       _react.default.createElement(_ToDoItem.default, { key: node.id, Viewer: Viewer, ToDo: node })))));
 
 

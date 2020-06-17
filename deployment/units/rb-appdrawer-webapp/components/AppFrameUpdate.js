@@ -22,7 +22,7 @@ class AppFrameUpdateExecutor extends _react.default.Component
   }
 
   render() {
-    return _react.default.createElement(_react.Fragment, null);
+    return /*#__PURE__*/_react.default.createElement(_react.Fragment, null);
   }}
 
 
@@ -32,9 +32,9 @@ class AppFrameUpdate extends _react.default.Component
   render() {
     const { title } = this.props;
 
-    return (
+    return /*#__PURE__*/(
       _react.default.createElement(_AppFrameContext.default.Consumer, null,
-      ({ setTitle, clearTitle }) =>
+      ({ setTitle, clearTitle }) => /*#__PURE__*/
       _react.default.createElement(AppFrameUpdateExecutor, {
         title: title,
         setTitle: setTitle,

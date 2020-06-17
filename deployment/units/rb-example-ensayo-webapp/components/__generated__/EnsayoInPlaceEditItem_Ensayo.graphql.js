@@ -28,43 +28,44 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "EnsayoInPlaceEditItem_Ensayo",
-  "type": "Ensayo",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "EnsayoInPlaceEditItem_Ensayo",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "id",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "Ensayo_Title",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
+    "args": null,
+    "kind": "ScalarField",
     "name": "Ensayo_Description",
-    "args": null,
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "Ensayo_Content",
     "args": null,
-    "storageKey": null }] };
+    "kind": "ScalarField",
+    "name": "Ensayo_Content",
+    "storageKey": null }],
 
 
+  "type": "Ensayo" };
 
 // prettier-ignore
 node /*: any*/.hash = '195136c812b1fbd8e34d1224b650e12a';
+
 module.exports = node;
 //# sourceMappingURL=EnsayoInPlaceEditItem_Ensayo.graphql.js.map

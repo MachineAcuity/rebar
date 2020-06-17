@@ -24,10 +24,10 @@ class TextFieldWithError extends _react.default.Component
 
     const isError = errorText !== '';
 
-    return (
-      _react.default.createElement(_FormControl.default, { error: isError, fullWidth: true, id: id },
-      _react.default.createElement(_InputLabel.default, { htmlFor: isError ? 'name-simple' : 'name-error' }, label),
-      _react.default.createElement(_Input.default, { id: "value", value: value, onChange: onChange }),
+    return /*#__PURE__*/(
+      _react.default.createElement(_FormControl.default, { error: isError, fullWidth: true, id: id }, /*#__PURE__*/
+      _react.default.createElement(_InputLabel.default, { htmlFor: isError ? 'name-simple' : 'name-error' }, label), /*#__PURE__*/
+      _react.default.createElement(_Input.default, { id: "value", value: value, onChange: onChange }), /*#__PURE__*/
       _react.default.createElement(_FormHelperText.default, null, isError ? errorText : helperText)));
 
 

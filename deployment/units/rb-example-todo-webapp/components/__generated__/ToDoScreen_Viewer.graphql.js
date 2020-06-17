@@ -25,22 +25,23 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "ToDoScreen_Viewer",
-  "type": "Viewer",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "ToDoScreen_Viewer",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "id",
     "args": null,
-    "storageKey": null }] };
+    "kind": "ScalarField",
+    "name": "id",
+    "storageKey": null }],
 
 
+  "type": "Viewer" };
 
 // prettier-ignore
 node /*: any*/.hash = '51f13adf0441eb6987038deaeea9998d';
+
 module.exports = node;
 //# sourceMappingURL=ToDoScreen_Viewer.graphql.js.map

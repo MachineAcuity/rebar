@@ -43,13 +43,15 @@ const styles = (theme) => ({
 const reGetFileNameExtension = /(.+?)\.([^.]*$|$)/
 
 function extractFileNameAndExtension(fileNameFull: string) {
-  // $AssureFlow we will get two items
-  let arrName: Array<string> = reGetFileNameExtension.exec(fileNameFull)
+  // $FlowIgnore we will get two items
+  let arrName: Array<string | null> = reGetFileNameExtension.exec(fileNameFull)
   if (!arrName) {
     arrName = [ null, fileNameFull, 'jpg' ]
   }
 
-  const fileNamePrototype = arrName[1]
+  // $FlowIgnore
+  const fileNamePrototype: string = arrName[1]
+
   let fileName = ''
   let previousNonLetter = true
   for (let i = 0; i < fileNamePrototype.length; i++) {
@@ -71,6 +73,8 @@ function extractFileNameAndExtension(fileNameFull: string) {
       previousNonLetter = true
     }
   }
+
+  if (!arrName[2]) throw new Error()
 
   const fileNameExtension = arrName[2].toLowerCase()
 
@@ -121,7 +125,7 @@ class ImageManagerUploader extends React.Component<
     if (filesDropped.length < 1) {
       return
     } else if (filesDropped.length < 1) {
-      // IDEA Replace alert with Material-UI alert
+      // IDEA [User Experience Quality] Replace alert with Material-UI alert
       alert('Please choose one image')
       return
     } else {
@@ -195,7 +199,7 @@ class ImageManagerUploader extends React.Component<
   }
 
   _handle_onUploadFailure = (responseText: string) => {
-    // IDEA Replace alert with Material-UI alert
+    // IDEA [User Experience Quality] Replace alert with Material-UI alert
     alert('Image upload failed')
 
     this.releasePreview()
@@ -264,7 +268,7 @@ class ImageManagerUploader extends React.Component<
           Object.entries(parameters)
             .map(
               ([ paramKey: string, paramValue: string ]) =>
-                //$AssureFlow
+                //$FlowIgnore
                 encodeURIComponent(paramKey) + '=' + encodeURIComponent(paramValue) + '&',
             )
             .join('') +

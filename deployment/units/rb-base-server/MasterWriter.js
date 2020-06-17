@@ -17,7 +17,7 @@ class MasterWriter {
 
 
 
-  // $AssureFlow
+  // $FlowIgnore
 
 
   constructor(basePath, logToConsole) {
@@ -57,9 +57,7 @@ class MasterWriter {
   async copyFile(sourceAbsolute, destinationRelative) {
     await this.ensureRelativePathExists(destinationRelative);
 
-    this.arrPromises.push(
-    fs.copyFile(sourceAbsolute, this.basePath + '/' + destinationRelative));
-
+    this.arrPromises.push(fs.copyFile(sourceAbsolute, this.basePath + '/' + destinationRelative));
   }
 
   async writeFile(destinationRelative, fileContent) {

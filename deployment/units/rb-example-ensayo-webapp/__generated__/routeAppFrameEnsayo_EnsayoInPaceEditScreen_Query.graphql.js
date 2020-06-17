@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 54301a62dc59203ddeaa14523b860077
- */
+
+
+
 
 /* eslint-disable */
 
@@ -37,66 +36,67 @@
                  */
 
 const node /*: ConcreteRequest*/ = {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "routeAppFrameEnsayo_EnsayoInPaceEditScreen_Query",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": [],
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "routeAppFrameEnsayo_EnsayoInPaceEditScreen_Query",
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
+        "args": null,
         "kind": "FragmentSpread",
-        "name": "EnsayoInPaceEditScreen_Viewer",
-        "args": null }] }] },
+        "name": "EnsayoInPaceEditScreen_Viewer" }],
 
 
+      "storageKey": null }],
 
 
+    "type": "Query" },
 
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "routeAppFrameEnsayo_EnsayoInPaceEditScreen_Query",
-    "argumentDefinitions": [],
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "id",
         "args": null,
-        "storageKey": null }] }] },
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null }],
 
 
+      "storageKey": null }] },
 
 
 
   "params": {
-    "operationKind": "query",
-    "name": "routeAppFrameEnsayo_EnsayoInPaceEditScreen_Query",
     "id": null,
-    "text": "query routeAppFrameEnsayo_EnsayoInPaceEditScreen_Query {\n  Viewer {\n    ...EnsayoInPaceEditScreen_Viewer\n    id\n  }\n}\n\nfragment EnsayoInPaceEditScreen_Viewer on Viewer {\n  id\n}\n",
-    "metadata": {} } };
+    "metadata": {},
+    "name": "routeAppFrameEnsayo_EnsayoInPaceEditScreen_Query",
+    "operationKind": "query",
+    "text": "query routeAppFrameEnsayo_EnsayoInPaceEditScreen_Query {\n  Viewer {\n    ...EnsayoInPaceEditScreen_Viewer\n    id\n  }\n}\n\nfragment EnsayoInPaceEditScreen_Viewer on Viewer {\n  id\n}\n" } };
 
 
 // prettier-ignore
 node /*: any*/.hash = '9d245c088169fbdc03599a436614b4f2';
+
 module.exports = node;
 //# sourceMappingURL=routeAppFrameEnsayo_EnsayoInPaceEditScreen_Query.graphql.js.map

@@ -38,12 +38,4 @@ suppress_type=$FlowFixMe
 suppress_type=$FixMe
 
 ; Reserved for cases when we know there is no issue but flow might be unable to determine that
-suppress_type=$AssureFlow
-
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(3[0-6]\\|[1-2][0-9]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(3[0-6]\\|1[0-9]\\|[1-2][0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)?:? #[0-9]+
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
-
-; Reserved for cases when we know there is no issue but flow might be unable to determine that
-suppress_comment=\\(.\\|\n\\)*\\$AssureFlow
+suppress_type=$FlowIgnore

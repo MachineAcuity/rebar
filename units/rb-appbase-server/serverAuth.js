@@ -5,7 +5,6 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import jwt from 'jwt-simple'
 
-import authExtensions from '../_configuration/rb-base-server/authExtensions'
 import delayPromise from '../rb-base-universal/delayPromise'
 import getNewUser from '../_configuration/rb-base-server/graphql/model/getNewUser'
 import log from '../rb-base-server/log'
@@ -23,7 +22,7 @@ require('dotenv').config()
 const envJWTSecret = process.env.JWT_SECRET
 if (envJWTSecret == null || typeof envJWTSecret !== 'string')
   throw new Error(
-    'Error: rb-appbase-server/serverAuth requires the environment variable JWT_SECRET to be set'
+    'Error: rb-appbase-server/serverAuth requires the environment variable JWT_SECRET to be set',
   )
 
 //
@@ -31,11 +30,9 @@ if (envJWTSecret == null || typeof envJWTSecret !== 'string')
 const serverAuth = express()
 
 serverAuth.use(bodyParser.json())
-serverAuth.use((req, res, next) =>
-  logServerRequest(req, res, next, requestLoggerAuth)
-)
+serverAuth.use((req, res, next) => logServerRequest(req, res, next, requestLoggerAuth))
 
-// IDEA: When logging in as a different user, logout of the old session should be performed first so that the session is deleted.
+// IDEA [Code Quality] When logging in as a different user, logout of the old session should be performed first so that the session is deleted.
 
 //
 
@@ -43,7 +40,7 @@ async function login(req, res) {
   let step = 'initialize'
 
   try {
-    // $AssureFlow yes, the Object Manager will have all the fields
+    // $FlowIgnore yes, the Object Manager will have all the fields
     const objectManager = await getObjectManager(req, res)
 
     if (!objectManager.siteInformation) {
@@ -57,14 +54,11 @@ async function login(req, res) {
 
     step = 'Find user'
 
-    const arr_UserAccount = await objectManager.getObjectList_async(
-      'UserAccount',
-      {
-        UserAccount_artifact_id: objectManager.siteInformation.artifact_id,
-        UserAccount_Identifier,
-        UserAccount_Type: 'un'
-      }
-    )
+    const arr_UserAccount = await objectManager.getObjectList_async('UserAccount', {
+      UserAccount_artifact_id: objectManager.siteInformation.artifact_id,
+      UserAccount_Identifier,
+      UserAccount_Type: 'sec',
+    })
 
     if (arr_UserAccount.length === 0) {
       res.status(401).json({ error: 'User account not found' })
@@ -76,13 +70,11 @@ async function login(req, res) {
 
     step = 'Check password'
     if (
-      !(await new Promise(resolve =>
-        bcryptjs.compare(
-          User_Secret,
-          a_UserAccount.UserAccount_Secret,
-          (err, passwordMatch) => resolve(passwordMatch)
-        )
-      ))
+      !await new Promise((resolve) =>
+        bcryptjs.compare(User_Secret, a_UserAccount.UserAccount_Secret, (err, passwordMatch) =>
+          resolve(passwordMatch),
+        ),
+      )
     ) {
       res.status(401).json({ error: 'Incorrect password' })
       return
@@ -98,7 +90,7 @@ async function login(req, res) {
       UserSession_User_id: a_UserAccount.UserAccount_User_id,
       UserSession_Start: new Date(),
       UserSession_Expired: false,
-      UserSession_IsAnonymous: false
+      UserSession_IsAnonymous: false,
     }
 
     // Add session to database
@@ -107,20 +99,20 @@ async function login(req, res) {
 
     step = 'Create JWT token'
     const UserToken1 = jwt.encode(
-      // $AssureFlow - id will be filled in by ObjectManager.add
+      // $FlowIgnore - id will be filled in by ObjectManager.add
       { session_id: a_UserSession.id },
-      envJWTSecret
+      envJWTSecret,
     )
 
     res.cookie('UserToken1', UserToken1, {
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000
+      maxAge: 30 * 24 * 60 * 60 * 1000,
     })
 
     step = 'Create user token 2'
     const a_User = await objectManager.getOneObject_async('User', {
       User_artifact_id: objectManager.siteInformation.artifact_id,
-      id: a_UserAccount.UserAccount_User_id
+      id: a_UserAccount.UserAccount_User_id,
     })
     const { UserToken2 } = a_User
 
@@ -130,8 +122,8 @@ async function login(req, res) {
     log('error', 'rb-appbase-server serverAuth login: Failed', { step, err })
     res.status(500).send(
       JSON.stringify({
-        error: 'An error has occurred while attempting login'
-      })
+        error: 'An error has occurred while attempting login',
+      }),
     )
   }
 }
@@ -151,55 +143,43 @@ async function createuser(req, res) {
     const UserAccount_Identifier = req.body.UserAccount_Identifier.toLowerCase()
     const User_Secret = req.body.User_Secret
 
-    const arr_UserAccount = await objectManager.getObjectList_async(
-      'UserAccount',
-      {
-        UserAccount_artifact_id: objectManager.siteInformation.artifact_id,
-        UserAccount_Identifier
-      }
-    )
+    if (UserAccount_Identifier === '' || User_Secret === '') {
+      throw new Error('Attempted log in with empty account identifier or password')
+    }
+
+    const arr_UserAccount = await objectManager.getObjectList_async('UserAccount', {
+      UserAccount_artifact_id: objectManager.siteInformation.artifact_id,
+      UserAccount_Identifier,
+    })
 
     if (arr_UserAccount.length > 0) {
       res.status(500).send(
         JSON.stringify({
-          error: 'User account already exists'
-        })
+          error: 'User account already exists',
+        }),
       )
     }
 
     step = 'Create user account secret'
-    const UserAccount_Secret = await new Promise(resolve =>
-      bcryptjs.hash(User_Secret, 8, (err, hash) => resolve(hash))
+    const UserAccount_Secret = await new Promise((resolve) =>
+      bcryptjs.hash(User_Secret, 8, (err, hash) => resolve(hash)),
     )
 
     // If account name looks like email address, use it as email
     const accountNameIsValidEmail = validateEmail(UserAccount_Identifier)
-    const User_PrimaryEmail = accountNameIsValidEmail
-      ? UserAccount_Identifier
-      : ''
+    const User_PrimaryEmail = accountNameIsValidEmail ? UserAccount_Identifier : ''
 
-    step = 'Create the user object'
-    const a_User = Object.assign(
-      getNewUser(objectManager.siteInformation.artifact_id),
-      {
-        User_artifact_id: objectManager.siteInformation.artifact_id,
-        UserToken2:
-          Math.random()
-            .toString(36)
-            .substring(2) +
-          Math.random()
-            .toString(36)
-            .substring(2) +
-          Math.random()
-            .toString(36)
-            .substring(2) +
-          Math.random()
-            .toString(36)
-            .substring(2),
-        User_DisplayName: UserAccount_Identifier,
-        User_PrimaryEmail: User_PrimaryEmail
-      }
-    )
+    step = 'Create the new user object'
+    const a_User = Object.assign(getNewUser(objectManager.siteInformation.artifact_id), {
+      User_artifact_id: objectManager.siteInformation.artifact_id,
+      UserToken2:
+        Math.random().toString(36).substring(2) +
+        Math.random().toString(36).substring(2) +
+        Math.random().toString(36).substring(2) +
+        Math.random().toString(36).substring(2),
+      User_DisplayName: UserAccount_Identifier,
+      User_PrimaryEmail: User_PrimaryEmail,
+    })
     objectManager.assignPrimaryKey('User', a_User)
     objectManager.setViewerUserId(a_User.id)
 
@@ -210,7 +190,7 @@ async function createuser(req, res) {
       UserSession_User_id: a_User.id,
       UserSession_Start: new Date(),
       UserSession_Expired: false,
-      UserSession_IsAnonymous: false
+      UserSession_IsAnonymous: false,
     }
 
     step = 'Create the user account object'
@@ -220,7 +200,7 @@ async function createuser(req, res) {
       UserAccount_User_id: a_User.id,
       UserAccount_Identifier,
       UserAccount_Secret,
-      UserAccount_Type: 'un'
+      UserAccount_Type: 'sec',
     }
 
     step = 'Add user session and account to database'
@@ -228,22 +208,22 @@ async function createuser(req, res) {
       objectManager.add('User', a_User),
       objectManager.add('UserSession', a_UserSession),
       objectManager.add('UserAccount', a_UserAccount),
-      ...onCreateUser(a_User.id, objectManager)
+      ...onCreateUser(a_User.id, objectManager),
     ])
 
     res.injectedByRebarFrameworks = { userSession: a_UserSession }
 
     step = 'Create a JWT token'
     const UserToken1 = jwt.encode(
-      // $AssureFlow - id will be filled in by ObjectManager.add
+      // $FlowIgnore - id will be filled in by ObjectManager.add
       { session_id: a_UserSession.id },
-      envJWTSecret
+      envJWTSecret,
     )
 
     step = 'Set user token 1 cookie'
     res.cookie('UserToken1', UserToken1, {
       httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000
+      maxAge: 30 * 24 * 60 * 60 * 1000,
     })
 
     step = 'Respond with success'
@@ -251,12 +231,12 @@ async function createuser(req, res) {
   } catch (err) {
     log('error', 'rb-appbase-server serverAuth create user: Failed', {
       step,
-      err
+      err,
     })
     res.status(500).send(
       JSON.stringify({
-        error: 'An error has occurred while attempting to create user'
-      })
+        error: 'An error has occurred while attempting to create new user',
+      }),
     )
   }
 }
@@ -273,12 +253,9 @@ async function changeSecret(req, res) {
 
     step = 'Locate user account'
     // user id and artifact id will be picked up from object manager
-    const arr_UserAccount = await objectManager.getObjectList_async(
-      'UserAccount',
-      {
-        UserAccount_Type: 'un'
-      }
-    )
+    const arr_UserAccount = await objectManager.getObjectList_async('UserAccount', {
+      UserAccount_Type: 'sec',
+    })
 
     if (arr_UserAccount.length === 0) {
       res.status(401).json({ error: 'User account not found' })
@@ -291,13 +268,13 @@ async function changeSecret(req, res) {
     step = 'Verify the current user secret'
     const { User_CurrentSecret } = req.body
     if (
-      !(await new Promise(resolve =>
+      !await new Promise((resolve) =>
         bcryptjs.compare(
           User_CurrentSecret,
           a_UserAccount.UserAccount_Secret,
-          (err, passwordMatch) => resolve(passwordMatch)
-        )
-      ))
+          (err, passwordMatch) => resolve(passwordMatch),
+        ),
+      )
     ) {
       res.status(401).json({ error: 'Incorrect current password' })
       return
@@ -305,8 +282,8 @@ async function changeSecret(req, res) {
 
     step = 'Hash the new user secret'
     const { User_NewSecret } = req.body
-    const UserAccount_Secret = await new Promise(resolve =>
-      bcryptjs.hash(User_NewSecret, 8, (err, hash) => resolve(hash))
+    const UserAccount_Secret = await new Promise((resolve) =>
+      bcryptjs.hash(User_NewSecret, 8, (err, hash) => resolve(hash)),
     )
 
     step = 'Write new secret hash to db'
@@ -317,12 +294,12 @@ async function changeSecret(req, res) {
   } catch (err) {
     log('error', 'rb-appbase-server serverAuth change-secret: Failed', {
       err,
-      step
+      step,
     })
     res.status(500).send(
       JSON.stringify({
-        error: 'An error has occurred while attempting to change password'
-      })
+        error: 'An error has occurred while attempting to change password',
+      }),
     )
   }
 }
@@ -334,14 +311,11 @@ async function logout(req, res) {
 
     // Notice that get user and session will return null if user is not found, hence the next line would
     // fail. This is OK because we have a catch in the end.
-    const userSession = (await getUserAndSessionIDByUserToken1_async(
-      objectManager,
-      req,
-      false
-    )).UserSession
+    const userSession = (await getUserAndSessionIDByUserToken1_async(objectManager, req, false))
+      .UserSession
 
     await objectManager.remove('UserSession', {
-      id: userSession.id
+      id: userSession.id,
     })
 
     res.cookie('UserToken1', '', { httpOnly: true, expires: new Date(1) })
@@ -350,14 +324,11 @@ async function logout(req, res) {
     log('error', 'rb-appbase-server serverAuth logout: Failed', { err })
     res.status(500).send(
       JSON.stringify({
-        error: 'An error has occurred while attempting to log out'
-      })
+        error: 'An error has occurred while attempting to log out',
+      }),
     )
   }
 }
 serverAuth.post('/logout', logout)
-
-// Add extensions - custom configurations
-authExtensions(serverAuth)
 
 export default serverAuth

@@ -1,11 +1,12 @@
 "use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.createResolver = createResolver;exports.routeConfig = routeConfig;exports.historyMiddlewares = void 0;
 
-var _queryMiddleware = _interopRequireDefault(require("farce/lib/queryMiddleware"));
-var _makeRouteConfig = _interopRequireDefault(require("found/lib/makeRouteConfig"));
 var _foundRelay = require("found-relay");
 var _relayRuntime = require("relay-runtime");
 
-var _createRoutes = _interopRequireDefault(require("../_configuration/rb-appbase-webapp/createRoutes"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _createRoutes = _interopRequireDefault(require("../_configuration/rb-appbase-webapp/createRoutes"));
+
+var _queryMiddleware = _interopRequireDefault(require("farce/queryMiddleware"));
+var _makeRouteConfig = _interopRequireDefault(require("found/makeRouteConfig"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 const historyMiddlewares = [_queryMiddleware.default];exports.historyMiddlewares = historyMiddlewares;
 

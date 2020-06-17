@@ -4,6 +4,9 @@ import ObjectManager from '../rb-base-server/ObjectManager'
 
 //
 
+/**
+ * Base class for image download configuration
+ */
 export default class ImageDownloadConfiguration {
   /** Detemines whether this configuration applies to the provided request */
   isProperConfiguration(req: Object): boolean {

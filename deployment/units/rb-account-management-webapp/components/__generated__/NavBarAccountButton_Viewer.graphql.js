@@ -26,29 +26,30 @@
 
 
 const node /*: ReaderFragment*/ = {
-  "kind": "Fragment",
-  "name": "NavBarAccountButton_Viewer",
-  "type": "Viewer",
-  "metadata": null,
   "argumentDefinitions": [],
+  "kind": "Fragment",
+  "metadata": null,
+  "name": "NavBarAccountButton_Viewer",
   "selections": [
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "User_IsAnonymous",
     "args": null,
+    "kind": "ScalarField",
+    "name": "User_IsAnonymous",
     "storageKey": null },
 
   {
-    "kind": "ScalarField",
     "alias": null,
-    "name": "User_DisplayName",
     "args": null,
-    "storageKey": null }] };
+    "kind": "ScalarField",
+    "name": "User_DisplayName",
+    "storageKey": null }],
 
 
+  "type": "Viewer" };
 
 // prettier-ignore
 node /*: any*/.hash = 'ec25508de9e3a02cad7892e2470b0646';
+
 module.exports = node;
 //# sourceMappingURL=NavBarAccountButton_Viewer.graphql.js.map

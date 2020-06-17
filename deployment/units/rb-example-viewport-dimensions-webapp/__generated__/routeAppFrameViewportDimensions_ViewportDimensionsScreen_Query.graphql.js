@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash 34fc12e0f14085cbef3d499df490e0d9
- */
+
+
+
 
 /* eslint-disable */
 
@@ -37,66 +36,67 @@
                  */
 
 const node /*: ConcreteRequest*/ = {
-  "kind": "Request",
   "fragment": {
-    "kind": "Fragment",
-    "name": "routeAppFrameViewportDimensions_ViewportDimensionsScreen_Query",
-    "type": "Query",
-    "metadata": null,
     "argumentDefinitions": [],
+    "kind": "Fragment",
+    "metadata": null,
+    "name": "routeAppFrameViewportDimensions_ViewportDimensionsScreen_Query",
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
+        "args": null,
         "kind": "FragmentSpread",
-        "name": "ViewportDimensionsScreen_Viewer",
-        "args": null }] }] },
+        "name": "ViewportDimensionsScreen_Viewer" }],
 
 
+      "storageKey": null }],
 
 
+    "type": "Query" },
 
+  "kind": "Request",
   "operation": {
+    "argumentDefinitions": [],
     "kind": "Operation",
     "name": "routeAppFrameViewportDimensions_ViewportDimensionsScreen_Query",
-    "argumentDefinitions": [],
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "Viewer",
-      "storageKey": null,
       "args": null,
       "concreteType": "Viewer",
+      "kind": "LinkedField",
+      "name": "Viewer",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "id",
         "args": null,
-        "storageKey": null }] }] },
+        "kind": "ScalarField",
+        "name": "id",
+        "storageKey": null }],
 
 
+      "storageKey": null }] },
 
 
 
   "params": {
-    "operationKind": "query",
-    "name": "routeAppFrameViewportDimensions_ViewportDimensionsScreen_Query",
     "id": null,
-    "text": "query routeAppFrameViewportDimensions_ViewportDimensionsScreen_Query {\n  Viewer {\n    ...ViewportDimensionsScreen_Viewer\n    id\n  }\n}\n\nfragment ViewportDimensionsScreen_Viewer on Viewer {\n  id\n}\n",
-    "metadata": {} } };
+    "metadata": {},
+    "name": "routeAppFrameViewportDimensions_ViewportDimensionsScreen_Query",
+    "operationKind": "query",
+    "text": "query routeAppFrameViewportDimensions_ViewportDimensionsScreen_Query {\n  Viewer {\n    ...ViewportDimensionsScreen_Viewer\n    id\n  }\n}\n\nfragment ViewportDimensionsScreen_Viewer on Viewer {\n  id\n}\n" } };
 
 
 // prettier-ignore
 node /*: any*/.hash = 'fd4b596cb5564462f401210ca2e12734';
+
 module.exports = node;
 //# sourceMappingURL=routeAppFrameViewportDimensions_ViewportDimensionsScreen_Query.graphql.js.map

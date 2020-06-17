@@ -9,13 +9,13 @@ export default class FetcherBase {
   UserToken2: string
   payloads: Array<any>
 
-  constructor( url: string, UserToken1: ?string, UserToken2: string ) {
+  constructor(url: string, UserToken1: ?string, UserToken2: string) {
     this.url = url
     this.UserToken1 = UserToken1
     this.UserToken2 = UserToken2
   }
 
-  async fetch( operation: { text: string }, variables: any ) {
+  async fetch(operation: { text: string }, variables: any) {
     const request = {
       method: 'POST',
       credentials: 'same-origin',
@@ -27,22 +27,22 @@ export default class FetcherBase {
     }
 
     try {
-      if ( this.UserToken1 ) {
-        // $AssureFlow we can add the cookie, will be used on server
+      if (this.UserToken1) {
+        // $FlowIgnore we can add the cookie, will be used on server
         request.headers.UserToken1 = this.UserToken1
       }
 
-      const response = await fetch( this.url, request )
+      const response = await fetch(this.url, request)
 
       return response.json()
-    } catch ( err ) {
+    } catch (err) {
       throw new NestedError(
         'FetcherBase failed UserToken1=' +
-          ( this.UserToken1 ? this.UserToken1 : '<null>' ) +
+          (this.UserToken1 ? this.UserToken1 : '<null>') +
           ' UserToken2=' +
           this.UserToken2 +
           ' request=' +
-          JSON.stringify( request ) +
+          JSON.stringify(request) +
           ' with' +
           err.message,
         err,

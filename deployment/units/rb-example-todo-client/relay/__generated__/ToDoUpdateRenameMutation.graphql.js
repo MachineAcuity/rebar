@@ -1,7 +1,6 @@
-/**
- * 
- * @relayHash c66d742d9b3b42e781cbbbb5148655b9
- */
+
+
+
 
 /* eslint-disable */
 
@@ -48,18 +47,15 @@
 const node /*: ConcreteRequest*/ = function () {
   var v0 = [
   {
+    "defaultValue": null,
     "kind": "LocalArgument",
     "name": "input",
-    "type": "ToDoUpdateRenameInput!",
-    "defaultValue": null }],
+    "type": "ToDoUpdateRenameInput!" }],
 
 
   v1 = [
   {
-    "kind": "LinkedField",
     "alias": null,
-    "name": "ToDoUpdateRename",
-    "storageKey": null,
     "args": [
     {
       "kind": "Variable",
@@ -68,62 +64,66 @@ const node /*: ConcreteRequest*/ = function () {
 
 
     "concreteType": "ToDoUpdateRenamePayload",
+    "kind": "LinkedField",
+    "name": "ToDoUpdateRename",
     "plural": false,
     "selections": [
     {
-      "kind": "LinkedField",
       "alias": null,
-      "name": "ToDo",
-      "storageKey": null,
       "args": null,
       "concreteType": "ToDo",
+      "kind": "LinkedField",
+      "name": "ToDo",
       "plural": false,
       "selections": [
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "id",
         "args": null,
+        "kind": "ScalarField",
+        "name": "id",
         "storageKey": null },
 
       {
-        "kind": "ScalarField",
         "alias": null,
-        "name": "ToDo_Text",
         "args": null,
-        "storageKey": null }] }] }];
+        "kind": "ScalarField",
+        "name": "ToDo_Text",
+        "storageKey": null }],
 
 
+      "storageKey": null }],
 
 
+    "storageKey": null }];
 
 
   return {
-    "kind": "Request",
     "fragment": {
-      "kind": "Fragment",
-      "name": "ToDoUpdateRenameMutation",
-      "type": "Mutation",
-      "metadata": null,
       "argumentDefinitions": v0 /*: any*/,
-      "selections": v1 /*: any*/ },
+      "kind": "Fragment",
+      "metadata": null,
+      "name": "ToDoUpdateRenameMutation",
+      "selections": v1 /*: any*/,
+      "type": "Mutation" },
 
+    "kind": "Request",
     "operation": {
+      "argumentDefinitions": v0 /*: any*/,
       "kind": "Operation",
       "name": "ToDoUpdateRenameMutation",
-      "argumentDefinitions": v0 /*: any*/,
       "selections": v1 /*: any*/ },
 
     "params": {
-      "operationKind": "mutation",
-      "name": "ToDoUpdateRenameMutation",
       "id": null,
-      "text": "mutation ToDoUpdateRenameMutation(\n  $input: ToDoUpdateRenameInput!\n) {\n  ToDoUpdateRename(input: $input) {\n    ToDo {\n      id\n      ToDo_Text\n    }\n  }\n}\n",
-      "metadata": {} } };
+      "metadata": {},
+      "name": "ToDoUpdateRenameMutation",
+      "operationKind": "mutation",
+      "text": "mutation ToDoUpdateRenameMutation(\n  $input: ToDoUpdateRenameInput!\n) {\n  ToDoUpdateRename(input: $input) {\n    ToDo {\n      id\n      ToDo_Text\n    }\n  }\n}\n" } };
 
 
 }();
 // prettier-ignore
 node /*: any*/.hash = '5ca316bc08f370bba86945985652a644';
+
 module.exports = node;
 //# sourceMappingURL=ToDoUpdateRenameMutation.graphql.js.map

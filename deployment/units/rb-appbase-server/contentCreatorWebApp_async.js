@@ -4,13 +4,13 @@ var _fs = _interopRequireDefault(require("fs"));
 var _path = _interopRequireDefault(require("path"));
 
 var _ejs = _interopRequireDefault(require("ejs"));
-var _createRender = _interopRequireDefault(require("found/lib/createRender"));
-var _server = require("found/lib/server");
+var _createRender = _interopRequireDefault(require("found/createRender"));
+var _server = require("found/server");
 var _nestedErrorStacks = _interopRequireDefault(require("nested-error-stacks"));
 var _react = _interopRequireDefault(require("react"));
 var _server2 = _interopRequireDefault(require("react-dom/server"));
 var _reactJss = require("react-jss");
-var _reactHelmet = _interopRequireDefault(require("react-helmet"));
+var _reactHelmet = require("react-helmet");
 var _serializeJavascript = _interopRequireDefault(require("serialize-javascript"));
 
 var _AppWrapper = _interopRequireDefault(require("../_configuration/rb-appbase-webapp/AppWrapper"));
@@ -39,9 +39,9 @@ throw new Error('Error: rb-appbase-webapp requires the environment variable PORT
 //
 
 // HTML page templates
-const htmlEjs = _ejs.default.compile(_fs.default.readFileSync(_path.default.resolve(__dirname, 'html.ejs'), 'utf8'));
+const htmlEjs = _ejs.default.compile(_fs.default.readFileSync(_path.default.resolve(__dirname, 'templates/html.ejs'), 'utf8'));
 const serverErrorHtml = _ejs.default.compile(
-_fs.default.readFileSync(_path.default.resolve(__dirname, 'serverErrorHtml.ejs'), 'utf8'));
+_fs.default.readFileSync(_path.default.resolve(__dirname, 'templates/serverErrorHtml.ejs'), 'utf8'));
 
 
 //
@@ -91,7 +91,7 @@ const render = (0, _createRender.default)({
       (0, _log.default)('error', 'Error: rb-appbase-webapp createRender renderError', error);
     }
 
-    return _react.default.createElement(_ErrorComponent.default, { httpStatus: error.status });
+    return /*#__PURE__*/_react.default.createElement(_ErrorComponent.default, { httpStatus: error.status });
   } });var
 
 
@@ -174,10 +174,10 @@ passUserToken1ToHeaders)
 
     // [2 Crossroads][server] Update server rendering according to https://material-ui.com/guides/server-rendering/
     const sheets = new _reactJss.SheetsRegistry();
-    const helmet = _reactHelmet.default.rewind();
+    const helmet = _reactHelmet.Helmet.rewind();
 
-    const rootHTML = _server2.default.renderToString(
-    _react.default.createElement(_reactJss.JssProvider, { registry: sheets },
+    const rootHTML = _server2.default.renderToString( /*#__PURE__*/
+    _react.default.createElement(_reactJss.JssProvider, { registry: sheets }, /*#__PURE__*/
     _react.default.createElement(_AppWrapper.default, { userAgent: userAgent, siteConfiguration: siteConfigurationSubset, url: reqUrl },
     element)));
 

@@ -13,6 +13,6 @@ const schema = new GraphQLSchema({
   mutation: MutationType,
 })
 
-maskErrors( schema )
+maskErrors(schema)
 
 export default schema

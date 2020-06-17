@@ -14,6 +14,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 
 import AppDrawerNavItems from '../../_configuration/rb-appdrawer-webapp/AppDrawerNavItems'
 import NavBarDefaultTitle from '../../_configuration/rb-appdrawer-webapp/NavBarDefaultTitle'
+import ViewportContext from '../../rb-appbase-webapp/components/ViewportContext'
 
 import AppFrameContext from './AppFrameContext'
 
@@ -69,6 +70,10 @@ const styles = (theme) => ({
       marginLeft: 12,
       marginTop: 12,
     },
+  },
+  contentContainerWithPermanentDrawer: {
+    marginLeft: drawerWidth,
+    width: '100%',
   },
   drawerPaper: {
     position: 'relative',
@@ -128,25 +133,45 @@ class AppFrame extends React.Component<
           <title>{title}</title>
         </Helmet>
 
-        <div className={classes.appFrame}>
-          <Fab
-            aria-label="open drawer"
-            className={classes.menuButton}
-            color="primary"
-            size="small"
-            onClick={this._handle_Drawer_Open}
-          >
-            <IconMenu />
-          </Fab>
+        <ViewportContext.Consumer>
+          {({ totalWidth }) => {
+            const bPermanentDrawer = totalWidth > 1300 + drawerWidth
 
-          <Drawer open={drawerIsOpen} onClose={this._handle_Drawer_Close}>
-            <AppDrawerNavItems Viewer={Viewer} onClick={this._handle_GoTo} />
-          </Drawer>
+            const chilrenContained = bPermanentDrawer ? (
+              <div className={classes.contentContainerWithPermanentDrawer}>{children}</div>
+            ) : (
+              children
+            )
 
-          <AppFrameContext.Provider value={{ setTitle, clearTitle }}>
-            {children}
-          </AppFrameContext.Provider>
-        </div>
+            return (
+              <div className={classes.appFrame}>
+                {!bPermanentDrawer && (
+                  <Fab
+                    aria-label="open drawer"
+                    className={classes.menuButton}
+                    color="primary"
+                    size="small"
+                    onClick={this._handle_Drawer_Open}
+                  >
+                    <IconMenu htmlColor="#ffc400" />
+                  </Fab>
+                )}
+
+                <Drawer
+                  open={drawerIsOpen}
+                  variant={bPermanentDrawer ? 'permanent' : 'temporary'}
+                  onClose={this._handle_Drawer_Close}
+                >
+                  <AppDrawerNavItems Viewer={Viewer} onClick={this._handle_GoTo} />
+                </Drawer>
+
+                <AppFrameContext.Provider value={{ setTitle, clearTitle }}>
+                  {chilrenContained}
+                </AppFrameContext.Provider>
+              </div>
+            )
+          }}
+        </ViewportContext.Consumer>
       </div>
     )
   }

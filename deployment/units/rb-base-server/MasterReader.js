@@ -85,9 +85,7 @@ class MasterReader {
         continue;
       }
 
-      const stat = await fs.stat(
-      this.basePath + '/' + dir.relativePath + '/' + fileName);
-
+      const stat = await fs.stat(this.basePath + '/' + dir.relativePath + '/' + fileName);
 
       let fileOrDirToAdd;
 
@@ -96,15 +94,12 @@ class MasterReader {
 
         fileOrDirToAdd = file;
       } else if (stat.isDirectory()) {
-        const subDir = await this.readDirectory(
-        arrRelativePath.concat(fileName));
-
+        const subDir = await this.readDirectory(arrRelativePath.concat(fileName));
 
         fileOrDirToAdd = subDir;
       } else
       throw new Error(
-      'MasterReader: Neither file nor directory' +
-      JSON.stringify(arrRelativePath));
+      'MasterReader: Neither file nor directory' + JSON.stringify(arrRelativePath));
 
 
       dir.arrContents.push(fileOrDirToAdd);

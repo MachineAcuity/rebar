@@ -26,17 +26,17 @@ class ForceLogin extends _react.default.Component {
   render() {
     const { classes, Viewer } = this.props;
 
-    if (Viewer.User_IsAnonymous) return _react.default.createElement(_RequiresAuthentication.default, null);
+    if (Viewer.User_IsAnonymous) return /*#__PURE__*/_react.default.createElement(_RequiresAuthentication.default, null);
     // Anonymous users do not get to have a profile
     else
-      return (
-        _react.default.createElement(_ResponsiveContentArea.default, null,
-        _react.default.createElement(_Card.default, { className: classes.card },
+      return /*#__PURE__*/(
+        _react.default.createElement(_ResponsiveContentArea.default, null, /*#__PURE__*/
+        _react.default.createElement(_Card.default, { className: classes.card }, /*#__PURE__*/
         _react.default.createElement(_CardHeader.default, {
           title: "Only Authorized",
-          subheader: "Only users who log in see this." }),
+          subheader: "Only users who log in see this." }), /*#__PURE__*/
 
-        _react.default.createElement(_CardContent.default, null,
+        _react.default.createElement(_CardContent.default, null, /*#__PURE__*/
         _react.default.createElement(_Typography.default, { paragraph: true }, "Content seen by authorized users")))));
 
 

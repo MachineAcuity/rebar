@@ -108,11 +108,7 @@ class LogoutScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconLogout htmlColor="#003c78" />}
-          subTitle=""
-          title="Log Out"
-        />
+        <CompositeCardHeader icon={<IconLogout />} subTitle="" title="Log Out" />
 
         <Card className={classes.card}>
           <br />
@@ -136,11 +132,7 @@ class LogoutScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconLogout htmlColor="#003c78" />}
-          subTitle=""
-          title="Log Out"
-        />
+        <CompositeCardHeader icon={<IconLogout />} subTitle="" title="Log Out" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -163,11 +155,7 @@ class LogoutScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconLogout htmlColor="#003c78" />}
-          subTitle=""
-          title="Log Out"
-        />
+        <CompositeCardHeader icon={<IconLogout />} subTitle="" title="Log Out" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -189,11 +177,7 @@ class LogoutScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconLogout htmlColor="#003c78" />}
-          subTitle=""
-          title="Log Out"
-        />
+        <CompositeCardHeader icon={<IconLogout />} subTitle="" title="Log Out" />
 
         <Card className={classes.card}>
           <CardContent>

@@ -4,13 +4,13 @@ import fs from 'fs'
 import path from 'path'
 
 import ejs from 'ejs'
-import createRender from 'found/lib/createRender'
-import { getFarceResult } from 'found/lib/server'
+import createRender from 'found/createRender'
+import { getFarceResult } from 'found/server'
 import NestedError from 'nested-error-stacks'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { JssProvider, SheetsRegistry } from 'react-jss'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet'
 import serialize from 'serialize-javascript'
 
 import AppWrapper from '../_configuration/rb-appbase-webapp/AppWrapper'
@@ -39,9 +39,9 @@ if (envPort == null || typeof envPort !== 'string')
 //
 
 // HTML page templates
-const htmlEjs = ejs.compile(fs.readFileSync(path.resolve(__dirname, 'html.ejs'), 'utf8'))
+const htmlEjs = ejs.compile(fs.readFileSync(path.resolve(__dirname, 'templates/html.ejs'), 'utf8'))
 const serverErrorHtml = ejs.compile(
-  fs.readFileSync(path.resolve(__dirname, 'serverErrorHtml.ejs'), 'utf8'),
+  fs.readFileSync(path.resolve(__dirname, 'templates/serverErrorHtml.ejs'), 'utf8'),
 )
 
 //

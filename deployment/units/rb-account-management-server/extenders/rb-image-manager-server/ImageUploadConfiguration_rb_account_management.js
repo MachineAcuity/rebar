@@ -19,7 +19,7 @@ throw new Error(
 'Error: Machine Acuity unit requires environment variable REBAR_DATA_FILES_LOCATION to be set');
 
 
-const designerFilesLocation = _path.default.resolve(envRebarDataFilesLocation, 'user');
+const userFileLocation = _path.default.resolve(envRebarDataFilesLocation, 'user');
 
 //
 
@@ -38,7 +38,7 @@ class ImageUploadConfiguration_rb_account_management extends _ImageUploadConfigu
     const viewerUserIDAsString = objectManager.getViewerUserId().toString();
 
     // Create directory
-    const usersDirectory = _path.default.resolve(designerFilesLocation);
+    const usersDirectory = _path.default.resolve(userFileLocation);
     const userGroupDirectory = _path.default.resolve(usersDirectory, viewerUserIDAsString.substring(0, 2));
     const userDirectory = _path.default.resolve(userGroupDirectory, viewerUserIDAsString);
     const profileDirectory = _path.default.resolve(userDirectory, 'profile');

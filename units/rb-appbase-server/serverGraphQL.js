@@ -107,7 +107,7 @@ async function root(req, res, next) {
         schema: schema,
         rootValue: objectManager,
         pretty: true,
-        graphiql: false, // IDEA Look into re-enabling GraphiQL
+        graphiql: false,
       }
     })(req, res, next)
   } catch (err) {

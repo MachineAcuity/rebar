@@ -18,10 +18,10 @@ class EnsayoInPaceEditList extends _react.default.Component
     const { Viewer } = this.props;
     const { Ensayos } = Viewer;
 
-    return (
-      _react.default.createElement("div", null,
+    return /*#__PURE__*/(
+      _react.default.createElement("div", null, /*#__PURE__*/
       _react.default.createElement(_List.default, null,
-      Ensayos.edges.map(({ node }) =>
+      Ensayos.edges.map(({ node }) => /*#__PURE__*/
       _react.default.createElement(_EnsayoInPlaceEditItem.default, {
         key: node.id,
         Viewer: Viewer,
