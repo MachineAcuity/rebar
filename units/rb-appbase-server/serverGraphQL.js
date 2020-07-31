@@ -2,9 +2,10 @@
 
 import bodyParser from 'body-parser'
 import express from 'express'
-import graphQLHTTP from 'express-graphql'
+import { graphqlHTTP } from 'express-graphql'
 
 import delayPromise from '../rb-base-universal/delayPromise'
+import ExecutionContext from '../rb-base-server/ExecutionContext'
 import log from '../rb-base-server/log'
 import { requestLoggerGraphQL } from '../_configuration/rb-base-server/requestLoggers'
 import logServerRequest from '../rb-base-server/logServerRequest'
@@ -102,10 +103,12 @@ async function root(req, res, next) {
       }
     }
 
-    graphQLHTTP(() => {
+    const ec = ExecutionContext.createRoot({ objectManager })
+
+    graphqlHTTP(() => {
       return {
         schema: schema,
-        rootValue: objectManager,
+        rootValue: ec,
         pretty: true,
         graphiql: false,
       }
