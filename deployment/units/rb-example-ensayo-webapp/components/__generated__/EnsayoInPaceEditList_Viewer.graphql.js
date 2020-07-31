@@ -145,7 +145,8 @@ const node /*: ReaderFragment*/ = function () {
       "name": "EnsayoInPlaceEditItem_Viewer" }],
 
 
-    "type": "Viewer" };
+    "type": "Viewer",
+    "abstractKey": null };
 
 }();
 // prettier-ignore

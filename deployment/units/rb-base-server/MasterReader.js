@@ -4,6 +4,8 @@ var _fs = _interopRequireDefault(require("fs"));function _interopRequireDefault(
 
 const fs = _fs.default.promises;
 
+//
+
 class FileBase {
 
 

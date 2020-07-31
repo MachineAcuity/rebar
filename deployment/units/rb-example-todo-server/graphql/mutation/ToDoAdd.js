@@ -3,8 +3,11 @@
 var _graphqlRelay = require("graphql-relay");
 var _graphql = require("graphql");
 
+var _ObjectManager = _interopRequireDefault(require("../../../rb-base-server/ObjectManager"));
 var _ToDosConnection = _interopRequireDefault(require("../type/ToDosConnection"));
 var _ViewerType = _interopRequireDefault(require("../../../../units/rb-appbase-server/graphql/type/ViewerType"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //  weak
+
+//
 var _default =
 (0, _graphqlRelay.mutationWithClientMutationId)({
   name: 'ToDoAdd',
@@ -16,7 +19,8 @@ var _default =
   outputFields: {
     ToDosEdge: {
       type: _ToDosConnection.default.edgeType,
-      resolve: async ({ local_id }, { ...args }, context, { rootValue: objectManager }) => {
+      resolve: async ({ local_id }, { ...args }, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
         const an_Object = await objectManager.getOneObject_async('ToDo', {
           id: local_id });
 
@@ -32,14 +36,17 @@ var _default =
 
     Viewer: {
       type: _ViewerType.default,
-      resolve: (parent, args, context, { rootValue: objectManager }) =>
-      objectManager.getOneObject_async('User', {
-        id: objectManager.getViewerUserId() }) } },
+      resolve: (parent, args, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
+        return objectManager.getOneObject_async('User', {
+          id: objectManager.getViewerUserId() });
+
+      } } },
 
 
 
-
-  mutateAndGetPayload: async ({ ToDo_Text }, context, { rootValue: objectManager }) => {
+  mutateAndGetPayload: async ({ ToDo_Text }, context, { rootValue: ec }) => {
+    const objectManager = ec.om();
     const local_id = await objectManager.add('ToDo', {
       ToDo_Text,
       ToDo_Complete: false });

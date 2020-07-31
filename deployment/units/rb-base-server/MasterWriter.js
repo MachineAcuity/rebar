@@ -9,10 +9,12 @@ var _ensureFileContent = _interopRequireDefault(require("./ensureFileContent"));
 
 const fs = _fs.default.promises;
 
+//
+
 /**
-                                  * Manages writing of multiple files
-                                  * @class MasterWriter
-                                  */
+ * Manages writing of multiple files
+ * @class MasterWriter
+ */
 class MasterWriter {
 
 

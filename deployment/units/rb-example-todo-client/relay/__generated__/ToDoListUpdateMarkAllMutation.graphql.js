@@ -76,14 +76,12 @@ const node /*: ConcreteRequest*/ = function () {
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "input",
-    "type": "ToDoListUpdateMarkAllInput!" },
+    "name": "input" },
 
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "status",
-    "type": "String!" }],
+    "name": "status" }],
 
 
   v1 = {
@@ -206,7 +204,8 @@ const node /*: ConcreteRequest*/ = function () {
       "metadata": null,
       "name": "ToDoListUpdateMarkAllMutation",
       "selections": v3 /*: any*/,
-      "type": "Mutation" },
+      "type": "Mutation",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -216,6 +215,7 @@ const node /*: ConcreteRequest*/ = function () {
       "selections": v3 /*: any*/ },
 
     "params": {
+      "cacheID": "03fd8afd4fe1347e96b406608f5899b7",
       "id": null,
       "metadata": {},
       "name": "ToDoListUpdateMarkAllMutation",

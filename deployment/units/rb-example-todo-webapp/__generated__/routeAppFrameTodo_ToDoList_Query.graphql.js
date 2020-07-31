@@ -72,8 +72,7 @@ const node /*: ConcreteRequest*/ = function () {
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "status",
-    "type": "String!" }],
+    "name": "status" }],
 
 
   v1 = [
@@ -119,7 +118,8 @@ const node /*: ConcreteRequest*/ = function () {
         "storageKey": null }],
 
 
-      "type": "Query" },
+      "type": "Query",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -254,6 +254,7 @@ const node /*: ConcreteRequest*/ = function () {
 
 
     "params": {
+      "cacheID": "6b2e8b64fd0661a2689ef3b6d0ecbebf",
       "id": null,
       "metadata": {},
       "name": "routeAppFrameTodo_ToDoList_Query",

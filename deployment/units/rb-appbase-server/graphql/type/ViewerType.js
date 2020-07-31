@@ -11,14 +11,17 @@ var _graphqlRelay = require("graphql-relay");
 
 var _defaultPersister = _interopRequireDefault(require("../../../_configuration/rb-base-server/graphql/defaultPersister"));
 var _NodeInterface = _interopRequireDefault(require("../NodeInterface"));
+var _ObjectManager = _interopRequireDefault(require("../../../rb-base-server/ObjectManager"));
 var _ViewerFields2 = _interopRequireDefault(require("../../../_configuration/rb-base-server/graphql/_ViewerFields"));
 var _User = _interopRequireDefault(require("../model/User"));
 
 var _UserPermissionForObjectsConnection = _interopRequireDefault(require("./UserPermissionForObjectsConnection"));
 var _UserPermissionForObjectType = _interopRequireDefault(require("./UserPermissionForObjectType"));
 var _UserQuotaForObjectsConnection = _interopRequireDefault(require("./UserQuotaForObjectsConnection"));
-var _UserQuotaForObjectType = _interopRequireDefault(require("./UserQuotaForObjectType"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+var _UserQuotaForObjectType = _interopRequireDefault(require("./UserQuotaForObjectType"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+//
+var _default =
 new _graphql.GraphQLObjectType({
   name: 'Viewer',
   interfaces: [_NodeInterface.default],
@@ -53,7 +56,8 @@ new _graphql.GraphQLObjectType({
 
 
 
-      resolve: async (obj, { ...args }, context, { rootValue: objectManager }) => {
+      resolve: async (obj, { ...args }, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
         const { UserPermissionForObject_ObjectType } = args;
         const arr = await objectManager.getObjectList_async('UserPermissionForObject', {
           UserPermissionForObject_ObjectType });
@@ -67,7 +71,8 @@ new _graphql.GraphQLObjectType({
 
       args: { ...{ id: { type: _graphql.GraphQLID } } },
 
-      resolve: async (parent, { id }, context, { rootValue: objectManager }) => {
+      resolve: async (parent, { id }, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
         const local_id = objectManager.uuidFromString(
         'UserPermissionForObject',
         (0, _graphqlRelay.fromGlobalId)(id).id);
@@ -86,7 +91,8 @@ new _graphql.GraphQLObjectType({
 
       args: { ..._graphqlRelay.connectionArgs },
 
-      resolve: async (obj, { ...args }, context, { rootValue: objectManager }) => {
+      resolve: async (obj, { ...args }, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
         const arr = await objectManager.getObjectList_async('UserQuotaForObject', {});
         return (0, _graphqlRelay.connectionFromArray)(arr, args);
       } },
@@ -97,7 +103,8 @@ new _graphql.GraphQLObjectType({
 
       args: { ...{ id: { type: _graphql.GraphQLID } } },
 
-      resolve: async (parent, { id }, context, { rootValue: objectManager }) => {
+      resolve: async (parent, { id }, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
         const local_id = objectManager.uuidFromString('UserQuotaForObject', (0, _graphqlRelay.fromGlobalId)(id).id);
 
         return await objectManager.getOneObject_async('UserQuotaForObject', {

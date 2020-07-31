@@ -51,8 +51,7 @@ const node /*: ConcreteRequest*/ = function () {
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "input",
-    "type": "ToDoDeleteInput!" }],
+    "name": "input" }],
 
 
   v1 = [
@@ -116,7 +115,8 @@ const node /*: ConcreteRequest*/ = function () {
         "storageKey": null }],
 
 
-      "type": "Mutation" },
+      "type": "Mutation",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -159,6 +159,7 @@ const node /*: ConcreteRequest*/ = function () {
 
 
     "params": {
+      "cacheID": "0092ce52250e6c893dfb00516c4dc5d7",
       "id": null,
       "metadata": {},
       "name": "ToDoDeleteMutation",

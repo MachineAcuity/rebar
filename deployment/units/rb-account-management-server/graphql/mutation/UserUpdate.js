@@ -3,8 +3,11 @@
 var _graphqlRelay = require("graphql-relay");
 var _graphql = require("graphql");
 
-var _ViewerType = _interopRequireDefault(require("../../../rb-appbase-server/graphql/type/ViewerType"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+var _ObjectManager = _interopRequireDefault(require("../../../rb-base-server/ObjectManager"));
+var _ViewerType = _interopRequireDefault(require("../../../rb-appbase-server/graphql/type/ViewerType"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
+//
+var _default =
 (0, _graphqlRelay.mutationWithClientMutationId)({
   name: 'UserUpdate',
 
@@ -17,16 +20,19 @@ var _ViewerType = _interopRequireDefault(require("../../../rb-appbase-server/gra
   outputFields: {
     Viewer: {
       type: _ViewerType.default,
-      resolve: (params, { ...args }, context, { rootValue: objectManager }) =>
-      objectManager.getOneObject_async('User', { id: objectManager.getViewerUserId() }) } },
+      resolve: (params, { ...args }, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
+        return objectManager.getOneObject_async('User', { id: objectManager.getViewerUserId() });
+      } } },
 
 
 
   mutateAndGetPayload: async (
   { User_DisplayName, User_PrimaryEmail, User_PrimaryPhone },
   context,
-  { rootValue: objectManager }) =>
+  { rootValue: ec }) =>
   {
+    const objectManager = ec.om();
     await objectManager.update('User', {
       id: objectManager.getViewerUserId(),
       User_DisplayName,
