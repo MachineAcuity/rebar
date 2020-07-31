@@ -11,6 +11,7 @@ import { connectionArgs, connectionFromArray, fromGlobalId, globalIdField } from
 
 import defaultPersister from '../../../_configuration/rb-base-server/graphql/defaultPersister'
 import NodeInterface from '../NodeInterface'
+import ObjectManager from '../../../rb-base-server/ObjectManager'
 import _ViewerFields from '../../../_configuration/rb-base-server/graphql/_ViewerFields'
 import User from '../model/User'
 
@@ -18,6 +19,8 @@ import UserPermissionForObjectsConnection from './UserPermissionForObjectsConnec
 import UserPermissionForObjectType from './UserPermissionForObjectType'
 import UserQuotaForObjectsConnection from './UserQuotaForObjectsConnection'
 import UserQuotaForObjectType from './UserQuotaForObjectType'
+
+//
 
 export default new GraphQLObjectType({
   name: 'Viewer',
@@ -53,7 +56,8 @@ export default new GraphQLObjectType({
         },
       },
 
-      resolve: async (obj, { ...args }, context, { rootValue: objectManager }) => {
+      resolve: async (obj, { ...args }, context, { rootValue: ec }) => {
+        const objectManager: ObjectManager = ec.om()
         const { UserPermissionForObject_ObjectType } = args
         const arr = await objectManager.getObjectList_async('UserPermissionForObject', {
           UserPermissionForObject_ObjectType,
@@ -67,7 +71,8 @@ export default new GraphQLObjectType({
 
       args: { ...{ id: { type: GraphQLID } } },
 
-      resolve: async (parent, { id }, context, { rootValue: objectManager }) => {
+      resolve: async (parent, { id }, context, { rootValue: ec }) => {
+        const objectManager: ObjectManager = ec.om()
         const local_id = objectManager.uuidFromString(
           'UserPermissionForObject',
           fromGlobalId(id).id,
@@ -86,7 +91,8 @@ export default new GraphQLObjectType({
 
       args: { ...connectionArgs },
 
-      resolve: async (obj, { ...args }, context, { rootValue: objectManager }) => {
+      resolve: async (obj, { ...args }, context, { rootValue: ec }) => {
+        const objectManager: ObjectManager = ec.om()
         const arr = await objectManager.getObjectList_async('UserQuotaForObject', {})
         return connectionFromArray(arr, args)
       },
@@ -97,7 +103,8 @@ export default new GraphQLObjectType({
 
       args: { ...{ id: { type: GraphQLID } } },
 
-      resolve: async (parent, { id }, context, { rootValue: objectManager }) => {
+      resolve: async (parent, { id }, context, { rootValue: ec }) => {
+        const objectManager: ObjectManager = ec.om()
         const local_id = objectManager.uuidFromString('UserQuotaForObject', fromGlobalId(id).id)
 
         return await objectManager.getOneObject_async('UserQuotaForObject', {

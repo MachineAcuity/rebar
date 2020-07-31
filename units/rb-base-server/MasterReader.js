@@ -4,6 +4,8 @@ import fsWithCallbacks from 'fs'
 
 const fs = fsWithCallbacks.promises
 
+//
+
 class FileBase {
   arrRelativePath: Array<string>
   relativePath: string

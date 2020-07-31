@@ -42,8 +42,7 @@ const node /*: ConcreteRequest*/ = function () {
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "input",
-    "type": "EnsayoDeleteInput!" }],
+    "name": "input" }],
 
 
   v1 = [
@@ -79,7 +78,8 @@ const node /*: ConcreteRequest*/ = function () {
       "metadata": null,
       "name": "EnsayoDeleteMutation",
       "selections": v1 /*: any*/,
-      "type": "Mutation" },
+      "type": "Mutation",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -89,6 +89,7 @@ const node /*: ConcreteRequest*/ = function () {
       "selections": v1 /*: any*/ },
 
     "params": {
+      "cacheID": "dae3f7017a3a56fbb77827070b3f69b8",
       "id": null,
       "metadata": {},
       "name": "EnsayoDeleteMutation",

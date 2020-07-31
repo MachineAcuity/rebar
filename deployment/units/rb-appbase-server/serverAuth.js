@@ -129,6 +129,8 @@ async function login(req, res) {
 }
 serverAuth.post('/login', login);
 
+//
+
 async function createuser(req, res) {
   let step = 'initialize';
 
@@ -242,6 +244,8 @@ async function createuser(req, res) {
 }
 serverAuth.post('/createuser', createuser);
 
+//
+
 async function changeSecret(req, res) {
   let step = 'initialize';
 
@@ -304,6 +308,8 @@ async function changeSecret(req, res) {
   }
 }
 serverAuth.post('/change-secret', changeSecret);
+
+//
 
 async function logout(req, res) {
   try {

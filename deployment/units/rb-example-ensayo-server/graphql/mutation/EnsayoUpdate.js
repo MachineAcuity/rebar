@@ -3,7 +3,10 @@
 var _graphqlRelay = require("graphql-relay");
 var _graphql = require("graphql");
 
-var _EnsayoType = _interopRequireDefault(require("../type/EnsayoType"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //  weak
+var _EnsayoType = _interopRequireDefault(require("../type/EnsayoType"));
+var _ObjectManager = _interopRequireDefault(require("../../../rb-base-server/ObjectManager"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //  weak
+
+//
 var _default =
 (0, _graphqlRelay.mutationWithClientMutationId)({
   name: 'EnsayoUpdate',
@@ -18,16 +21,19 @@ var _default =
   outputFields: {
     Ensayo: {
       type: _EnsayoType.default,
-      resolve: ({ local_id }, { ...args }, context, { rootValue: objectManager }) =>
-      objectManager.getOneObject_async('Ensayo', { id: local_id }) } },
+      resolve: ({ local_id }, { ...args }, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
+        return objectManager.getOneObject_async('Ensayo', { id: local_id });
+      } } },
 
 
 
   mutateAndGetPayload: async (
   { id, Ensayo_Title, Ensayo_Description, Ensayo_Content },
   context,
-  { rootValue: objectManager }) =>
+  { rootValue: ec }) =>
   {
+    const objectManager = ec.om();
     const local_id = (0, _graphqlRelay.fromGlobalId)(id).id;
 
     await objectManager.update('Ensayo', {

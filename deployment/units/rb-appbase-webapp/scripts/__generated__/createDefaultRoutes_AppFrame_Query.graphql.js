@@ -70,7 +70,8 @@ const node /*: ConcreteRequest*/ = {
       "storageKey": null }],
 
 
-    "type": "Query" },
+    "type": "Query",
+    "abstractKey": null },
 
   "kind": "Request",
   "operation": {
@@ -120,6 +121,7 @@ const node /*: ConcreteRequest*/ = {
 
 
   "params": {
+    "cacheID": "edb67f089a05aea706d15258fd72fa5e",
     "id": null,
     "metadata": {},
     "name": "createDefaultRoutes_AppFrame_Query",

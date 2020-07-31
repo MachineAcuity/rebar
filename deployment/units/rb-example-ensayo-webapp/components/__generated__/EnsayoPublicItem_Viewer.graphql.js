@@ -32,8 +32,7 @@ const node /*: ReaderFragment*/ = {
   "argumentDefinitions": [
   {
     "kind": "RootArgument",
-    "name": "id",
-    "type": "ID" }],
+    "name": "id" }],
 
 
   "kind": "Fragment",
@@ -79,7 +78,8 @@ const node /*: ReaderFragment*/ = {
     "storageKey": null }],
 
 
-  "type": "Viewer" };
+  "type": "Viewer",
+  "abstractKey": null };
 
 // prettier-ignore
 node /*: any*/.hash = 'c89d0591d3683ab3a528213ea89d139f';

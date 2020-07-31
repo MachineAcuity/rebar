@@ -39,3 +39,6 @@ suppress_type=$FixMe
 
 ; Reserved for cases when we know there is no issue but flow might be unable to determine that
 suppress_type=$FlowIgnore
+
+; Enable experimental optional chaining
+esproposal.optional_chaining=enable

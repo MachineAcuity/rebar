@@ -9,6 +9,8 @@ import ensureFileContent from './ensureFileContent'
 
 const fs = fsWithCallbacks.promises
 
+//
+
 /**
  * Manages writing of multiple files
  * @class MasterWriter

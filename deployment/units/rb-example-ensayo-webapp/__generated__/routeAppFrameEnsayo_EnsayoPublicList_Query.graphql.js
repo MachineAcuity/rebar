@@ -88,7 +88,8 @@ const node /*: ConcreteRequest*/ = function () {
         "storageKey": null }],
 
 
-      "type": "Query" },
+      "type": "Query",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -207,6 +208,7 @@ const node /*: ConcreteRequest*/ = function () {
 
 
     "params": {
+      "cacheID": "91ac8fb532503a9564ceda1e7d2efccf",
       "id": null,
       "metadata": {},
       "name": "routeAppFrameEnsayo_EnsayoPublicList_Query",
