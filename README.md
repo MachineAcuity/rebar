@@ -3,10 +3,6 @@
 Multi-tenant SaaS boilerplate + examples for universal web application with React, Material-UI, Relay, GraphQL, JWT, Node.js, C* DB - Cassandra/Elassandra/Scylla.
 
 
-[*Live demo*](http://rebar-demo.MachineAcuity.com/).
-
-
-
 # Technology stack
 
 ## Client
