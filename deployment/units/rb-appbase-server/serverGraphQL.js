@@ -2,9 +2,10 @@
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 var _express = _interopRequireDefault(require("express"));
-var _expressGraphql = _interopRequireDefault(require("express-graphql"));
+var _expressGraphql = require("express-graphql");
 
 var _delayPromise = _interopRequireDefault(require("../rb-base-universal/delayPromise"));
+var _ExecutionContext = _interopRequireDefault(require("../rb-base-server/ExecutionContext"));
 var _log = _interopRequireDefault(require("../rb-base-server/log"));
 var _requestLoggers = require("../_configuration/rb-base-server/requestLoggers");
 var _logServerRequest = _interopRequireDefault(require("../rb-base-server/logServerRequest"));
@@ -102,10 +103,12 @@ async function root(req, res, next) {
       }
     }
 
-    (0, _expressGraphql.default)(() => {
+    const ec = _ExecutionContext.default.createRoot({ objectManager });
+
+    (0, _expressGraphql.graphqlHTTP)(() => {
       return {
         schema: _schema.default,
-        rootValue: objectManager,
+        rootValue: ec,
         pretty: true,
         graphiql: false };
 

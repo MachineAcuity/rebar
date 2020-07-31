@@ -59,7 +59,8 @@ const node /*: ConcreteRequest*/ = {
       "storageKey": null }],
 
 
-    "type": "Query" },
+    "type": "Query",
+    "abstractKey": null },
 
   "kind": "Request",
   "operation": {
@@ -88,6 +89,7 @@ const node /*: ConcreteRequest*/ = {
 
 
   "params": {
+    "cacheID": "77624c0ac668d44cd87e8ddbd25f5fe4",
     "id": null,
     "metadata": {},
     "name": "routeAppFrameDemo_HomePageScreen_Query",

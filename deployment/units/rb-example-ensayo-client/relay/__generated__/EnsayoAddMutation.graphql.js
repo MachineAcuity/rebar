@@ -66,8 +66,7 @@ const node /*: ConcreteRequest*/ = function () {
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "input",
-    "type": "EnsayoAddInput!" }],
+    "name": "input" }],
 
 
   v1 = {
@@ -166,7 +165,8 @@ const node /*: ConcreteRequest*/ = function () {
       "metadata": null,
       "name": "EnsayoAddMutation",
       "selections": v2 /*: any*/,
-      "type": "Mutation" },
+      "type": "Mutation",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -176,6 +176,7 @@ const node /*: ConcreteRequest*/ = function () {
       "selections": v2 /*: any*/ },
 
     "params": {
+      "cacheID": "c338ca1b2bf2f6b2bc5fb4a83bdcea0d",
       "id": null,
       "metadata": {},
       "name": "EnsayoAddMutation",

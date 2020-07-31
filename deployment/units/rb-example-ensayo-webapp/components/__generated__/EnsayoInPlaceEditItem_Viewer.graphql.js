@@ -38,7 +38,8 @@ const node /*: ReaderFragment*/ = {
     "storageKey": null }],
 
 
-  "type": "Viewer" };
+  "type": "Viewer",
+  "abstractKey": null };
 
 // prettier-ignore
 node /*: any*/.hash = '301c94f48041c0970afb2265a6da8b61';

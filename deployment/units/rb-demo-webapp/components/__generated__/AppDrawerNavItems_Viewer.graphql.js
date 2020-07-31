@@ -45,7 +45,8 @@ const node /*: ReaderFragment*/ = {
     "name": "AppDrawerAccountItem_Viewer" }],
 
 
-  "type": "Viewer" };
+  "type": "Viewer",
+  "abstractKey": null };
 
 // prettier-ignore
 node /*: any*/.hash = '1cb0d6078d9c9144955d3294daed7f6c';

@@ -49,8 +49,7 @@ const node /*: ConcreteRequest*/ = function () {
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "id",
-    "type": "ID!" }],
+    "name": "id" }],
 
 
   v1 = {
@@ -84,7 +83,8 @@ const node /*: ConcreteRequest*/ = function () {
         "storageKey": null }],
 
 
-      "type": "Query" },
+      "type": "Query",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -146,6 +146,7 @@ const node /*: ConcreteRequest*/ = function () {
 
 
     "params": {
+      "cacheID": "a5dabe16420e027fd46c51c275b72ce3",
       "id": null,
       "metadata": {},
       "name": "routeAppFrameEnsayo_EnsayoPublicItem_Query",

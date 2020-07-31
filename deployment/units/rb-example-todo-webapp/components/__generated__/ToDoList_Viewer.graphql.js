@@ -50,8 +50,7 @@ const node /*: ReaderFragment*/ = function () {
     "argumentDefinitions": [
     {
       "kind": "RootArgument",
-      "name": "status",
-      "type": "String" }],
+      "name": "status" }],
 
 
     "kind": "Fragment",
@@ -181,7 +180,8 @@ const node /*: ReaderFragment*/ = function () {
       "name": "ToDoItem_Viewer" }],
 
 
-    "type": "Viewer" };
+    "type": "Viewer",
+    "abstractKey": null };
 
 }();
 // prettier-ignore

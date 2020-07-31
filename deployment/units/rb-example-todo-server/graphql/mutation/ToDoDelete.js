@@ -3,7 +3,10 @@
 var _graphqlRelay = require("graphql-relay");
 var _graphql = require("graphql");
 
+var _ObjectManager = _interopRequireDefault(require("../../../rb-base-server/ObjectManager"));
 var _ViewerType = _interopRequireDefault(require("../../../../units/rb-appbase-server/graphql/type/ViewerType"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //  weak
+
+//
 var _default =
 (0, _graphqlRelay.mutationWithClientMutationId)({
   name: 'ToDoDelete',
@@ -20,14 +23,17 @@ var _default =
 
     Viewer: {
       type: _ViewerType.default,
-      resolve: (parent, args, context, { rootValue: objectManager }) =>
-      objectManager.getOneObject_async('User', {
-        id: objectManager.getViewerUserId() }) } },
+      resolve: (parent, args, context, { rootValue: ec }) => {
+        const objectManager = ec.om();
+        return objectManager.getOneObject_async('User', {
+          id: objectManager.getViewerUserId() });
+
+      } } },
 
 
 
-
-  mutateAndGetPayload: async ({ id }, context, { rootValue: objectManager }) => {
+  mutateAndGetPayload: async ({ id }, context, { rootValue: ec }) => {
+    const objectManager = ec.om();
     const local_id = (0, _graphqlRelay.fromGlobalId)(id).id;
 
     await objectManager.remove('ToDo', { id: local_id });

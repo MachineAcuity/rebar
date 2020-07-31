@@ -53,8 +53,7 @@ const node /*: ConcreteRequest*/ = function () {
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "input",
-    "type": "UserUpdateInput!" }],
+    "name": "input" }],
 
 
   v1 = [
@@ -118,7 +117,8 @@ const node /*: ConcreteRequest*/ = function () {
         "storageKey": null }],
 
 
-      "type": "Mutation" },
+      "type": "Mutation",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -161,6 +161,7 @@ const node /*: ConcreteRequest*/ = function () {
 
 
     "params": {
+      "cacheID": "8a10965445477206c3e49abd11e4cb9d",
       "id": null,
       "metadata": {},
       "name": "UserUpdateMutation",

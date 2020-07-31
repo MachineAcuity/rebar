@@ -49,8 +49,7 @@ const node /*: ConcreteRequest*/ = function () {
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "input",
-    "type": "ToDoUpdateRenameInput!" }],
+    "name": "input" }],
 
 
   v1 = [
@@ -104,7 +103,8 @@ const node /*: ConcreteRequest*/ = function () {
       "metadata": null,
       "name": "ToDoUpdateRenameMutation",
       "selections": v1 /*: any*/,
-      "type": "Mutation" },
+      "type": "Mutation",
+      "abstractKey": null },
 
     "kind": "Request",
     "operation": {
@@ -114,6 +114,7 @@ const node /*: ConcreteRequest*/ = function () {
       "selections": v1 /*: any*/ },
 
     "params": {
+      "cacheID": "00efd7d6abba35feaf61671d72e2d870",
       "id": null,
       "metadata": {},
       "name": "ToDoUpdateRenameMutation",
