@@ -10,9 +10,7 @@ import { withStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import IconAccount from 'mdi-material-ui/Account'
 import React from 'react'
-import CompositeCardHeader, {
-  cardHeaderContentStyles,
-} from '../../rb-appbase-webapp/components/CompositeCardHeader'
+import PageHeader, { cardHeaderContentStyles } from '../../rb-appbase-webapp/components/PageHeader'
 import ResponsiveContentArea from '../../rb-appbase-webapp/components/ResponsiveContentArea'
 import NewUserSecretInput from './NewUserSecretInput'
 
@@ -138,11 +136,7 @@ class NewUserScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconAccount />}
-          subTitle="Creating, please wait"
-          title="New User"
-        />
+        <PageHeader icon={<IconAccount />} subTitle="Creating, please wait" title="New User" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -170,7 +164,7 @@ class NewUserScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconAccount />} subTitle="Created" title="New User" />
+        <PageHeader icon={<IconAccount />} subTitle="Created" title="New User" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -194,11 +188,7 @@ class NewUserScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconAccount htmlColor="#ff0000" />}
-          subTitle="Failed"
-          title="New User"
-        />
+        <PageHeader icon={<IconAccount htmlColor="#ff0000" />} subTitle="Failed" title="New User" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -237,7 +227,7 @@ class NewUserScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconAccount />} subTitle="Create new user" title="New User" />
+        <PageHeader icon={<IconAccount />} subTitle="Create new user" title="New User" />
 
         <Card className={classes.card}>
           <CardContent>

@@ -6,9 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import IconShieldKeyOutline from 'mdi-material-ui/ShieldKeyOutline'
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import CompositeCardHeader, {
-  cardHeaderContentStyles,
-} from '../../rb-appbase-webapp/components/CompositeCardHeader'
+import PageHeader, { cardHeaderContentStyles } from '../../rb-appbase-webapp/components/PageHeader'
 import ResponsiveContentArea from '../../rb-appbase-webapp/components/ResponsiveContentArea'
 
 const doNothing = () => {}
@@ -47,7 +45,7 @@ class RequiresAuthenticationNotice extends React.Component<{
 
     return (
       <ResponsiveContentArea>
-        <CompositeCardHeader icon={<IconShieldKeyOutline />} subTitle="" title="Please log in" />
+        <PageHeader icon={<IconShieldKeyOutline />} subTitle="" title="Please log in" />
 
         <Card className={classes.card}>
           <CardContent>

@@ -11,9 +11,7 @@ import IconAccountSettings from 'mdi-material-ui/AccountSettings'
 import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 
-import CompositeCardHeader, {
-  cardHeaderContentStyles,
-} from '../../rb-appbase-webapp/components/CompositeCardHeader'
+import PageHeader, { cardHeaderContentStyles } from '../../rb-appbase-webapp/components/PageHeader'
 import ImageManagerUploader from '../../rb-image-manager-webapp/components/ImageManagerUploader'
 import UserUpdateMutation from '../../rb-account-management-client/relay/UserUpdateMutation'
 import RequiresAuthenticationNotice from '../../rb-account-management-webapp/components/RequiresAuthentication'
@@ -103,11 +101,7 @@ class UserProfileScreen extends React.Component<
 
     return (
       <ResponsiveContentArea>
-        <CompositeCardHeader
-          icon={<IconAccountSettings />}
-          subTitle="Profile &amp; settings"
-          title="User"
-        />
+        <PageHeader icon={<IconAccountSettings />} subTitle="Profile &amp; settings" title="User" />
 
         <Card className={classes.card}>
           <CardContent>

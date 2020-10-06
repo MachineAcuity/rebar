@@ -11,9 +11,7 @@ import TextField from '@material-ui/core/TextField'
 import IconLockReset from 'mdi-material-ui/LockReset'
 import React from 'react'
 
-import CompositeCardHeader, {
-  cardHeaderContentStyles,
-} from '../../rb-appbase-webapp/components/CompositeCardHeader'
+import PageHeader, { cardHeaderContentStyles } from '../../rb-appbase-webapp/components/PageHeader'
 import ResponsiveContentArea from '../../rb-appbase-webapp/components/ResponsiveContentArea'
 
 import NewUserSecretInput from './NewUserSecretInput'
@@ -122,7 +120,7 @@ class ChangeSecretScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconLockReset />} subTitle="" title="Updating password" />
+        <PageHeader icon={<IconLockReset />} subTitle="" title="Updating password" />
 
         <Card className={classes.card} raised={true}>
           <CardContent>
@@ -147,7 +145,7 @@ class ChangeSecretScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconLockReset />} subTitle="" title="Password changed" />
+        <PageHeader icon={<IconLockReset />} subTitle="" title="Password changed" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -170,11 +168,7 @@ class ChangeSecretScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader
-          icon={<IconLockReset />}
-          subTitle=""
-          title="Failed to update password"
-        />
+        <PageHeader icon={<IconLockReset />} subTitle="" title="Failed to update password" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -210,7 +204,7 @@ class ChangeSecretScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconLockReset />} subTitle="" title="Change password" />
+        <PageHeader icon={<IconLockReset />} subTitle="" title="Change password" />
 
         <Card className={classes.card}>
           <CardContent>

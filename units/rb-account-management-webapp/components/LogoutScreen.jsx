@@ -11,9 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import IconLogout from 'mdi-material-ui/Logout'
 import React from 'react'
 
-import CompositeCardHeader, {
-  cardHeaderContentStyles,
-} from '../../rb-appbase-webapp/components/CompositeCardHeader'
+import PageHeader, { cardHeaderContentStyles } from '../../rb-appbase-webapp/components/PageHeader'
 import ResponsiveContentArea from '../../rb-appbase-webapp/components/ResponsiveContentArea'
 
 //
@@ -108,7 +106,7 @@ class LogoutScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconLogout />} subTitle="" title="Log Out" />
+        <PageHeader icon={<IconLogout />} subTitle="" title="Log Out" />
 
         <Card className={classes.card}>
           <br />
@@ -132,7 +130,7 @@ class LogoutScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconLogout />} subTitle="" title="Log Out" />
+        <PageHeader icon={<IconLogout />} subTitle="" title="Log Out" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -155,7 +153,7 @@ class LogoutScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconLogout />} subTitle="" title="Log Out" />
+        <PageHeader icon={<IconLogout />} subTitle="" title="Log Out" />
 
         <Card className={classes.card}>
           <CardContent>
@@ -177,7 +175,7 @@ class LogoutScreen extends React.Component<
 
     return (
       <div>
-        <CompositeCardHeader icon={<IconLogout />} subTitle="" title="Log Out" />
+        <PageHeader icon={<IconLogout />} subTitle="" title="Log Out" />
 
         <Card className={classes.card}>
           <CardContent>
