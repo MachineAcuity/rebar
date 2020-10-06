@@ -112,7 +112,7 @@ export const cardHeaderContentStyles = {
 
 //
 
-class CompositeCardHeader extends React.Component<{
+class PageHeader extends React.Component<{
   classes: Object,
   icon?: React.Node,
   subTitle: string | typeof React.Fragment,
@@ -142,4 +142,4 @@ class CompositeCardHeader extends React.Component<{
   }
 }
 
-export default withStyles(styles)(CompositeCardHeader)
+export default withStyles(styles)(PageHeader)
